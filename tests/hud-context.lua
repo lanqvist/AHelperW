@@ -1,5 +1,7 @@
 -- Behavioral checks in a Lua VM. UI mocks do not validate WoW secure rendering.
 unpack = table.unpack or unpack
+-- run.cjs sets SPEC_ID per VM; Arms (71) remains the default.
+local specID = SPEC_ID or 71
 local now, combat, target = 100, false, true
 local forbidden = { secret = true }
 function issecretvalue(v) return type(v) == "table" and rawget(v, "secret") == true end
@@ -20,7 +22,7 @@ function UnitClass() return "Warrior", "WARRIOR" end
 function IsPlayerSpell() return true end
 Enum = { PowerType = { Rage = 1 }, NumericRuleFormatRounding = { Nearest = 0 } }
 UISpecialFrames = {}
-C_SpecializationInfo = { GetSpecialization = function() return 1 end, GetSpecializationInfo = function() return 71 end }
+C_SpecializationInfo = { GetSpecialization = function() return 1 end, GetSpecializationInfo = function() return specID end }
 C_ClassTalents = { GetActiveConfigID = function() return 1 end }
 C_Traits = { GenerateImportString = function() return "test-build" end }
 local frames = {}
@@ -65,7 +67,7 @@ UIParent = Frame("Frame"); UIParent:SetSize(1920, 1080)
 local ns = { db = { size = 38, gap = 4, perRow = 8, palette = "default", almost = 1.5 }, gridH = 120,
   Round = function(v) return v end, SetFont = noop, frame = Frame("Frame", UIParent), Resources = { regions = {} } }
 local function loadAddon(name) assert(loadfile("AHelperW/" .. name .. ".lua"))("AHelperW", ns) end
-loadAddon("Display"); loadAddon("Palette"); loadAddon("ClassData")
+loadAddon("Display"); loadAddon("Palette"); loadAddon("ClassData"); loadAddon("SpecProfiles"); loadAddon("Layout")
 C_StringUtil = nil -- Native formatter absence must not break the addon.
 local usable, noPower = true, false
 local cd = { isActive = false, isOnGCD = false, startTime = 0, duration = 0 }
@@ -108,12 +110,16 @@ assert(ns.squares[1].cool.cooldownArgs[2] == 12, "charge recharge must drive the
 charges.maxCharges = forbidden
 ns.BuildSquares({7384}, {}, {}); ns.UpdateSquares()
 assert(ns.squares[1].chargesUnknownMax and ns.squares[1].charges.text == 1, "unknown charge maximum must not hide available charges")
-ns.db.custom = { [71] = { spells = { 999 }, procs = {}, debuffs = {} } }
+ns.db.custom = { [specID] = { spells = { 999 }, procs = {}, debuffs = {} } }
 ns.ExpandArmsHUD()
-assert(ns.db.custom[71].spells[1] == 999, "migration must retain custom order")
-local found = {}; for _, id in ipairs(ns.db.custom[71].spells) do found[id] = true end
-assert(found[100] and found[6552], "missing Arms actions")
-local count = #ns.db.custom[71].spells; ns.ExpandArmsHUD(); assert(#ns.db.custom[71].spells == count)
+assert(ns.db.custom[specID].spells[1] == 999, "migration must retain custom order")
+if specID == 71 then
+  local found = {}; for _, id in ipairs(ns.db.custom[71].spells) do found[id] = true end
+  assert(found[100] and found[6552], "missing Arms actions")
+  local count = #ns.db.custom[71].spells; ns.ExpandArmsHUD(); assert(#ns.db.custom[71].spells == count)
+else
+  assert(#ns.db.custom[specID].spells == 1 and ns.db.armsHudVersion == nil, "Arms migration must not touch other specs")
+end
 
 local itemIDs, enabled = {}, 1
 function GetInventoryItemID(_, slot) return itemIDs[slot] end
@@ -131,6 +137,7 @@ function UnitChannelInfo(unit)
 end
 function UnitCastingDuration() return forbidden end
 function UnitChannelDuration() return forbidden end
+loadAddon("TargetCount"); loadAddon("CastReceipt"); loadAddon("ComboHistory")
 loadAddon("CombatContext")
 local events = frames[#frames]
 local function event(name, ...) events.scripts.OnEvent(events, name, ...) end
@@ -142,10 +149,13 @@ assert(C.footer.text:find("АВТОАТАКА: ДА", 1, true))
 assert(C.cells.trinket1.itemID == nil, "empty trinket must not inherit potion")
 assert(C.cells.potion.itemID == 9999)
 assert(C.cells.targets.value.text == "?", "targets must not default to one")
+assert(ns.TargetCount.reason == "stabilizing", "new auto estimate must wait for stabilization")
 C.cells.targets.scripts.OnClick(nil, "LeftButton")
-assert(C.targets == 1)
+assert(C.targets == 1 and ns.db.targetMode == "manual" and C.cells.targets.value.text == "1")
 C.cells.targets.scripts.OnClick(nil, "RightButton")
-assert(C.targets == nil)
+-- Right click returns to auto; the manual choice is kept only for the next manual click.
+assert(ns.db.targetMode == "auto" and ns.TargetCount.reason == "stabilizing")
+assert(C.cells.targets.value.text == "?", "auto mode must not show the stale manual count")
 C.SetForecast("ttd", 30); now = 110; C.Update()
 assert(C.cells.ttd.value.text == "~30", "pre-pull forecast must not tick")
 combat = true; event("PLAYER_REGEN_DISABLED"); now = 125; C.Update()
@@ -153,6 +163,11 @@ assert(C.cells.ttd.value.text == "~15")
 now = 141; C.Update(); assert(C.cells.ttd.value.text == "?", "expired forecast must not stay zero")
 C.SetForecast("ttd", 20); C.SetForecast("fight", 60); event("PLAYER_TARGET_CHANGED")
 assert(C.forecasts.ttd == nil and C.forecasts.fight ~= nil)
+local rangeIDs = {}
+C_Spell.IsSpellInRange = function(id, unit) if unit == "target" then rangeIDs[id] = true end; return target and true or nil end
+C.Update(); C_Spell.IsSpellInRange = savedRangeAPI
+assert(rangeIDs[ns.specProfiles[specID].referenceSpellID] and rangeIDs[100], "range must use the spec melee reference and Charge")
+assert(C.cells.range.value.text == "ДА" and C.cells.chargeRange.value.text == "ДА")
 casting = "target"; C.Update()
 assert(C.cells.targetCast.value.text == "Cast")
 assert(C.cells.targetCast.shield.shown == forbidden, "secret interrupt state must flow into native display")
@@ -171,6 +186,7 @@ assert(C.cells.last.value.text == 12294)
 target = false; C.Update(); assert(C.cells.range.value.text == "НЕТ ЦЕЛИ")
 event("PLAYER_REGEN_ENABLED"); combat = false; C.Update()
 assert(C.cells.last.value.text == "—" and C.forecasts.fight == nil)
+assert(C.targets == nil, "manual target count must reset after combat")
 loadAddon("Export")
 HUD_EXPORT = assert(ns.MakeHUDExport())
 assert(HUD_EXPORT:find('"static":true', 1, true))
