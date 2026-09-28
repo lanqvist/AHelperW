@@ -1,6 +1,6 @@
 // Inventory HUD dependencies of reachable Fury/Slayer APL expressions; not an APL evaluator.
 // IDs carry their evidence: simc-source (pinned sc_warrior.cpp / trait table), research
-// (docs/research-apl.md), client-export (known to the client and shown in a HUD export),
+// (docs/research-apl.md), game-observed (seen in a reader log), client-export (known to the client and shown in a HUD export),
 // conflict or pending. Only a game check promotes an ID further.
 import fs from 'node:fs';
 const root = new URL('./', import.meta.url);
@@ -34,8 +34,8 @@ const buffs = {
   enrage:{spellID:184362, evidence:'simc-source', note:'find_spell(184362); research-apl: verified'},
   recklessness:{spellID:1719, evidence:'simc-source', note:'spell.recklessness_buff'},
   whirlwind:{spellID:85739, evidence:'simc-source', note:'Meat Cleaver/Improved Whirlwind stacks; research-apl: verified'},
-  sudden_death:{spellID:[280776, 52437], evidence:'conflict-both-tracked', note:'SimC spell.sudden_death_buff = 52437; research-apl and ClassData Fury preset use 280776. Both are known to the client and both are 12 s Execute buffs on Wowhead (only 52437 zeroes the cost). FuryAPL treats either square as the buff.'},
-  hack_and_slash:{spellID:383873, evidence:'research', note:'Wowhead (live): talent 383877 Proc Trigger Spell -> 383873, 8 s, +20% Raging/Crushing Blow damage, +1 charge'},
+  sudden_death:{spellID:52437, evidence:'game-observed', note:'Lit 22 frames with 1 stack and consumed by Execute in log 20260928T195134Z-649af31e; 280776 (research-apl) never lit'},
+  hack_and_slash:{spellID:383873, evidence:'game-observed', note:'Wowhead (live): talent 383877 Proc Trigger Spell -> 383873, 8 s, +20% Raging/Crushing Blow damage, +1 charge; lit 129 frames in the first manual fight'},
   bladestorm:{spellID:onslaught === false ? 227847 : 446035, evidence:onslaught === undefined ? 'pending' : 'simc-source',
     note:'446035 with Unrelenting Onslaught + Bladestorm, otherwise 227847'},
 };

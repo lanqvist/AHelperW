@@ -24,10 +24,9 @@ class FuryAPL(APLRuntime):
     buffs = {
         'enrage':184362, 'recklessness':1719, 'whirlwind':85739, 'bladestorm':446035,
         'hack_and_slash':383873, 'berserker_stance':386196, 'power_infusion':10060,
+        # Observed in the first manual fight; 280776 (early research) never lit.
+        'sudden_death':52437,
     }
-    # SimC uses 52437, research/ClassData 280776; the client knows both. Either
-    # square being active means the buff is up, so the HUD shows both.
-    sudden_death_ids = (280776, 52437)
     # Action -> talent that grants it (ready() is false without the talent).
     talent_actions = {
         'rampage':'rampage', 'bloodthirst':'bloodthirst', 'raging_blow':'raging_blow',
@@ -58,30 +57,9 @@ class FuryAPL(APLRuntime):
                                 'source':'AHelperW adapted TTD gate: bladestorm,if='+condition,
                                 'expressions':dict(row['expressions'], **{'if':Expression(condition)})})
         self.coverage_gaps = (
-            'Sudden Death: оба кандидата ID (280776, 52437) до наблюдения в бою',
-            'Hack and Slash 383873: клиент знает ID (экспорт), в бою не наблюдался',
             'предметы и зелья: исполнение не подключено',
             'ротация, ID замен и подтверждения применений ещё не проверены в игре',
         )
-
-    def sudden_death(self, field):
-        values = [self.aura('proc', spell, field) for spell in self.sudden_death_ids
-                  if ('proc', spell) in self.squares]
-        if not values:
-            return unknown('buff.sudden_death: нет квадрата в HUD')
-        if field in ('up', 'react'):
-            result = False
-            for value in values: result = binary('|', result, value)
-            return result
-        if field == 'down':
-            result = True
-            for value in values: result = binary('&', result, value)
-            return result
-        # Stacks/remains of whichever candidate is active; all absent -> 0.
-        active = [v for v in values if not isinstance(v, Unknown) and v]
-        if active:
-            return max(active)
-        return next((v for v in values if isinstance(v, Unknown)), 0)
 
     def execute_threshold(self):
         return 35 if 'massacre' in self.talents else 20
@@ -90,8 +68,6 @@ class FuryAPL(APLRuntime):
         parts = name.split('.')
         if name == 'ahw_ttd_known':
             return not isinstance(self.number('context/ttd'), Unknown)
-        if parts[:2] == ['buff', 'sudden_death']:
-            return self.sudden_death(parts[2])
         if parts[0] == 'cooldown' and parts[1] in self.spells:
             action, field = parts[1:3]
             talent = self.talent_actions.get(action)
@@ -134,7 +110,7 @@ class FuryAPL(APLRuntime):
             # target_ready: Sudden Death or target at/below the execute threshold.
             # The HUD's usable state is not relied on alone (Touch of Death lesson).
             hp = self.number('resource/targetHealthPercent')
-            allowed = binary('|', self.sudden_death('up'), binary('<=', hp, self.execute_threshold()))
+            allowed = binary('|', self.aura('proc', 52437, 'up'), binary('<=', hp, self.execute_threshold()))
             result = binary('&', result, allowed)
         return result
 
