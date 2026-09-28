@@ -3,6 +3,7 @@ import ctypes as ct
 from ctypes import wintypes as wt
 import time
 from cast_receipt import CastObserver
+from bindings_ui import label as binding_label
 from gcd_timing import GcdTiming
 
 U=ct.WinDLL('user32',use_last_error=True)
@@ -140,7 +141,17 @@ class Executor:
                                          note='No cast event; button became unavailable after the press')
                         return {'status':'waiting','reason':'Клиент отклонил '+request['action']+'; повторная оценка APL'}
                     self.failure_reason='Применение '+request['action']+' не подтверждено; автонажатия заблокированы. Останови запись для разбора.'
-                    self.debug.event('input_confirmation_latched',action=request['action'],reason=self.failure_reason)
+                    other=self.cast_observer.unexpected_after(request['sentAt'],request.get('expected',()))
+                    if other is not None:
+                        # Seen in game: Ctrl+2 was set for Berserker Stance here, but cast Charge.
+                        names={}
+                        for (kind,spell),(_,spec) in self.apl.squares.items():
+                            for cast in spec.get('castSpellIDs') or [spell]: names.setdefault(cast,spec.get('name') or str(spell))
+                        self.failure_reason=('Клавиша '+binding_label(request.get('binding'))+' вызвала '
+                                             +names.get(other,'заклинание')+' ('+str(other)+'), а не '+request.get('label',request['action'])
+                                             +' — похоже, в игре на этой клавише другое действие. Проверь бинд; автонажатия заблокированы.')
+                    self.debug.event('input_confirmation_latched',action=request['action'],reason=self.failure_reason,
+                                     observedSpellID=other)
                     return {'status':'blocked','reason':self.failure_reason}
                 else:
                     return {'status':'waiting','reason':'Ожидание события применения '+request['action']}
@@ -183,5 +194,8 @@ class Executor:
         square=self.apl.squares.get(('spell',decision['bindingSpellID']),('',{}))[1]
         self.cast_observer.sent(decision,square,self.last_send,data.get('castReceipt',{}))
         if getattr(self.apl, 'require_cast_confirmation', False):
-            self.receipt_pending={'action':decision['action'],'sentAt':self.last_send,'row':row}
+            expected=set(square.get('castSpellIDs') or [decision['bindingSpellID']]); expected.add(decision['spellID'])
+            self.receipt_pending={'action':decision['action'],'sentAt':self.last_send,'row':row,
+                                  'binding':decision['binding'],'expected':expected,
+                                  'label':square.get('name') or decision['action']}
         return dict(decision,status='sent',reason='Отправлено: '+decision['action'])

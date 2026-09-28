@@ -43,6 +43,13 @@ class CastObserver:
         self.last_sequence = None
         self.waiting = []
         self.status = None
+        self.recent = []
+
+    def unexpected_after(self, sent_at, expected, window=.8):
+        """First other spell cast just after a press: a hint that the key is bound
+        to a different action in the game. Nearby procs can also appear here."""
+        return next((spell for spell, at in self.recent
+                     if sent_at < at <= sent_at + window and spell not in expected), None)
 
     def pause(self):
         for item in self.waiting:
@@ -84,6 +91,7 @@ class CastObserver:
                         self.debug.event('cast_receipt_gap', missed=delta-1)
                     self.last_sequence = event['sequence']
                     self.debug.event('player_cast_observed', **event, capturedAt=data['capturedAt'])
+                    self.recent = (self.recent + [(event['spellID'], data['capturedAt'])])[-24:]
                     match = next((item for item in self.waiting if event['spellID'] in item['expected']
                                   and item['sentAt'] < data['capturedAt'] <= item['sentAt'] + 2.5), None)
                     if match:
@@ -95,6 +103,11 @@ class CastObserver:
                         self.waiting.remove(match)
         for item in list(self.waiting):
             if now-item['sentAt'] > 2.5:
+                other = self.unexpected_after(item['sentAt'], item['expected'])
+                if other is not None:
+                    self.debug.event('input_binding_mismatch_suspected', action=item['action'], observedSpellID=other,
+                                     expectedSpellIDs=sorted(item['expected']),
+                                     note='Another spell was cast right after the key; check the in-game binding')
                 self.debug.event('action_cast_unobserved', action=item['action'],
                                  expectedSpellIDs=sorted(item['expected']), reason='no_matching_event_observed',
                                  receiptStatus=receipt['status'], note='Not proof of cast failure')
