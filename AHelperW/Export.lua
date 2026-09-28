@@ -102,7 +102,7 @@ function ns.MakeHUDExport()
   result.targetCounting.statusColors = ns.TargetCount.statusColors
   result.context.targetInterrupt = Rect(ns.CombatContext.cells.targetCast.interruptFlag, true)
   result.context.autoAttack = Rect(ns.CombatContext.footer)
-  result.castReceipt = { version = 1, rect = Rect(ns.CastReceipt.frame), rows = 4, columns = 56,
+  result.castReceipt = { version = 2, rect = Rect(ns.CastReceipt.frame), rows = ns.CastReceipt.ROWS, columns = 56,
     source = "public UNIT_SPELLCAST_SUCCEEDED; matching event does not prove which input caused it" }
   if spec == 269 then
     result.comboHistory = { version = 1, diagnosticOnly = true, markers = Array(),

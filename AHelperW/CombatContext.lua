@@ -157,7 +157,9 @@ function C.Build(width, resourceHeight)
   local layout = ns.HUDLayout()
   local gap, size = ns.Round(layout.compact and 2 or 4), ns.Round(ns.db.size)
   local smallH = layout.compact and ns.Round(26) or size
-  local lastH = layout.compact and ns.Round(36) or size
+  -- Room for the 8-row cast journal (y 12..24) above the OCR digits: compact
+  -- digits use the bottom 17 of 42; the full layout reads the bottom half.
+  local lastH = layout.compact and ns.Round(42) or size + ns.Round(10)
   local footerH = ns.Round(layout.compact and 10 or 16)
   local cellW = (width - gap * 5) / 6
   local height = smallH * 2 + lastH + gap * 3 + footerH

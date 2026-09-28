@@ -25,7 +25,8 @@ for (const spec of specs) {
   if (!config.static || config.specID !== spec.specID || config.apl.profileID !== spec.profileID
     || config.targetCounting.referenceSpellID !== spec.reference
     || config.aliases[aliasKey]?.spellID !== aliasSpell
-    || !(config.squares.length > 0) || config.context.targets.width <= 0) {
+    || !(config.squares.length > 0) || config.context.targets.width <= 0
+    || config.castReceipt?.version !== 2 || config.castReceipt.rows !== 8) {
     throw new Error(`Invalid export for spec ${spec.specID}`);
   }
 }

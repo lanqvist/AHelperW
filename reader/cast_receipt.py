@@ -3,17 +3,24 @@ import time
 
 
 def decode(image, config, bounds):
-    if not config or config.get('version') != 1 or not config.get('rect'):
+    if not config or not config.get('rect'):
+        return {'status': 'not_configured'}
+    # v1: fixed four rows; v2: row count from the export (eight in 0.2.14+).
+    if config.get('version') == 1:
+        rows = 4
+    elif config.get('version') == 2 and config.get('rows') in range(4, 17):
+        rows = config['rows']
+    else:
         return {'status': 'not_configured'}
     r = config['rect']
-    if r['width'] < 112 or r['height'] < 8:
+    if r['width'] < 112 or r['height'] < 2 * rows:
         return {'status': 'too_small'}
     records = []
-    for row in range(4):
+    for row in range(rows):
         bits = []
         for col in range(56):
             x = int(r['x'] - bounds[0] + (col + .5) * r['width'] / 56)
-            y = int(r['y'] - bounds[1] + (row + .5) * r['height'] / 4)
+            y = int(r['y'] - bounds[1] + (row + .5) * r['height'] / rows)
             if not (0 <= x < image.width and 0 <= y < image.height):
                 return {'status': 'outside_frame'}
             rgb = image.getpixel((x, y))[:3]

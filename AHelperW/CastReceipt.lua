@@ -1,6 +1,8 @@
 local _, ns = ...
 -- A short visible journal of PUBLIC player cast events. Never inspect secret IDs.
-local R = { sequence = 0, records = {}, rows = {} }
+-- Eight rows: one Fury GCD can emit 4-5 events (cast + child hits) within a
+-- single reader frame, which overflowed the original four-row journal.
+local R = { sequence = 0, records = {}, rows = {}, ROWS = 8, ROW_HEIGHT = 1.5 }
 ns.CastReceipt = R
 
 local function Paint(index, sequence, spellID)
@@ -23,20 +25,20 @@ function R.Build(parent, width)
   if not R.frame then
     R.frame = CreateFrame("Frame", nil, parent)
     R.frame:SetPoint("TOPLEFT", parent, "TOPLEFT", 2, -12)
-    for row = 1, 4 do
+    for row = 1, R.ROWS do
       R.rows[row] = {}
       for col = 1, 56 do
         R.rows[row][col] = R.frame:CreateTexture(nil, "OVERLAY")
       end
     end
   end
-  R.frame:SetSize(width - 4, 6)
-  for row = 1, 4 do
+  R.frame:SetSize(width - 4, R.ROWS * R.ROW_HEIGHT)
+  for row = 1, R.ROWS do
     for col = 1, 56 do
       local texture = R.rows[row][col]
       texture:ClearAllPoints()
-      texture:SetPoint("TOPLEFT", R.frame, "TOPLEFT", (col - 1) * (width - 4) / 56, -(row - 1) * 1.5)
-      texture:SetSize((width - 4) / 56, 1.5)
+      texture:SetPoint("TOPLEFT", R.frame, "TOPLEFT", (col - 1) * (width - 4) / 56, -(row - 1) * R.ROW_HEIGHT)
+      texture:SetSize((width - 4) / 56, R.ROW_HEIGHT)
     end
     local bytes = R.records[row]
     Paint(row, bytes and bytes[2] * 256 + bytes[3] or 0,
@@ -50,5 +52,5 @@ events:SetScript("OnEvent", function(_, _, _, _, spellID)
   if issecretvalue and issecretvalue(spellID) then return end
   if type(spellID) ~= "number" or spellID < 1 or spellID >= 16777216 or spellID % 1 ~= 0 then return end
   R.sequence = R.sequence % 65535 + 1
-  Paint((R.sequence - 1) % 4 + 1, R.sequence, spellID)
+  Paint((R.sequence - 1) % R.ROWS + 1, R.sequence, spellID)
 end)
