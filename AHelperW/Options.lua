@@ -315,6 +315,31 @@ SlashCmdList.AHELPERW = function(input)
         detail))
     end
     msg("тест: получи прок ВНЕ боя и повтори /ahw procdebug — «ВИСИТ» подтверждает ID ауры")
+  elseif cmd == "auradump" then
+    -- Out-of-combat inventory of every helpful player aura, to find IDs that
+    -- are not yet in the HUD set. Secret or restricted fields print as "?".
+    if InCombatLockdown() then
+      msg("список аур доступен вне боя")
+      return
+    end
+    local getter = C_UnitAuras and C_UnitAuras.GetAuraDataByIndex
+    if not getter then
+      msg("C_UnitAuras.GetAuraDataByIndex: |cffff4040НЕТ|r")
+      return
+    end
+    local function plain(v)
+      if v == nil or (issecretvalue and issecretvalue(v)) then return "?" end
+      return tostring(v)
+    end
+    local count = 0
+    for i = 1, 80 do
+      local ok, aura = pcall(getter, "player", i, "HELPFUL")
+      if not ok or not aura then break end
+      count = count + 1
+      print(("  %s %s [applications=%s source=%s]"):format(
+        plain(aura.spellId), plain(aura.name), plain(aura.applications), plain(aura.sourceUnit)))
+    end
+    msg("баффов игрока: " .. count .. "; сравни с ожидаемыми проками и повтори после нового прока")
   elseif cmd == "procmethods" then
     -- интроспекция реального API AuraContainer в живом клиенте
     local ok, c = pcall(CreateFrame, "AuraContainer", nil, UIParent)
@@ -422,7 +447,7 @@ SlashCmdList.AHELPERW = function(input)
     print("  /ahw auratimers on|off — время действия баффов")
     print("  /ahw armsapl — дополнить набор под Arms/Slayer, сборка 69933")
     print("  /ahw wwapl — экспериментальный набор ВВ/Шадо-Пан; /ahw apl — текущий спек")
-    print("  /ahw furyapl — набор Fury/Slayer в разработке (только HUD и экспорт)")
+    print("  /ahw furyapl — набор Fury/Slayer в разработке")
     print("  /ahw preview on|off — иконки, номера и список квадратов")
     print("  /ahw context on|off — дополнительный контекст Arms")
     print("  /ahw compact on|off — компактный / полный вид; после смены обнови экспорт")
@@ -433,6 +458,7 @@ SlashCmdList.AHELPERW = function(input)
     print("  /ahw trinket 1|2 buff|damage КД_сек бафф_сек [strength] — параметры предмета для APL")
     print("  /ahw export — экспорт схемы HUD и текущего профиля вне боя")
     print("  /ahw timerdebug — диагностика привязки таймеров КД")
+    print("  /ahw procdebug — ауры набора HUD; /ahw auradump — все баффы игрока вне боя")
     print("  /ahw reset — сбросить позицию")
     print("  /ahw spells — показать набор текущего спека")
     print("  /ahw add|del <spellID> — добавить/убрать способность")

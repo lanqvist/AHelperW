@@ -22,12 +22,12 @@ PROFILES = {
     71: SpecProfile('warrior.arms.slayer', 71, 'Arms / Slayer', 'arms-apl',
                     frozenset({60}), ('rage',), 'game-observed',
                     binary_auras=frozenset({107574, 446035, 386164, 10060, 208086, 388539})),
-    # HUD/export only: the APL model is not implemented, create_apl refuses it.
+    # Not yet observed in game: input stays off by default after loading.
     # Enrage 184362 gates rampage,if=buff.enrage.remains<gcd.
     72: SpecProfile('warrior.fury.slayer', 72, 'Fury / Slayer', 'fury-apl',
                     frozenset({60}), ('rage',), 'in-development',
                     fast_aura_timers=frozenset({184362}),
-                    binary_auras=frozenset({184362, 1719, 446035, 386196, 10060})),
+                    binary_auras=frozenset({184362, 1719, 446035, 386196, 10060, 383873})),
     269: SpecProfile('monk.windwalker.shado-pan', 269, 'ВВ / Шадо-Пан', 'windwalker-apl',
                      frozenset({65}), ('energy', 'chi'), 'experimental'),
 }
@@ -49,6 +49,9 @@ def create_apl(reader, data_root, bindings, settings):
     if profile.spec_id == 71:
         from apl import ArmsAPL
         model = ArmsAPL(reader, root, bindings, settings)
+    elif profile.spec_id == 72:
+        from fury_apl import FuryAPL
+        model = FuryAPL(reader, root, bindings, settings)
     elif profile.spec_id == 269:
         from windwalker_apl import WindwalkerAPL
         model = WindwalkerAPL(reader, root, bindings, settings)

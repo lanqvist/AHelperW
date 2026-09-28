@@ -54,9 +54,9 @@
     {
       "symbol": "buff.hack_and_slash.up",
       "mode": "native-display",
-      "spellID": null,
-      "evidence": "pending",
-      "note": "Trigger of talent 383877 effect 1; numeric ID absent from the pinned source"
+      "spellID": 383873,
+      "evidence": "research",
+      "note": "Wowhead (live): talent 383877 Proc Trigger Spell -> 383873, 8 s, +20% Raging/Crushing Blow damage, +1 charge"
     },
     {
       "symbol": "buff.recklessness.down",
@@ -82,16 +82,22 @@
     {
       "symbol": "buff.sudden_death.down",
       "mode": "native-display",
-      "spellID": 52437,
-      "evidence": "conflict",
-      "note": "SimC spell.sudden_death_buff = 52437; research-apl and ClassData Fury preset use 280776. Both are known to the client (export 2026-09-28); check which one lights with /ahw procdebug."
+      "spellID": [
+        280776,
+        52437
+      ],
+      "evidence": "conflict-both-tracked",
+      "note": "SimC spell.sudden_death_buff = 52437; research-apl and ClassData Fury preset use 280776. Both are known to the client and both are 12 s Execute buffs on Wowhead (only 52437 zeroes the cost). FuryAPL treats either square as the buff."
     },
     {
       "symbol": "buff.sudden_death.up",
       "mode": "native-display",
-      "spellID": 52437,
-      "evidence": "conflict",
-      "note": "SimC spell.sudden_death_buff = 52437; research-apl and ClassData Fury preset use 280776. Both are known to the client (export 2026-09-28); check which one lights with /ahw procdebug."
+      "spellID": [
+        280776,
+        52437
+      ],
+      "evidence": "conflict-both-tracked",
+      "note": "SimC spell.sudden_death_buff = 52437; research-apl and ClassData Fury preset use 280776. Both are known to the client and both are 12 s Execute buffs on Wowhead (only 52437 zeroes the cost). FuryAPL treats either square as the buff."
     },
     {
       "symbol": "buff.whirlwind.stack",

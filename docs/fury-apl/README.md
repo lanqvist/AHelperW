@@ -1,12 +1,12 @@
-# Fury / Slayer — пакет APL (подготовка)
+# Fury / Slayer — пакет APL и модель ридера
 
 ## Статус на 28 сентября 2026
 
 Разработка Fury разрешена пользователем; выбрана ветка **Slayer** (hero subtree 60),
 spec **72**, клиент 12.1.0.69933. Готовы пакет данных (извлечение APL,
-декодирование билда, отчёт покрытия) и профиль `[72]` для HUD/экспорта/чтения.
-`FuryAPL` **не реализован**: ридер явно отказывает в модели APL для spec 72.
-В игре ничего не проверялось, автонажатия не запускались.
+декодирование билда, отчёт покрытия), профиль `[72]` и модель `reader/fury_apl.py`.
+Модель проверена только офлайн на синтетических кадрах; ручного боя под
+записью и автонажатий Fury ещё не было.
 
 ## Профиль [72] (реализован, в игре не проверен)
 
@@ -14,22 +14,47 @@ spec **72**, клиент 12.1.0.69933. Готовы пакет данных (и
   Bloodthirst 23881, отметки 20/35, алиасы Crushing Blow 335097 → Raging Blow
   и Bloodbath 335096 → Bloodthirst с общими биндами. `/ahw furyapl` (или
   `/ahw apl`) дополняет набор HUD пресетом. Sudden Death включён под обоими
-  спорными ID (52437 и 280776), чтобы `/ahw procdebug` показал, какой горит.
-  Execute 5308 и Whirlwind 190411 — непроверенные ID; Hack and Slash без ID
-  в пресет не входит. Avatar исключён: его нет в билде.
+  ID (52437 и 280776); модель считает бафф активным, если горит любой.
+  Hack and Slash — 383873 (Wowhead). Avatar исключён: его нет в билде.
 - Компактная строка Arms теперь относится к любому профилю с одной яростью,
   то есть и к Fury. Отметки порогов одинаковы с Arms: в билде нет Massacre,
   поэтому для APL значим только 20%.
 - Пресет Fury по умолчанию в `ClassData.lua` дополнен Rampage 184367.
-- `reader/spec_profiles.py`: статус `in-development`; `create_apl` для spec 72
-  выбрасывает понятную ошибку, чтение HUD и назначение клавиш работают.
+- `reader/spec_profiles.py`: статус `in-development`, модель `FuryAPL`.
   Автонажатия при загрузке профилей не из `game-observed` выключены.
+- `/ahw auradump` — все баффы игрока вне боя со spellID (поиск новых ID).
 - OCR: таймер Enrage 184362 читается каждые 0.2 с вместо 0.6; стаки
   бинарных аур (Enrage, Recklessness, Bladestorm 446035, Berserker Stance, PI)
   не распознаются, как у Arms. Список Arms перенесён в профиль без изменения.
 - Проверка без игры: экспорт `MakeHUDExport` и `Resources.Build` в Lua VM
   (моки из `tests/hud-context.lua`) для spec 71 и 72, обычный и компактный вид;
   план OCR Arms до/после правки совпал.
+
+## Модель `FuryAPL` (офлайн-проверка, в игре не проверена)
+
+- Наследует `APLRuntime`; списки из `build-requirements.json`, таблица
+  талантов — общая `../arms-apl/warrior-traits.json`. Требует подтверждения
+  применения (как ВВ): без события за 2.5 с автонажатия блокируются.
+- Гейты `ready()` из закреплённого `sc_warrior.cpp`: с Reckless Abandon во
+  время Recklessness Bloodthirst/Raging Blow недоступны, Bloodbath/Crushing
+  Blow — только во время Recklessness; действия без таланта недоступны;
+  Berserker Stance — только при отсутствии ауры; Execute — только при
+  Sudden Death или HP цели ≤ 20% (35% с Massacre), не по одному цвету HUD.
+- `cooldown.X.ready/remains` — только о кулдауне: `nores`/`unusable` кнопки
+  не делает её «на КД».
+- **Адаптация** (помечена в каждом решении): `bladestorm,if=buff.recklessness.up|
+  target.time_to_die<=5` исполняется как `…|ahw_ttd_known&target.time_to_die<=5`.
+  Без заданного TTD Bladestorm идёт только в Recklessness; догадки о TTD нет.
+- Предметы/зелья/PI не исполняются (как у Arms/ВВ).
+- Офлайн-сценарии на сохранённом экспорте (без захвата/ввода): открытие
+  Recklessness; Rampage при rage≥100 в Recklessness и при спадающем Enrage;
+  Crushing Blow в Recklessness; Odyn's Fury/Raging Blow вне неё; Execute только
+  с Sudden Death выше 20%; Whirlwind первым в AoE при 0 стаков; Bladestorm
+  при TTD 3 и не при TTD 60; Berserker Stance вне боя. Блокировки с причиной:
+  нет квадрата Hack and Slash, устаревший таймер Enrage, неизвестное число
+  целей, неизвестные оба квадрата Sudden Death.
+- Во время канала Bladestorm выбирается только Storm Bolt (общее исключение
+  Arms); если APL выбирает другое действие, ридер ждёт конца канала.
 
 ## Источники
 
@@ -88,26 +113,26 @@ Slayer, 77 выбранных узлов. Для APL важно:
 
 ## Итоги покрытия (`coverage.json`)
 
-54 зависимости; полного покрытия нет. ID со статусом **pending/conflict**:
+54 зависимости; полного покрытия нет. Нерешённых ID нет, но не все проверены:
 
-| Символ | Проблема |
+| Символ | Статус |
 |---|---|
-| `buff.sudden_death` | **конфликт**: SimC — 52437; research-apl и пресет Fury в ClassData — 280776; клиент знает оба |
-| `buff.hack_and_slash` | ID — trigger таланта 383877, числа нет в исходнике |
+| `buff.sudden_death` | оба кандидата отслеживаются: SimC 52437, research/ClassData 280776; оба — 12-с баффы Execute на Wowhead |
+| `buff.hack_and_slash` | 383873 по Wowhead (trigger таланта 383877); в клиенте не наблюдался |
 
 Execute 5308 и Whirlwind 190411 получили статус `client-export` по первому
 экспорту (см. ниже); применение и подсветка в бою ещё не наблюдались.
 
-Проверять вне боя/в бою через `/ahw procdebug` и экспорт `castSpellIDs`, не
-вписывать догадку как подтверждённое значение.
+Уточнять по логу обычного ручного боя (цвета квадратов, receipt), без
+отдельных отладочных сессий; не вписывать догадку как подтверждённое значение.
 
 ### Условия, которые будут блокировать выбор
 
-- `rampage,if=buff.enrage.remains<gcd` — нужен свежий OCR таймера Enrage.
-  Обычный период таймеров ~0.6 с; при просрочке значение неизвестно и
-  блокирует список. Потребуется повышенный приоритет чтения.
-- `bladestorm,if=buff.recklessness.up|target.time_to_die<=5` — вне Recklessness
-  зависит от ручного TTD; на манекене повторит проблему Avatar у Arms.
+- `rampage,if=buff.enrage.remains<gcd` — нужен свежий OCR таймера Enrage
+  (период поднят до 0.2 с); при просрочке значение неизвестно и блокирует список.
+- `rampage,if=buff.recklessness.up&!buff.hack_and_slash.up` — без квадрата
+  383873 в HUD блокирует выбор в Recklessness, если Rampage доступен.
+- Bladestorm/TTD — см. адаптацию выше.
 - `whirlwind,if=talent.improved_whirlwind&buff.whirlwind.stack=0` (AoE) —
   стаки Whirlwind через OCR; отсутствие ауры даёт 0, неизвестность — блок.
 - `active_enemies` выбирает slayer / slayer_aoe; неизвестное число целей блокирует.
@@ -131,7 +156,8 @@ Execute 5308 и Whirlwind 190411 получили статус `client-export` �
 1. Профиль `[72]` в `SpecProfiles.lua` и `spec_profiles.py`: эталон дальности
    Bloodthirst, порог 20, алиасы Crushing Blow/Bloodbath, пресет HUD по
    `coverage.json`. — сделано, см. выше.
-2. `FuryAPL(APLRuntime)`: таблицы ID, гейты замен, явные адаптации.
-3. В игре вне боя: доставить Lua, `/reload`, `/ahw furyapl`, `/ahw procdebug`
-   для pending-ID, `/ahw export`, ручной бой с логом ридера.
-4. Офлайн-прогон ручного лога без нажатий; автонажатия — только по решению пользователя.
+2. `FuryAPL(APLRuntime)` — сделано, см. выше.
+3. В игре вне боя: `/reload`, `/ahw furyapl` (добавит Hack and Slash),
+   убрать Thunder Blast в `/ahw editor`, `/ahw export`, импорт в ридер,
+   назначить клавиши, ручной бой под записью ридера без автонажатий.
+4. Офлайн-прогон этого лога; автонажатия — только по решению пользователя.

@@ -8,10 +8,10 @@ ns.specProfiles = {
     executeThresholds = {20, 35},
     aliases = { heroic_strike = { spellID = 1269383, displaySpellID = 1464, procID = 1269391, sharesBindingWith = "slam" } },
   },
-  -- In development: HUD/export only; the reader has no Fury APL model yet.
-  -- IDs and evidence: docs/fury-apl/coverage.json. Sudden Death is listed under
-  -- both conflicting IDs (SimC 52437, research 280776) until procdebug decides.
-  -- Execute 5308 and Whirlwind 190411 are unverified; Hack and Slash has no ID yet.
+  -- In development; reader model: reader/fury_apl.py. IDs and evidence:
+  -- docs/fury-apl/coverage.json. Sudden Death is listed under both candidate IDs
+  -- (SimC 52437, research 280776); the reader treats either one as the buff.
+  -- Hack and Slash 383873 is the talent's triggered buff per Wowhead.
   [72] = {
     id = "warrior.fury.slayer", name = "Fury / Slayer", heroTree = "slayer",
     primary = "rage", powerType = Enum.PowerType.Rage, referenceSpellID = 23881,
@@ -24,7 +24,7 @@ ns.specProfiles = {
       spells = { 184367, 23881, 85288, 5308, 1719, 227847, 385059, 190411,
         107570, 100, 6552, 386196,
         69179, 255647, 312411, 26297, 20572, 265221, 274738 },
-      procs = { 184362, 1719, 52437, 280776, 85739, 446035, 445606, 386196, 10060 },
+      procs = { 184362, 1719, 52437, 280776, 85739, 383873, 446035, 445606, 386196, 10060 },
       debuffs = {},
     },
   },

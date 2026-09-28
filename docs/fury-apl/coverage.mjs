@@ -34,8 +34,8 @@ const buffs = {
   enrage:{spellID:184362, evidence:'simc-source', note:'find_spell(184362); research-apl: verified'},
   recklessness:{spellID:1719, evidence:'simc-source', note:'spell.recklessness_buff'},
   whirlwind:{spellID:85739, evidence:'simc-source', note:'Meat Cleaver/Improved Whirlwind stacks; research-apl: verified'},
-  sudden_death:{spellID:52437, evidence:'conflict', note:'SimC spell.sudden_death_buff = 52437; research-apl and ClassData Fury preset use 280776. Both are known to the client (export 2026-09-28); check which one lights with /ahw procdebug.'},
-  hack_and_slash:{spellID:null, evidence:'pending', note:'Trigger of talent 383877 effect 1; numeric ID absent from the pinned source'},
+  sudden_death:{spellID:[280776, 52437], evidence:'conflict-both-tracked', note:'SimC spell.sudden_death_buff = 52437; research-apl and ClassData Fury preset use 280776. Both are known to the client and both are 12 s Execute buffs on Wowhead (only 52437 zeroes the cost). FuryAPL treats either square as the buff.'},
+  hack_and_slash:{spellID:383873, evidence:'research', note:'Wowhead (live): talent 383877 Proc Trigger Spell -> 383873, 8 s, +20% Raging/Crushing Blow damage, +1 charge'},
   bladestorm:{spellID:onslaught === false ? 227847 : 446035, evidence:onslaught === undefined ? 'pending' : 'simc-source',
     note:'446035 with Unrelenting Onslaught + Bladestorm, otherwise 227847'},
 };
