@@ -142,6 +142,11 @@ class Reader:
             if not explicit:
                 dy = int(r['height'] * .5)
                 r['y'] += dy; r['height'] -= dy
+                receipt = c.get('castReceipt',{}).get('rect')
+                if key == 'last' and receipt and r['y'] < receipt['y'] + receipt['height'] <= r['y'] + r['height']:
+                    # Full layout: keep the journal's white bits out of the digits.
+                    cut = receipt['y'] + receipt['height'] - r['y']
+                    r['y'] += cut; r['height'] -= cut
             self.regions['context/' + key] = r
         rects = [s['rect'] for _,_,_,s in self.entries] + list(c['resources'].values()) + list(c['context'].values())
         if c.get('castReceipt',{}).get('rect'): rects.append(c['castReceipt']['rect'])
