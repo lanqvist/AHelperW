@@ -59,7 +59,7 @@ class FuryAPL(APLRuntime):
                                 'expressions':dict(row['expressions'], **{'if':Expression(condition)})})
         self.coverage_gaps = (
             'Sudden Death: оба кандидата ID (280776, 52437) до наблюдения в бою',
-            'Hack and Slash 383873: ID по Wowhead, нужен квадрат в HUD',
+            'Hack and Slash 383873: клиент знает ID (экспорт), в бою не наблюдался',
             'предметы и зелья: исполнение не подключено',
             'ротация, ID замен и подтверждения применений ещё не проверены в игре',
         )
