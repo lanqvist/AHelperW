@@ -147,9 +147,11 @@ class Executor:
                         names={}
                         for (kind,spell),(_,spec) in self.apl.squares.items():
                             for cast in spec.get('castSpellIDs') or [spell]: names.setdefault(cast,spec.get('name') or str(spell))
-                        self.failure_reason=('Клавиша '+binding_label(request.get('binding'))+' вызвала '
-                                             +names.get(other,'заклинание')+' ('+str(other)+'), а не '+request.get('label',request['action'])
-                                             +' — похоже, в игре на этой клавише другое действие. Проверь бинд; автонажатия заблокированы.')
+                        # Your own presses land here too (seen: a manual Charge on the pull), so this
+                        # only points at the binding as one possibility.
+                        self.failure_reason=('После нажатия '+binding_label(request.get('binding'))+' ('+request.get('label',request['action'])
+                                             +') пришло применение '+names.get(other,'заклинания')+' ('+str(other)+'), а нужного нет. '
+                                             'Если вы не нажимали его сами — проверь бинд в игре. Автонажатия заблокированы.')
                     self.debug.event('input_confirmation_latched',action=request['action'],reason=self.failure_reason,
                                      observedSpellID=other)
                     return {'status':'blocked','reason':self.failure_reason}
