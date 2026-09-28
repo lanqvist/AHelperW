@@ -1,0 +1,23 @@
+## Interface: 120100
+## Title: AHelperW
+## Notes: Ultra-contrast cooldown & resource HUD
+## Author: lanqvist
+## Version: 0.2.13
+## SavedVariables: AHelperWDB
+
+Palette.lua
+ClassData.lua
+Layout.lua
+Display.lua
+Squares.lua
+Preview.lua
+Resources.lua
+TargetCount.lua
+CastReceipt.lua
+CombatContext.lua
+TargetProbe.lua
+Export.lua
+Manager.lua
+Settings.lua
+Options.lua
+Core.lua

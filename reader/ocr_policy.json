@@ -1,0 +1,5 @@
+{
+  "mode": "optimized",
+  "batchLimit": 12,
+  "periodSeconds": {}
+}

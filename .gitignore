@@ -1,0 +1,27 @@
+# Local runtime, personal HUD exports and key assignments
+reader/profile*.json
+reader/bindings/
+reader/logs/
+reader/state.json
+reader/last_success.*
+reader/error.log
+docs/arms-apl/build.txt
+docs/arms-apl/decoded-build.json
+
+# Environments and generated artifacts
+.venv/
+.build-venv/
+venv/
+__pycache__/
+*.py[cod]
+node_modules/
+build/
+dist/
+*.log
+*.tmp
+*.bak
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db

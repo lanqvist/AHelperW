@@ -1,0 +1,4 @@
+Pillow>=11,<13
+numpy>=2,<3
+rapidocr-onnxruntime==1.4.4
+mss==10.2.0
