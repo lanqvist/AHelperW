@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import queue
 import re
+import shutil
 import sys
 import threading
 import time
@@ -28,7 +29,15 @@ from input_sender import Executor, stop_pressed
 from capture_backend import HudCapture
 from cast_receipt import decode as decode_cast_receipt
 
-ROOT = Path(__file__).resolve().parent
+ASSETS = Path(__file__).resolve().parent
+PACKAGED = bool(getattr(sys, 'frozen', False))
+ROOT = Path(os.environ['LOCALAPPDATA'])/'AHelperW' if PACKAGED else ASSETS
+APL_ROOT = ASSETS/'apl-data' if PACKAGED else ASSETS.parent/'docs'/'arms-apl'
+ROOT.mkdir(parents=True, exist_ok=True)
+if PACKAGED:
+    for name in ('pipeline.json', 'ocr_policy.json'):
+        if not (ROOT/name).exists():
+            shutil.copyfile(ASSETS/name, ROOT/name)
 U, K = ct.windll.user32, ct.windll.kernel32
 U.GetForegroundWindow.restype = wt.HWND
 U.GetWindowThreadProcessId.argtypes = [wt.HWND, ct.POINTER(wt.DWORD)]
@@ -368,7 +377,7 @@ class App(tk.Tk):
         ttk.Button(bar,text='Назначение клавиш',command=self.open_bindings).pack(side='left',padx=(0,8))
         ttk.Label(bar,text='Переключись в WoW после запуска. OCR: ? означает неизвестно.').pack(side='left')
         execution=ttk.Frame(self); execution.pack(fill='x',padx=8,pady=(0,6))
-        self.auto_input=tk.BooleanVar(value=True)
+        self.auto_input=tk.BooleanVar(value=not PACKAGED)
         ttk.Checkbutton(execution,text='Автонажатия по APL',variable=self.auto_input,
                         command=lambda:self.stop() if self.running else None).pack(side='left')
         ttk.Label(execution,text='Целей:').pack(side='left',padx=(12,4))
@@ -381,7 +390,7 @@ class App(tk.Tk):
         self.apl_status=ttk.Label(self,text='APL остановлен. Назначаются только способности с клавишами.',wraplength=1100)
         self.apl_status.pack(fill='x',padx=8)
         self.status=ttk.Label(self,text=''); self.status.pack(fill='x',padx=8)
-        self.log_status=ttk.Label(self,text=f'Дебаг: {self.debug.path.name} (reader/logs)')
+        self.log_status=ttk.Label(self,text=f'Дебаг: {self.debug.path}')
         self.log_status.pack(fill='x',padx=8)
         self.table=ttk.Treeview(self,columns=('kind','state','timer','stacks','confidence','binding'),show='tree headings',height=24)
         self.table.heading('#0',text='Индикатор'); self.table.column('#0',width=290)
@@ -394,7 +403,12 @@ class App(tk.Tk):
         self.detail.pack(pady=6)
         self.image_label=ttk.Label(self); self.image_label.pack(pady=6)
         self.protocol('WM_DELETE_WINDOW',self.close)
-        self.load(ROOT/'profile.json'); self.after(100,self.poll)
+        if (ROOT/'profile.json').exists():
+            self.load(ROOT/'profile.json')
+        else:
+            self.status.config(text='Первый запуск: настрой HUD в WoW, выполни /ahw export и нажми «Открыть экспорт».')
+            self.apl_status.config(text='После импорта назначь клавиши. Чтение и автонажатия сейчас выключены. F8 — остановить.')
+        self.after(100,self.poll)
 
     def load(self,path):
         try: reader=Reader(path)
@@ -403,6 +417,18 @@ class App(tk.Tk):
             messagebox.showerror('Экспорт',str(e)); return
         if self.binding_editor and self.binding_editor.winfo_exists() and not self.binding_editor.close():
             return
+        self.stop()
+        if PACKAGED and Path(path).resolve() != (ROOT/'profile.json').resolve():
+            try:
+                destination = ROOT/'profile.json'
+                temporary = ROOT/'profile.import.tmp'
+                temporary.write_text(json.dumps(reader.cfg, ensure_ascii=False, indent=2), encoding='utf-8')
+                if destination.exists():
+                    shutil.copyfile(destination, ROOT/'profile.previous.json')
+                os.replace(temporary, destination)
+            except OSError as exc:
+                messagebox.showerror('Экспорт', 'Не удалось сохранить профиль: '+str(exc), parent=self)
+                return
         self.stop(); self.reader=reader; self.last_good=None; self.last_ocr_good=None
         self.debug.event('profile_loaded', path=str(path), profileHash=reader.hash, profile=reader.cfg)
         self.table.delete(*self.table.get_children())
@@ -416,7 +442,7 @@ class App(tk.Tk):
         self.refresh_bindings()
         if reader.cfg.get('specID')==71:
             try:
-                model=ArmsAPL(reader,ROOT.parent/'docs'/'arms-apl',{}, {'targets':None,'phase':'auto'})
+                model=ArmsAPL(reader,APL_ROOT,{}, {'targets':None,'phase':'auto'})
                 self.debug.event('apl_model_loaded',profileHash=reader.hash,talents=sorted(model.talents),
                                  lists={k:len(v) for k,v in model.lists.items()})
                 self.apl_status.config(text='APL Arms / Slayer загружен. Назначь клавиши и выбери число целей. F8 — остановить.')
@@ -503,7 +529,7 @@ class App(tk.Tk):
         if self.auto_input.get():
             try:
                 _,bindings=load_bindings(ROOT/'bindings'/f"spec-{self.reader.cfg['specID']}.json",self.reader.cfg['specID'])
-                executor=Executor(ArmsAPL(self.reader,ROOT.parent/'docs'/'arms-apl',bindings,settings),self.debug)
+                executor=Executor(ArmsAPL(self.reader,APL_ROOT,bindings,settings),self.debug)
             except Exception as exc:
                 self.debug.event('apl_start_error',error=str(exc),traceback=traceback.format_exc())
                 messagebox.showerror('APL',str(exc),parent=self)
@@ -756,7 +782,8 @@ class App(tk.Tk):
 if __name__=='__main__':
     K.CreateMutexW.argtypes = [ct.c_void_p, wt.BOOL, wt.LPCWSTR]
     K.CreateMutexW.restype = wt.HANDLE
-    mutex = K.CreateMutexW(None, False, 'Local\\AHelperW.Reader.' + hashlib.sha256(str(ROOT).encode()).hexdigest()[:16])
+    mutex_name = 'Local\\AHelperW.Reader.Installed' if PACKAGED else 'Local\\AHelperW.Reader.' + hashlib.sha256(str(ROOT).encode()).hexdigest()[:16]
+    mutex = K.CreateMutexW(None, False, mutex_name)
     if not mutex or K.GetLastError() == 183:
         ct.windll.user32.MessageBoxW(None,'Считыватель уже открыт или запуск заблокирован системой.', 'AHelperW', 64)
         raise SystemExit
@@ -768,6 +795,6 @@ if __name__=='__main__':
     except Exception:
         import traceback
         (ROOT/'error.log').write_text(traceback.format_exc(),encoding='utf-8')
-        ct.windll.user32.MessageBoxW(None,'Не удалось запустить считыватель. Подробности в reader/error.log.', 'AHelperW',16)
+        ct.windll.user32.MessageBoxW(None,'Не удалось запустить считыватель. Подробности: '+str(ROOT/'error.log'), 'AHelperW',16)
     finally:
         K.CloseHandle(mutex)

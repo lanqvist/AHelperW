@@ -16,10 +16,11 @@ The SIL Open Font License 1.1 is included in `AHelperW/Media/OFL.txt`.
 
 ## Python dependencies
 
-The reader's dependencies are listed in `reader/requirements.txt` and installed
-separately. Their licenses remain applicable. No Python environment or packaged
-third-party binaries are included in this source snapshot.
+The reader's dependencies are listed in `reader/requirements.txt`; the release
+build pins them in `packaging/requirements-build.txt`. Their licenses remain
+applicable. The installer includes dependency notices under `_internal/licenses`,
+and a matching source archive under `Source`. Python's license is included too.
 
 This notice does not grant a new license to original AHelperW code or replace
-any upstream license. Installer redistribution will need the corresponding
-dependency notices and any required source materials.
+any upstream license. Keep notices and corresponding source materials with any
+redistributed package.
