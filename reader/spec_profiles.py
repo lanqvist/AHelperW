@@ -25,7 +25,7 @@ PROFILES = {
     # Not yet observed in game: input stays off by default after loading.
     # Enrage 184362 gates rampage,if=buff.enrage.remains<gcd.
     72: SpecProfile('warrior.fury.slayer', 72, 'Fury / Slayer', 'fury-apl',
-                    frozenset({60}), ('rage',), 'in-development',
+                    frozenset({60}), ('rage',), 'experimental',
                     fast_aura_timers=frozenset({184362}),
                     binary_auras=frozenset({184362, 1719, 446035, 386196, 10060, 383873})),
     269: SpecProfile('monk.windwalker.shado-pan', 269, 'ВВ / Шадо-Пан', 'windwalker-apl',

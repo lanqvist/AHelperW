@@ -58,7 +58,7 @@ class FuryAPL(APLRuntime):
                                 'expressions':dict(row['expressions'], **{'if':Expression(condition)})})
         self.coverage_gaps = (
             'предметы и зелья: исполнение не подключено',
-            'ротация, ID замен и подтверждения применений ещё не проверены в игре',
+            'проверено одним боем на манекенах (5 целей, фаза добивания); ST и полный бой — нет',
         )
 
     def execute_threshold(self):
