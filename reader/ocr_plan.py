@@ -34,9 +34,11 @@ class OcrPlan:
                         self.disabled[key] = 'binary_aura_use_color'
                 elif arms and spec['spellID']==386164 and spec['kind']=='proc':
                     self.disabled[key] = 'no_duration_display'
-            elif key=='resource/rage': self.periods[key]=.15
+            elif key in ('resource/rage','resource/energy','resource/chi'): self.periods[key]=.15
+            elif key=='context/energyRegen': self.periods[key]=.5
+            elif key=='context/zenithRecharge': self.periods[key]=.5
             elif key=='context/targets': self.periods[key]=.2
-            elif key in ('resource/playerHealth','context/maxrage'): self.periods[key]=2.
+            elif key in ('resource/playerHealth','context/maxrage','context/maxenergy'): self.periods[key]=2.
             elif key=='resource/targetHealth': self.disabled[key]='use_targetHealthPercent'
             elif key in ('context/range','context/chargeRange','context/potion','context/trinket1','context/trinket2'):
                 self.disabled[key]='text_status_not_numeric'

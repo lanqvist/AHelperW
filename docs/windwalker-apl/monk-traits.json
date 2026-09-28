@@ -1,0 +1,5059 @@
+{
+  "build": "12.1.0.69933",
+  "source": {
+    "commit": "4c7c73621e596419b5bd6faa5d68940a9c640379",
+    "retrieved": "2026-09-28",
+    "url": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/class_modules/apl/apl_monk.cpp",
+    "clientBuild": "12.1.0.69933"
+  },
+  "entries": [
+    {
+      "tree": 1,
+      "entryId": 124866,
+      "nodeId": 101089,
+      "maxRanks": 1,
+      "spellId": 388874,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Improved Detox",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124867,
+      "nodeId": 101090,
+      "maxRanks": 1,
+      "spellId": 218164,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Detox",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124924,
+      "nodeId": 101135,
+      "maxRanks": 1,
+      "spellId": 387276,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Strength of Spirit",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 124923,
+      "nodeId": 101135,
+      "maxRanks": 1,
+      "spellId": 392910,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Profound Rebuttal",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 124926,
+      "nodeId": 101136,
+      "maxRanks": 1,
+      "spellId": 116844,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Ring of Peace",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 124925,
+      "nodeId": 101136,
+      "maxRanks": 1,
+      "spellId": 198898,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Song of Chi-Ji",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 124927,
+      "nodeId": 101137,
+      "maxRanks": 1,
+      "spellId": 432181,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Dance of the Wind",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124928,
+      "nodeId": 101138,
+      "maxRanks": 1,
+      "spellId": 450595,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Spirit's Essence",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124929,
+      "nodeId": 101139,
+      "maxRanks": 1,
+      "spellId": 432181,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Dance of the Wind",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124930,
+      "nodeId": 101140,
+      "maxRanks": 1,
+      "spellId": 322113,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Improved Touch of Death",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124931,
+      "nodeId": 101141,
+      "maxRanks": 1,
+      "spellId": 450432,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Pressure Points",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124932,
+      "nodeId": 101142,
+      "maxRanks": 1,
+      "spellId": 115078,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Paralysis",
+      "specs": [],
+      "grantedSpecs": [
+        268,
+        269,
+        270
+      ],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124933,
+      "nodeId": 101143,
+      "maxRanks": 1,
+      "spellId": 115175,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Soothing Mist",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124934,
+      "nodeId": 101144,
+      "maxRanks": 1,
+      "spellId": 388681,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Elusive Mists",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124935,
+      "nodeId": 101145,
+      "maxRanks": 1,
+      "spellId": 388812,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Vivacious Vivification",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124936,
+      "nodeId": 101146,
+      "maxRanks": 1,
+      "spellId": 388811,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Grace of the Crane",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124937,
+      "nodeId": 101147,
+      "maxRanks": 1,
+      "spellId": 116841,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Tiger's Lust",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124938,
+      "nodeId": 101148,
+      "maxRanks": 1,
+      "spellId": 450514,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Wind's Reach",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124940,
+      "nodeId": 101149,
+      "maxRanks": 1,
+      "spellId": 450335,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Crashing Momentum",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 124939,
+      "nodeId": 101149,
+      "maxRanks": 1,
+      "spellId": 116095,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Disable",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 124941,
+      "nodeId": 101150,
+      "maxRanks": 1,
+      "spellId": 218164,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Detox",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124942,
+      "nodeId": 101151,
+      "maxRanks": 1,
+      "spellId": 450631,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Energy Transfer",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124943,
+      "nodeId": 101152,
+      "maxRanks": 1,
+      "spellId": 116705,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Spear Hand Strike",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124944,
+      "nodeId": 101153,
+      "maxRanks": 1,
+      "spellId": 388664,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Calming Presence",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124946,
+      "nodeId": 101154,
+      "maxRanks": 1,
+      "spellId": 450154,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Rushing Reflexes",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124947,
+      "nodeId": 101155,
+      "maxRanks": 1,
+      "spellId": 450622,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Swift Art",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124948,
+      "nodeId": 101156,
+      "maxRanks": 1,
+      "spellId": 392900,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Vigorous Expulsion",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124949,
+      "nodeId": 101157,
+      "maxRanks": 1,
+      "spellId": 389579,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Save Them All",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124951,
+      "nodeId": 101158,
+      "maxRanks": 1,
+      "spellId": 450503,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Quick Footed",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 124950,
+      "nodeId": 101158,
+      "maxRanks": 1,
+      "spellId": 328670,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Hasty Provocation",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 124953,
+      "nodeId": 101159,
+      "maxRanks": 1,
+      "spellId": 1272781,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Tiger Fang",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124954,
+      "nodeId": 101160,
+      "maxRanks": 1,
+      "spellId": 450553,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Jade Walk",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124955,
+      "nodeId": 101161,
+      "maxRanks": 1,
+      "spellId": 450520,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Bounding Agility",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124956,
+      "nodeId": 101162,
+      "maxRanks": 1,
+      "spellId": 1272694,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Zenith Stomp",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124957,
+      "nodeId": 101163,
+      "maxRanks": 1,
+      "spellId": 450448,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Peace and Prosperity",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124958,
+      "nodeId": 101164,
+      "maxRanks": 1,
+      "spellId": 1242910,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Jade Infusion",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 133997,
+      "nodeId": 101164,
+      "maxRanks": 1,
+      "spellId": 115313,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Summon Jade Serpent Statue",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 124960,
+      "nodeId": 101165,
+      "maxRanks": 1,
+      "spellId": 414131,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Yu'lon's Grace",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124961,
+      "nodeId": 101166,
+      "maxRanks": 2,
+      "spellId": 388674,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Ferocity of Xuen",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124962,
+      "nodeId": 101167,
+      "maxRanks": 1,
+      "spellId": 101643,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Transcendence",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124963,
+      "nodeId": 101168,
+      "maxRanks": 1,
+      "spellId": 449582,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Lighter Than Air",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124964,
+      "nodeId": 101169,
+      "maxRanks": 2,
+      "spellId": 450426,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Chi Proficiency",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124965,
+      "nodeId": 101170,
+      "maxRanks": 1,
+      "spellId": 450569,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Flow of Chi",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124966,
+      "nodeId": 101171,
+      "maxRanks": 1,
+      "spellId": 450560,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Healing Winds",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124967,
+      "nodeId": 101172,
+      "maxRanks": 1,
+      "spellId": 115315,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Summon Black Ox Statue",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124968,
+      "nodeId": 101173,
+      "maxRanks": 1,
+      "spellId": 388917,
+      "replacementId": 0,
+      "overrideId": 115203,
+      "name": "Fortifying Brew",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124970,
+      "nodeId": 101174,
+      "maxRanks": 1,
+      "spellId": 388814,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Ironshell Brew",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 124969,
+      "nodeId": 101174,
+      "maxRanks": 1,
+      "spellId": 388813,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Expeditious Fortification",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 124971,
+      "nodeId": 101175,
+      "maxRanks": 1,
+      "spellId": 157411,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Windwalking",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124973,
+      "nodeId": 101176,
+      "maxRanks": 1,
+      "spellId": 394110,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Escape from Reality",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 124972,
+      "nodeId": 101176,
+      "maxRanks": 1,
+      "spellId": 434774,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Transcendence: Linked Spirits",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 124974,
+      "nodeId": 101177,
+      "maxRanks": 1,
+      "spellId": 1272452,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Chi Transfer",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124975,
+      "nodeId": 101178,
+      "maxRanks": 1,
+      "spellId": 394123,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Fatal Touch",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124976,
+      "nodeId": 101179,
+      "maxRanks": 2,
+      "spellId": 450427,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Martial Instincts",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124977,
+      "nodeId": 101180,
+      "maxRanks": 1,
+      "spellId": 450638,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Celestial Determination",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124979,
+      "nodeId": 101181,
+      "maxRanks": 1,
+      "spellId": 414132,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Dance of the Wind",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124980,
+      "nodeId": 101182,
+      "maxRanks": 1,
+      "spellId": 264348,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Tiger Tail Sweep",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124982,
+      "nodeId": 101183,
+      "maxRanks": 1,
+      "spellId": 115173,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Celerity",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 124981,
+      "nodeId": 101183,
+      "maxRanks": 1,
+      "spellId": 115008,
+      "replacementId": 109132,
+      "overrideId": 0,
+      "name": "Chi Torpedo",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 124983,
+      "nodeId": 101184,
+      "maxRanks": 2,
+      "spellId": 344359,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Ancient Arts",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124984,
+      "nodeId": 101185,
+      "maxRanks": 1,
+      "spellId": 388809,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Fast Feet",
+      "specs": [
+        269,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 124985,
+      "nodeId": 101186,
+      "maxRanks": 1,
+      "spellId": 107428,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Rising Sun Kick",
+      "specs": [
+        269,
+        270
+      ],
+      "grantedSpecs": [
+        269,
+        270
+      ],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 126500,
+      "nodeId": 102432,
+      "maxRanks": 1,
+      "spellId": 450391,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Chi Wave",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 126502,
+      "nodeId": 102433,
+      "maxRanks": 1,
+      "spellId": 450391,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Chi Wave",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 126501,
+      "nodeId": 102433,
+      "maxRanks": 1,
+      "spellId": 123986,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Chi Burst",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 134029,
+      "nodeId": 108540,
+      "maxRanks": 1,
+      "spellId": 1243287,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Diffuse Magic",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136085,
+      "nodeId": 109826,
+      "maxRanks": 1,
+      "spellId": 1261543,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Fast Feet",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136086,
+      "nodeId": 109827,
+      "maxRanks": 1,
+      "spellId": 115069,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Stagger",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [
+        268
+      ],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136510,
+      "nodeId": 110019,
+      "maxRanks": 1,
+      "spellId": 1266811,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Mist Caller",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136511,
+      "nodeId": 110020,
+      "maxRanks": 1,
+      "spellId": 392900,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Vigorous Expulsion",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136512,
+      "nodeId": 110021,
+      "maxRanks": 1,
+      "spellId": 1266748,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Vital Clarity",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136514,
+      "nodeId": 110022,
+      "maxRanks": 1,
+      "spellId": 387276,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Strength of Spirit",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 136513,
+      "nodeId": 110022,
+      "maxRanks": 1,
+      "spellId": 392910,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Profound Rebuttal",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 136515,
+      "nodeId": 110023,
+      "maxRanks": 1,
+      "spellId": 388812,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Vivacious Vivification",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136517,
+      "nodeId": 110024,
+      "maxRanks": 1,
+      "spellId": 1266719,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Silent Sanctuary",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136518,
+      "nodeId": 110025,
+      "maxRanks": 1,
+      "spellId": 1266733,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Stillstep Coil",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136519,
+      "nodeId": 110026,
+      "maxRanks": 1,
+      "spellId": 388812,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Vivacious Vivification",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 136516,
+      "nodeId": 110026,
+      "maxRanks": 1,
+      "spellId": 1266734,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Serene Surge",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 136520,
+      "nodeId": 110027,
+      "maxRanks": 1,
+      "spellId": 1266740,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Reinvigoration",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136596,
+      "nodeId": 110095,
+      "maxRanks": 1,
+      "spellId": 450631,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Energy Transfer",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136598,
+      "nodeId": 110097,
+      "maxRanks": 1,
+      "spellId": 1277444,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Chi Warding",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136599,
+      "nodeId": 110098,
+      "maxRanks": 1,
+      "spellId": 116705,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Spear Hand Strike",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124805,
+      "nodeId": 101035,
+      "maxRanks": 2,
+      "spellId": 458623,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Ferociousness",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124806,
+      "nodeId": 101036,
+      "maxRanks": 1,
+      "spellId": 261917,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sharp Reflexes",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124807,
+      "nodeId": 101037,
+      "maxRanks": 1,
+      "spellId": 115396,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Ascension",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124809,
+      "nodeId": 101038,
+      "maxRanks": 1,
+      "spellId": 451485,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Brawler's Intensity",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124810,
+      "nodeId": 101039,
+      "maxRanks": 1,
+      "spellId": 392958,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Glory of the Dawn",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124811,
+      "nodeId": 101040,
+      "maxRanks": 1,
+      "spellId": 392985,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Thunderfist",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124812,
+      "nodeId": 101041,
+      "maxRanks": 1,
+      "spellId": 451576,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Communion With Wind",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124815,
+      "nodeId": 101043,
+      "maxRanks": 1,
+      "spellId": 1248833,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Airborne Rhythm",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124814,
+      "nodeId": 101043,
+      "maxRanks": 1,
+      "spellId": 1248837,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Hurricane's Vault",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124816,
+      "nodeId": 101044,
+      "maxRanks": 1,
+      "spellId": 392994,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Path of Jade",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 126026,
+      "nodeId": 101044,
+      "maxRanks": 1,
+      "spellId": 451573,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Singularly Focused Jade",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124817,
+      "nodeId": 101045,
+      "maxRanks": 1,
+      "spellId": 457974,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Jadefire Stomp",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124818,
+      "nodeId": 101046,
+      "maxRanks": 1,
+      "spellId": 1272175,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Universal Energy",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124819,
+      "nodeId": 101047,
+      "maxRanks": 2,
+      "spellId": 391383,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Hardened Soles",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124820,
+      "nodeId": 101048,
+      "maxRanks": 1,
+      "spellId": 451294,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Momentum Boost",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124821,
+      "nodeId": 101049,
+      "maxRanks": 1,
+      "spellId": 388856,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Touch of the Tiger",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124822,
+      "nodeId": 101050,
+      "maxRanks": 1,
+      "spellId": 392979,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Jade Ignition",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124823,
+      "nodeId": 101051,
+      "maxRanks": 1,
+      "spellId": 1249832,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Obsidian Spiral",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124825,
+      "nodeId": 101052,
+      "maxRanks": 1,
+      "spellId": 391370,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Drinking Horn Cover",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124824,
+      "nodeId": 101052,
+      "maxRanks": 1,
+      "spellId": 280197,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Spiritual Focus",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124826,
+      "nodeId": 101053,
+      "maxRanks": 1,
+      "spellId": 1249625,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Zenith",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124827,
+      "nodeId": 101054,
+      "maxRanks": 1,
+      "spellId": 116645,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Teachings of the Monastery",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124828,
+      "nodeId": 101055,
+      "maxRanks": 1,
+      "spellId": 451823,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Dual Threat",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124829,
+      "nodeId": 101056,
+      "maxRanks": 1,
+      "spellId": 451498,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Energy Burst",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124830,
+      "nodeId": 101057,
+      "maxRanks": 1,
+      "spellId": 1248749,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Cyclone's Drift",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 134453,
+      "nodeId": 101057,
+      "maxRanks": 1,
+      "spellId": 1248747,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Crashing Fists",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124833,
+      "nodeId": 101059,
+      "maxRanks": 1,
+      "spellId": 451515,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sequenced Strikes",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124834,
+      "nodeId": 101060,
+      "maxRanks": 1,
+      "spellId": 325201,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Dance of Chi-Ji",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124835,
+      "nodeId": 101061,
+      "maxRanks": 1,
+      "spellId": 391330,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Meridian Strikes",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124836,
+      "nodeId": 101062,
+      "maxRanks": 1,
+      "spellId": 392982,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Shadowboxing Treads",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124837,
+      "nodeId": 101063,
+      "maxRanks": 1,
+      "spellId": 1263346,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Swift as a Coursing River",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124838,
+      "nodeId": 101064,
+      "maxRanks": 1,
+      "spellId": 119582,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Purifying Brew",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124839,
+      "nodeId": 101065,
+      "maxRanks": 1,
+      "spellId": 387625,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Staggering Strikes",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 136148,
+      "nodeId": 101065,
+      "maxRanks": 1,
+      "spellId": 388505,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Quick Sip",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124841,
+      "nodeId": 101067,
+      "maxRanks": 1,
+      "spellId": 322507,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Celestial Brew",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 136146,
+      "nodeId": 101067,
+      "maxRanks": 1,
+      "spellId": 1241059,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Celestial Infusion",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124842,
+      "nodeId": 101068,
+      "maxRanks": 1,
+      "spellId": 322960,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Fortifying Brew: Determination",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124843,
+      "nodeId": 101069,
+      "maxRanks": 1,
+      "spellId": 115181,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Breath of Fire",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124844,
+      "nodeId": 101070,
+      "maxRanks": 1,
+      "spellId": 1262334,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Jade Flash",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124845,
+      "nodeId": 101071,
+      "maxRanks": 1,
+      "spellId": 124502,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Gift of the Ox",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124846,
+      "nodeId": 101072,
+      "maxRanks": 1,
+      "spellId": 383695,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Improved Blackout Kick",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124847,
+      "nodeId": 101073,
+      "maxRanks": 1,
+      "spellId": 322740,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Mighty Stomp",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124848,
+      "nodeId": 101074,
+      "maxRanks": 2,
+      "spellId": 387219,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Walk with the Ox",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124849,
+      "nodeId": 101075,
+      "maxRanks": 1,
+      "spellId": 132578,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Invoke Niuzao, the Black Ox",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124850,
+      "nodeId": 101076,
+      "maxRanks": 1,
+      "spellId": 1263353,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Celestial Flames",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124851,
+      "nodeId": 101077,
+      "maxRanks": 1,
+      "spellId": 1241136,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Zen State",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124853,
+      "nodeId": 101078,
+      "maxRanks": 1,
+      "spellId": 387638,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Shadowboxing Treads",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124852,
+      "nodeId": 101078,
+      "maxRanks": 1,
+      "spellId": 387230,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Fluidity of Motion",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124854,
+      "nodeId": 101079,
+      "maxRanks": 1,
+      "spellId": 383785,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Counterstrike",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124855,
+      "nodeId": 101080,
+      "maxRanks": 1,
+      "spellId": 389942,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Face Palm",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124856,
+      "nodeId": 101081,
+      "maxRanks": 2,
+      "spellId": 386937,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Anvil and Stave",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124858,
+      "nodeId": 101082,
+      "maxRanks": 1,
+      "spellId": 325093,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Light Brewing",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124857,
+      "nodeId": 101082,
+      "maxRanks": 1,
+      "spellId": 383714,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Training of Niuzao",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124860,
+      "nodeId": 101083,
+      "maxRanks": 1,
+      "spellId": 393357,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Tranquil Spirit",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124861,
+      "nodeId": 101084,
+      "maxRanks": 1,
+      "spellId": 1241097,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Niuzao's Resolve",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124862,
+      "nodeId": 101085,
+      "maxRanks": 1,
+      "spellId": 455139,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Elixir of Determination",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124863,
+      "nodeId": 101086,
+      "maxRanks": 1,
+      "spellId": 400629,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Spirit of the Ox",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124864,
+      "nodeId": 101087,
+      "maxRanks": 1,
+      "spellId": 322120,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Shuffle",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124865,
+      "nodeId": 101088,
+      "maxRanks": 1,
+      "spellId": 121253,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Keg Smash",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124869,
+      "nodeId": 101092,
+      "maxRanks": 1,
+      "spellId": 388551,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Uplifted Spirits",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124871,
+      "nodeId": 101093,
+      "maxRanks": 1,
+      "spellId": 197900,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Mist Wrap",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124870,
+      "nodeId": 101093,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124872,
+      "nodeId": 101094,
+      "maxRanks": 1,
+      "spellId": 388511,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Overflowing Mists",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124874,
+      "nodeId": 101095,
+      "maxRanks": 1,
+      "spellId": 388218,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Calming Coalescence",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124873,
+      "nodeId": 101095,
+      "maxRanks": 1,
+      "spellId": 467270,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Refreshment",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124875,
+      "nodeId": 101096,
+      "maxRanks": 1,
+      "spellId": 116849,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Life Cocoon",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124876,
+      "nodeId": 101097,
+      "maxRanks": 1,
+      "spellId": 446260,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Crane Style",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124878,
+      "nodeId": 101098,
+      "maxRanks": 1,
+      "spellId": 202424,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Chrysalis",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124877,
+      "nodeId": 101098,
+      "maxRanks": 1,
+      "spellId": 399226,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Burst of Life",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124879,
+      "nodeId": 101099,
+      "maxRanks": 1,
+      "spellId": 388548,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Mists of Life",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124880,
+      "nodeId": 101100,
+      "maxRanks": 1,
+      "spellId": 388038,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Yu'lon's Whisper",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124881,
+      "nodeId": 101101,
+      "maxRanks": 1,
+      "spellId": 1268807,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Emperor's Elixir",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124882,
+      "nodeId": 101102,
+      "maxRanks": 1,
+      "spellId": 467293,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Jadefire Teachings",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 128221,
+      "nodeId": 101102,
+      "maxRanks": 1,
+      "spellId": 467307,
+      "replacementId": 107428,
+      "overrideId": 0,
+      "name": "Rushing Wind Kick",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124884,
+      "nodeId": 101103,
+      "maxRanks": 1,
+      "spellId": 1271431,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Amplified Rush",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124883,
+      "nodeId": 101103,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124885,
+      "nodeId": 101104,
+      "maxRanks": 1,
+      "spellId": 1243155,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Way of the Serpent",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 134001,
+      "nodeId": 101104,
+      "maxRanks": 1,
+      "spellId": 388779,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Way of the Crane",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124887,
+      "nodeId": 101106,
+      "maxRanks": 1,
+      "spellId": 438439,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Dance of Chi-Ji",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124888,
+      "nodeId": 101107,
+      "maxRanks": 1,
+      "spellId": 1268817,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Misty Coalescence",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124889,
+      "nodeId": 101108,
+      "maxRanks": 1,
+      "spellId": 446326,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Zen Pulse",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124890,
+      "nodeId": 101109,
+      "maxRanks": 1,
+      "spellId": 122280,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Healing Elixir",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124891,
+      "nodeId": 101110,
+      "maxRanks": 1,
+      "spellId": 274586,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Invigorating Mists",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124892,
+      "nodeId": 101111,
+      "maxRanks": 2,
+      "spellId": 388847,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Rapid Diffusion",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124893,
+      "nodeId": 101112,
+      "maxRanks": 1,
+      "spellId": 388701,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Dancing Mists",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 137474,
+      "nodeId": 101112,
+      "maxRanks": 1,
+      "spellId": 1299572,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Vital Expenditure",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124895,
+      "nodeId": 101113,
+      "maxRanks": 1,
+      "spellId": 388031,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Jade Bond",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124894,
+      "nodeId": 101113,
+      "maxRanks": 1,
+      "spellId": 388212,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Gift of the Celestials",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124896,
+      "nodeId": 101114,
+      "maxRanks": 2,
+      "spellId": 388682,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Misty Peaks",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124897,
+      "nodeId": 101115,
+      "maxRanks": 1,
+      "spellId": 197895,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Focused Thunder",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124898,
+      "nodeId": 101116,
+      "maxRanks": 1,
+      "spellId": 388593,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Peaceful Mending",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124900,
+      "nodeId": 101117,
+      "maxRanks": 1,
+      "spellId": 387991,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Tear of Morning",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124899,
+      "nodeId": 101117,
+      "maxRanks": 1,
+      "spellId": 274909,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Rising Mist",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124901,
+      "nodeId": 101118,
+      "maxRanks": 1,
+      "spellId": 404408,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Legacy of Wisdom",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 128344,
+      "nodeId": 101118,
+      "maxRanks": 1,
+      "spellId": 471761,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Emperor's Favor",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124903,
+      "nodeId": 101119,
+      "maxRanks": 1,
+      "spellId": 400053,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Veil of Pride",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124902,
+      "nodeId": 101119,
+      "maxRanks": 1,
+      "spellId": 1270621,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Tranquil Tea",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124904,
+      "nodeId": 101120,
+      "maxRanks": 1,
+      "spellId": 399491,
+      "replacementId": 116670,
+      "overrideId": 0,
+      "name": "Sheilun's Gift",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124905,
+      "nodeId": 101121,
+      "maxRanks": 1,
+      "spellId": 458431,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Lotus Infusion",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124906,
+      "nodeId": 101122,
+      "maxRanks": 1,
+      "spellId": 446345,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Deep Clarity",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124907,
+      "nodeId": 101123,
+      "maxRanks": 1,
+      "spellId": 1280297,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Mistline",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124908,
+      "nodeId": 101124,
+      "maxRanks": 2,
+      "spellId": 388491,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Secret Infusion",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124910,
+      "nodeId": 101125,
+      "maxRanks": 1,
+      "spellId": 467316,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Jade Empowerment",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124909,
+      "nodeId": 101125,
+      "maxRanks": 1,
+      "spellId": 1277302,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Morning Breeze",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124911,
+      "nodeId": 101126,
+      "maxRanks": 2,
+      "spellId": 388020,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Resplendent Mist",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125932,
+      "nodeId": 101127,
+      "maxRanks": 1,
+      "spellId": 173841,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Pool of Mists",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124913,
+      "nodeId": 101128,
+      "maxRanks": 1,
+      "spellId": 343655,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Celestial Harmony",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124915,
+      "nodeId": 101129,
+      "maxRanks": 1,
+      "spellId": 322118,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Invoke Yu'lon, the Jade Serpent",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124914,
+      "nodeId": 101129,
+      "maxRanks": 1,
+      "spellId": 325197,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Invoke Chi-Ji, the Red Crane",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124917,
+      "nodeId": 101130,
+      "maxRanks": 1,
+      "spellId": 422031,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Energizing Brew",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124916,
+      "nodeId": 101130,
+      "maxRanks": 1,
+      "spellId": 197915,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Lifecycles",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124919,
+      "nodeId": 101131,
+      "maxRanks": 1,
+      "spellId": 115310,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Revival",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124918,
+      "nodeId": 101131,
+      "maxRanks": 1,
+      "spellId": 388615,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Restoral",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124920,
+      "nodeId": 101132,
+      "maxRanks": 1,
+      "spellId": 115869,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Mana Tea",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124921,
+      "nodeId": 101133,
+      "maxRanks": 1,
+      "spellId": 116680,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Thunder Focus Tea",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124922,
+      "nodeId": 101134,
+      "maxRanks": 1,
+      "spellId": 124682,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Enveloping Mist",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124987,
+      "nodeId": 101187,
+      "maxRanks": 1,
+      "spellId": 383994,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Dragonfire Brew",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124986,
+      "nodeId": 101187,
+      "maxRanks": 1,
+      "spellId": 386965,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Charred Passions",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124989,
+      "nodeId": 101188,
+      "maxRanks": 1,
+      "spellId": 383698,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Scalding Brew",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124988,
+      "nodeId": 101188,
+      "maxRanks": 1,
+      "spellId": 383697,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sal'salabim's Strength",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124990,
+      "nodeId": 101189,
+      "maxRanks": 2,
+      "spellId": 196737,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "High Tolerance",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124992,
+      "nodeId": 101190,
+      "maxRanks": 1,
+      "spellId": 280515,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Bob and Weave",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124991,
+      "nodeId": 101190,
+      "maxRanks": 1,
+      "spellId": 115399,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Black Ox Brew",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124997,
+      "nodeId": 101193,
+      "maxRanks": 1,
+      "spellId": 418359,
+      "replacementId": 100780,
+      "overrideId": 0,
+      "name": "Press the Advantage",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124996,
+      "nodeId": 101193,
+      "maxRanks": 1,
+      "spellId": 196736,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blackout Combo",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 124999,
+      "nodeId": 101195,
+      "maxRanks": 1,
+      "spellId": 383707,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Stormstout's Last Keg",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125000,
+      "nodeId": 101196,
+      "maxRanks": 1,
+      "spellId": 1262628,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Awakening Spirit",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 136149,
+      "nodeId": 101196,
+      "maxRanks": 1,
+      "spellId": 1262659,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Vital Flame",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 125001,
+      "nodeId": 101197,
+      "maxRanks": 1,
+      "spellId": 325153,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Exploding Keg",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125003,
+      "nodeId": 101198,
+      "maxRanks": 1,
+      "spellId": 1262017,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Fuel on the Fire",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 136150,
+      "nodeId": 101198,
+      "maxRanks": 1,
+      "spellId": 1262329,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Empty the Cellar",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125004,
+      "nodeId": 101199,
+      "maxRanks": 1,
+      "spellId": 455068,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Ox Stance",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125006,
+      "nodeId": 101201,
+      "maxRanks": 1,
+      "spellId": 393516,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Pretense of Instability",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125008,
+      "nodeId": 101202,
+      "maxRanks": 1,
+      "spellId": 196730,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Special Delivery",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 125007,
+      "nodeId": 101202,
+      "maxRanks": 1,
+      "spellId": 116847,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Rushing Jade Wind",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 125010,
+      "nodeId": 101203,
+      "maxRanks": 1,
+      "spellId": 451524,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Revolving Whirl",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 125009,
+      "nodeId": 101203,
+      "maxRanks": 1,
+      "spellId": 1250042,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Echo Technique",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 125011,
+      "nodeId": 101204,
+      "maxRanks": 1,
+      "spellId": 452137,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Flurry of Xuen",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125012,
+      "nodeId": 101205,
+      "maxRanks": 1,
+      "spellId": 388849,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Rising Star",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125013,
+      "nodeId": 101206,
+      "maxRanks": 1,
+      "spellId": 1272678,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Weapon of Wind",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125014,
+      "nodeId": 101207,
+      "maxRanks": 1,
+      "spellId": 392983,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Strike of the Windlord",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 134452,
+      "nodeId": 101207,
+      "maxRanks": 1,
+      "spellId": 152175,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Whirling Dragon Punch",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 125015,
+      "nodeId": 101208,
+      "maxRanks": 1,
+      "spellId": 1272685,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Martial Agility",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125016,
+      "nodeId": 101209,
+      "maxRanks": 1,
+      "spellId": 454969,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Memory of the Monastery",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125017,
+      "nodeId": 101210,
+      "maxRanks": 1,
+      "spellId": 392993,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Xuen's Battlegear",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125018,
+      "nodeId": 101211,
+      "maxRanks": 1,
+      "spellId": 388848,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Crane Vortex",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125019,
+      "nodeId": 101212,
+      "maxRanks": 1,
+      "spellId": 451529,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Knowledge of the Broken Temple",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125020,
+      "nodeId": 101213,
+      "maxRanks": 1,
+      "spellId": 1272415,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sunfire Spiral",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125021,
+      "nodeId": 101214,
+      "maxRanks": 1,
+      "spellId": 397768,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Inner Peace",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125022,
+      "nodeId": 101215,
+      "maxRanks": 1,
+      "spellId": 137384,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Combo Breaker",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125023,
+      "nodeId": 101216,
+      "maxRanks": 1,
+      "spellId": 196740,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Hit Combo",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125025,
+      "nodeId": 101217,
+      "maxRanks": 1,
+      "spellId": 121817,
+      "replacementId": 322101,
+      "overrideId": 0,
+      "name": "Combat Wisdom",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125026,
+      "nodeId": 101218,
+      "maxRanks": 1,
+      "spellId": 113656,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Fists of Fury",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125611,
+      "nodeId": 101710,
+      "maxRanks": 1,
+      "spellId": 454484,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "One With the Wind",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125002,
+      "nodeId": 101711,
+      "maxRanks": 1,
+      "spellId": 1262329,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Empty the Cellar",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 124859,
+      "nodeId": 102004,
+      "maxRanks": 1,
+      "spellId": 383700,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Gai Plin's Imperial Brew",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 126307,
+      "nodeId": 102250,
+      "maxRanks": 1,
+      "spellId": 1217413,
+      "replacementId": 101545,
+      "overrideId": 0,
+      "name": "Slicing Winds",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 128711,
+      "nodeId": 104128,
+      "maxRanks": 1,
+      "spellId": 1248704,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Skyfire Heel",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 128712,
+      "nodeId": 104129,
+      "maxRanks": 1,
+      "spellId": 1250041,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Harmonic Combo",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 134543,
+      "nodeId": 108946,
+      "maxRanks": 1,
+      "spellId": 1250566,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Rushing Wind Kick",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 135749,
+      "nodeId": 109516,
+      "maxRanks": 1,
+      "spellId": 1260511,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Spiritfont",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 137072,
+      "nodeId": 109516,
+      "maxRanks": 2,
+      "spellId": 1260677,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Spiritfont",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 137071,
+      "nodeId": 109516,
+      "maxRanks": 1,
+      "spellId": 1260680,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Spiritfont",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 136145,
+      "nodeId": 109882,
+      "maxRanks": 1,
+      "spellId": 387046,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Elusive Footwork",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 136147,
+      "nodeId": 109883,
+      "maxRanks": 1,
+      "spellId": 454483,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "August Blessing",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 136177,
+      "nodeId": 109910,
+      "maxRanks": 1,
+      "spellId": 1263245,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Heart of the Ox",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 137075,
+      "nodeId": 110435,
+      "maxRanks": 1,
+      "spellId": 1265129,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Bring Me Another",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 137074,
+      "nodeId": 110435,
+      "maxRanks": 2,
+      "spellId": 1265138,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Bring Me Another",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 137073,
+      "nodeId": 110435,
+      "maxRanks": 1,
+      "spellId": 1265141,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Bring Me Another",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 137076,
+      "nodeId": 110436,
+      "maxRanks": 1,
+      "spellId": 1261703,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Tigereye Brew",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 137077,
+      "nodeId": 110436,
+      "maxRanks": 2,
+      "spellId": 1261844,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Tigereye Brew",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 137078,
+      "nodeId": 110436,
+      "maxRanks": 1,
+      "spellId": 1261849,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Tigereye Brew",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 3,
+      "entryId": 125029,
+      "nodeId": 101220,
+      "maxRanks": 1,
+      "spellId": 451024,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Overwhelming Force",
+      "specs": [
+        268,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 66,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125031,
+      "nodeId": 101221,
+      "maxRanks": 1,
+      "spellId": 451041,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Tiger's Vigor",
+      "specs": [
+        268,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 66,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 125030,
+      "nodeId": 101221,
+      "maxRanks": 1,
+      "spellId": 451043,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Roar from the Heavens",
+      "specs": [
+        268,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 66,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 125032,
+      "nodeId": 101222,
+      "maxRanks": 1,
+      "spellId": 450875,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Manifestation",
+      "specs": [
+        268,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 66,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125033,
+      "nodeId": 101223,
+      "maxRanks": 1,
+      "spellId": 450508,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Aspect of Harmony",
+      "specs": [
+        268,
+        270
+      ],
+      "grantedSpecs": [
+        268,
+        270
+      ],
+      "subtree": 66,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125035,
+      "nodeId": 101224,
+      "maxRanks": 1,
+      "spellId": 450867,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Purified Spirit",
+      "specs": [
+        268,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 66,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 125034,
+      "nodeId": 101224,
+      "maxRanks": 1,
+      "spellId": 450870,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Harmonic Gambit",
+      "specs": [
+        268,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 66,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 125036,
+      "nodeId": 101225,
+      "maxRanks": 1,
+      "spellId": 450892,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Endless Draught",
+      "specs": [
+        268,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 66,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125038,
+      "nodeId": 101226,
+      "maxRanks": 1,
+      "spellId": 450912,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Path of Resurgence",
+      "specs": [
+        268,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 66,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 125037,
+      "nodeId": 101226,
+      "maxRanks": 1,
+      "spellId": 450965,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Way of a Thousand Strikes",
+      "specs": [
+        268,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 66,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 125039,
+      "nodeId": 101227,
+      "maxRanks": 1,
+      "spellId": 450529,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Coalescence",
+      "specs": [
+        268,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 66,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125040,
+      "nodeId": 101228,
+      "maxRanks": 1,
+      "spellId": 451017,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Clarity of Purpose",
+      "specs": [
+        268,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 66,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125042,
+      "nodeId": 101229,
+      "maxRanks": 1,
+      "spellId": 451036,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Mantra of Purity",
+      "specs": [
+        268,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 66,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 125041,
+      "nodeId": 101229,
+      "maxRanks": 1,
+      "spellId": 451029,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Mantra of Tenacity",
+      "specs": [
+        268,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 66,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 125043,
+      "nodeId": 101230,
+      "maxRanks": 1,
+      "spellId": 450889,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Balanced Stratagem",
+      "specs": [
+        268,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 66,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125049,
+      "nodeId": 101233,
+      "maxRanks": 1,
+      "spellId": 442719,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Restore Balance",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 125048,
+      "nodeId": 101233,
+      "maxRanks": 1,
+      "spellId": 443625,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Yu'lon's Knowledge",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 125050,
+      "nodeId": 101234,
+      "maxRanks": 1,
+      "spellId": 1273154,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Path of the Falling Star",
+      "specs": [
+        269,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125052,
+      "nodeId": 101235,
+      "maxRanks": 1,
+      "spellId": 443571,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Inner Compass",
+      "specs": [
+        269,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125051,
+      "nodeId": 101235,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        269,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125054,
+      "nodeId": 101236,
+      "maxRanks": 1,
+      "spellId": 442743,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Temple Training",
+      "specs": [
+        269,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 125053,
+      "nodeId": 101236,
+      "maxRanks": 1,
+      "spellId": 442687,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Xuen's Guidance",
+      "specs": [
+        269,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 125055,
+      "nodeId": 101237,
+      "maxRanks": 1,
+      "spellId": 443566,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Chi-Ji's Swiftness",
+      "specs": [
+        269,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125057,
+      "nodeId": 101238,
+      "maxRanks": 1,
+      "spellId": 442747,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Niuzao's Protection",
+      "specs": [
+        269,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 125056,
+      "nodeId": 101238,
+      "maxRanks": 1,
+      "spellId": 443059,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Jade Sanctuary",
+      "specs": [
+        269,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 125058,
+      "nodeId": 101239,
+      "maxRanks": 1,
+      "spellId": 443589,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Unity Within",
+      "specs": [
+        269,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125059,
+      "nodeId": 101240,
+      "maxRanks": 1,
+      "spellId": 1262756,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Stampede of the Ancients",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125061,
+      "nodeId": 101242,
+      "maxRanks": 1,
+      "spellId": 443087,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Courage of the White Tiger",
+      "specs": [
+        269,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125062,
+      "nodeId": 101243,
+      "maxRanks": 1,
+      "spellId": 123904,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Invoke Xuen, the White Tiger",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [
+        269
+      ],
+      "subtree": 64,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125063,
+      "nodeId": 101244,
+      "maxRanks": 1,
+      "spellId": 450993,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Vigilant Watch",
+      "specs": [
+        268,
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 65,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125065,
+      "nodeId": 101245,
+      "maxRanks": 1,
+      "spellId": 450991,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Whirling Steel",
+      "specs": [
+        268,
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 65,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 125064,
+      "nodeId": 101245,
+      "maxRanks": 1,
+      "spellId": 450992,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Predictive Training",
+      "specs": [
+        268,
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 65,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 125066,
+      "nodeId": 101246,
+      "maxRanks": 1,
+      "spellId": 450990,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Martial Precision",
+      "specs": [
+        268,
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 65,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125068,
+      "nodeId": 101247,
+      "maxRanks": 1,
+      "spellId": 450979,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Pride of Pandaria",
+      "specs": [
+        268,
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 65,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 125067,
+      "nodeId": 101247,
+      "maxRanks": 1,
+      "spellId": 450982,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "High Impact",
+      "specs": [
+        268,
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 65,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 125069,
+      "nodeId": 101248,
+      "maxRanks": 1,
+      "spellId": 450615,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Flurry Strikes",
+      "specs": [
+        268,
+        269
+      ],
+      "grantedSpecs": [
+        268,
+        269
+      ],
+      "subtree": 65,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125070,
+      "nodeId": 101249,
+      "maxRanks": 1,
+      "spellId": 450987,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Veteran's Eye",
+      "specs": [
+        268,
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 65,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125071,
+      "nodeId": 101250,
+      "maxRanks": 1,
+      "spellId": 450988,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "One Versus Many",
+      "specs": [
+        268,
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 65,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125072,
+      "nodeId": 101251,
+      "maxRanks": 1,
+      "spellId": 450989,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Efficient Training",
+      "specs": [
+        268,
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 65,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125073,
+      "nodeId": 101252,
+      "maxRanks": 1,
+      "spellId": 1272821,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Wisdom of the Wall",
+      "specs": [
+        268,
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 65,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125074,
+      "nodeId": 101253,
+      "maxRanks": 1,
+      "spellId": 450986,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Against All Odds",
+      "specs": [
+        268,
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 65,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 125076,
+      "nodeId": 101254,
+      "maxRanks": 1,
+      "spellId": 1272844,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Combat Stance",
+      "specs": [
+        268,
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 65,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 125075,
+      "nodeId": 101254,
+      "maxRanks": 1,
+      "spellId": 1272849,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Initiator's Edge",
+      "specs": [
+        268,
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 65,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 135952,
+      "nodeId": 109694,
+      "maxRanks": 1,
+      "spellId": 1270958,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Harmonic Surge",
+      "specs": [
+        268,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 66,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 135953,
+      "nodeId": 109695,
+      "maxRanks": 1,
+      "spellId": 1271048,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Potential Energy",
+      "specs": [
+        268,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 66,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 135954,
+      "nodeId": 109696,
+      "maxRanks": 1,
+      "spellId": 1271105,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Meditative Focus",
+      "specs": [
+        268,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 66,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 135955,
+      "nodeId": 109697,
+      "maxRanks": 1,
+      "spellId": 1262612,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Shado Over the Battlefield",
+      "specs": [
+        268,
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 65,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 135956,
+      "nodeId": 109698,
+      "maxRanks": 1,
+      "spellId": 1262603,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Stand Ready",
+      "specs": [
+        268,
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 65,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 135957,
+      "nodeId": 109699,
+      "maxRanks": 1,
+      "spellId": 1262610,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Weapons of the Wall",
+      "specs": [
+        268,
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 65,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 135958,
+      "nodeId": 109700,
+      "maxRanks": 1,
+      "spellId": 1262672,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Flowing Wisdom",
+      "specs": [
+        269,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 135959,
+      "nodeId": 109701,
+      "maxRanks": 1,
+      "spellId": 443294,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Heart of the Jade Serpent",
+      "specs": [
+        269,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 136562,
+      "nodeId": 110067,
+      "maxRanks": 1,
+      "spellId": 443028,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Celestial Conduit",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [
+        270
+      ],
+      "subtree": 64,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 136747,
+      "nodeId": 110211,
+      "maxRanks": 1,
+      "spellId": 443110,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Strength of the Black Ox",
+      "specs": [
+        269,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 136754,
+      "nodeId": 110218,
+      "maxRanks": 1,
+      "spellId": 1262667,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Yu'lon's Avatar",
+      "specs": [
+        269,
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 136745,
+      "nodeId": 110220,
+      "maxRanks": 1,
+      "spellId": 1248989,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Celestial Conduit",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 136760,
+      "nodeId": 110221,
+      "maxRanks": 1,
+      "spellId": 442719,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Restore Balance",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 136744,
+      "nodeId": 110221,
+      "maxRanks": 1,
+      "spellId": 392986,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Xuen's Bond",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 2
+    },
+    {
+      "tree": 4,
+      "entryId": 125028,
+      "nodeId": 101219,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 66,
+      "nodeType": 3
+    },
+    {
+      "tree": 4,
+      "entryId": 125027,
+      "nodeId": 101219,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        268
+      ],
+      "grantedSpecs": [],
+      "subtree": 65,
+      "nodeType": 3
+    },
+    {
+      "tree": 4,
+      "entryId": 125045,
+      "nodeId": 101231,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 3
+    },
+    {
+      "tree": 4,
+      "entryId": 125044,
+      "nodeId": 101231,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        270
+      ],
+      "grantedSpecs": [],
+      "subtree": 66,
+      "nodeType": 3
+    },
+    {
+      "tree": 4,
+      "entryId": 125047,
+      "nodeId": 101232,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 64,
+      "nodeType": 3
+    },
+    {
+      "tree": 4,
+      "entryId": 125046,
+      "nodeId": 101232,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        269
+      ],
+      "grantedSpecs": [],
+      "subtree": 65,
+      "nodeType": 3
+    }
+  ]
+}

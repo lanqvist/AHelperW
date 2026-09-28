@@ -54,6 +54,7 @@ class CastObserver:
 
     def update(self, data):
         now = time.time()
+        confirmed = []
         receipt = data.get('castReceipt', {'status': 'not_configured'})
         if receipt['status'] != self.status:
             self.debug.event('cast_receipt_status', status=receipt['status'])
@@ -79,6 +80,8 @@ class CastObserver:
                     match = next((item for item in self.waiting if event['spellID'] in item['expected']
                                   and item['sentAt'] < data['capturedAt'] <= item['sentAt'] + 2.5), None)
                     if match:
+                        confirmed.append({'action':match['action'], 'sentAt':match['sentAt'],
+                                          'spellID':event['spellID'], 'sequence':event['sequence']})
                         self.debug.event('action_cast_observed', action=match['action'], **event,
                                          elapsedSeconds=data['capturedAt']-match['sentAt'],
                                          note='Matching player cast observed; manual input attribution is unknown')
@@ -89,4 +92,5 @@ class CastObserver:
                                  expectedSpellIDs=sorted(item['expected']), reason='no_matching_event_observed',
                                  receiptStatus=receipt['status'], note='Not proof of cast failure')
                 self.waiting.remove(item)
-        data['castVerification'] = {'status': receipt['status'], 'pending': len(self.waiting)}
+        data['castVerification'] = {'status': receipt['status'], 'pending': len(self.waiting),
+                                    'confirmed':confirmed}

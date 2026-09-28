@@ -34,8 +34,7 @@ local function unitRow(unit)
     hostile = query(UnitCanAttack, "player", unit),
     dead = query(UnitIsDeadOrGhost, unit),
     combat = query(UnitAffectingCombat, unit),
-    mortalStrike = query(C_Spell and C_Spell.IsSpellInRange, 12294, unit),
-    cleave = query(C_Spell and C_Spell.IsSpellInRange, 845, unit),
+    referenceRange = query(C_Spell and C_Spell.IsSpellInRange, ns.db.targetProbe.referenceSpellID, unit),
     target = query(UnitIsUnit, unit, "target"),
   }
 end
@@ -69,8 +68,8 @@ local function sample()
       snap.rows[#snap.rows + 1] = row
       if row.exists == "yes" and row.hostile == "yes" and row.dead == "no" then
         snap.visibleHostile = snap.visibleHostile + 1
-        if row.mortalStrike == "yes" then snap.meleeConfirmed = snap.meleeConfirmed + 1
-        elseif row.mortalStrike ~= "no" then snap.unresolved = snap.unresolved + 1 end
+        if row.referenceRange == "yes" then snap.meleeConfirmed = snap.meleeConfirmed + 1
+        elseif row.referenceRange ~= "no" then snap.unresolved = snap.unresolved + 1 end
       elseif row.exists ~= "no" and row.hostile ~= "no" and row.dead ~= "yes" then
         snap.unresolved = snap.unresolved + 1
       end
@@ -99,7 +98,8 @@ end
 function P.Start()
   if ticker then ticker:Cancel(); ticker = nil end
   local version, build = GetBuildInfo()
-  ns.db.targetProbe = { version = 1, client = version, build = build,
+  ns.db.targetProbe = { version = 2, client = version, build = build,
+    referenceSpellID = ns.GetMeleeReference(),
     startedAt = GetTime(), samples = {}, finished = false }
   sample()
   ticker = C_Timer.NewTicker(1, function()
@@ -111,15 +111,15 @@ end
 
 local function rowText(r)
   return r.unit .. " exists=" .. r.exists .. " hostile=" .. r.hostile .. " dead=" .. r.dead
-    .. " combat=" .. r.combat .. " MS=" .. r.mortalStrike .. " Cleave=" .. r.cleave .. " target=" .. r.target
+    .. " combat=" .. r.combat .. " referenceRange=" .. (r.referenceRange or r.mortalStrike or "missing") .. " target=" .. r.target
 end
 
 function P.Report()
   local recording = ns.db.targetProbe
   if not recording then msg("Сначала /ahw targetprobe start"); return end
-  local lines = { "AHelperW TargetProbe v1; client=" .. recording.client .. "; build=" .. recording.build,
+  local lines = { "AHelperW TargetProbe v" .. (recording.version or 1) .. "; client=" .. recording.client .. "; build=" .. recording.build,
     "yes/no=public boolean; nil=no answer; secret=restricted; error=API failure; missing=API unavailable",
-    "MS=Mortal Strike range, NOT exact AoE range. Rows describe nameplates, NOT all nearby enemies." }
+    "referenceSpellID=" .. tostring(recording.referenceSpellID or (recording.version == 1 and 12294) or "unavailable") .. "; NOT exact AoE range. Rows describe nameplates, NOT all nearby enemies." }
   for _, s in ipairs(recording.samples) do
     lines[#lines + 1] = "t=" .. s.seconds .. " combat=" .. s.playerCombat .. " lockdown=" .. s.lockdown
       .. " hostile=" .. s.visibleHostile .. " melee=" .. s.meleeConfirmed .. " unresolved=" .. s.unresolved

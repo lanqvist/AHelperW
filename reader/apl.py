@@ -4,7 +4,6 @@ import math
 import re
 import time
 from dataclasses import dataclass
-
 SPELLS={'mortal_strike':12294,'overpower':7384,'cleave':845,'sweeping_strikes':260708,
         'colossus_smash':167105,'avatar':107574,'bladestorm':227847,'execute':163201,
         'slam':1464,'heroic_strike':1269383,'storm_bolt':107570,'charge':100,
@@ -104,66 +103,25 @@ class Expression:
 
 
 def decode_talents(text,table):
-    alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-    bits=[]
-    for char in text:
-        if char not in alphabet: raise ValueError('Некорректная строка талантов')
-        bits.extend((alphabet.index(char)>>i)&1 for i in range(6))
-    position=0
-    def take(count):
-        nonlocal position
-        if position+count>len(bits): raise ValueError('Оборванная строка талантов')
-        value=sum(bits[position+i]<<i for i in range(count)); position+=count
-        return value
-    if take(8)!=2 or take(16)!=71: raise ValueError('Нужен экспорт талантов Arms версии 2')
-    take(128)
-    nodes={}
-    for trait in table['entries']: nodes.setdefault(trait['nodeId'],[]).append(trait)
-    selected=[]
-    for _,node in sorted(nodes.items()):
-        if not take(1): continue
-        trait=node[0]
-        maximum=sum(t['maxRanks'] for t in node) if trait['nodeType']==1 else trait['maxRanks']
-        rank=maximum
-        if not take(1): rank=1
-        else:
-            if take(1):
-                rank=take(6)
-                if not 1<=rank<maximum: raise ValueError('Ранг таланта вне диапазона')
-            if take(1):
-                if trait['nodeType'] not in (2,3): raise ValueError('Неожиданный выбор таланта')
-                choice=take(2)
-                if choice>=len(node): raise ValueError('Выбор таланта вне диапазона')
-                trait=node[choice]
-        if trait['tree']!=3 and trait['specs'] and 71 not in trait['specs']: raise ValueError('Чужая специализация в дереве')
-        if trait['nodeType']==1:
-            for tier in node:
-                allocated=min(rank,tier['maxRanks'])
-                if allocated: selected.append(tier)
-                rank-=allocated
-        else: selected.append(trait)
-    if len(bits)-position>5 or any(bits[position:]): raise ValueError('Неизвестный остаток строки талантов')
-    # The export can include granted root nodes from inactive hero trees.
-    # The subtree selector, not those granted nodes, determines the active tree.
-    heroes={t['subtree'] for t in selected if t['tree']==4 and t['nodeType']==3}
-    if heroes!={60}: raise ValueError('Эта версия APL предназначена для Slayer')
-    selected=[t for t in selected if t['spellId'] and (not t['subtree'] or t['subtree'] in heroes)]
-    return {re.sub('[^a-z0-9]+','_',t['name'].lower().replace("'",'')) for t in selected}
+    from talent_decode import decode
+    return set(decode(text,table,71,{60})[0])
 
 
-class ArmsAPL:
+class APLRuntime:
     def __init__(self,reader,root,bindings,settings):
         self.reader=reader; self.cfg=reader.cfg; self.bindings=bindings; self.settings=settings
-        if self.cfg.get('specID')!=71: raise ValueError('Автонажатия пока доступны только Arms / Slayer')
-        table=json.loads((root/'warrior-traits.json').read_text(encoding='utf-8'))
+        if self.cfg.get('specID')!=self.spec_id: raise ValueError('Неверная специализация пакета APL')
+        table=json.loads((root/self.trait_file).read_text(encoding='utf-8'))
         if str(self.cfg['client']['build'])!=table['build'].split('.')[-1]: raise ValueError('Экспорт HUD и дерево талантов относятся к разным сборкам')
-        self.talents=decode_talents(self.cfg['talents'],table)
+        from talent_decode import decode
+        self.talent_ranks,self.hero_trees=decode(self.cfg['talents'],table,self.spec_id,self.allowed_heroes)
+        self.talents=set(self.talent_ranks)
         self.squares={(s['kind'],s['spellID']):(key,s) for key,s in reader.square_specs.items()}
         self.aliases={a['spellID']:a['displaySpellID'] for a in self.cfg.get('aliases',{}).values() if 'spellID' in a and 'displaySpellID' in a}
         self.lists={}
         source=json.loads((root/'build-requirements.json').read_text(encoding='utf-8'))
         for row in source['actions']:
-            pieces=row['expression'].split(','); action={'action':pieces[0],'source':row['expression'],'list':row['list']}
+            pieces=[p for p in row['expression'].split(',') if p]; action={'action':pieces[0],'source':row['expression'],'list':row['list']}
             for p in pieces[1:]:
                 key,value=p.split('=',1); action[key]=value
             action['expressions']={k:Expression(action[k]) for k in ('if','value','value_else','condition') if k in action}
@@ -207,7 +165,7 @@ class ArmsAPL:
         if name=='gcd.remains':
             return 0 if self.data['rows'].get('gcd',{}).get('state')=='ready' else unknown(name)
         if name=='charges':
-            square=self.squares.get(('spell',SPELLS.get(self.current)))
+            square=self.squares.get(('spell',self.spells.get(self.current)))
             return self.number(square[0]+'/stacks') if square else unknown(name)
         if name=='target.debuff.casting.react':
             state=self.data['rows'].get('context/targetCast',{}).get('state')
@@ -216,13 +174,13 @@ class ArmsAPL:
             if state=='nores' and flag in ('ready','cd'): return flag=='ready'
             return unknown('прерываемость каста цели')
         parts=name.split('.')
-        if parts[0]=='buff' and parts[1] in BUFFS:
-            return self.aura('proc',BUFFS[parts[1]],parts[2])
+        if parts[0]=='buff' and parts[1] in self.buffs:
+            return self.aura('proc',self.buffs[parts[1]],parts[2])
         if name.startswith('debuff.colossus_smash.'):
             return self.aura('debuff',208086,parts[2])
         if name=='dot.rend_dot.remains': return self.aura('debuff',388539,'remains')
-        if parts[0]=='cooldown' and parts[1] in SPELLS:
-            spell=SPELLS[parts[1]]; square=self.squares.get(('spell',spell))
+        if parts[0]=='cooldown' and parts[1] in self.spells:
+            spell=self.spells[parts[1]]; square=self.squares.get(('spell',spell))
             if not square: return unknown(name)
             state=self.state('spell',spell)
             if parts[2]=='duration':
@@ -244,8 +202,11 @@ class ArmsAPL:
             return unknown(name)
         return unknown(name)
 
+    def requires_display_charge(self, action):
+        return True
+
     def available(self,action):
-        spell=SPELLS.get(action)
+        spell=self.spells.get(action)
         if spell is None: return False
         display=self.aliases.get(spell,spell)
         if not self.bindings.get(str(display)): return False
@@ -257,7 +218,7 @@ class ArmsAPL:
         if action=='slam': result=binary('&',result,self.aura('proc',1269391,'down'))
         if action=='battle_stance': result=binary('&',result,self.aura('proc',386164,'down'))
         square=self.squares.get(('spell',display))
-        if square and square[1].get('charges'):
+        if square and square[1].get('charges') and self.requires_display_charge(action):
             result=binary('&',result,binary('>',self.number(square[0]+'/stacks'),0))
         return result
 
@@ -292,7 +253,7 @@ class ArmsAPL:
                 answer=self.evaluate_list(action['name'],depth+1)
                 if answer or verb=='run_action_list': return answer
                 continue
-            spell=SPELLS[verb]; display=self.aliases.get(spell,spell)
+            spell=self.spells[verb]; display=self.aliases.get(spell,spell)
             return {'status':'ready','action':verb,'spellID':spell,'bindingSpellID':display,
                     'binding':self.bindings[str(display)],'rule':action['source'],'list':name}
         return None
@@ -327,3 +288,11 @@ class ArmsAPL:
             if not (decision['action']=='storm_bolt' and self.aura('proc',446035,'up') is True):
                 return {'status':'waiting','reason':'Ожидание окончания каста/канала'}
         return decision
+
+
+class ArmsAPL(APLRuntime):
+    spec_id = 71
+    trait_file = 'warrior-traits.json'
+    allowed_heroes = {60}
+    spells = SPELLS
+    buffs = BUFFS

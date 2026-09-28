@@ -16,6 +16,7 @@ function T.Reset()
 end
 
 local function scan()
+  local reference = ns.GetMeleeReference()
   local candidates = {}
   for i = 1, 40 do candidates["nameplate" .. i] = true end
   for unit in pairs(T.tokens) do candidates[unit] = true end
@@ -27,7 +28,7 @@ local function scan()
       local hostile = read(UnitCanAttack, "player", unit)
       local dead = read(UnitIsDeadOrGhost, unit)
       if hostile == true and dead == false then
-        local range = read(C_Spell.IsSpellInRange, 12294, unit)
+        local range = reference and read(C_Spell.IsSpellInRange, reference, unit)
         if range == true then count = count + 1
         elseif range == nil then unresolved = unresolved + 1; unknownRange = unknownRange + 1 end
       elseif hostile ~= false and dead ~= true then unresolved = unresolved + 1; unknownUnit = unknownUnit + 1 end

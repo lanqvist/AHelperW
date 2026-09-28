@@ -1,0 +1,618 @@
+{
+  "specId": 269,
+  "source": {
+    "commit": "4c7c73621e596419b5bd6faa5d68940a9c640379",
+    "retrieved": "2026-09-28",
+    "url": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/class_modules/apl/apl_monk.cpp",
+    "clientBuild": "12.1.0.69933"
+  },
+  "scope": "all-windwalker-branches-unmodified",
+  "actions": [
+    {
+      "list": "precombat",
+      "expression": "snapshot_stats"
+    },
+    {
+      "list": "precombat",
+      "expression": "use_item,name=algethar_puzzle_box,if=!talent.flurry_strikes&(trinket.1.is.algethar_puzzle_box|trinket.2.is.algethar_puzzle_box)"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=patchwerk,value=fight_style.patchwerk|fight_style.castingpatchwerk"
+    },
+    {
+      "list": "default_",
+      "expression": "auto_attack"
+    },
+    {
+      "list": "default_",
+      "expression": "touch_of_karma,target_if=max:target.time_to_die"
+    },
+    {
+      "list": "default_",
+      "expression": "potion,if=buff.invoke_xuen_the_white_tiger.remains>15|fight_remains<=30"
+    },
+    {
+      "list": "default_",
+      "expression": "potion,if=talent.flurry_strikes&chi>2&(time<5|cooldown.zenith.up&time<5|time>300&((trinket.1.is.algethar_puzzle_box&trinket.1.cooldown.remains>100|trinket.2.is.algethar_puzzle_box&trinket.2.cooldown.remains>100)|!trinket.1.has_use_buff&!trinket.2.has_use_buff)&talent.flurry_strikes|time>300&buff.zenith.up)"
+    },
+    {
+      "list": "default_",
+      "expression": "variable,name=has_external_pi,value=cooldown.invoke_power_infusion_0.duration>0"
+    },
+    {
+      "list": "default_",
+      "expression": "call_action_list,name=opener,if=time<2"
+    },
+    {
+      "list": "default_",
+      "expression": "call_action_list,name=trinket"
+    },
+    {
+      "list": "default_",
+      "expression": "call_action_list,name=racials"
+    },
+    {
+      "list": "default_",
+      "expression": "invoke_external_buff,name=power_infusion,if=buff.zenith.up&(buff.invoke_xuen_the_white_tiger.up|talent.flurry_strikes)"
+    },
+    {
+      "list": "default_",
+      "expression": "call_action_list,name=big_coc,if=talent.celestial_conduit"
+    },
+    {
+      "list": "default_",
+      "expression": "call_action_list,name=zenith"
+    },
+    {
+      "list": "default_",
+      "expression": "call_action_list,name=default_st,if=active_enemies=1"
+    },
+    {
+      "list": "default_",
+      "expression": "call_action_list,name=multitarget,if=active_enemies>1"
+    },
+    {
+      "list": "default_",
+      "expression": "call_action_list,name=fallback"
+    },
+    {
+      "list": "default_",
+      "expression": "arcane_torrent,if=chi<chi.max&energy<55"
+    },
+    {
+      "list": "default_",
+      "expression": "thorn_bloom"
+    },
+    {
+      "list": "default_",
+      "expression": "haymaker"
+    },
+    {
+      "list": "default_",
+      "expression": "bag_of_tricks"
+    },
+    {
+      "list": "default_",
+      "expression": "arcane_pulse"
+    },
+    {
+      "list": "default_",
+      "expression": "rocket_barrage"
+    },
+    {
+      "list": "default_",
+      "expression": "lights_judgment"
+    },
+    {
+      "list": "opener",
+      "expression": "tiger_palm,if=combo_strike&chi<4"
+    },
+    {
+      "list": "opener",
+      "expression": "use_item,name=algethar_puzzle_box,if=target.time_to_die>25&(cooldown.invoke_xuen_the_white_tiger.remains<2|talent.flurry_strikes&cooldown.zenith.up)|fight_remains<25"
+    },
+    {
+      "list": "trinket",
+      "expression": "use_item,slot=main_hand"
+    },
+    {
+      "list": "trinket",
+      "expression": "use_item,name=algethar_puzzle_box,if=fight_remains>5&(!buff.zenith.up&!talent.flurry_strikes&(target.time_to_die>35&fight_style.dungeonroute|target.time_to_die>25)&(cooldown.potion.remains>30|fight_remains<45|fight_remains>80)&(cooldown.invoke_xuen_the_white_tiger.remains<2|talent.flurry_strikes&cooldown.zenith.up)|fight_remains<25|talent.flurry_strikes&(target.time_to_die>35&fight_style.dungeonroute|target.time_to_die>25)&!buff.zenith.up|fight_style.dungeonslice&(time<5&chi>3|active_enemies>3&target.time_to_die>15))"
+    },
+    {
+      "list": "trinket",
+      "expression": "use_item,slot=trinket1,if=trinket.1.has_use_buff&!trinket.2.has_use_buff&(pet.xuen_the_white_tiger.active&talent.invoke_xuen_the_white_tiger|talent.flurry_strikes&buff.zenith.remains>14)"
+    },
+    {
+      "list": "trinket",
+      "expression": "use_item,slot=trinket2,if=trinket.2.has_use_buff&!trinket.1.has_use_buff&(pet.xuen_the_white_tiger.active&talent.invoke_xuen_the_white_tiger|talent.flurry_strikes&buff.zenith.remains>14)"
+    },
+    {
+      "list": "trinket",
+      "expression": "use_item,slot=trinket1,if=trinket.1.has_use_buff&trinket.2.has_use_buff&(pet.xuen_the_white_tiger.active&talent.invoke_xuen_the_white_tiger|talent.flurry_strikes&buff.zenith.remains>14)"
+    },
+    {
+      "list": "trinket",
+      "expression": "use_item,slot=trinket2,if=trinket.1.has_use_buff&trinket.2.has_use_buff&(cooldown.invoke_xuen_the_white_tiger.remains>30&(buff.zenith.up|(cooldown.strike_of_the_windlord.remains<2&talent.strike_of_the_windlord|cooldown.whirling_dragon_punch.remains<2&talent.whirling_dragon_punch))|talent.flurry_strikes&buff.zenith.remains>10)"
+    },
+    {
+      "list": "trinket",
+      "expression": "use_item,slot=trinket1,if=!trinket.1.has_use_buff&trinket.2.has_use_buff&trinket.2.cooldown.remains>30"
+    },
+    {
+      "list": "trinket",
+      "expression": "use_item,slot=trinket2,if=!trinket.2.has_use_buff&trinket.1.has_use_buff&trinket.1.cooldown.remains>30"
+    },
+    {
+      "list": "trinket",
+      "expression": "use_item,slot=trinket1,if=!trinket.1.has_use_buff&!trinket.2.has_use_buff"
+    },
+    {
+      "list": "trinket",
+      "expression": "use_item,slot=trinket2,if=!trinket.1.has_use_buff&!trinket.2.has_use_buff"
+    },
+    {
+      "list": "big_coc",
+      "expression": "invoke_xuen_the_white_tiger,target_if=max:target.time_to_die,if=(target.time_to_die>35&fight_style.dungeonroute|target.time_to_die>25&!fight_style.dungeonroute)&((cooldown.zenith.up|buff.zenith.remains>13)&!buff.heart_of_the_jade_serpent.up)&(!fight_style.dungeonslice|active_enemies>1|time<100)&(chi>2|chi>1&energy<40)"
+    },
+    {
+      "list": "big_coc",
+      "expression": "invoke_xuen_the_white_tiger,target_if=max:target.time_to_die,if=(target.time_to_die>35&fight_style.dungeonroute|target.time_to_die>25&!fight_style.dungeonroute)&(trinket.1.is.algethar_puzzle_box&trinket.1.cooldown.remains>100|trinket.2.is.algethar_puzzle_box&trinket.2.cooldown.remains>100)&(!fight_style.dungeonslice|active_enemies>1|time<100)"
+    },
+    {
+      "list": "big_coc",
+      "expression": "invoke_xuen_the_white_tiger,target_if=max:target.time_to_die,if=fight_style.dungeonslice&target.time_to_die>15&active_enemies>4|fight_remains<=25"
+    },
+    {
+      "list": "big_coc",
+      "expression": "zenith_stomp,target_if=max:target.time_to_die,if=combo_strike&prev.celestial_conduit&chi<5"
+    },
+    {
+      "list": "big_coc",
+      "expression": "zenith_stomp,target_if=max:target.time_to_die,if=combo_strike&(chi<2|buff.zenith.remains<2)"
+    },
+    {
+      "list": "big_coc",
+      "expression": "tiger_palm,,target_if=max:target.time_to_die,if=buff.zenith.up&!buff.heart_of_the_jade_serpent.remains&!buff.heart_of_the_jade_serpent_yulons_avatar.remains&active_enemies=1&!talent.harmonic_combo&chi<2&combo_strike"
+    },
+    {
+      "list": "big_coc",
+      "expression": "celestial_conduit,target_if=max:target.time_to_die,if=buff.zenith.up&!buff.heart_of_the_jade_serpent.remains&!buff.heart_of_the_jade_serpent_yulons_avatar.remains&(!buff.whirling_dragon_punch.up|cooldown.whirling_dragon_punch.remains|cooldown.strike_of_the_windlord.remains&talent.strike_of_the_windlord)|fight_remains<4|active_enemies>1+1*talent.drinking_horn_cover&(fight_style.dungeonslice|buff.bloodlust.up),cancel_if=(!cooldown.rising_sun_kick.remains|!cooldown.fists_of_fury.remains|!buff.heart_of_the_jade_serpent.up)&(!talent.zenith_stomp|!buff.bloodlust.up|buff.zenith_stomp.stack=0|chi>4)"
+    },
+    {
+      "list": "big_coc",
+      "expression": "whirling_dragon_punch,if=buff.power_infusion.up&(!buff.heart_of_the_jade_serpent_unity_within.up|buff.heart_of_the_jade_serpent_unity_within.remains<2)"
+    },
+    {
+      "list": "zenith",
+      "expression": "zenith,target_if=max:target.time_to_die,if=buff.invoke_xuen_the_white_tiger.remains>10&(!buff.zenith.up|talent.flurry_strikes)"
+    },
+    {
+      "list": "zenith",
+      "expression": "zenith,target_if=max:target.time_to_die,if=(buff.bloodlust.remains>10|cooldown.potion.remains>250&variable.patchwerk)&(active_enemies>2|cooldown.rising_sun_kick.remains|buff.rushing_wind_kick.up)&(!buff.zenith.up|!cooldown.fists_of_fury.remains&!buff.heart_of_the_jade_serpent.up&!buff.heart_of_the_jade_serpent_unity_within.up)"
+    },
+    {
+      "list": "zenith",
+      "expression": "zenith,target_if=max:target.time_to_die,if=(target.time_to_die>30&fight_style.dungeonroute|target.time_to_die>25&!fight_style.dungeonroute)&(buff.bloodlust.up&cooldown.celestial_conduit.remains&(cooldown.rising_sun_kick.remains|active_enemies>2)&!buff.zenith.up&talent.celestial_conduit)"
+    },
+    {
+      "list": "zenith",
+      "expression": "zenith,target_if=max:target.time_to_die,if=(target.time_to_die>30&fight_style.dungeonroute|target.time_to_die>25&!fight_style.dungeonroute)&(talent.flurry_strikes&(buff.bloodlust.up|cooldown.potion.remains>295))&!buff.zenith.up&(buff.bloodlust.remains>30|talent.spiritual_focus)"
+    },
+    {
+      "list": "zenith",
+      "expression": "zenith,target_if=max:target.time_to_die,if=time>250&cooldown.potion.remains>295&(!trinket.1.has_use_buff&!trinket.2.has_use_buff|trinket.1.has_use_buff&trinket.1.cooldown.remains>30|trinket.2.has_use_buff&trinket.2.cooldown.remains>30)&(fight_remains>120|fight_remains<50&fight_remains>cooldown.zenith.full_recharge_time)"
+    },
+    {
+      "list": "zenith",
+      "expression": "zenith,target_if=max:target.time_to_die,if=(target.time_to_die>30&fight_style.dungeonroute|target.time_to_die>25&!fight_style.dungeonroute)&talent.flurry_strikes&!trinket.1.has_use_buff&!trinket.2.has_use_buff&cooldown.rising_sun_kick.remains&cooldown.fists_of_fury.remains<5&(cooldown.whirling_dragon_punch.remains<10|cooldown.strike_of_the_windlord.remains<10)&cooldown.zenith.full_recharge_time<40&!fight_style.dungeonslice&!buff.zenith.up"
+    },
+    {
+      "list": "zenith",
+      "expression": "zenith,target_if=max:target.time_to_die,if=(target.time_to_die>30&fight_style.dungeonroute|target.time_to_die>25&!fight_style.dungeonroute)&(!buff.bloodlust.up&(trinket.1.is.algethar_puzzle_box&trinket.1.cooldown.remains>100|trinket.2.is.algethar_puzzle_box&trinket.2.cooldown.remains>100)&(cooldown.rising_sun_kick.remains|active_enemies>2|talent.drinking_horn_cover&chi<2))&!buff.zenith.up"
+    },
+    {
+      "list": "zenith",
+      "expression": "zenith,target_if=max:target.time_to_die,if=(variable.patchwerk|fight_style.dungeonroute&target.time_to_die>27+5*talent.drinking_horn_cover)&talent.flurry_strikes&(buff.tigereye_brew_1.stack>19-2*talent.echo_technique|buff.tigereye_brew_1.stack>11&talent.spiritual_focus-2*talent.echo_technique)&(target.time_to_die>30&fight_style.dungeonroute|target.time_to_die>25&!fight_style.dungeonroute)&(cooldown.rising_sun_kick.remains|active_enemies>1)&(!trinket.1.has_use_buff&!trinket.2.has_use_buff|trinket.1.has_use_buff&(trinket.1.cooldown.remains>40|trinket.1.cooldown.remains>30&talent.spiritual_focus)|trinket.2.has_use_buff&(trinket.2.cooldown.remains>40|trinket.2.cooldown.remains>30&talent.spiritual_focus))&(talent.strike_of_the_windlord&cooldown.strike_of_the_windlord.remains<15-5*talent.revolving_whirl&talent.drinking_horn_cover|talent.whirling_dragon_punch&cooldown.whirling_dragon_punch.remains<15-7*talent.revolving_whirl&talent.drinking_horn_cover|talent.strike_of_the_windlord&cooldown.strike_of_the_windlord.remains<10|talent.whirling_dragon_punch&cooldown.whirling_dragon_punch.remains<10)&cooldown.fists_of_fury.remains<9+4*talent.spiritual_focus"
+    },
+    {
+      "list": "zenith",
+      "expression": "zenith,target_if=max:target.time_to_die,if=(cooldown.rising_sun_kick.remains|active_enemies>2)&fight_style.dungeonslice&time>130&time<150&active_enemies>1&talent.flurry_strikes&!buff.zenith.up"
+    },
+    {
+      "list": "zenith",
+      "expression": "zenith,target_if=max:target.time_to_die,if=fight_style.dungeonslice&target.time_to_die>15&active_enemies>4&(talent.flurry_strikes|talent.celestial_conduit&talent.restore_balance&cooldown.invoke_xuen_the_white_tiger.remains<cooldown.zenith.full_recharge_time)&!variable.patchwerk&!buff.zenith.up"
+    },
+    {
+      "list": "zenith",
+      "expression": "zenith,target_if=max:target.time_to_die,if=!buff.zenith.up&(talent.celestial_conduit&fight_remains<cooldown.invoke_xuen_the_white_tiger.remains&(cooldown.rising_sun_kick.remains|active_enemies>2)&(target.time_to_die>30&fight_style.dungeonroute|target.time_to_die>25&!fight_style.dungeonroute|target.time_to_die>15&active_enemies>4)&!variable.patchwerk)"
+    },
+    {
+      "list": "zenith",
+      "expression": "zenith,target_if=max:target.time_to_die,if=!buff.zenith.up&(talent.flurry_strikes|talent.spiritual_focus)&fight_style.dungeonroute&cooldown.zenith.full_recharge_time<30&target.time_to_die>25-5*talent.spiritual_focus"
+    },
+    {
+      "list": "zenith",
+      "expression": "zenith,target_if=max:target.time_to_die,if=variable.patchwerk&!buff.zenith.up&cooldown.fists_of_fury.remains<10&(cooldown.whirling_dragon.remains<10|cooldown.strike_of_the_windlord.remains<10)&(cooldown.rising_sun_kick.remains|chi<2&energy<50|active_enemies>1)&cooldown.zenith.full_recharge_time<30&(!trinket.1.has_use_buff&!trinket.2.has_use_buff|trinket.1.has_use_buff&trinket.1.cooldown.remains>30|trinket.2.has_use_buff&trinket.2.cooldown.remains>30)&(fight_remains>120|fight_remains<50&fight_remains>cooldown.zenith.full_recharge_time)"
+    },
+    {
+      "list": "zenith",
+      "expression": "zenith,target_if=max:target.time_to_die,if=fight_remains<=23&(cooldown.rising_sun_kick.remains|active_enemies>2)"
+    },
+    {
+      "list": "zenith",
+      "expression": "zenith,target_if=max:target.time_to_die,if=fight_remains<45&cooldown.zenith.full_recharge_time<5&(cooldown.rising_sun_kick.remains|active_enemies>1)"
+    },
+    {
+      "list": "zenith",
+      "expression": "zenith,target_if=max:target.time_to_die,if=!buff.zenith.up&(variable.patchwerk&!trinket.1.is.algethar_puzzle_box&!trinket.2.is.algethar_puzzle_box&trinket.1.has_use_buff&(trinket.1.cooldown.ready|cooldown.zenith.full_recharge_time<5))&(talent.flurry_strikes|buff.invoke_xuen_the_white_tiger.remains>10)"
+    },
+    {
+      "list": "zenith",
+      "expression": "zenith,target_if=max:target.time_to_die,if=!buff.zenith.up&(variable.patchwerk&!trinket.1.is.algethar_puzzle_box&!trinket.2.is.algethar_puzzle_box&trinket.2.has_use_buff&(trinket.2.cooldown.ready|cooldown.zenith.full_recharge_time<5))&(talent.flurry_strikes|buff.invoke_xuen_the_white_tiger.remains>10)"
+    },
+    {
+      "list": "zenith",
+      "expression": "zenith,target_if=max:target.time_to_die,if=!buff.zenith.up&talent.celestial_conduit&cooldown.zenith.full_recharge_time<30&active_enemies>4&fight_style.dungeonslice|talent.flurry_strikes&fight_style.dungeonslice&cooldown.zenith.full_recharge_time<20&cooldown.rising_sun_kick.remains&cooldown.fists_of_fury.remains<10&time<60&!buff.zenith.up"
+    },
+    {
+      "list": "racials",
+      "expression": "berserking,if=buff.invoke_xuen_the_white_tiger.remains>15|!talent.invoke_xuen_the_white_tiger&buff.zenith.remains>14|fight_remains<20"
+    },
+    {
+      "list": "racials",
+      "expression": "ancestral_call,if=buff.invoke_xuen_the_white_tiger.remains>15|!talent.invoke_xuen_the_white_tiger&buff.zenith.remains>14|fight_remains<20"
+    },
+    {
+      "list": "racials",
+      "expression": "blood_fury,if=buff.invoke_xuen_the_white_tiger.remains>15|!talent.invoke_xuen_the_white_tiger&buff.zenith.remains>14|fight_remains<20"
+    },
+    {
+      "list": "racials",
+      "expression": "fireblood,if=buff.invoke_xuen_the_white_tiger.remains>15|!talent.invoke_xuen_the_white_tiger&buff.zenith.remains>14|fight_remains<20"
+    },
+    {
+      "list": "default_st",
+      "expression": "whirling_dragon_punch,if=(talent.flurry_strikes|buff.heart_of_the_jade_serpent_unity_within.remains<2)&(!cooldown.rising_sun_kick.remains|!cooldown.fists_of_fury.remains)&(talent.echo_technique&buff.combo_breaker.stack<2|talent.revolving_whirl&buff.dance_of_chiji.stack<2|!talent.revolving_whirl&!talent.echo_technique)&(cooldown.invoke_xuen_the_white_tiger.remains>9|talent.flurry_strikes)"
+    },
+    {
+      "list": "default_st",
+      "expression": "celestial_conduit,target_if=max:target.time_to_die,if=!buff.heart_of_the_jade_serpent.remains&!buff.heart_of_the_jade_serpent_yulons_avatar.remains&(!buff.whirling_dragon_punch.up|cooldown.whirling_dragon_punch.remains|cooldown.strike_of_the_windlord.remains&talent.strike_of_the_windlord)|fight_remains<4|active_enemies>1+1*talent.drinking_horn_cover&(fight_style.dungeonslice|buff.bloodlust.up),cancel_if=(!cooldown.rising_sun_kick.remains|!cooldown.fists_of_fury.remains|!buff.heart_of_the_jade_serpent.up)&(!talent.zenith_stomp|!buff.bloodlust.up|buff.zenith_stomp.stack=0|chi>4)"
+    },
+    {
+      "list": "default_st",
+      "expression": "zenith_stomp,if=combo_strike&(talent.flurry_strikes|buff.zenith_stomp.stack=2|cooldown.celestial_conduit.remains>50)&(chi<2|chi<5&buff.zenith.remains<7|chi<4&cooldown.fists_of_fury.remains&cooldown.rising_sun_kick.remains&(!buff.combo_breaker.up|!talent.energy_burst|buff.zenith.remains<5))&talent.flurry_strikes"
+    },
+    {
+      "list": "default_st",
+      "expression": "fists_of_fury,if=buff.heart_of_the_jade_serpent.remains<1&buff.heart_of_the_jade_serpent.up|buff.heart_of_the_jade_serpent_unity_within.remains<1&buff.heart_of_the_jade_serpent_unity_within.up|buff.heart_of_the_jade_serpent_yulons_avatar.remains<1&buff.heart_of_the_jade_serpent_yulons_avatar.up"
+    },
+    {
+      "list": "default_st",
+      "expression": "tiger_palm,if=combo_strike&!buff.zenith.up&chi<4+talent.ascension&energy.time_to_max<=gcd.max*3&(!buff.bloodlust.up|chi<1)&buff.combo_breaker.stack<2"
+    },
+    {
+      "list": "default_st",
+      "expression": "strike_of_the_windlord,if=(cooldown.invoke_xuen_the_white_tiger.remains>9|talent.flurry_strikes)"
+    },
+    {
+      "list": "default_st",
+      "expression": "fists_of_fury,if=cooldown.zenith.full_recharge_time>2"
+    },
+    {
+      "list": "default_st",
+      "expression": "touch_of_death,if=!variable.patchwerk|fight_remains<10|talent.meridian_strikes"
+    },
+    {
+      "list": "default_st",
+      "expression": "whirling_dragon_punch,if=(talent.flurry_strikes|buff.heart_of_the_jade_serpent_unity_within.remains<1)&(talent.echo_technique&buff.combo_breaker.stack<2|talent.revolving_whirl&buff.dance_of_chiji.stack<2|!talent.revolving_whirl&!talent.echo_technique)&(cooldown.invoke_xuen_the_white_tiger.remains>9|talent.flurry_strikes)"
+    },
+    {
+      "list": "default_st",
+      "expression": "blackout_kick,if=combo_strike&(buff.zenith.up&talent.obsidian_spiral&chi<2-talent.harmonic_combo|buff.zenith.up&chi<1&talent.obsidian_spiral&buff.combo_breaker.up&talent.energy_burst|!buff.zenith.up&chi<3-talent.harmonic_combo&buff.combo_breaker.up&talent.energy_burst)&!cooldown.fists_of_fury.remains"
+    },
+    {
+      "list": "default_st",
+      "expression": "tiger_palm,if=combo_strike&chi<3-talent.harmonic_combo&!cooldown.fists_of_fury.remains&(!buff.combo_breaker.up|!talent.obsidian_spiral&!talent.energy_burst|chi<2-talent.harmonic_combo)"
+    },
+    {
+      "list": "default_st",
+      "expression": "blackout_kick,if=combo_strike&(buff.zenith.up&talent.obsidian_spiral&chi<1|!buff.zenith.up&chi<2&buff.combo_breaker.up&talent.energy_burst)&(!cooldown.rising_sun_kick.remains|!cooldown.strike_of_the_windlord.remains&talent.strike_of_the_windlord)"
+    },
+    {
+      "list": "default_st",
+      "expression": "rushing_wind_kick"
+    },
+    {
+      "list": "default_st",
+      "expression": "spinning_crane_kick,if=combo_strike&buff.dance_of_chiji.up&buff.unbroken_rhythm.up&(!talent.sequenced_strikes|buff.combo_breaker.stack<2)"
+    },
+    {
+      "list": "default_st",
+      "expression": "rising_sun_kick,if=combo_strike&!cooldown.whirling_dragon_punch.remains&(!buff.dance_of_chiji.up|!buff.unbroken_rhythm.up)"
+    },
+    {
+      "list": "default_st",
+      "expression": "rising_sun_kick,if=combo_strike&buff.bloodlust.up&!buff.unbroken_rhythm.up&!buff.dance_of_chiji.up"
+    },
+    {
+      "list": "default_st",
+      "expression": "rising_sun_kick,if=combo_strike&buff.bloodlust.up&!buff.dance_of_chiji.up"
+    },
+    {
+      "list": "default_st",
+      "expression": "blackout_kick,if=combo_strike&talent.rushing_wind_kick&buff.combo_breaker.stack>1&buff.combo_breaker.remains<8"
+    },
+    {
+      "list": "default_st",
+      "expression": "spinning_crane_kick,if=combo_strike&(buff.dance_of_chiji.up&buff.unbroken_rhythm.up|buff.dance_of_chiji.stack>0&buff.dance_of_chiji.remains<5&(!talent.sequenced_strikes|buff.combo_breaker.stack<2))"
+    },
+    {
+      "list": "default_st",
+      "expression": "spinning_crane_kick,if=combo_strike&buff.unbroken_rhythm.up&talent.celestial_conduit"
+    },
+    {
+      "list": "default_st",
+      "expression": "rising_sun_kick,if=combo_strike"
+    },
+    {
+      "list": "default_st",
+      "expression": "blackout_kick,if=combo_strike&buff.combo_breaker.stack=2"
+    },
+    {
+      "list": "default_st",
+      "expression": "blackout_kick,if=combo_strike&buff.zenith.up&cooldown.rising_sun_kick.remains&cooldown.fists_of_fury.remains&(buff.combo_breaker.up|talent.obsidian_spiral&chi<5+talent.ascension)"
+    },
+    {
+      "list": "default_st",
+      "expression": "spinning_crane_kick,if=combo_strike&buff.dance_of_chiji.stack=2&(buff.combo_breaker.stack<2|!talent.sequenced_strikes)"
+    },
+    {
+      "list": "default_st",
+      "expression": "spinning_crane_kick,if=combo_strike&buff.zenith.up&(buff.dance_of_chiji.up&(buff.combo_breaker.stack<2|!talent.sequenced_strikes)|chi>4)"
+    },
+    {
+      "list": "default_st",
+      "expression": "touch_of_death,if=!buff.zenith.up"
+    },
+    {
+      "list": "default_st",
+      "expression": "slicing_winds,if=talent.airborne_rhythm"
+    },
+    {
+      "list": "default_st",
+      "expression": "tiger_palm,if=combo_strike&chi<2"
+    },
+    {
+      "list": "default_st",
+      "expression": "blackout_kick,if=combo_strike&buff.combo_breaker.up"
+    },
+    {
+      "list": "default_st",
+      "expression": "spinning_crane_kick,if=combo_strike&buff.dance_of_chiji.up"
+    },
+    {
+      "list": "default_st",
+      "expression": "spinning_crane_kick,if=combo_strike&talent.celestial_conduit&(chi>3&!buff.zenith.up&talent.harmonic_combo|chi>4&!buff.zenith.up)"
+    },
+    {
+      "list": "default_st",
+      "expression": "blackout_kick,if=combo_strike&buff.zenith.up&chi>3"
+    },
+    {
+      "list": "default_st",
+      "expression": "tiger_palm,if=combo_strike&chi<4+talent.ascension"
+    },
+    {
+      "list": "multitarget",
+      "expression": "fists_of_fury,target_if=max:target.time_to_die,if=buff.heart_of_the_jade_serpent.remains<1&buff.heart_of_the_jade_serpent.up"
+    },
+    {
+      "list": "multitarget",
+      "expression": "touch_of_death,target_if=min:target.time_to_die,if=!buff.zenith.up|fight_remains<5|((trinket.1.is.algethar_puzzle_box&trinket.1.cooldown.remains>100|trinket.2.is.algethar_puzzle_box&trinket.2.cooldown.remains>100)|!trinket.1.has_use_buff&!trinket.2.has_use_buff)"
+    },
+    {
+      "list": "multitarget",
+      "expression": "whirling_dragon_punch,if=buff.heart_of_the_jade_serpent_unity_within.remains<2&(talent.echo_technique&buff.combo_breaker.stack<2|talent.revolving_whirl&buff.dance_of_chiji.stack<2|!talent.revolving_whirl&!talent.echo_technique)&(cooldown.invoke_xuen_the_white_tiger.remains>9|talent.flurry_strikes)"
+    },
+    {
+      "list": "multitarget",
+      "expression": "fists_of_fury,target_if=max:target.time_to_die"
+    },
+    {
+      "list": "multitarget",
+      "expression": "zenith_stomp,if=combo_strike&(talent.flurry_strikes|buff.zenith_stomp.stack=2|cooldown.celestial_conduit.remains>50)&(talent.celestial_conduit&chi<5&!buff.heart_of_the_jade_serpent_unity_within.up|buff.zenith.remains<5&buff.zenith_stomp.stack=2|buff.zenith.remains<4|chi<3)&(cooldown.whirling_dragon_punch.remains|chi<2)"
+    },
+    {
+      "list": "multitarget",
+      "expression": "spinning_crane_kick,if=combo_strike&buff.dance_of_chiji.up&buff.combo_breaker.stack<2&talent.sequenced_strikes&buff.dance_of_chiji.remains<3"
+    },
+    {
+      "list": "multitarget",
+      "expression": "tiger_palm,target_if=max:target.time_to_die,if=chi<3-talent.harmonic_combo-buff.zenith.up&talent.celestial_conduit&(buff.heart_of_the_jade_serpent.up|buff.heart_of_the_jade_serpent_unity_within.up)&!cooldown.fists_of_fury.remains&combo_strike"
+    },
+    {
+      "list": "multitarget",
+      "expression": "strike_of_the_windlord,if=talent.celestial_conduit&buff.heart_of_the_jade_serpent_unity_within.remains<2"
+    },
+    {
+      "list": "multitarget",
+      "expression": "rising_sun_kick,target_if=max:target.time_to_die,if=combo_strike&cooldown.whirling_dragon_punch.remains<2&cooldown.fists_of_fury.remains&!buff.unbroken_rhythm.up&!buff.whirling_dragon_punch.up"
+    },
+    {
+      "list": "multitarget",
+      "expression": "spinning_crane_kick,if=combo_strike&buff.unbroken_rhythm.up&talent.flurry_strikes"
+    },
+    {
+      "list": "multitarget",
+      "expression": "tiger_palm,target_if=max:target.time_to_die,if=chi<5&combo_strike&energy.time_to_max<=gcd.max*3&!buff.zenith.up&!buff.bloodlust.up|combo_strike&chi<3-1*buff.zenith.up&!cooldown.fists_of_fury.remains&(!buff.combo_breaker.up|!talent.energy_burst)&!buff.zenith_stomp.up"
+    },
+    {
+      "list": "multitarget",
+      "expression": "spinning_crane_kick,if=combo_strike&buff.unbroken_rhythm.up"
+    },
+    {
+      "list": "multitarget",
+      "expression": "rushing_wind_kick,target_if=max:target.time_to_die,if=!buff.unbroken_rhythm.up"
+    },
+    {
+      "list": "multitarget",
+      "expression": "zenith_stomp,target_if=max:target.time_to_die,if=(talent.flurry_strikes|buff.zenith_stomp.stack=2|cooldown.celestial_conduit.remains>50)&(combo_strike&(buff.zenith.up&chi<5-1*!talent.ascension&(talent.flurry_strikes|chi<3|buff.zenith.remains<5)))&(cooldown.whirling_dragon_punch.remains|chi<2)"
+    },
+    {
+      "list": "multitarget",
+      "expression": "strike_of_the_windlord,if=buff.zenith.up|cooldown.zenith.remains>5&buff.heart_of_the_jade_serpent_unity_within.remains<2"
+    },
+    {
+      "list": "multitarget",
+      "expression": "whirling_dragon_punch,if=(talent.echo_technique&buff.combo_breaker.stack<2|talent.revolving_whirl&buff.dance_of_chiji.stack<2|!talent.revolving_whirl&!talent.echo_technique)&(cooldown.invoke_xuen_the_white_tiger.remains>9|talent.flurry_strikes)&(buff.zenith.up|cooldown.zenith.remains>5&buff.heart_of_the_jade_serpent_unity_within.remains<2)"
+    },
+    {
+      "list": "multitarget",
+      "expression": "spinning_crane_kick,if=combo_strike&buff.dance_of_chiji.stack=2&buff.combo_breaker.stack<2&talent.sequenced_strikes"
+    },
+    {
+      "list": "multitarget",
+      "expression": "blackout_kick,target_if=max:target.time_to_die,if=combo_strike&buff.zenith.up&talent.obsidian_spiral&talent.energy_burst&buff.combo_breaker.up&chi<5"
+    },
+    {
+      "list": "multitarget",
+      "expression": "spinning_crane_kick,if=combo_strike&buff.zenith.up&chi>1"
+    },
+    {
+      "list": "multitarget",
+      "expression": "rising_sun_kick,target_if=max:target.time_to_die,if=!buff.unbroken_rhythm.up&(cooldown.fists_of_fury.remains>1|cooldown.fists_of_fury.remains&talent.celestial_conduit|chi>4&talent.flurry_strikes)&combo_strike&(active_enemies<2|cooldown.whirling_dragon_punch.remains<5|buff.zenith.up|buff.bloodlust.up)"
+    },
+    {
+      "list": "multitarget",
+      "expression": "blackout_kick,target_if=max:target.time_to_die,if=combo_strike&buff.zenith.up&chi>1&(talent.energy_burst&buff.combo_breaker.up|talent.obsidian_spiral)&chi<6&cooldown.rising_sun_kick.remains"
+    },
+    {
+      "list": "multitarget",
+      "expression": "slicing_winds"
+    },
+    {
+      "list": "multitarget",
+      "expression": "spinning_crane_kick,target_if=max:target.time_to_die,if=talent.flurry_strikes&buff.zenith.up&chi>2&combo_strike"
+    },
+    {
+      "list": "multitarget",
+      "expression": "touch_of_death,target_if=min:target.time_to_die,if=!buff.zenith.up|fight_remains<5|((trinket.1.is.algethar_puzzle_box&trinket.1.cooldown.remains>100|trinket.2.is.algethar_puzzle_box&trinket.2.cooldown.remains>100)|!trinket.1.has_use_buff&!trinket.2.has_use_buff)|talent.meridian_strikes"
+    },
+    {
+      "list": "multitarget",
+      "expression": "spinning_crane_kick,target_if=max:target.time_to_die,if=combo_strike&cooldown.fists_of_fury.remains"
+    },
+    {
+      "list": "multitarget",
+      "expression": "blackout_kick,target_if=max:target.time_to_die,if=combo_strike&buff.combo_breaker.up&(talent.rushing_wind_kick|talent.energy_burst|buff.combo_breaker.remains<5)"
+    },
+    {
+      "list": "multitarget",
+      "expression": "tiger_palm,target_if=max:target.time_to_die,if=combo_strike&(chi.max-chi>=2&(talent.energy_burst&!buff.combo_breaker.up|!talent.energy_burst)&!buff.zenith.up|(talent.energy_burst&!buff.combo_breaker.up|!talent.energy_burst)&!buff.zenith.up&!cooldown.fists_of_fury.remains&chi<3|chi=0)"
+    },
+    {
+      "list": "multitarget",
+      "expression": "blackout_kick,target_if=max:target.time_to_die,if=combo_strike&talent.shadowboxing_treads"
+    },
+    {
+      "list": "multitarget",
+      "expression": "rising_sun_kick,target_if=max:target.time_to_die,if=combo_strike"
+    },
+    {
+      "list": "fallback",
+      "expression": "blackout_kick,if=combo_strike"
+    },
+    {
+      "list": "fallback",
+      "expression": "slicing_winds"
+    },
+    {
+      "list": "fallback",
+      "expression": "tiger_palm,if=combo_strike"
+    },
+    {
+      "list": "fallback",
+      "expression": "spinning_crane_kick,if=chi>4&combo_strike"
+    }
+  ],
+  "references": [
+    "buff.bloodlust.remains",
+    "buff.bloodlust.up",
+    "buff.combo_breaker.remains",
+    "buff.combo_breaker.stack",
+    "buff.combo_breaker.up",
+    "buff.dance_of_chiji.remains",
+    "buff.dance_of_chiji.stack",
+    "buff.dance_of_chiji.up",
+    "buff.heart_of_the_jade_serpent.remains",
+    "buff.heart_of_the_jade_serpent.up",
+    "buff.heart_of_the_jade_serpent_unity_within.remains",
+    "buff.heart_of_the_jade_serpent_unity_within.up",
+    "buff.heart_of_the_jade_serpent_yulons_avatar.remains",
+    "buff.heart_of_the_jade_serpent_yulons_avatar.up",
+    "buff.invoke_xuen_the_white_tiger.remains",
+    "buff.invoke_xuen_the_white_tiger.up",
+    "buff.power_infusion.up",
+    "buff.rushing_wind_kick.up",
+    "buff.tigereye_brew_1.stack",
+    "buff.unbroken_rhythm.up",
+    "buff.whirling_dragon_punch.up",
+    "buff.zenith.remains",
+    "buff.zenith.up",
+    "buff.zenith_stomp.stack",
+    "buff.zenith_stomp.up",
+    "chi.max",
+    "cooldown.celestial_conduit.remains",
+    "cooldown.fists_of_fury.remains",
+    "cooldown.invoke_power_infusion_0.duration",
+    "cooldown.invoke_xuen_the_white_tiger.remains",
+    "cooldown.potion.remains",
+    "cooldown.rising_sun_kick.remains",
+    "cooldown.strike_of_the_windlord.remains",
+    "cooldown.whirling_dragon.remains",
+    "cooldown.whirling_dragon_punch.remains",
+    "cooldown.zenith.full_recharge_time",
+    "cooldown.zenith.remains",
+    "cooldown.zenith.up",
+    "energy.time_to_max",
+    "fight_style.castingpatchwerk",
+    "fight_style.dungeonroute",
+    "fight_style.dungeonslice",
+    "fight_style.patchwerk",
+    "gcd.max",
+    "pet.xuen_the_white_tiger.active",
+    "prev.celestial_conduit",
+    "talent.airborne_rhythm",
+    "talent.ascension",
+    "talent.celestial_conduit",
+    "talent.drinking_horn_cover",
+    "talent.echo_technique",
+    "talent.energy_burst",
+    "talent.flurry_strikes",
+    "talent.harmonic_combo",
+    "talent.invoke_xuen_the_white_tiger",
+    "talent.meridian_strikes",
+    "talent.obsidian_spiral",
+    "talent.restore_balance",
+    "talent.revolving_whirl",
+    "talent.rushing_wind_kick",
+    "talent.sequenced_strikes",
+    "talent.shadowboxing_treads",
+    "talent.spiritual_focus",
+    "talent.strike_of_the_windlord",
+    "talent.whirling_dragon_punch",
+    "talent.zenith_stomp",
+    "target.time_to_die",
+    "trinket.1.cooldown.ready",
+    "trinket.1.cooldown.remains",
+    "trinket.1.has_use_buff",
+    "trinket.1.is.algethar_puzzle_box",
+    "trinket.2.cooldown.ready",
+    "trinket.2.cooldown.remains",
+    "trinket.2.has_use_buff",
+    "trinket.2.is.algethar_puzzle_box",
+    "variable.patchwerk"
+  ]
+}

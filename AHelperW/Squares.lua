@@ -377,6 +377,8 @@ function ns.BuildSquares(spells, procs, debuffs, stackLinks)
     sq.maxCharges = nil
     sq.stackAuraID = kind == "spell" and stackLinks and stackLinks[spellID] or nil
     sq.chargesUnknownMax = nil
+    local profile = ns.GetAPLProfile()
+    sq.chargeSpellID = profile and profile.chargeSources and profile.chargeSources[spellID]
     if kind == "spell" then
       local chInfo = C_Spell.GetSpellCharges(spellID)
       if chInfo then
@@ -415,11 +417,12 @@ function ns.BuildSquares(spells, procs, debuffs, stackLinks)
     sq.previewBadge:SetShown(ns.db.preview)
     if kind ~= "spell" and ProbeAuraContainer() then
       if kind == "proc" then
-        sq.procEngine = AttachAuraSlot(sq, spellID, "player", spellID == 10060 and "HELPFUL" or "HELPFUL|PLAYER", pal.proc, ns.db.auraTimers) or nil
+        sq.procEngine = AttachAuraSlot(sq, spellID, "player", ns.externalAuras[spellID] and "HELPFUL" or "HELPFUL|PLAYER", pal.proc, ns.db.auraTimers) or nil
       else
         sq.procEngine = AttachAuraSlot(sq, spellID, "target", "HARMFUL|PLAYER", pal.debuff, true) or nil
       end
-    elseif kind == "spell" and stackLinks and stackLinks[spellID] and ProbeAuraContainer() then
+    elseif kind == "spell" and not (sq.multiCharge or sq.chargesUnknownMax)
+      and stackLinks and stackLinks[spellID] and ProbeAuraContainer() then
       -- стаки связанной ауры в углу квадрата способности (движковый счётчик)
       AttachAuraSlot(sq, stackLinks[spellID], "player", "HELPFUL|PLAYER", nil, false, true)
     end
@@ -541,7 +544,7 @@ function ns.UpdateSquares()
 
         -- цифра зарядов — только у многозарядных (флаг вычислен при Build вне боя);
         -- у одноразрядных API тоже возвращает таблицу, но «1» там — бессмысленный шум
-        local ch = (sq.multiCharge or sq.chargesUnknownMax) and C_Spell.GetSpellCharges(effectiveID) or nil
+        local ch = (sq.multiCharge or sq.chargesUnknownMax) and C_Spell.GetSpellCharges(sq.chargeSpellID or effectiveID) or nil
         if ch then
           -- currentCharges может быть секретом — SetText принимает секреты как есть
           pcall(sq.charges.SetText, sq.charges, ch.currentCharges)
@@ -618,7 +621,7 @@ function ns.RefreshCooldownWidgets()
   for _, sq in ipairs(squares) do
     if sq:IsShown() and sq.spellID and sq.kind == "spell" then
       local effectiveID = EffectiveSpell(sq.spellID)
-      ns.cooldownStatus[sq.spellID] = BindSpellTimer(sq, effectiveID)
+      ns.cooldownStatus[sq.spellID] = BindSpellTimer(sq, sq.chargeSpellID or effectiveID)
     end
   end
   ns.db.timerDiagnostics = ns.cooldownStatus

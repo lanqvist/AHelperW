@@ -130,6 +130,13 @@ local function EnsureBuilt()
     c.timerUnknown:Hide()
   end
   Cell("last", "ПРИМЕНЕНО: ID", "Последний UNIT_SPELLCAST_SUCCEEDED игрока: ID применённой способности. Отправка клавиши сама по себе не является применением.")
+  for _, profile in pairs(ns.specProfiles) do
+    for _, entry in ipairs(profile.rechargeTelemetry or {}) do
+      if not C.cells[entry.key] then
+        Cell(entry.key, entry.title, "Текущая длительность восстановления одного заряда, секунды. Значение передаётся движку без чтения секретного числа.")
+      end
+    end
+  end
   C.cells.last.age = C.cells.last:CreateFontString(nil, "OVERLAY")
   ns.SetFont(C.cells.last.age, 9, "OUTLINE")
   C.cells.last.age:SetPoint("TOPRIGHT", -3, -2)
@@ -143,7 +150,8 @@ end
 function C.Build(width, resourceHeight)
   EnsureBuilt()
   local _, spec = ns.GetSpecData()
-  C.active = spec == 71 and ns.db.context ~= false
+  C.profile = ns.GetAPLProfile()
+  C.active = C.profile ~= nil and ns.db.context ~= false
   frame:SetShown(C.active)
   if not C.active then return resourceHeight end
   local layout = ns.HUDLayout()
@@ -153,6 +161,9 @@ function C.Build(width, resourceHeight)
   local footerH = ns.Round(layout.compact and 10 or 16)
   local cellW = (width - gap * 5) / 6
   local height = smallH * 2 + lastH + gap * 3 + footerH
+  local telemetry = C.profile.rechargeTelemetry or {}
+  local telemetryRows = math.ceil(#telemetry / 6)
+  height = height + telemetryRows * (smallH + gap)
   frame:ClearAllPoints()
   frame:SetPoint("TOP", ns.frame, "TOP", 0, -(layout.pad + layout.sectionGap + ns.gridH + resourceHeight + gap))
   frame:SetSize(width, height)
@@ -169,6 +180,8 @@ function C.Build(width, resourceHeight)
     c:SetPoint("TOPLEFT", frame, "TOPLEFT", col * (cellW + gap), -rowIndex * (smallH + gap))
     c:SetSize(w, i <= 12 and smallH or lastH)
     c.title:SetText(layout.compact and shortTitles[key] or c.fullTitle)
+    if spec == 269 and key == "maxrage" then c.title:SetText("MAX ЭН.") end
+    if spec == 269 and key == "chargeRange" then c.title:SetText("ЭН./С") end
     ns.SetFont(c.title, layout.compact and 7 or 8, "OUTLINE")
     c.title:SetWidth(w - 6 - (key == "targets" and 11 or 0))
     c.value:ClearAllPoints()
@@ -182,6 +195,26 @@ function C.Build(width, resourceHeight)
       ns.SetFont(c.value, math.min(11, math.floor(((layout.compact and fullWidth or w) - 6) / 3.2)), "OUTLINE")
     end
     if c.icon then c.icon:SetShown(not layout.compact) end
+  end
+  for _, profile in pairs(ns.specProfiles) do
+    for _, entry in ipairs(profile.rechargeTelemetry or {}) do C.cells[entry.key]:Hide() end
+  end
+  for i, entry in ipairs(telemetry) do
+    local c = C.cells[entry.key]
+    c:ClearAllPoints()
+    c:SetPoint("TOPLEFT", frame, "TOPLEFT", ((i - 1) % 6) * (cellW + gap),
+      -(smallH * 2 + lastH + gap * 3 + math.floor((i - 1) / 6) * (smallH + gap)))
+    c:SetSize(cellW, smallH)
+    c.title:SetWidth(cellW - 6)
+    c.value:SetWidth(cellW - 6)
+    ns.SetFont(c.value, 11, "OUTLINE")
+    c:Show()
+  end
+  ns.ComboHistory.Build(frame, cellW * 5 + gap * 4, smallH, spec == 269)
+  if spec == 269 then
+    ns.ComboHistory.frame:ClearAllPoints()
+    ns.ComboHistory.frame:SetPoint("TOPLEFT", frame, "TOPLEFT", cellW + gap,
+      -(smallH * 2 + lastH + gap * 3))
   end
   C.footer:SetWidth(width)
   ns.SetFont(C.footer, layout.compact and 7 or 9, "OUTLINE")
@@ -310,11 +343,22 @@ function C.Update()
   end
   Number(C.cells.speed, GetUnitSpeed, "decimal", "player")
   Number(C.cells.haste, UnitSpellHaste, "decimal", "player")
-  Number(C.cells.maxrage, UnitPowerMax, "integer", "player", Enum.PowerType.Rage)
+  Number(C.cells.maxrage, UnitPowerMax, "integer", "player", C.profile.powerType)
+  for _, entry in ipairs(C.profile.rechargeTelemetry or {}) do
+    Number(C.cells[entry.key], function()
+      local charges = C_Spell.GetSpellCharges(entry.spellID)
+      if charges then return charges.cooldownDuration end
+    end, "decimal")
+  end
   local target = read(UnitExists, "target")
   local attack = read(UnitCanAttack, "player", "target")
   local dead = read(UnitIsDeadOrGhost, "target")
-  for _, entry in ipairs({ { "range", 12294 }, { "chargeRange", 100 } }) do
+  local rangeEntries = { { "range", C.profile.referenceSpellID } }
+  if C.profile.primary == "rage" then rangeEntries[#rangeEntries + 1] = { "chargeRange", 100 }
+  else
+    Number(C.cells.chargeRange, function() local _, active = GetPowerRegen(); return active end, "decimal")
+  end
+  for _, entry in ipairs(rangeEntries) do
     local value = read(C_Spell.IsSpellInRange, entry[2], "target")
     if target == false then SetCell(C.cells[entry[1]], "НЕТ ЦЕЛИ")
     elseif dead == true or attack == false then SetCell(C.cells[entry[1]], "НЕЛЬЗЯ", "unusable")

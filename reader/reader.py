@@ -24,7 +24,7 @@ from debug_log import DebugLog
 from state_writer import StateWriter
 from ocr_plan import OcrPlan
 from bindings_ui import BindingEditor, load_bindings, label as binding_label
-from apl import ArmsAPL
+from spec_profiles import create_apl, PROFILES
 from input_sender import Executor, stop_pressed
 from capture_backend import HudCapture
 from cast_receipt import decode as decode_cast_receipt
@@ -32,7 +32,7 @@ from cast_receipt import decode as decode_cast_receipt
 ASSETS = Path(__file__).resolve().parent
 PACKAGED = bool(getattr(sys, 'frozen', False))
 ROOT = Path(os.environ['LOCALAPPDATA'])/'AHelperW' if PACKAGED else ASSETS
-APL_ROOT = ASSETS/'apl-data' if PACKAGED else ASSETS.parent/'docs'/'arms-apl'
+APL_ROOT = ASSETS/'apl-data' if PACKAGED else ASSETS.parent/'docs'
 ROOT.mkdir(parents=True, exist_ok=True)
 if PACKAGED:
     for name in ('pipeline.json', 'ocr_policy.json'):
@@ -115,7 +115,7 @@ class Reader:
             if kind not in ('spell','proc','debuff'):
                 raise ValueError('Неизвестный тип квадрата')
             self.entries.append((f"{kind}:{s['spellID']}:{s['index']}",
-                f"{s['index']:02} {NAMES.get(s['spellID'], str(s['spellID']))}", kind, s))
+                f"{s['index']:02} {s.get('name') or NAMES.get(s['spellID'], str(s['spellID']))}", kind, s))
         self.regions = {}
         self.square_specs = {key:s for key,_,_,s in self.entries}
         for key, _, kind, s in self.entries:
@@ -137,6 +137,7 @@ class Reader:
             self.regions['context/' + key] = r
         rects = [s['rect'] for _,_,_,s in self.entries] + list(c['resources'].values()) + list(c['context'].values())
         if c.get('castReceipt',{}).get('rect'): rects.append(c['castReceipt']['rect'])
+        rects += [m['rect'] for m in c.get('comboHistory',{}).get('markers',[]) if m.get('rect')]
         for r in rects + list(self.regions.values()):
             if not all(isinstance(r[k], (int,float)) and math.isfinite(r[k]) for k in ('x','y','width','height')):
                 raise ValueError('Некорректные координаты')
@@ -269,6 +270,10 @@ class Reader:
             maximum=spec.get('maxCharges')
             if key.endswith('/stacks') and isinstance(maximum,(int,float)) and value>maximum: return None
             if key=='resource/targetHealthPercent' and value>100: return None
+            if key in ('resource/chi','resource/energy'):
+                maximum=self.cfg.get('resourceMeta',{}).get(key.split('/')[1],{}).get('max')
+                if isinstance(maximum,(int,float)) and value>maximum: return None
+                if key=='resource/chi' and not value.is_integer(): return None
             if key=='context/targets' and (not value.is_integer() or not 1<=value<=80): return None
             return value
         for key, result in zip(keys, results):
@@ -337,6 +342,21 @@ class Reader:
             if sample and not flag: x,y=sample['x'],sample['y']
             candidates=['ready','cd','unknown','procoff'] if flag else ['ready','cd','nores','procoff','unknown']
             rows['context/'+key]=self.color(image,int(x),int(y),candidates,flag_colors if flag else None)
+        combo={'status':'not_configured','active':[]}
+        config=self.cfg.get('comboHistory',{})
+        if config.get('version')==1:
+            combo={'status':'readable','active':[],'markers':{},'diagnosticOnly':True}
+            for marker in config.get('markers',[]):
+                r=marker.get('rect')
+                if not marker.get('configured') or not r or min(r['width'],r['height'])<7:
+                    state='unknown'
+                else:
+                    state=self.color(image,int(r['x']+r['width']/2),int(r['y']+r['height']/2),
+                                     ['active','inactive','unknown'],config['colors'])['state']
+                combo['markers'][marker['action']]=state
+                if state=='active': combo['active'].append(marker['action'])
+                if state=='unknown': combo['status']='unreadable'
+            if combo['status']=='readable' and len(combo['active'])!=1: combo['status']='ambiguous'
         after_colors=time.perf_counter()
         # Capture and color decoding never wait for OCR.
         if game_origin(self.cfg['screen']) != (hwnd,ox,oy): raise ValueError('Окно переместилось: кадр отброшен')
@@ -349,6 +369,7 @@ class Reader:
         return {'schema':'AHelperW.Reader','version':1,'profileHash':self.hash,'valid':True,
                 'capturedAt':timestamp,'expiresAt':timestamp+.8,'rows':rows,'numbers':{},
                 'castReceipt':decode_cast_receipt(image,self.cfg.get('castReceipt'),self.bounds),
+                'comboHistory':combo,
                 'captureCompletedAt':captured_end,'captureBackend':grabber.backend,
                 'captureFallbackError':grabber.fallback_error,
                 'timings':{'focusBeforeSeconds':after_focus-begin,'grabSeconds':after_grab-after_focus,
@@ -376,6 +397,17 @@ class App(tk.Tk):
         self.toggle=ttk.Button(bar,text='Начать',command=self.start_stop); self.toggle.pack(side='left',padx=8)
         ttk.Button(bar,text='Назначение клавиш',command=self.open_bindings).pack(side='left',padx=(0,8))
         ttk.Label(bar,text='Переключись в WoW после запуска. OCR: ? означает неизвестно.').pack(side='left')
+        profiles_bar=ttk.Frame(self); profiles_bar.pack(fill='x',padx=8,pady=(0,6))
+        ttk.Label(profiles_bar,text='Сохранённый HUD:').pack(side='left')
+        self.profile_choice=ttk.Combobox(profiles_bar,state='readonly',width=31)
+        self.profile_choice.pack(side='left',padx=8)
+        self.profile_choice.bind('<<ComboboxSelected>>',self.choose_saved_profile)
+        self.refresh_profile_choices()
+        ttk.Label(profiles_bar,text='Тип боя APL:').pack(side='left',padx=(12,4))
+        self.fight_choice=ttk.Combobox(profiles_bar,state='readonly',width=29,
+            values=['Не задан','Постоянные цели (Patchwerk)','Маршрут подземелья (DungeonRoute)','DungeonSlice (модель SimC)'])
+        self.fight_choice.set('Не задан'); self.fight_choice.pack(side='left')
+        self.fight_choice.bind('<<ComboboxSelected>>',lambda _: self.stop() if self.running else None)
         execution=ttk.Frame(self); execution.pack(fill='x',padx=8,pady=(0,6))
         self.auto_input=tk.BooleanVar(value=not PACKAGED)
         ttk.Checkbutton(execution,text='Автонажатия по APL',variable=self.auto_input,
@@ -430,6 +462,22 @@ class App(tk.Tk):
                 messagebox.showerror('Экспорт', 'Не удалось сохранить профиль: '+str(exc), parent=self)
                 return
         self.stop(); self.reader=reader; self.last_good=None; self.last_ocr_good=None
+        # Store geometry per specialization; loading a different spec never
+        # reuses the other spec's rectangles or starts input.
+        spec_id=reader.cfg.get('specID')
+        if spec_id in PROFILES:
+            saved=ROOT/f'profile-spec-{spec_id}.json'
+            try:
+                temporary=saved.with_suffix('.tmp')
+                temporary.write_text(json.dumps(reader.cfg,ensure_ascii=False,indent=2),encoding='utf-8')
+                if saved.exists() and Path(path).resolve()!=saved.resolve():
+                    shutil.copyfile(saved,saved.with_suffix('.previous.json'))
+                os.replace(temporary,saved)
+                self.refresh_profile_choices()
+                self.profile_choice.set(PROFILES[spec_id].name)
+            except OSError as exc:
+                self.debug.event('profile_save_error',error=str(exc))
+        if spec_id == 269: self.auto_input.set(False)
         self.debug.event('profile_loaded', path=str(path), profileHash=reader.hash, profile=reader.cfg)
         self.table.delete(*self.table.get_children())
         for key,name,kind,_ in reader.entries: self.table.insert('', 'end',iid=key,text=name,values=(kind,'?','?','?','—'))
@@ -440,12 +488,16 @@ class App(tk.Tk):
             iid='context/'+key
             if not self.table.exists(iid): self.table.insert('','end',iid=iid,text=iid,values=('context','?','—','—','—'))
         self.refresh_bindings()
-        if reader.cfg.get('specID')==71:
+        if reader.cfg.get('specID') in PROFILES:
             try:
-                model=ArmsAPL(reader,APL_ROOT,{}, {'targets':None,'phase':'auto'})
+                model=create_apl(reader,APL_ROOT,{}, {'targets':None,'phase':'auto'})
                 self.debug.event('apl_model_loaded',profileHash=reader.hash,talents=sorted(model.talents),
-                                 lists={k:len(v) for k,v in model.lists.items()})
-                self.apl_status.config(text='APL Arms / Slayer загружен. Назначь клавиши и выбери число целей. F8 — остановить.')
+                                 lists={k:len(v) for k,v in model.lists.items()},
+                                 profileID=model.profile.id,coverageGaps=getattr(model,'coverage_gaps',()),
+                                 adaptations=getattr(model,'adaptations',()))
+                self.apl_status.config(text=f'APL {model.profile.name}: {model.profile.status}. Назначь клавиши; F8 — остановить.')
+                if spec_id == 269:
+                    self.apl_status.config(text='ВВ — адаптация: текущая цель, без синхронизации предметов; упрощённый Зенит. F8 — остановить.')
             except Exception as exc:
                 self.debug.event('apl_model_error',error=str(exc),traceback=traceback.format_exc())
                 self.apl_status.config(text='APL недоступен: '+str(exc))
@@ -453,6 +505,15 @@ class App(tk.Tk):
 
     def choose(self):
         path=filedialog.askopenfilename(filetypes=[('Экспорт','*.json *.txt'),('Все файлы','*.*')])
+        if path: self.load(path)
+
+    def refresh_profile_choices(self):
+        self.saved_profiles={p.name:ROOT/f'profile-spec-{spec}.json' for spec,p in PROFILES.items()
+                             if (ROOT/f'profile-spec-{spec}.json').exists()}
+        self.profile_choice.config(values=list(self.saved_profiles))
+
+    def choose_saved_profile(self, _event=None):
+        path=self.saved_profiles.get(self.profile_choice.get())
         if path: self.load(path)
 
     def refresh_bindings(self):
@@ -526,10 +587,13 @@ class App(tk.Tk):
         executor=None
         settings={'targets':{'1':1,'2':2,'3+':3}.get(self.targets_choice.get()),
                   'phase':{'Обычная (вручную)':'normal','Казнь (вручную)':'execute'}.get(self.phase_choice.get(),'auto')}
+        settings['fightStyle']={'Постоянные цели (Patchwerk)':'patchwerk',
+            'Маршрут подземелья (DungeonRoute)':'dungeonroute',
+            'DungeonSlice (модель SimC)':'dungeonslice'}.get(self.fight_choice.get())
         if self.auto_input.get():
             try:
                 _,bindings=load_bindings(ROOT/'bindings'/f"spec-{self.reader.cfg['specID']}.json",self.reader.cfg['specID'])
-                executor=Executor(ArmsAPL(self.reader,APL_ROOT,bindings,settings),self.debug)
+                executor=Executor(create_apl(self.reader,APL_ROOT,bindings,settings),self.debug)
             except Exception as exc:
                 self.debug.event('apl_start_error',error=str(exc),traceback=traceback.format_exc())
                 messagebox.showerror('APL',str(exc),parent=self)

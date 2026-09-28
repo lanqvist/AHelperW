@@ -103,14 +103,15 @@ SlashCmdList.AHELPERW = function(input)
     ns.ResetProcContainers()
     ns.Rebuild()
     msg("превью: " .. (ns.db.preview and "вкл" or "выкл"))
-  elseif cmd == "armsapl" then
+  elseif cmd == "armsapl" or cmd == "wwapl" or cmd == "apl" then
     if InCombatLockdown() then
       msg("добавление набора APL доступно вне боя")
       return
     end
     local _, specID = ns.GetSpecData()
-    if specID ~= 71 then
-      msg("этот набор предназначен для Arms / Slayer, спек 71")
+    local profile = ns.GetAPLProfile()
+    if not profile or (cmd == "armsapl" and specID ~= 71) or (cmd == "wwapl" and specID ~= 269) then
+      msg("для этого спека набор APL не подключён; /ahw apl выбирает текущий спек")
       return
     end
     local _, build = GetBuildInfo()
@@ -118,9 +119,15 @@ SlashCmdList.AHELPERW = function(input)
       msg("набор сверялся со сборкой 69933; текущая сборка требует повторной сверки")
       return
     end
-    local preset = ns.armsAplPreset
+    local preset = profile.preset or ns.armsAplPreset
     local custom = ns.EnsureCustom()
     if not custom or not preset then return end
+    if specID == 269 then
+      -- Replace the historical talent ID with its actual tracked buff ID.
+      for i, id in ipairs(custom.procs) do
+        if id == 1261844 then custom.procs[i] = 1261724 end
+      end
+    end
     local count = 0
     local missing = {}
     for _, kind in ipairs({ "spells", "procs", "debuffs" }) do
@@ -142,7 +149,7 @@ SlashCmdList.AHELPERW = function(input)
     ns.db.auraTimers = true
     ns.Rebuild()
     ns.ApplyCdTextOption()
-    msg("добавлено индикаторов Arms/Slayer: " .. count .. "; таймеры КД и баффов включены")
+    msg("добавлено индикаторов " .. profile.name .. ": " .. count .. "; таймеры КД и баффов включены")
     msg("набор для присланного билда 69933; активные таланты автоматически не сверяются")
     if #missing > 0 then msg("клиент не знает ID: " .. table.concat(missing, ", ")) end
   elseif cmd == "auratimers" then
@@ -414,6 +421,7 @@ SlashCmdList.AHELPERW = function(input)
     print("  /ahw cdtext on|off — секунды на кулдаунах (при <10 сек)")
     print("  /ahw auratimers on|off — время действия баффов")
     print("  /ahw armsapl — дополнить набор под Arms/Slayer, сборка 69933")
+    print("  /ahw wwapl — экспериментальный набор ВВ/Шадо-Пан; /ahw apl — текущий спек")
     print("  /ahw preview on|off — иконки, номера и список квадратов")
     print("  /ahw context on|off — дополнительный контекст Arms")
     print("  /ahw compact on|off — компактный / полный вид; после смены обнови экспорт")

@@ -2,11 +2,12 @@
 ## Title: AHelperW
 ## Notes: Ultra-contrast cooldown & resource HUD
 ## Author: lanqvist
-## Version: 0.2.13
+## Version: 0.2.14-dev
 ## SavedVariables: AHelperWDB
 
 Palette.lua
 ClassData.lua
+SpecProfiles.lua
 Layout.lua
 Display.lua
 Squares.lua
@@ -14,6 +15,7 @@ Preview.lua
 Resources.lua
 TargetCount.lua
 CastReceipt.lua
+ComboHistory.lua
 CombatContext.lua
 TargetProbe.lua
 Export.lua

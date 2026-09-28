@@ -44,7 +44,8 @@ function ns.MakeHUDExport()
   if InCombatLockdown() then return nil, "Экспорт доступен вне боя." end
   local version, build, _, interface = GetBuildInfo()
   local _, spec = ns.GetSpecData()
-  if spec ~= 71 then return nil, "Схема APL-экспорта сейчас предназначена для Arms." end
+  local profile = ns.GetAPLProfile()
+  if not profile then return nil, "Для текущей специализации пакет экспорта APL не подключён." end
   local _, race = UnitRace("player")
   local configID = ns.ReadValue(C_ClassTalents.GetActiveConfigID)
   local talents = configID and ns.ReadValue(C_Traits.GenerateImportString, configID)
@@ -54,16 +55,16 @@ function ns.MakeHUDExport()
     schema = "AHelperW.HUD", version = 1, static = true,
     client = { version = version, build = build, interface = interface },
     specID = spec, race = race, talents = talents or "unknown",
-    apl = { sourceCommit = "4c7c73621e596419b5bd6faa5d68940a9c640379", assumedBuild = "69933", heroTree = "slayer", talentsVerified = false },
+    apl = { profileID = profile.id, sourceCommit = "4c7c73621e596419b5bd6faa5d68940a9c640379", assumedBuild = "69933", heroTree = profile.heroTree, talentsVerified = false },
     screen = { width = screenW, height = screenH, origin = "top-left", units = "physical-pixels" },
     display = { palette = ns.db.palette, preview = ns.db.preview, cdText = ns.db.cdText, scale = ns.db.scale, dock = ns.db.dock,
       size = ns.db.size, gap = layout.gap, perRow = layout.perRow, compact = layout.compact, stable = ns.db.stable, colors = ns.Palette(), timerLayout = "split-v1", chargeText = "white-on-black", stateLabelLayout = "bottom-center-v1",
       gcdColors = { ready = {0, 1, 0.53}, cd = {0.65, 0.12, 0.12}, unknown = {0.16, 0.16, 0.16} } },
     squares = Array(), context = {}, contextNumbers = {}, contextSamples = {}, resources = {}, equipment = Array(),
-    aliases = { heroic_strike = { spellID = 1269383, displaySpellID = 1464, procID = 1269391, sharesBindingWith = "slam" } },
+    aliases = profile.aliases,
     unknownInputs = { "target_if:min:target.health.pct across all enemies", "exact movement.distance", "line_of_sight", "future raid events", "unconfigured trinket metadata" },
     manualInputs = { target_time_to_die = "ttd", fight_remains = "fight" },
-    targetCounting = { mode = ns.db.targetMode or "auto", method = "visible-hostile-nameplates", referenceSpellID = 12294, estimated = true, unknownIsZero = false },
+    targetCounting = { mode = ns.db.targetMode or "auto", method = "visible-hostile-nameplates", referenceSpellID = profile.referenceSpellID, estimated = true, unknownIsZero = false },
     notes = "Static geometry/config only. Re-export after moving, scaling, changing preview, equipment, talents or tracked spells. No live combat data. Unknown is never zero/ready."
   }
   for i, sq in ipairs(ns.squares) do
@@ -75,7 +76,8 @@ function ns.MakeHUDExport()
         local override = C_Spell.GetOverrideSpell and ns.ReadValue(C_Spell.GetOverrideSpell, sq.spellID)
         if type(override) == "number" and override > 0 and override ~= sq.spellID then castIDs[#castIDs + 1] = override end
       end
-      result.squares[#result.squares + 1] = { index = i, kind = sq.kind, spellID = sq.spellID, rect = rect, castSpellIDs = castIDs,
+      local info = C_Spell.GetSpellInfo(sq.spellID)
+      result.squares[#result.squares + 1] = { index = i, kind = sq.kind, spellID = sq.spellID, name = info and info.name, rect = rect, castSpellIDs = castIDs,
         charges = sq.chargesUnknownMax and "unknown-max" or sq.multiCharge or false,
         maxCharges = sq.maxCharges, stackAuraID = sq.stackAuraID,
         baseCooldownMs = sq.kind == "spell" and ns.ReadValue(GetSpellBaseCooldown, sq.spellID) or nil,
@@ -102,7 +104,27 @@ function ns.MakeHUDExport()
   result.context.autoAttack = Rect(ns.CombatContext.footer)
   result.castReceipt = { version = 1, rect = Rect(ns.CastReceipt.frame), rows = 4, columns = 56,
     source = "public UNIT_SPELLCAST_SUCCEEDED; matching event does not prove which input caused it" }
+  if spec == 269 then
+    result.comboHistory = { version = 1, diagnosticOnly = true, markers = Array(),
+      colors = { active = { 0, 1, 0.53 }, inactive = { 0.16, 0.16, 0.16 }, unknown = { 0.48, 0.35, 0 } } }
+    for _, marker in ipairs(ns.ComboHistory.markers) do
+      result.comboHistory.markers[#result.comboHistory.markers + 1] = {
+        action = marker.action, auraID = marker.auraID, configured = marker.configured, rect = Rect(marker.frame) }
+    end
+  end
   for key, r in pairs(ns.Resources.regions or {}) do result.resources[key] = Rect(r) end
+  result.resourceMeta = { [profile.primary] = { powerType = profile.powerType,
+    max = ns.ReadValue(UnitPowerMax, "player", profile.powerType) } }
+  if profile.secondary then
+    result.resourceMeta[profile.secondary] = { powerType = profile.secondaryType,
+      max = ns.ReadValue(UnitPowerMax, "player", profile.secondaryType) }
+    for _, section in ipairs({ "context", "contextNumbers", "contextSamples" }) do
+      result[section].energyRegen = result[section].chargeRange
+      result[section].chargeRange = nil
+      result[section].maxenergy = result[section].maxrage
+      result[section].maxrage = nil
+    end
+  end
   for slot = 1, 19 do
     local id = ns.ReadValue(GetInventoryItemID, "player", slot)
     if id then

@@ -115,8 +115,8 @@ ns.classData = {
     stackLinks = { [322507] = 325092 } },                                                 -- Brewmaster; Celestial Brew ← стаки Purified Chi
   [269] = { secondary = PT.Chi,
     spells = { 1249625, 113656, 107428, 152175, 392983, 1248989, 123904, 322109, 109132 },
-    procs  = { 116768, 1261844, 456368 },
-    stackLinks = { [1249625] = 1261844 } },                                               -- WW; Zenith ← стаки Tigereye Brew
+    procs  = { 116768, 325202, 1261724, 1249625, 1291484, 1250554, 1297033 },
+    stackLinks = { [1249625] = 1261724 } },                                               -- WW; actual Tigereye Brew aura, not talent 1261844
   [270] = {
     spells = { 115151, 116680, 467307, 107428, 115869, 116849, 115310, 322118 },
     procs  = { 202090, 392883, 446326, 1260511, 388491 } },                               -- MW: Teachings, Spiritfont

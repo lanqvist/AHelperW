@@ -85,9 +85,19 @@ class Executor:
         self.apl=apl; self.debug=debug; self.pending=None; self.last_send=0
         self.cast_observer=CastObserver(debug)
         self.gcd_timing=GcdTiming(debug)
+        self.receipt_pending=None
+        self.failure_reason=None
 
     def pause(self):
         self.pending=None
+        if self.receipt_pending:
+            # Losing observation is not evidence that the input failed. The
+            # observer below discards its baseline; discard the matching deadline
+            # too, so returning to the game cannot time out an abandoned request.
+            self.debug.event('input_confirmation_interrupted',
+                             action=self.receipt_pending['action'], reason='reading_paused')
+            self.receipt_pending=None
+        if hasattr(self.apl, 'reset_observations'): self.apl.reset_observations()
         self.cast_observer.pause()
         self.gcd_timing.pause()
 
@@ -99,7 +109,26 @@ class Executor:
 
     def _step(self,data,focus_guard,halt):
         now=time.time()
+        if hasattr(self.apl, 'observe'): self.apl.observe(data)
         self.cast_observer.update(data)
+        if self.failure_reason:
+            return {'status':'blocked','reason':self.failure_reason}
+        if getattr(self.apl, 'require_cast_confirmation', False):
+            if self.receipt_pending:
+                request=self.receipt_pending
+                matched=any(c['action']==request['action'] and c['sentAt']==request['sentAt']
+                            for c in data.get('castVerification',{}).get('confirmed',[]))
+                if matched:
+                    self.receipt_pending=None
+                    self.pending=None
+                elif now-request['sentAt']>2.5:
+                    self.failure_reason='Применение '+request['action']+' не подтверждено; автонажатия заблокированы. Останови запись для разбора.'
+                    self.debug.event('input_confirmation_latched',action=request['action'],reason=self.failure_reason)
+                    return {'status':'blocked','reason':self.failure_reason}
+                else:
+                    return {'status':'waiting','reason':'Ожидание события применения '+request['action']}
+            if data.get('castReceipt',{}).get('status')!='readable':
+                return {'status':'waiting','reason':'Нет читаемой истории применений'}
         if data['rows'].get('context/inputAllowed',{}).get('state')!='ready':
             self.pause()
             return {'status':'waiting','reason':'Ввод закрыт: чат, меню, смерть или неизвестный сигнал HUD'}
@@ -136,4 +165,6 @@ class Executor:
         self.debug.event('key_sent',decision=decision,capturedAt=data['capturedAt'],sentAt=self.last_send)
         square=self.apl.squares.get(('spell',decision['bindingSpellID']),('',{}))[1]
         self.cast_observer.sent(decision,square,self.last_send,data.get('castReceipt',{}))
+        if getattr(self.apl, 'require_cast_confirmation', False):
+            self.receipt_pending={'action':decision['action'],'sentAt':self.last_send}
         return dict(decision,status='sent',reason='Отправлено: '+decision['action'])

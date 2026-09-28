@@ -130,6 +130,7 @@ function R.Build(specData)
   EnsureBuilt()
   local layout = ns.HUDLayout()
   local _, specID = ns.GetSpecData()
+  local profile = ns.GetAPLProfile()
   R.compactArms = layout.compact and specID == 71
   local size = ns.Round(ns.db.size)
   local mini = ns.Round(size * 0.4)
@@ -150,6 +151,10 @@ function R.Build(specData)
   targetBar.percent:SetJustifyH("RIGHT")
 
   R.secondary = specData and specData.secondary or nil
+  R.regions = { playerHealth = hpBar, targetHealth = targetBar,
+    targetHealthPercent = targetBar.percent, gcd = gcdFrame }
+  R.regions[profile and profile.primary or "primary"] = rageArea
+  if profile and profile.secondary then R.regions[profile.secondary] = hybrid end
 
   hybrid.prev = nil -- иначе после смены спека вспышка «максимум» срабатывает ложно
   R.lastPowerMode = nil -- перепривязать якоря/шрифт ресурса после ребилда
@@ -186,7 +191,7 @@ function R.Build(specData)
   row:ClearAllPoints()
   row:SetPoint("TOP", ns.frame, "TOP", 0, -(layout.pad + (ns.gridH or 0) + layout.sectionGap))
 
-  R.showArmsInputs = specID == 71
+  R.showArmsInputs = profile ~= nil
   gcdCooldown:SetDrawSwipe(not ns.db.stable)
   if R.showArmsInputs then
     local extraGap = ns.Round(5)
@@ -196,16 +201,21 @@ function R.Build(specData)
     targetBar:SetSize(ns.Round(size * 3.4), ns.Round(size * 0.55))
     targetBar:ClearAllPoints()
     targetBar:SetPoint("TOPLEFT", targetRow, "TOPLEFT", 0, -1)
-    targetBar.mark20:ClearAllPoints()
-    targetBar.mark20:SetPoint("TOP", targetBar, "TOPLEFT", ns.Round(size * 3.4 * 0.2), 0)
-    targetBar.mark20:SetPoint("BOTTOM", targetBar, "BOTTOMLEFT", ns.Round(size * 3.4 * 0.2), 0)
-    targetBar.mark35:ClearAllPoints()
-    targetBar.mark35:SetPoint("TOP", targetBar, "TOPLEFT", ns.Round(size * 3.4 * 0.35), 0)
-    targetBar.mark35:SetPoint("BOTTOM", targetBar, "BOTTOMLEFT", ns.Round(size * 3.4 * 0.35), 0)
-    for i, fraction in ipairs({ 0.2, 0.35 }) do
+    local thresholds = profile.executeThresholds or {}
+    for i, mark in ipairs({targetBar.mark20, targetBar.mark35}) do
       local label = targetBar.labels[i]
-      label:ClearAllPoints()
-      label:SetPoint("TOP", targetBar, "BOTTOMLEFT", ns.Round(size * 3.4 * fraction), -1)
+      local threshold = thresholds[i]
+      mark:SetShown(threshold ~= nil)
+      label:SetShown(threshold ~= nil)
+      if threshold then
+        local offset = ns.Round(size * 3.4 * threshold / 100)
+        mark:ClearAllPoints()
+        mark:SetPoint("TOP", targetBar, "TOPLEFT", offset, 0)
+        mark:SetPoint("BOTTOM", targetBar, "BOTTOMLEFT", offset, 0)
+        label:SetText(threshold)
+        label:ClearAllPoints()
+        label:SetPoint("TOP", targetBar, "BOTTOMLEFT", offset, -1)
+      end
     end
     gcdFrame:SetSize(size, size)
     gcdFrame:ClearAllPoints()
@@ -371,10 +381,29 @@ local function UpdateSecondary(pal)
   end
   if not R.secondary then return end
 
-  -- Вторичные ресурсы никогда не секретны — обычная логика разрешена и в бою
-  local cur = UnitPower("player", R.secondary) or 0
-  local max = UnitPowerMax("player", R.secondary) or 0
-  hybrid.text:SetText(cur)
+  local cur = UnitPower("player", R.secondary)
+  local max = UnitPowerMax("player", R.secondary)
+  local displayed = pcall(hybrid.text.SetText, hybrid.text, cur)
+  if not displayed then hybrid.text:SetText("?") end
+  local profile = ns.GetAPLProfile()
+  if profile and profile.secondary == "chi" then
+    -- Fixed white-on-black digits match the reader's numeric OCR channel.
+    -- Two digits avoid the low-confidence isolated zero observed in the WW log.
+    -- Formatting stays in the renderer; no arithmetic on secret resources.
+    local formatted = pcall(hybrid.text.SetFormattedText, hybrid.text, "%02.0f", cur)
+    if not formatted then hybrid.text:SetText("?") end
+    hybrid.bg:SetColorTexture(0.16, 0.16, 0.16, 1)
+    hybrid.text:SetTextColor(1, 1, 1)
+    hybrid.prev = nil
+    return
+  end
+  -- The renderer can display a secret; color/flash logic cannot inspect it.
+  if IsSecretV(cur) or IsSecretV(max) or type(cur) ~= "number" or type(max) ~= "number" then
+    hybrid.bg:SetColorTexture(unpack(pal.pipOff))
+    hybrid.text:SetTextColor(1, 1, 1)
+    hybrid.prev = nil
+    return
+  end
   local bg, tc
   if max > 0 and cur >= max then
     bg, tc = pal.ready, pal.textOnBright
