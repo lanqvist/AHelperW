@@ -15,7 +15,11 @@
 Личный билд декодирован (в `build.txt`, игнорируется): нет Massacre (порог 20%)
 и Avatar. Конфликт ID Sudden Death (SimC 52437 против 280776 в research/ClassData),
 ID Hack and Slash, Fury Execute и Whirlwind не установлены — проверять в игре.
-Профиль HUD, `FuryAPL`, бинды и экспорт не сделаны; в игре не проверялось.
+Затем добавлен профиль `[72]` (Lua + ридер): HUD-пресет, алиасы Crushing Blow/
+Bloodbath, эталон Bloodthirst, быстрый OCR таймера Enrage, `/ahw furyapl`.
+`FuryAPL` не сделан — ридер отказывает в модели APL для spec 72. Экспорт
+проверен только в Lua VM с моками; в игре и в ридере на реальном экспорте нет.
+`tests/run.cjs` падал ещё до этих правок: тест не загружает Layout/SpecProfiles.
 
 ### Текущая разработка: ВВ / Шадо-Пан (28 сентября)
 

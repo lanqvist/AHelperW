@@ -477,7 +477,8 @@ class App(tk.Tk):
                 self.profile_choice.set(PROFILES[spec_id].name)
             except OSError as exc:
                 self.debug.event('profile_save_error',error=str(exc))
-        if spec_id == 269: self.auto_input.set(False)
+        # Profiles not yet observed in game never start with input enabled.
+        if spec_id in PROFILES and PROFILES[spec_id].status!='game-observed': self.auto_input.set(False)
         self.debug.event('profile_loaded', path=str(path), profileHash=reader.hash, profile=reader.cfg)
         self.table.delete(*self.table.get_children())
         for key,name,kind,_ in reader.entries: self.table.insert('', 'end',iid=key,text=name,values=(kind,'?','?','?','—'))

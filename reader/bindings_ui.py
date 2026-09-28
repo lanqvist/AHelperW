@@ -99,7 +99,7 @@ class BindingEditor(tk.Toplevel):
             spell=alias.get('spellID')
             if source in self.items and type(spell) is int and str(spell)!=source:
                 self.aliases[str(spell)]=int(source)
-                self.notes[source]='Общая клавиша: '+('Героический удар' if alias_name=='heroic_strike' else alias_name)
+                self.notes[source]='Общая клавиша: '+('Героический удар' if alias_name=='heroic_strike' else alias.get('label',alias_name))
         try:
             self.document,self.bindings=load_bindings(self.path,self.spec)
         except Exception:
@@ -110,7 +110,7 @@ class BindingEditor(tk.Toplevel):
         self.geometry('850x340' if compact else '900x690')
         self.minsize(810,320 if compact else 580)
         self.transient(parent)
-        title='Воин · Оружие' if self.spec==71 else 'Способности текущей специализации'
+        title={71:'Воин · Оружие',72:'Воин · Неистовство'}.get(self.spec,'Способности текущей специализации')
         ttk.Label(self,text=title,font=('Segoe UI',15,'bold')).pack(anchor='w',padx=16,pady=(16,4))
         ttk.Label(self,text='Выбери способность → «Записать клавишу» → нажми сочетание → «Сохранить».').pack(anchor='w',padx=16)
         ttk.Label(self,text='Укажи сочетания, уже назначенные в WoW. Баффы и дебаффы отдельно не назначаются.').pack(anchor='w',padx=16,pady=(3,10))
