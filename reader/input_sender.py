@@ -87,6 +87,7 @@ class Executor:
         self.gcd_timing=GcdTiming(debug)
         self.receipt_pending=None
         self.failure_reason=None
+        self.rejected_at={}
 
     def pause(self):
         self.pending=None
@@ -118,10 +119,26 @@ class Executor:
                 request=self.receipt_pending
                 matched=any(c['action']==request['action'] and c['sentAt']==request['sentAt']
                             for c in data.get('castVerification',{}).get('confirmed',[]))
+                # The client refusing the press (e.g. Execute as the target heals
+                # back above 20%) turns the button unusable. A button that stays
+                # ready without an event remains unexplained and still latches.
+                state=data['rows'].get(request['row'],{}).get('state')
+                if data.get('capturedAt',0)>request['sentAt'] and state in ('unusable','nores','outofrange'):
+                    request.setdefault('rejectedState',state)
                 if matched:
                     self.receipt_pending=None
                     self.pending=None
                 elif now-request['sentAt']>2.5:
+                    previous=self.rejected_at.get(request['action'])
+                    if 'rejectedState' in request and not (previous and request['sentAt']-previous<10):
+                        # One explained refusal per action per 10 s; a repeat latches.
+                        self.rejected_at[request['action']]=request['sentAt']
+                        self.receipt_pending=None
+                        self.pending=None
+                        self.debug.event('input_rejected_by_client',action=request['action'],
+                                         buttonState=request['rejectedState'],
+                                         note='No cast event; button became unavailable after the press')
+                        return {'status':'waiting','reason':'Клиент отклонил '+request['action']+'; повторная оценка APL'}
                     self.failure_reason='Применение '+request['action']+' не подтверждено; автонажатия заблокированы. Останови запись для разбора.'
                     self.debug.event('input_confirmation_latched',action=request['action'],reason=self.failure_reason)
                     return {'status':'blocked','reason':self.failure_reason}
@@ -166,5 +183,5 @@ class Executor:
         square=self.apl.squares.get(('spell',decision['bindingSpellID']),('',{}))[1]
         self.cast_observer.sent(decision,square,self.last_send,data.get('castReceipt',{}))
         if getattr(self.apl, 'require_cast_confirmation', False):
-            self.receipt_pending={'action':decision['action'],'sentAt':self.last_send}
+            self.receipt_pending={'action':decision['action'],'sentAt':self.last_send,'row':row}
         return dict(decision,status='sent',reason='Отправлено: '+decision['action'])
