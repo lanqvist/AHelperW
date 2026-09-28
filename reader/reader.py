@@ -179,6 +179,9 @@ class Reader:
             self.pixel_regions['context/targets'] = self.regions['context/targets']
         self.plan = OcrPlan(self, ROOT/'ocr_policy.json')
         self.ocr_stats = {}
+        # Live maxima read from the HUD (context/maxenergy); the export's value
+        # is a snapshot and can be lower than the current maximum.
+        self.live_max = {}
 
     def crop(self, image, r):
         x,y,x2,y2 = box(r); bx,by,_,_ = self.bounds
@@ -289,11 +292,20 @@ class Reader:
             if key.endswith('/stacks') and isinstance(maximum,(int,float)) and value>maximum: return None
             if key=='resource/targetHealthPercent' and value>100: return None
             if key in ('resource/chi','resource/energy'):
-                maximum=self.cfg.get('resourceMeta',{}).get(key.split('/')[1],{}).get('max')
+                resource=key.split('/')[1]
+                maximum=self.cfg.get('resourceMeta',{}).get(resource,{}).get('max')
+                live=self.live_max.get(resource)
+                if isinstance(live,(int,float)) and (not isinstance(maximum,(int,float)) or live>maximum): maximum=live
                 if isinstance(maximum,(int,float)) and value>maximum: return None
                 if key=='resource/chi' and not value.is_integer(): return None
             if key=='context/targets' and (not value.is_integer() or not 1<=value<=80): return None
             return value
+        # Read the live maximum first so this batch's resource value can use it.
+        for key, result in zip(keys, results):
+            if key=='context/maxenergy':
+                raw, confidence = result[0].strip(), float(result[1])
+                if confidence>=.92 and re.fullmatch(r'\d{2,3}', raw) and 50<=int(raw)<=300:
+                    self.live_max['energy']=int(raw)
         for key, result in zip(keys, results):
             raw, confidence = result[0].strip(), float(result[1])
             value=parse(key,raw,confidence)

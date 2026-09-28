@@ -40,8 +40,11 @@ class WindwalkerAPL(APLRuntime):
     # Deferred with the user: preserve the APL rule but do not execute it until
     # the separate usable action has been observed on the character.
     deferred_actions = frozenset({'zenith_stomp'})
+    # Whirling Dragon Punch and Touch of Death markers matched their cast events
+    # in log 20260928T210541Z-aee16ff5 (152175 at +30.09 s, 322109 at +15.55 s).
     observed_combo_markers = frozenset({'tiger_palm', 'blackout_kick', 'rising_sun_kick',
-                                       'fists_of_fury', 'spinning_crane_kick', 'zenith_stomp'})
+                                       'fists_of_fury', 'spinning_crane_kick', 'zenith_stomp',
+                                       'whirling_dragon_punch', 'touch_of_death'})
 
     def __init__(self, reader, root, bindings, settings):
         super().__init__(reader, root, bindings, settings)
@@ -175,6 +178,12 @@ class WindwalkerAPL(APLRuntime):
             return self.talent_ranks.get(parts[1],0) if parts[-1] == 'rank' else parts[1] in self.talents
         if name in ('chi','energy'):
             return self.number('resource/'+name)
+        if name == 'energy.max':
+            # The HUD shows the live maximum; the export's snapshot can be stale
+            # (exported 120 while the character had 150 in the next fight).
+            live = self.number('context/maxenergy')
+            if not isinstance(live, Unknown) and live > 0:
+                return live
         if name in ('chi.max','energy.max'):
             value = self.cfg.get('resourceMeta',{}).get(parts[0],{}).get('max')
             return value if isinstance(value,(int,float)) and value > 0 else unknown(name)
