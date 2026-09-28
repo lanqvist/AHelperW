@@ -32,6 +32,11 @@ local function Rect(region, includeHidden)
   if not region or (not includeHidden and not region:IsVisible()) then return nil end
   local x, bottom, width, height = region:GetRect()
   if not x then return nil end
+  if issecretvalue and (issecretvalue(x) or issecretvalue(bottom) or issecretvalue(width) or issecretvalue(height)) then
+    -- A region sized by secret content cannot be measured; never do math on it.
+    ns.exportSecretRegion = true
+    return nil
+  end
   local screenW, screenH = GetPhysicalScreenSize()
   local scale = region:GetEffectiveScale()
   local sx = screenW / (UIParent:GetWidth() * UIParent:GetEffectiveScale()) * scale
@@ -46,6 +51,7 @@ function ns.MakeHUDExport()
   local _, spec = ns.GetSpecData()
   local profile = ns.GetAPLProfile()
   if not profile then return nil, "Для текущей специализации пакет экспорта APL не подключён." end
+  ns.exportSecretRegion = nil
   local _, race = UnitRace("player")
   local configID = ns.ReadValue(C_ClassTalents.GetActiveConfigID)
   local talents = configID and ns.ReadValue(C_Traits.GenerateImportString, configID)
@@ -136,6 +142,9 @@ function ns.MakeHUDExport()
     end
   end
   result.potionID = ns.db.potionID
+  if ns.exportSecretRegion then
+    return nil, "Часть HUD сейчас скрыта клиентом (secret-размеры). Сними цель и повтори экспорт."
+  end
   local text = JSON(result)
   ns.db.lastHUDExport = text
   return text

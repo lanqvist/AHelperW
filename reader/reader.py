@@ -508,6 +508,12 @@ class App(tk.Tk):
                 self.debug.event('apl_model_error',error=str(exc),traceback=traceback.format_exc())
                 self.apl_status.config(text='APL недоступен: '+str(exc))
         self.status.config(text=f'{Path(path).name}: {len(reader.entries)} квадратов; {reader.cfg["screen"]["width"]}×{reader.cfg["screen"]["height"]}. Остановлено.')
+        if reader.cfg.get('castReceipt',{}).get('version')==1:
+            # Exports from addons before the 8-row journal (28 Sep 2026) have the
+            # old bottom-row geometry: context cells no longer match the HUD.
+            self.debug.event('profile_outdated',reason='castReceipt v1: HUD geometry predates the 8-row journal')
+            self.apl_status.config(text='Экспорт сделан старой версией HUD: геометрия устарела. '
+                                        'В игре на этом спеке: /ahw export и загрузи новый экспорт.')
 
     def choose(self):
         path=filedialog.askopenfilename(filetypes=[('Экспорт','*.json *.txt'),('Все файлы','*.*')])

@@ -88,9 +88,14 @@ local function EnsureBuilt()
   targetBar.label:SetPoint("CENTER")
   ns.SetFont(targetBar.label, 10, "OUTLINE")
   targetBar.label:SetText("ЦЕЛЬ")
+  -- The percentage text is set from a secret value, which makes the font
+  -- string's own rect secret; the export reads this plain frame instead.
+  targetBar.percentArea = CreateFrame("Frame", nil, targetBar)
+  targetBar.percentArea:SetPoint("RIGHT", -2, 0)
+  targetBar.percentArea:SetHeight(10)
   targetBar.percent = targetBar:CreateFontString(nil, "OVERLAY")
   ns.SetFont(targetBar.percent, 10, "OUTLINE")
-  targetBar.percent:SetPoint("RIGHT", -2, 0)
+  targetBar.percent:SetPoint("RIGHT", targetBar.percentArea, "RIGHT", 0, 0)
   targetBar.label:ClearAllPoints()
   targetBar.label:SetPoint("LEFT", 3, 0)
   targetBar.labels = {}
@@ -122,7 +127,7 @@ local function EnsureBuilt()
   gcdCooldown:SetHideCountdownNumbers(false)
   ns.ConfigureCountdown(gcdCooldown)
   targetRow:Hide()
-  R.regions = { playerHealth = hpBar, rage = rageArea, targetHealth = targetBar, targetHealthPercent = targetBar.percent, gcd = gcdFrame }
+  R.regions = { playerHealth = hpBar, rage = rageArea, targetHealth = targetBar, targetHealthPercent = targetBar.percentArea, gcd = gcdFrame }
 end
 
 -- Построение под спек. Возвращает w, h строки ресурсов.
@@ -147,11 +152,12 @@ function R.Build(specData)
   rageArea:ClearAllPoints()
   rageArea:SetPoint("RIGHT", row, "RIGHT", 0, 0)
   targetBar.percent:SetWidth(ns.Round(size * 1.5))
+  targetBar.percentArea:SetWidth(ns.Round(size * 1.5))
   targetBar.percent:SetJustifyH("RIGHT")
 
   R.secondary = specData and specData.secondary or nil
   R.regions = { playerHealth = hpBar, targetHealth = targetBar,
-    targetHealthPercent = targetBar.percent, gcd = gcdFrame }
+    targetHealthPercent = targetBar.percentArea, gcd = gcdFrame }
   R.regions[profile and profile.primary or "primary"] = rageArea
   if profile and profile.secondary then R.regions[profile.secondary] = hybrid end
 

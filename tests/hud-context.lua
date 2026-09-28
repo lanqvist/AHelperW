@@ -192,6 +192,11 @@ assert(C.cells.last.value.text == "—" and C.forecasts.fight == nil)
 assert(C.targets == nil, "manual target count must reset after combat")
 loadAddon("Export")
 HUD_EXPORT = assert(ns.MakeHUDExport())
+C.cells.targets.GetRect = function() return forbidden, 1, 1, 1 end
+local refused, why = ns.MakeHUDExport()
+assert(refused == nil and why:find("secret", 1, true), "secret geometry must refuse the export, not error")
+C.cells.targets.GetRect = nil
+assert(ns.MakeHUDExport(), "export recovers once geometry is readable again")
 assert(HUD_EXPORT:find('"static":true', 1, true))
 combat = true; assert(ns.MakeHUDExport() == nil, "combat export must be rejected")
 combat = false; target = true; usable = true; noPower = false
@@ -217,7 +222,10 @@ assert(finalResourceHeight > 150 and ticker, "context must contribute to Core la
 local frameCount = #frames
 ticker(); ticker()
 assert(#frames == frameCount, "polling must not allocate frames")
-assert(ns.Resources.regions.targetHealthPercent.text == "?", "missing formatter must not display 0.93 as 0.93 percent")
+assert(ns.Resources.regions.targetHealth.percent.text == "?", "missing formatter must not display 0.93 as 0.93 percent")
+-- The export measures a plain frame: the text itself is sized by a secret value in game.
+assert(ns.Resources.regions.targetHealthPercent == ns.Resources.regions.targetHealth.percentArea
+  and ns.Resources.regions.targetHealthPercent.kind == "Frame", "target percent must export its proxy frame")
 SlashCmdList = {}
 loadAddon("Options")
 SlashCmdList.AHELPERW("trinket 1 buff 120 20 strength")
