@@ -1,0 +1,418 @@
+{
+  "clientBuild": "12.1.0.69933",
+  "specID": 72,
+  "heroTree": "slayer",
+  "complete": false,
+  "note": "Display coverage only. Native rendering, OCR accuracy and APL evaluation are separate concerns.",
+  "talentGates": {
+    "talent.avatar": false,
+    "talent.berserker_stance": true,
+    "talent.bladestorm": true,
+    "talent.bloodthirst": true,
+    "talent.improved_whirlwind": true,
+    "talent.massacre.enabled": false,
+    "talent.odyns_fury": true,
+    "talent.raging_blow": true,
+    "talent.rampage": true,
+    "talent.reckless_abandon": true,
+    "talent.recklessness": true,
+    "talent.slayers_dominance": true,
+    "talent.storm_bolt": true,
+    "talent.unrelenting_onslaught": true
+  },
+  "executeThresholdPercent": 20,
+  "actionsWithoutSelectedTalent": [
+    "avatar"
+  ],
+  "unusedVariables": [
+    "trinket_1_exclude",
+    "trinket_2_exclude",
+    "trinket_1_manual",
+    "st_planning",
+    "adds_remain"
+  ],
+  "dependencies": [
+    {
+      "symbol": "active_enemies",
+      "mode": "native-display",
+      "source": "TargetCount estimate or manual override; unknown blocks branch choice"
+    },
+    {
+      "symbol": "buff.bladestorm.up",
+      "mode": "native-display",
+      "spellID": 446035,
+      "evidence": "simc-source",
+      "note": "446035 with Unrelenting Onslaught + Bladestorm, otherwise 227847"
+    },
+    {
+      "symbol": "buff.enrage.remains",
+      "mode": "native-display+ocr",
+      "spellID": 184362,
+      "evidence": "simc-source",
+      "note": "find_spell(184362); research-apl: verified"
+    },
+    {
+      "symbol": "buff.hack_and_slash.up",
+      "mode": "native-display",
+      "spellID": null,
+      "evidence": "pending",
+      "note": "Trigger of talent 383877 effect 1; numeric ID absent from the pinned source"
+    },
+    {
+      "symbol": "buff.recklessness.down",
+      "mode": "native-display",
+      "spellID": 1719,
+      "evidence": "simc-source",
+      "note": "spell.recklessness_buff"
+    },
+    {
+      "symbol": "buff.recklessness.remains",
+      "mode": "native-display+ocr",
+      "spellID": 1719,
+      "evidence": "simc-source",
+      "note": "spell.recklessness_buff"
+    },
+    {
+      "symbol": "buff.recklessness.up",
+      "mode": "native-display",
+      "spellID": 1719,
+      "evidence": "simc-source",
+      "note": "spell.recklessness_buff"
+    },
+    {
+      "symbol": "buff.sudden_death.down",
+      "mode": "native-display",
+      "spellID": 52437,
+      "evidence": "conflict",
+      "note": "SimC spell.sudden_death_buff = 52437; research-apl and ClassData Fury preset use 280776. Check with /ahw procdebug."
+    },
+    {
+      "symbol": "buff.sudden_death.up",
+      "mode": "native-display",
+      "spellID": 52437,
+      "evidence": "conflict",
+      "note": "SimC spell.sudden_death_buff = 52437; research-apl and ClassData Fury preset use 280776. Check with /ahw procdebug."
+    },
+    {
+      "symbol": "buff.whirlwind.stack",
+      "mode": "native-display+ocr",
+      "spellID": 85739,
+      "evidence": "simc-source",
+      "note": "Meat Cleaver/Improved Whirlwind stacks; research-apl: verified"
+    },
+    {
+      "symbol": "cooldown.bladestorm.ready",
+      "mode": "native-display",
+      "spellID": 227847,
+      "evidence": "simc-source",
+      "note": "Cast/override 446035 with Unrelenting Onslaught, as in Arms"
+    },
+    {
+      "symbol": "cooldown.execute.ready",
+      "mode": "native-display",
+      "spellID": null,
+      "evidence": "pending",
+      "note": "Fury find_specialization_spell(\"Execute\"); 5308/280735 are unverified guesses"
+    },
+    {
+      "symbol": "cooldown.recklessness.duration",
+      "mode": "static-model-required",
+      "spellID": 1719,
+      "evidence": "simc-source"
+    },
+    {
+      "symbol": "cooldown.recklessness.remains",
+      "mode": "native-display",
+      "spellID": 1719,
+      "evidence": "simc-source"
+    },
+    {
+      "symbol": "fight_remains",
+      "mode": "manual-forecast",
+      "source": "fight cell"
+    },
+    {
+      "symbol": "gcd",
+      "mode": "derived",
+      "source": "1.5 s adjusted by displayed haste; minimum 0.75"
+    },
+    {
+      "symbol": "movement.distance",
+      "mode": "partial",
+      "source": "Per-spell range + Charge range; exact distance unavailable"
+    },
+    {
+      "symbol": "rage",
+      "mode": "native-display",
+      "source": "Current rage + maximum"
+    },
+    {
+      "symbol": "raid_event.movement.distance",
+      "mode": "unavailable",
+      "source": "Simulation raid events"
+    },
+    {
+      "symbol": "raid_event.movement.in",
+      "mode": "unavailable",
+      "source": "Simulation raid events"
+    },
+    {
+      "symbol": "talent.improved_whirlwind",
+      "mode": "static-export",
+      "source": "Talent string of the HUD export",
+      "selected": true
+    },
+    {
+      "symbol": "talent.massacre.enabled",
+      "mode": "static-export",
+      "source": "Talent string of the HUD export",
+      "selected": false
+    },
+    {
+      "symbol": "talent.recklessness",
+      "mode": "static-export",
+      "source": "Talent string of the HUD export",
+      "selected": true
+    },
+    {
+      "symbol": "talent.slayers_dominance",
+      "mode": "static-export",
+      "source": "Talent string of the HUD export",
+      "selected": true
+    },
+    {
+      "symbol": "target.debuff.casting.react",
+      "mode": "native-display",
+      "source": "Target cast/channel + interruptibility marker"
+    },
+    {
+      "symbol": "target.health.pct",
+      "mode": "native-display",
+      "source": "Current target only, Resources.lua"
+    },
+    {
+      "symbol": "target.time_to_die",
+      "mode": "manual-forecast",
+      "source": "ttd cell; blocks bladestorm outside Recklessness while unknown"
+    },
+    {
+      "symbol": "time",
+      "mode": "observed",
+      "source": "Combat start event"
+    },
+    {
+      "symbol": "trinket.1.cooldown.duration",
+      "mode": "manual-metadata",
+      "source": "Equipment export; runtime currently models trinkets as absent"
+    },
+    {
+      "symbol": "trinket.1.has_buff.strength",
+      "mode": "manual-metadata",
+      "source": "Equipment export; runtime currently models trinkets as absent"
+    },
+    {
+      "symbol": "trinket.1.has_cooldown",
+      "mode": "manual-metadata",
+      "source": "Equipment export; runtime currently models trinkets as absent"
+    },
+    {
+      "symbol": "trinket.1.has_use_buff",
+      "mode": "manual-metadata",
+      "source": "Equipment export; runtime currently models trinkets as absent"
+    },
+    {
+      "symbol": "trinket.1.ilvl",
+      "mode": "static-export",
+      "source": "Equipment export; runtime currently models trinkets as absent"
+    },
+    {
+      "symbol": "trinket.1.is.treacherous_transmitter",
+      "mode": "static-export",
+      "source": "Equipment export; runtime currently models trinkets as absent"
+    },
+    {
+      "symbol": "trinket.1.proc.any_dps.duration",
+      "mode": "manual-metadata",
+      "source": "Equipment export; runtime currently models trinkets as absent"
+    },
+    {
+      "symbol": "trinket.2.cooldown.duration",
+      "mode": "manual-metadata",
+      "source": "Equipment export; runtime currently models trinkets as absent"
+    },
+    {
+      "symbol": "trinket.2.has_buff.strength",
+      "mode": "manual-metadata",
+      "source": "Equipment export; runtime currently models trinkets as absent"
+    },
+    {
+      "symbol": "trinket.2.has_cooldown",
+      "mode": "manual-metadata",
+      "source": "Equipment export; runtime currently models trinkets as absent"
+    },
+    {
+      "symbol": "trinket.2.has_use_buff",
+      "mode": "manual-metadata",
+      "source": "Equipment export; runtime currently models trinkets as absent"
+    },
+    {
+      "symbol": "trinket.2.ilvl",
+      "mode": "static-export",
+      "source": "Equipment export; runtime currently models trinkets as absent"
+    },
+    {
+      "symbol": "trinket.2.is.treacherous_transmitter",
+      "mode": "static-export",
+      "source": "Equipment export; runtime currently models trinkets as absent"
+    },
+    {
+      "symbol": "trinket.2.proc.any_dps.duration",
+      "mode": "manual-metadata",
+      "source": "Equipment export; runtime currently models trinkets as absent"
+    },
+    {
+      "symbol": "variable.damage_trinket_priority",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.execute_phase",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.on_gcd_racials",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.trinket_1_buffs",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.trinket_1_duration",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.trinket_1_high_value",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.trinket_1_sync",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.trinket_2_buffs",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.trinket_2_duration",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.trinket_2_high_value",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.trinket_2_sync",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.trinket_priority",
+      "mode": "derived",
+      "source": "APL expression"
+    }
+  ],
+  "shadowed": [
+    {
+      "list": "slayer",
+      "expression": "execute,if=buff.sudden_death.up",
+      "reason": "unconditional execute earlier in the list"
+    },
+    {
+      "list": "slayer",
+      "expression": "execute",
+      "reason": "unconditional execute earlier in the list"
+    }
+  ],
+  "actions": {
+    "rampage": {
+      "spellID": 184367,
+      "evidence": "simc-source"
+    },
+    "bloodthirst": {
+      "spellID": 23881,
+      "evidence": "simc-source"
+    },
+    "bloodbath": {
+      "spellID": 335096,
+      "displaySpellID": 23881,
+      "evidence": "simc-source",
+      "note": "Bloodthirst replacement; shares its binding"
+    },
+    "raging_blow": {
+      "spellID": 85288,
+      "evidence": "simc-source"
+    },
+    "crushing_blow": {
+      "spellID": 335097,
+      "displaySpellID": 85288,
+      "evidence": "simc-source",
+      "note": "Raging Blow replacement; ready only with Reckless Abandon during Recklessness"
+    },
+    "execute": {
+      "spellID": null,
+      "evidence": "pending",
+      "note": "Fury find_specialization_spell(\"Execute\"); 5308/280735 are unverified guesses"
+    },
+    "recklessness": {
+      "spellID": 1719,
+      "evidence": "simc-source"
+    },
+    "avatar": {
+      "spellID": 107574,
+      "evidence": "simc-source",
+      "note": "Only in slayer_aoe in this pinned APL"
+    },
+    "bladestorm": {
+      "spellID": 227847,
+      "evidence": "simc-source",
+      "note": "Cast/override 446035 with Unrelenting Onslaught, as in Arms"
+    },
+    "odyns_fury": {
+      "spellID": 385059,
+      "evidence": "simc-source"
+    },
+    "whirlwind": {
+      "spellID": null,
+      "evidence": "pending",
+      "note": "find_class_spell(\"Whirlwind\"); ID absent from the pinned source"
+    },
+    "storm_bolt": {
+      "spellID": 107570,
+      "evidence": "simc-source",
+      "note": "Only during Bladestorm; reuses the Arms channel exception"
+    },
+    "berserker_stance": {
+      "spellID": 386196,
+      "evidence": "simc-source",
+      "note": "Precombat toggle; needs aura-down guard like Arms battle_stance"
+    },
+    "charge": 100,
+    "pummel": 6552,
+    "heroic_leap": "Raid movement event only; not executable",
+    "potion": "User-selected item; not executed",
+    "use_item": "Not executed; trinkets modelled as absent",
+    "auto_attack": "Footer indicator",
+    "snapshot_stats": "Simulation-only action",
+    "invoke_external_buff": "Player coordination; Power Infusion aura 10060 is displayed but cannot be requested"
+  }
+}

@@ -3,6 +3,8 @@ import hashlib
 import json
 import time
 
+from spec_profiles import PROFILES
+
 
 class OcrPlan:
     def __init__(self, reader, config_path):
@@ -15,6 +17,9 @@ class OcrPlan:
         specs = reader.square_specs
         procs = {s['spellID']: key for key, s in specs.items() if s['kind']=='proc'}
         arms = reader.cfg.get('specID') == 71
+        profile = PROFILES.get(reader.cfg.get('specID'))
+        binary = profile.binary_auras if profile else frozenset()
+        fast_timers = profile.fast_aura_timers if profile else frozenset()
         for key in reader.regions:
             owner, field = key.rsplit('/',1)
             spec = specs.get(owner)
@@ -30,9 +35,11 @@ class OcrPlan:
                             self.aliases[key] = procs[linked]+'/stacks'
                         elif linked is None:
                             self.disabled[key] = 'no_counter'
-                    elif arms and spec['spellID'] in (107574,446035,386164,10060,208086,388539):
+                    elif spec['spellID'] in binary:
                         self.disabled[key] = 'binary_aura_use_color'
-                elif arms and spec['spellID']==386164 and spec['kind']=='proc':
+                elif field=='timer' and spec['kind']=='proc' and spec['spellID'] in fast_timers:
+                    self.periods[key] = .2
+                elif spec['spellID'] in (386164, 386196) and spec['kind']=='proc':
                     self.disabled[key] = 'no_duration_display'
             elif key in ('resource/rage','resource/energy','resource/chi'): self.periods[key]=.15
             elif key=='context/energyRegen': self.periods[key]=.5

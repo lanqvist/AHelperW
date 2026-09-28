@@ -103,14 +103,14 @@ SlashCmdList.AHELPERW = function(input)
     ns.ResetProcContainers()
     ns.Rebuild()
     msg("превью: " .. (ns.db.preview and "вкл" or "выкл"))
-  elseif cmd == "armsapl" or cmd == "wwapl" or cmd == "apl" then
+  elseif cmd == "armsapl" or cmd == "wwapl" or cmd == "furyapl" or cmd == "apl" then
     if InCombatLockdown() then
       msg("добавление набора APL доступно вне боя")
       return
     end
     local _, specID = ns.GetSpecData()
     local profile = ns.GetAPLProfile()
-    if not profile or (cmd == "armsapl" and specID ~= 71) or (cmd == "wwapl" and specID ~= 269) then
+    if not profile or (cmd == "armsapl" and specID ~= 71) or (cmd == "wwapl" and specID ~= 269) or (cmd == "furyapl" and specID ~= 72) then
       msg("для этого спека набор APL не подключён; /ahw apl выбирает текущий спек")
       return
     end
@@ -422,6 +422,7 @@ SlashCmdList.AHELPERW = function(input)
     print("  /ahw auratimers on|off — время действия баффов")
     print("  /ahw armsapl — дополнить набор под Arms/Slayer, сборка 69933")
     print("  /ahw wwapl — экспериментальный набор ВВ/Шадо-Пан; /ahw apl — текущий спек")
+    print("  /ahw furyapl — набор Fury/Slayer в разработке (только HUD и экспорт)")
     print("  /ahw preview on|off — иконки, номера и список квадратов")
     print("  /ahw context on|off — дополнительный контекст Arms")
     print("  /ahw compact on|off — компактный / полный вид; после смены обнови экспорт")

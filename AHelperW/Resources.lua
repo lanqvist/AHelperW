@@ -129,9 +129,8 @@ end
 function R.Build(specData)
   EnsureBuilt()
   local layout = ns.HUDLayout()
-  local _, specID = ns.GetSpecData()
   local profile = ns.GetAPLProfile()
-  R.compactArms = layout.compact and specID == 71
+  R.compactArms = layout.compact and profile ~= nil and profile.primary == "rage" and not profile.secondary
   local size = ns.Round(ns.db.size)
   local mini = ns.Round(size * 0.4)
   local miniGap = ns.Round(3)

@@ -9,6 +9,8 @@ docs/arms-apl/build.txt
 docs/arms-apl/decoded-build.json
 docs/windwalker-apl/build.txt
 docs/windwalker-apl/decoded-build.json
+docs/fury-apl/build.txt
+docs/fury-apl/decoded-build.json
 
 # Environments and generated artifacts
 .venv/
