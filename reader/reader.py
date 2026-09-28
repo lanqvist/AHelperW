@@ -124,7 +124,15 @@ class Reader:
             if c['display'].get('timerLayout') != 'split-v1':
                 r['x'] = s['rect']['x']; r['width'] = s['rect']['width']
             self.regions[key + '/timer'] = r
-            self.regions[key + '/stacks'] = s['stackRegion']
+            # Counter digits rise ~2 px above the exported box at 4K (the top of a
+            # 3 was cut and read as a rejected 5). Extend the box upwards by 8% of
+            # the square, never into the timer text above it.
+            stacks = dict(s['stackRegion'])
+            top = max(stacks['y'] - max(2, round(s['rect']['height'] * .08)),
+                      s['timerRegion']['y'] + s['timerRegion']['height'])
+            if top < stacks['y']:
+                stacks['height'] += stacks['y'] - top; stacks['y'] = top
+            self.regions[key + '/stacks'] = stacks
         for key, r in c['resources'].items():
             if key != 'gcd': self.regions['resource/' + key] = r
         for key, r in c['context'].items():
@@ -153,8 +161,10 @@ class Reader:
         self.lock = threading.Lock()
         # Only these counters have a constant, opaque background. Their pixels
         # can be validated independently from the square's changing state colour.
+        # Fingerprints use the exported opaque box, not the OCR region padded
+        # into the state-coloured square, so a colour change keeps the digit.
         self.charge_regions = {
-            key+'/stacks':self.regions[key+'/stacks']
+            key+'/stacks':spec['stackRegion']
             for key,spec in self.square_specs.items()
             if spec['kind']=='spell' and spec.get('charges')
             and c['display'].get('chargeText')=='white-on-black'
@@ -204,7 +214,10 @@ class Reader:
                 self.plan.attempts[key]=now
                 continue
             crop = self.crop(image, region)
-            fingerprint=self.plan.fingerprint(crop,None if key in self.pixel_regions else state,self.hash)
+            # Pixel-validated counters are fingerprinted on the same box the
+            # frame merge checks (the exported opaque box), not the OCR crop.
+            fingerprint=(self.plan.fingerprint(self.crop(image,self.pixel_regions[key]),None,self.hash)
+                         if key in self.pixel_regions else self.plan.fingerprint(crop,state,self.hash))
             reused=self.plan.reuse(key,fingerprint,now)
             if reused is not None:
                 self.plan.attempts[key]=now

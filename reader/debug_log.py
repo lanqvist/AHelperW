@@ -34,10 +34,32 @@ class DebugLog:
             except (OSError, ValueError) as exc:
                 self.error = str(exc)
 
+    def save_stack_sample(self, reader, image, data, numbers, key, spec):
+        count = self.sample_counts.get(key, 0)
+        if count >= 3:
+            return
+        directory = self.path.parent / (self.session + '-crops')
+        name = key.replace(':','-') + f'-rejected-{count+1}'
+        try:
+            directory.mkdir(parents=True, exist_ok=True)
+            reader.crop(image, spec['rect']).save(directory / (name + '-square.png'))
+            reader.crop(image, reader.regions[key+'/stacks']).save(directory / (name + '-stacks.png'))
+            (directory/(name+'.json')).write_text(json.dumps({'profileHash':reader.hash,'capturedAt':data['capturedAt'],
+                'key':key,'rect':spec['rect'],'stackRegion':reader.regions[key+'/stacks'],
+                'color':data['rows'].get(key),'stacks':numbers.get(key+'/stacks')}, ensure_ascii=False, indent=2), encoding='utf-8')
+            self.sample_counts[key] = count+1
+            self.event('debug_crop_saved', key=key, directory=str(directory), sample=name, capturedAt=data['capturedAt'])
+        except OSError as exc:
+            self.event('debug_crop_error', key=key, error=str(exc))
+
     def save_samples(self, reader, image, data, numbers):
         """A few original spell squares, enough to diagnose missing countdowns."""
         for key, _, kind, spec in reader.entries:
+            rejected = (numbers.get(key+'/stacks') or {}).get('reason') == 'rejected'
             if kind != 'spell':
+                # Aura counters: keep a few crops of rejected reads as evidence.
+                if rejected:
+                    self.save_stack_sample(reader, image, data, numbers, key, spec)
                 continue
             counter = bool(spec.get('charges')) and key+'/stacks' in numbers
             countdown = data['rows'][key]['state'] in ('cd','almost') and key+'/timer' in numbers
