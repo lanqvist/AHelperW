@@ -11,7 +11,7 @@ T.statusColors = {
 }
 
 function T.Reset()
-  T.nextScan, T.count, T.pending, T.pendingAt = 0, nil, nil, nil
+  T.nextScan, T.count, T.pending, T.pendingAt, T.lower = 0, nil, nil, nil, nil
   T.reason = "waiting"
 end
 
@@ -45,7 +45,7 @@ function T.Update()
   T.visible, T.unresolved, T.observed = visible, unresolved, count
   -- No visible nearby candidates is not proof that zero enemies exist.
   if unresolved > 0 or count == 0 then
-    T.count, T.pending, T.pendingAt = nil, nil, nil
+    T.count, T.pending, T.pendingAt, T.lower = nil, nil, nil, nil
     T.reason = unknownUnit > 0 and "unit_unknown" or (unknownRange > 0 and "range_unknown"
       or (visible == 0 and "no_nameplates" or "no_melee_observation"))
     return nil
@@ -63,8 +63,13 @@ function T.Update()
     T.delay = previous and count < previous and 0.8 or 0.4
     T.count = nil
   end
-  if now - T.pendingAt >= T.delay then T.count, T.reason = count, "estimate"
-  else T.reason = "stabilizing" end
+  if now - T.pendingAt >= T.delay then T.count, T.reason, T.lower = count, "estimate", nil
+  else
+    -- Lower bound while stabilizing: the smallest count observed since the
+    -- last published estimate. Every observation had no unresolved plates.
+    T.reason = "stabilizing"
+    T.lower = math.min(T.lower or count, count)
+  end
   return T.count
 end
 

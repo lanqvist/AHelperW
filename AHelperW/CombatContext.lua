@@ -330,7 +330,12 @@ function C.Update()
   local targetStatus = autoTargets and (ns.TargetCount.reason or "waiting") or "manual"
   C.cells.targets.statusFlag:SetColorTexture(unpack(ns.TargetCount.statusColors[targetStatus] or ns.TargetCount.statusColors.waiting))
   C.cells.targets.title:SetText(ns.db.compact and (autoTargets and "Ц:АВТ" or "Ц:РУЧ") or (autoTargets and "ЦЕЛИ:~АВТО" or "ЦЕЛИ:РУЧН."))
-  SetCell(C.cells.targets, targets and (not autoTargets and targets == 3 and "3+" or tostring(targets)) or "?", targets and "nores" or "unknown")
+  local lower = autoTargets and not targets and targetStatus == "stabilizing" and ns.TargetCount.lower
+  -- "N+" while stabilizing is a lower bound, kept in the unknown colour so it
+  -- is never read as an exact count; the reader needs the stabilizing flag.
+  local text = targets and (not autoTargets and targets == 3 and "3+" or tostring(targets))
+    or (lower and lower >= 2 and (lower .. "+")) or "?"
+  SetCell(C.cells.targets, text, targets and "nores" or "unknown")
   local fighting = read(UnitAffectingCombat, "player")
   SetCell(C.cells.time, started and string.format("%.1f", GetTime() - started) or (fighting and "?" or "0"), fighting and "nores" or "procoff")
   local inputOK, focus = pcall(function() return GetCurrentKeyBoardFocus() end)

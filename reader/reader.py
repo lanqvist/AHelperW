@@ -282,6 +282,11 @@ class Reader:
             out[key]={'value':value,'raw':raw,'confidence':round(confidence,3),
                       'reason': 'recognized' if value is not None else 'rejected',
                       'preprocess':masks[key], 'variants':[{'method':'mask','raw':raw,'confidence':round(confidence,3)}]}
+            bound=re.fullmatch(r'(\d{1,2})\+',raw) if key=='context/targets' and confidence>=.92 else None
+            if bound and 2<=int(bound.group(1))<=80:
+                # "N+" is a lower bound only while the HUD flag says stabilizing;
+                # the merge step checks the flag and the pixels before using it.
+                out[key]['lowerBound']=int(bound.group(1))
             if value is None and (key.endswith(('/timer','/stacks')) or key.startswith('resource/')
                                   or key in ('context/speed','context/haste','context/time','context/maxrage','context/last')):
                 fallback_keys.append(key)
@@ -704,6 +709,15 @@ class App(tk.Tk):
                                 if cached and source in charge_pixels and not same_observation:
                                     reason='target_count_changed_or_unknown' if source=='context/targets' else 'charge_pixels_changed'
                                 data['numbers'][key]={'value':None,'raw':'','confidence':0.,'reason':reason}
+                            if (source=='context/targets' and cached and cached[0].get('lowerBound')
+                                    and data['rows'].get('context/targetCountStatus',{}).get('state')=='stabilizing'
+                                    and data['rows'].get(source,{}).get('state')=='unknown'
+                                    and cached[0].get('pixelFingerprint')==charge_pixels.get(source)
+                                    and cached[0]['expiresAt']>time.time()):
+                                data['numbers']['context/targetsMin']={
+                                    'value':cached[0]['lowerBound'],'capturedAt':data['capturedAt'],
+                                    'expiresAt':cached[0]['expiresAt'],'pixelValidatedAt':data['capturedAt'],
+                                    'validation':'target_count_pixels','note':'lower bound while stabilizing'}
                         shared['pending']=(data,img,shared['epoch'],dict(shared['versions']))
                     data['timings']['fingerprintAndMergeSeconds']=time.perf_counter()-merge_started
                     frame_ready.set()
@@ -713,10 +727,12 @@ class App(tk.Tk):
                         'sourceStatus':target_status,
                         'sourceLabel':LABELS.get(target_status,'Нет индикатора причины в экспорте'),
                         'value':target_number.get('value'),
+                        'lowerBound':data['numbers'].get('context/targetsMin',{}).get('value'),
                         'ocrReason':target_number.get('reason'),
                         'capturedAt':data['capturedAt'],
                     }
-                    target_signature=(target_status,target_number.get('value'),target_number.get('reason'))
+                    target_signature=(target_status,target_number.get('value'),target_number.get('reason'),
+                                      data['targetCountDiagnostic']['lowerBound'])
                     if target_signature != last_target_diagnostic:
                         self.debug.event('target_count_changed',generation=token,diagnostic=data['targetCountDiagnostic'])
                         last_target_diagnostic=target_signature

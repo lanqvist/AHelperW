@@ -21,10 +21,12 @@ set(2); assert(tick(1.15) == nil)
 set(3); assert(tick(1.30) == nil)
 set(5); assert(tick(1.35) == nil)
 -- 0.4 s from the first enemy, not from the last increase.
+assert(T.lower == 1, "lower bound on a pull is the first count")
 assert(tick(1.41) == 5 and T.reason == "estimate", "rising count must not restart stabilization")
+assert(T.lower == nil, "a published estimate clears the lower bound")
 
 -- A decrease keeps the longer window, measured from the drop.
-set(3); assert(tick(2.00) == nil and T.delay == 0.8)
+set(3); assert(tick(2.00) == nil and T.delay == 0.8 and T.lower == 3)
 assert(tick(2.50) == nil)
 assert(tick(2.81) == 3)
 
@@ -36,3 +38,12 @@ assert(tick(3.41) == 4)
 set(2); tick(4.00)
 set(3); tick(4.10)
 assert(T.pendingAt == 4.10 and tick(4.40) == nil and tick(4.51) == 3)
+
+-- Flicker 5 -> 4 -> 5: the bound keeps the smallest count since the last estimate.
+set(5); tick(6.00); assert(tick(6.41) == 5)
+set(4); assert(tick(7.00) == nil and T.lower == 4)
+set(5); assert(tick(7.20) == nil and T.lower == 4)
+assert(tick(7.61) == 5 and T.lower == nil)
+-- An unresolved observation clears the bound instead of keeping a stale one.
+set(3); tick(8.00); assert(T.lower == 3)
+set(0); assert(tick(8.20) == nil and T.lower == nil)

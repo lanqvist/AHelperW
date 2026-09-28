@@ -270,10 +270,16 @@ class APLRuntime:
         # every possible count yields the same ready action, that is exact.
         if (result.get('status')=='blocked' and result.get('missing')==['context/targets']
                 and not self.settings.get('targets') and self.enemy_values):
+            # A pixel-validated "N+" from the HUD narrows the counts to N and up;
+            # every count above the largest APL threshold behaves like max+1.
+            lower=self.number('context/targetsMin')
+            candidates=self.enemy_values
+            if not isinstance(lower,Unknown):
+                candidates=tuple(v for v in self.enemy_values if v>=lower) or self.enemy_values[-1:]
             saved=self.settings.get('targets')
             try:
                 answers=[]
-                for count in self.enemy_values:
+                for count in candidates:
                     self.settings['targets']=count
                     answers.append(self._decide(data))
             finally:
@@ -281,7 +287,8 @@ class APLRuntime:
             first=answers[0]
             if first.get('status')=='ready' and all(a.get('status')=='ready' and a['action']==first['action']
                                                     and a['binding']==first['binding'] for a in answers):
-                return dict(first,targetsIndependent=list(self.enemy_values))
+                return dict(first,targetsIndependent=list(candidates),
+                            targetsLowerBound=None if isinstance(lower,Unknown) else lower)
         return result
 
     def _decide(self,data):
