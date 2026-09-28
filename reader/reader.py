@@ -429,6 +429,9 @@ class App(tk.Tk):
         self.reader=None; self.latest=None; self.last_good=None; self.last_ocr_good=None; self.photo=None
         bar=ttk.Frame(self); bar.pack(fill='x',padx=8,pady=8)
         ttk.Button(bar,text='Открыть экспорт',command=self.choose).pack(side='left')
+        ttk.Button(bar,text='Вставить из буфера',command=self.paste_export).pack(side='left',padx=(8,0))
+        for sequence in ('<Control-v>','<Control-V>','<Control-Cyrillic_em>','<Control-Cyrillic_EM>'):
+            self.bind(sequence,lambda _event: self.paste_export())
         self.toggle=ttk.Button(bar,text='Начать',command=self.start_stop); self.toggle.pack(side='left',padx=8)
         ttk.Button(bar,text='Назначение клавиш',command=self.open_bindings).pack(side='left',padx=(0,8))
         ttk.Label(bar,text='Переключись в WoW после запуска. OCR: ? означает неизвестно.').pack(side='left')
@@ -473,7 +476,7 @@ class App(tk.Tk):
         if (ROOT/'profile.json').exists():
             self.load(ROOT/'profile.json')
         else:
-            self.status.config(text='Первый запуск: настрой HUD в WoW, выполни /ahw export и нажми «Открыть экспорт».')
+            self.status.config(text='Первый запуск: в WoW /ahw export, Ctrl+C, затем здесь «Вставить из буфера» (или Ctrl+V).')
             self.apl_status.config(text='После импорта назначь клавиши. Чтение и автонажатия сейчас выключены. F8 — остановить.')
         self.after(100,self.poll)
 
@@ -544,6 +547,42 @@ class App(tk.Tk):
             self.debug.event('profile_outdated',reason='castReceipt v1: HUD geometry predates the 8-row journal')
             self.apl_status.config(text='Экспорт сделан старой версией HUD: геометрия устарела. '
                                         'В игре на этом спеке: /ahw export и загрузи новый экспорт.')
+
+    def paste_export(self):
+        """Import the text copied from the in-game /ahw export window."""
+        try:
+            text=self.clipboard_get().strip()
+        except tk.TclError:
+            messagebox.showerror('Экспорт','Буфер обмена пуст. В WoW: /ahw export, затем Ctrl+C.',parent=self); return
+        try:
+            cfg=json.loads(text)
+        except ValueError:
+            cfg=None
+        if not isinstance(cfg,dict) or cfg.get('schema')!='AHelperW.HUD':
+            messagebox.showerror('Экспорт','В буфере не экспорт AHelperW. В WoW: /ahw export, затем Ctrl+C '
+                                 '(весь текст окна).',parent=self); return
+        spec=cfg.get('specID')
+        target=ROOT/(f'profile-spec-{spec}.json' if spec in PROFILES else 'profile.clipboard.json')
+        temporary=target.with_suffix('.import.tmp')
+        try:
+            temporary.write_text(text,encoding='utf-8')
+            Reader(temporary)  # validate before replacing anything
+        except Exception as exc:
+            temporary.unlink(missing_ok=True)
+            self.debug.event('profile_error',path='clipboard',error=str(exc),traceback=traceback.format_exc())
+            messagebox.showerror('Экспорт',str(exc),parent=self); return
+        try:
+            if target.exists(): shutil.copyfile(target,target.with_suffix('.previous.json'))
+            os.replace(temporary,target)
+            # Also the startup profile, so the reader reopens with this export.
+            startup=ROOT/'profile.json'
+            if startup.exists(): shutil.copyfile(startup,ROOT/'profile.previous.json')
+            startup_tmp=ROOT/'profile.import.tmp'
+            shutil.copyfile(target,startup_tmp); os.replace(startup_tmp,startup)
+        except OSError as exc:
+            messagebox.showerror('Экспорт','Не удалось сохранить профиль: '+str(exc),parent=self); return
+        self.debug.event('profile_pasted',specID=spec,path=str(target))
+        self.load(target)
 
     def choose(self):
         path=filedialog.askopenfilename(filetypes=[('Экспорт','*.json *.txt'),('Все файлы','*.*')])
