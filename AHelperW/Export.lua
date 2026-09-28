@@ -45,6 +45,25 @@ local function Rect(region, includeHidden)
     width = math.floor(width * sx + 0.5), height = math.floor(height * sy + 0.5) }
 end
 
+-- Everything that moves or resizes HUD elements. A stored export whose key
+-- differs from the current one describes an older layout.
+function ns.HUDLayoutKey()
+  local db, pos = ns.db, ns.db.pos or {}
+  local w, h = GetPhysicalScreenSize()
+  return table.concat({ tostring(db.compact), tostring(db.perRow), tostring(db.size), tostring(db.gap),
+    tostring(db.scale), tostring(db.dock), tostring(pos.point), tostring(pos.relPoint), tostring(pos.x), tostring(pos.y),
+    tostring(db.style), tostring(db.preview), tostring(db.context), tostring(UIParent:GetEffectiveScale()), w .. "x" .. h }, "|")
+end
+
+-- Keep the latest export per specialization. WoW writes SavedVariables on
+-- /reload, logout or exit; the reader then picks the newest one up.
+function ns.StoreHUDExport(spec, text)
+  ns.db.hudExports = ns.db.hudExports or {}
+  local key = ns.HUDLayoutKey()
+  ns.db.hudExports[spec] = { text = text, at = time(), layout = key }
+  for _, item in pairs(ns.db.hudExports) do item.stale = item.layout ~= key or nil end
+end
+
 function ns.MakeHUDExport()
   if InCombatLockdown() then return nil, "Экспорт доступен вне боя." end
   local version, build, _, interface = GetBuildInfo()
@@ -142,11 +161,15 @@ function ns.MakeHUDExport()
     end
   end
   result.potionID = ns.db.potionID
+  if #result.squares == 0 then
+    return nil, "HUD скрыт: нет видимых квадратов для экспорта."
+  end
   if ns.exportSecretRegion then
     return nil, "Часть HUD сейчас скрыта клиентом (secret-размеры). Сними цель и повтори экспорт."
   end
   local text = JSON(result)
   ns.db.lastHUDExport = text
+  ns.StoreHUDExport(spec, text)
   return text
 end
 

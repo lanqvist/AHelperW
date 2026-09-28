@@ -7,6 +7,7 @@ local forbidden = { secret = true }
 function issecretvalue(v) return type(v) == "table" and rawget(v, "secret") == true end
 function wipe(t) for k in pairs(t) do t[k] = nil end end
 function GetTime() return now end
+time = os.time
 function InCombatLockdown() return combat end
 function UnitAffectingCombat() return combat end
 function UnitExists() return target end
@@ -192,6 +193,12 @@ assert(C.cells.last.value.text == "—" and C.forecasts.fight == nil)
 assert(C.targets == nil, "manual target count must reset after combat")
 loadAddon("Export")
 HUD_EXPORT = assert(ns.MakeHUDExport())
+local stored = ns.db.hudExports[specID]
+assert(stored and stored.text == HUD_EXPORT and stored.at and not stored.stale, "export must be stored per spec")
+local savedScale = ns.db.scale; ns.db.scale = (savedScale or 1) + 1
+ns.StoreHUDExport(999, "{}")
+assert(ns.db.hudExports[specID].stale and not ns.db.hudExports[999].stale, "a layout change marks older exports stale")
+ns.db.scale = savedScale; ns.db.hudExports[999] = nil
 C.cells.targets.GetRect = function() return forbidden, 1, 1, 1 end
 local refused, why = ns.MakeHUDExport()
 assert(refused == nil and why:find("secret", 1, true), "secret geometry must refuse the export, not error")

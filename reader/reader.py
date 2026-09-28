@@ -28,6 +28,7 @@ from spec_profiles import create_apl, PROFILES
 from input_sender import Executor, stop_pressed
 from capture_backend import HudCapture
 from cast_receipt import decode as decode_cast_receipt
+import saved_exports
 
 ASSETS = Path(__file__).resolve().parent
 PACKAGED = bool(getattr(sys, 'frozen', False))
@@ -69,6 +70,10 @@ LABELS.update(estimate='Автооценка получена',manual='Ручн�
               range_unknown='Дистанция соседних целей неизвестна',unit_unknown='Данные соседних целей недоступны',
               waiting='Ожидание первого подсчёта')
 
+# Game folders seen via the focused WoW process; used to find SavedVariables.
+WOW_DIRS = set()
+
+
 def game_origin(screen):
     hwnd = U.GetForegroundWindow()
     pid = wt.DWORD()
@@ -82,6 +87,7 @@ def game_origin(screen):
             raise ValueError('Не удалось определить активное приложение')
         if Path(buf.value).name.lower() not in ('wow.exe', 'wowt.exe', 'wowb.exe'):
             raise ValueError('Пауза: WoW не в фокусе')
+        WOW_DIRS.add(str(Path(buf.value).parent))
     finally:
         K.CloseHandle(handle)
     rect, point = wt.RECT(), wt.POINT()
@@ -479,6 +485,9 @@ class App(tk.Tk):
             self.status.config(text='Первый запуск: в WoW /ahw export, Ctrl+C, затем здесь «Вставить из буфера» (или Ctrl+V).')
             self.apl_status.config(text='После импорта назначь клавиши. Чтение и автонажатия сейчас выключены. F8 — остановить.')
         self.after(100,self.poll)
+        # Exports the addon stores in SavedVariables on /reload or logout.
+        self.saved_mtimes={}; self.pending_export=None
+        self.after(700,self.watch_saved_exports)
 
     def load(self,path):
         try: reader=Reader(path)
@@ -583,6 +592,66 @@ class App(tk.Tk):
             messagebox.showerror('Экспорт','Не удалось сохранить профиль: '+str(exc),parent=self); return
         self.debug.event('profile_pasted',specID=spec,path=str(target))
         self.load(target)
+
+    def watch_saved_exports(self):
+        try:
+            self.sync_saved_exports()
+        except Exception as exc:
+            self.debug.event('auto_export_error',error=str(exc),traceback=traceback.format_exc())
+        self.after(2000,self.watch_saved_exports)
+
+    def sync_saved_exports(self):
+        """Import newer per-spec exports from the addon's SavedVariables (read-only)
+        and switch to the newest one, never in the middle of reading."""
+        extra=list(WOW_DIRS)+([self.reader.pipeline.get('wowRetailDir')] if self.reader else [])
+        files=saved_exports.candidate_files(extra)
+        mtimes={str(p):p.stat().st_mtime for p in files if p.exists()}
+        if mtimes==self.saved_mtimes and not (self.pending_export and not self.running):
+            return
+        self.saved_mtimes=mtimes
+        exports=[e for e in saved_exports.read_exports(files) if e['specID'] in PROFILES]
+        newest={}
+        for item in exports:
+            if item['specID'] not in newest or item['at']>newest[item['specID']]['at']:
+                newest[item['specID']]=item
+        for spec,item in newest.items():
+            if item['stale']:
+                continue
+            target=ROOT/f'profile-spec-{spec}.json'
+            if target.exists() and (item['at']<=target.stat().st_mtime
+                                    or target.read_text(encoding='utf-8-sig').strip()==item['text'].strip()):
+                continue
+            temporary=target.with_suffix('.import.tmp')
+            try:
+                temporary.write_text(item['text'],encoding='utf-8'); Reader(temporary)
+                if target.exists(): shutil.copyfile(target,target.with_suffix('.previous.json'))
+                os.replace(temporary,target)
+                self.debug.event('auto_export_imported',specID=spec,exportedAt=item['at'],source=item['source'])
+            except Exception as exc:
+                temporary.unlink(missing_ok=True)
+                self.debug.event('auto_export_error',specID=spec,error=str(exc))
+        fresh=[i for i in newest.values() if not i['stale']]
+        if not fresh:
+            return
+        latest=max(fresh,key=lambda i:i['at'])
+        startup=ROOT/'profile.json'
+        if startup.exists() and latest['at']<=startup.stat().st_mtime:
+            self.pending_export=None
+            return
+        if self.reader and json.loads(latest['text'])==self.reader.cfg:
+            return
+        if self.running:
+            self.pending_export=latest['specID']
+            self.apl_status.config(text=f'Из WoW получен новый экспорт {PROFILES[latest["specID"]].name}; '
+                                        'применится после остановки чтения.')
+            return
+        self.pending_export=None
+        target=ROOT/f'profile-spec-{latest["specID"]}.json'
+        if startup.exists(): shutil.copyfile(startup,ROOT/'profile.previous.json')
+        startup_tmp=ROOT/'profile.import.tmp'; shutil.copyfile(target,startup_tmp); os.replace(startup_tmp,startup)
+        self.debug.event('auto_export_loaded',specID=latest['specID'],exportedAt=latest['at'])
+        self.load(target)
+        self.status.config(text=f'Автоимпорт из WoW: {PROFILES[latest["specID"]].name} (после /reload или выхода персонажа).')
 
     def choose(self):
         path=filedialog.askopenfilename(filetypes=[('Экспорт','*.json *.txt'),('Все файлы','*.*')])

@@ -55,8 +55,15 @@ ns.Rebuild = Rebuild
 
 local ev = CreateFrame("Frame")
 ev:RegisterEvent("PLAYER_LOGIN")
+-- Fires on /reload and logout before SavedVariables are written: refresh this
+-- spec's export so the reader can import it without /ahw export.
+ev:RegisterEvent("PLAYER_LOGOUT")
 
 ev:SetScript("OnEvent", function(_, event, ...)
+  if event == "PLAYER_LOGOUT" then
+    if ns.db and ns.frame and not InCombatLockdown() and ns.GetAPLProfile() then pcall(ns.MakeHUDExport) end
+    return
+  end
   if event == "PLAYER_LOGIN" then
     InitDB()
     ns.CreateMainFrame()
