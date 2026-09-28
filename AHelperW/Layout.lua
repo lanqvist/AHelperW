@@ -18,6 +18,7 @@ function ns.SetCompact(enabled)
   end
   ns.db.compact = enabled
   ns.db.lastHUDExport = nil
+  if ns.ScheduleAutoExport then ns.ScheduleAutoExport(2) end
   ns.ResetProcContainers()
   ns.Rebuild()
   print("AHelperW: " .. (enabled and "компактный" or "полный") .. " вид; останови ридер и обнови /ahw export.")
@@ -48,6 +49,7 @@ function ns.SavePosition(frame)
   ns.db.pos = { point = point, relPoint = relPoint, x = x, y = y }
   ns.db.dock = "free"
   ns.db.lastHUDExport = nil
+  if ns.ScheduleAutoExport then ns.ScheduleAutoExport(2) end
   if ns.RefreshPreview then ns.RefreshPreview() end
 end
 
@@ -102,6 +104,7 @@ function ns.SetDock(mode)
   ns.db.dock = mode
   ns.RestorePosition()
   ns.db.lastHUDExport = nil
+  if ns.ScheduleAutoExport then ns.ScheduleAutoExport(2) end
   if ns.RefreshPreview then ns.RefreshPreview() end
 end
 
@@ -117,6 +120,7 @@ function ns.ApplyScale()
   if ns.frame then
     ns.frame:SetScale(ns.db.scale)
     ns.db.lastHUDExport = nil
+    if ns.ScheduleAutoExport then ns.ScheduleAutoExport(2) end
     if ns.RefreshPreview then ns.RefreshPreview() end
   end
 end

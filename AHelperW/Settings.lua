@@ -85,12 +85,14 @@ local function Build()
   window.icons = Button(window, "", 16, 150, 198, function()
     ns.db.style = ns.db.style == "mix" and "color" or "mix"
     ns.db.lastHUDExport = nil
+    if ns.ScheduleAutoExport then ns.ScheduleAutoExport(2) end
     ns.ResetProcContainers()
     ns.Rebuild()
   end)
   window.preview = Button(window, "", 226, 150, 198, function()
     ns.db.preview = not ns.db.preview
     ns.db.lastHUDExport = nil
+    if ns.ScheduleAutoExport then ns.ScheduleAutoExport(2) end
     ns.ResetProcContainers()
     ns.Rebuild()
   end)

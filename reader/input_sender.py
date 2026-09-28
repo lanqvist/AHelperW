@@ -85,6 +85,10 @@ class Executor:
     def __init__(self,apl,debug):
         self.apl=apl; self.debug=debug; self.pending=None; self.last_send=0
         self.cast_observer=CastObserver(debug)
+        bindings=getattr(apl,'bindings',{}) or {}
+        self.cast_observer.pressable={cast for (kind,spell),(_,spec) in getattr(apl,'squares',{}).items()
+                                      if kind=='spell' and bindings.get(str(spell))
+                                      for cast in (spec.get('castSpellIDs') or [spell])}
         self.gcd_timing=GcdTiming(debug)
         self.receipt_pending=None
         self.failure_reason=None

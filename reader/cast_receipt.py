@@ -44,12 +44,16 @@ class CastObserver:
         self.waiting = []
         self.status = None
         self.recent = []
+        # Casts of bound HUD buttons; automatic events (Bladestorm ticks, Unhinged
+        # Bloodbath) are not evidence about a key.
+        self.pressable = None
 
     def unexpected_after(self, sent_at, expected, window=.8):
         """First other spell cast just after a press: a hint that the key is bound
         to a different action in the game. Nearby procs can also appear here."""
         return next((spell for spell, at in self.recent
-                     if sent_at < at <= sent_at + window and spell not in expected), None)
+                     if sent_at < at <= sent_at + window and spell not in expected
+                     and (self.pressable is None or spell in self.pressable)), None)
 
     def pause(self):
         for item in self.waiting:

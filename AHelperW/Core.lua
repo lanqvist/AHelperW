@@ -50,6 +50,7 @@ local function Rebuild()
   ns.Resources.RefreshGCD()
   ns.RefreshTargetContainers()
   ns.RefreshPreview()
+  ns.ScheduleAutoExport(2)
 end
 ns.Rebuild = Rebuild
 
@@ -105,6 +106,7 @@ ev:SetScript("OnEvent", function(_, event, ...)
     ns.RefreshTargetContainers()
     ns.Resources.Update()
   elseif event == "PLAYER_REGEN_ENABLED" then
+    if ns.autoExportAfterCombat then ns.autoExportAfterCombat = nil; ns.ScheduleAutoExport(2) end
     if ns.pendingRebuild then
       ns.pendingRebuild = nil
       Rebuild()

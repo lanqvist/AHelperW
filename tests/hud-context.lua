@@ -214,7 +214,8 @@ function UnitPower() return 71 end
 function UnitPowerType() return 1 end
 Enum.PowerType.Mana = 0
 local ticker
-C_Timer = { NewTicker = function(_, fn) ticker = fn end }
+local afterFns = {}
+C_Timer = { NewTicker = function(_, fn) ticker = fn end, After = function(_, fn) afterFns[#afterFns + 1] = fn end }
 ns.CreateMainFrame = function() return ns.frame end
 ns.PixelMult = function() return 1 end
 ns.ApplyScale, ns.InitMinimapButton, ns.RefreshPreview = noop, noop, noop
@@ -226,6 +227,10 @@ local core = frames[#frames]
 core.scripts.OnEvent(core, "PLAYER_LOGIN")
 assert(ns.db.stable and ns.db.context)
 assert(finalResourceHeight > 150 and ticker, "context must contribute to Core layout and ticker")
+ns.db.hudExports = nil
+assert(#afterFns >= 1, "a rebuild must schedule an automatic export")
+afterFns[1]()
+assert(ns.db.autoExportStatus and ns.db.hudExports and ns.db.hudExports[specID], "scheduled export must be stored for the spec")
 local frameCount = #frames
 ticker(); ticker()
 assert(#frames == frameCount, "polling must not allocate frames")

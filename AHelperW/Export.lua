@@ -64,6 +64,28 @@ function ns.StoreHUDExport(spec, text)
   for _, item in pairs(ns.db.hudExports) do item.stale = item.layout ~= key or nil end
 end
 
+-- Export while the HUD is on screen (a few seconds after a rebuild or layout
+-- change); the stored copy reaches disk on /reload or logout. At PLAYER_LOGOUT
+-- the UI may already be hidden, so that attempt alone is not enough.
+local autoPending, autoTries = false, 0
+function ns.ScheduleAutoExport(delay)
+  if autoPending or not C_Timer or not C_Timer.After then return end
+  autoPending = true
+  C_Timer.After(delay or 2, function()
+    autoPending = false
+    if not ns.db or not ns.GetAPLProfile() then return end
+    if InCombatLockdown() then ns.autoExportAfterCombat = true; return end
+    local ok, text, err = pcall(ns.MakeHUDExport)
+    if not ok then text, err = nil, tostring(text) end
+    ns.db.autoExportStatus = { at = time(), ok = text ~= nil, error = err }
+    if text then autoTries = 0
+    else
+      autoTries = autoTries + 1
+      if autoTries <= 12 then ns.ScheduleAutoExport(5) end
+    end
+  end)
+end
+
 function ns.MakeHUDExport()
   if InCombatLockdown() then return nil, "Экспорт доступен вне боя." end
   local version, build, _, interface = GetBuildInfo()
