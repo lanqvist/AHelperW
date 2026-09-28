@@ -1,0 +1,564 @@
+{
+  "specId": 72,
+  "source": {
+    "commit": "4c7c73621e596419b5bd6faa5d68940a9c640379",
+    "retrieved": "2026-09-28",
+    "url": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/class_modules/apl/apl_warrior.cpp",
+    "sharedSource": "../arms-apl/apl_warrior.cpp",
+    "traitTable": "../arms-apl/warrior-traits.json",
+    "idReference": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/class_modules/sc_warrior.cpp",
+    "clientBuild": "12.1.0.69933"
+  },
+  "scope": "all-fury-branches-unmodified",
+  "actions": [
+    {
+      "list": "precombat",
+      "expression": "snapshot_stats"
+    },
+    {
+      "list": "precombat",
+      "expression": "berserker_stance,toggle=on"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_1_exclude,value=trinket.1.is.algethar_puzzle_box"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_2_exclude,value=trinket.2.is.algethar_puzzle_box"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_1_buffs,value=trinket.1.has_use_buff"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_2_buffs,value=trinket.2.has_use_buff"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_1_duration,op=setif,value=0,value_else=trinket.1.proc.any_dps.duration,condition=0"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_2_duration,op=setif,value=0,value_else=trinket.2.proc.any_dps.duration,condition=0"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_1_high_value,op=setif,value=2,value_else=1,condition=trinket.1.is.treacherous_transmitter"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_2_high_value,op=setif,value=2,value_else=1,condition=trinket.2.is.treacherous_transmitter"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_1_sync,op=setif,value=1,value_else=0.5,condition=variable.trinket_1_buffs&talent.recklessness&trinket.1.cooldown.duration%%cooldown.recklessness.duration=0"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_2_sync,op=setif,value=1,value_else=0.5,condition=variable.trinket_2_buffs&talent.recklessness&trinket.2.cooldown.duration%%cooldown.recklessness.duration=0"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_priority,op=setif,value=2,value_else=1,condition=!variable.trinket_1_buffs&variable.trinket_2_buffs&(trinket.2.has_cooldown|!trinket.1.has_cooldown)|variable.trinket_2_buffs&((trinket.2.cooldown.duration%variable.trinket_2_duration)*(1.5+trinket.2.has_buff.strength)*(variable.trinket_2_sync)*(variable.trinket_2_high_value)*(1+((trinket.2.ilvl-trinket.1.ilvl)%100)))>((trinket.1.cooldown.duration%variable.trinket_1_duration)*(1.5+trinket.1.has_buff.strength)*(variable.trinket_1_sync)*(variable.trinket_1_high_value)*(1+((trinket.1.ilvl-trinket.2.ilvl)%100)))"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=damage_trinket_priority,op=setif,value=2,value_else=1,condition=!variable.trinket_1_buffs&!variable.trinket_2_buffs&trinket.2.ilvl>=trinket.1.ilvl"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_1_manual,value=trinket.1.is.algethar_puzzle_box"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_1_manual,value=trinket.2.is.algethar_puzzle_box"
+    },
+    {
+      "list": "default_",
+      "expression": "auto_attack"
+    },
+    {
+      "list": "default_",
+      "expression": "charge,if=time<=0.5|movement.distance>5"
+    },
+    {
+      "list": "default_",
+      "expression": "heroic_leap,if=(raid_event.movement.distance>25&raid_event.movement.in>45)"
+    },
+    {
+      "list": "default_",
+      "expression": "potion,if=target.time_to_die>300|buff.recklessness.up|target.time_to_die<25"
+    },
+    {
+      "list": "default_",
+      "expression": "pummel,if=target.debuff.casting.react"
+    },
+    {
+      "list": "default_",
+      "expression": "call_action_list,name=trinkets"
+    },
+    {
+      "list": "default_",
+      "expression": "call_action_list,name=variables"
+    },
+    {
+      "list": "default_",
+      "expression": "lights_judgment,if=variable.on_gcd_racials"
+    },
+    {
+      "list": "default_",
+      "expression": "bag_of_tricks,if=variable.on_gcd_racials"
+    },
+    {
+      "list": "default_",
+      "expression": "berserking,if=buff.recklessness.up"
+    },
+    {
+      "list": "default_",
+      "expression": "blood_fury"
+    },
+    {
+      "list": "default_",
+      "expression": "fireblood"
+    },
+    {
+      "list": "default_",
+      "expression": "ancestral_call"
+    },
+    {
+      "list": "default_",
+      "expression": "invoke_external_buff,name=power_infusion,if=buff.recklessness.remains>15&fight_remains>=135|variable.execute_phase&buff.recklessness.up|fight_remains<=25"
+    },
+    {
+      "list": "default_",
+      "expression": "run_action_list,name=slayer,if=talent.slayers_dominance&active_enemies=1"
+    },
+    {
+      "list": "default_",
+      "expression": "run_action_list,name=slayer_aoe,if=talent.slayers_dominance&active_enemies>1"
+    },
+    {
+      "list": "default_",
+      "expression": "run_action_list,name=thane,if=talent.lightning_strikes&active_enemies=1"
+    },
+    {
+      "list": "default_",
+      "expression": "run_action_list,name=thane_aoe,if=talent.lightning_strikes&active_enemies>1"
+    },
+    {
+      "list": "slayer",
+      "expression": "recklessness"
+    },
+    {
+      "list": "slayer",
+      "expression": "rampage,if=buff.enrage.remains<gcd"
+    },
+    {
+      "list": "slayer",
+      "expression": "rampage,if=buff.recklessness.up&rage>=100"
+    },
+    {
+      "list": "slayer",
+      "expression": "rampage,if=buff.recklessness.up&cooldown.bladestorm.ready"
+    },
+    {
+      "list": "slayer",
+      "expression": "bladestorm,if=buff.recklessness.up|target.time_to_die<=5"
+    },
+    {
+      "list": "slayer",
+      "expression": "execute,if=buff.recklessness.up&buff.sudden_death.up"
+    },
+    {
+      "list": "slayer",
+      "expression": "rampage,if=buff.recklessness.up&!buff.hack_and_slash.up"
+    },
+    {
+      "list": "slayer",
+      "expression": "crushing_blow"
+    },
+    {
+      "list": "slayer",
+      "expression": "odyns_fury,if=buff.recklessness.up"
+    },
+    {
+      "list": "slayer",
+      "expression": "execute,if=buff.recklessness.up"
+    },
+    {
+      "list": "slayer",
+      "expression": "bloodbath"
+    },
+    {
+      "list": "slayer",
+      "expression": "odyns_fury,if=buff.recklessness.up"
+    },
+    {
+      "list": "slayer",
+      "expression": "rampage,if=rage>100"
+    },
+    {
+      "list": "slayer",
+      "expression": "execute"
+    },
+    {
+      "list": "slayer",
+      "expression": "execute,if=buff.sudden_death.up"
+    },
+    {
+      "list": "slayer",
+      "expression": "odyns_fury"
+    },
+    {
+      "list": "slayer",
+      "expression": "execute"
+    },
+    {
+      "list": "slayer",
+      "expression": "raging_blow"
+    },
+    {
+      "list": "slayer",
+      "expression": "rampage"
+    },
+    {
+      "list": "slayer",
+      "expression": "bloodthirst"
+    },
+    {
+      "list": "slayer",
+      "expression": "whirlwind"
+    },
+    {
+      "list": "slayer",
+      "expression": "storm_bolt,if=buff.bladestorm.up"
+    },
+    {
+      "list": "slayer_aoe",
+      "expression": "whirlwind,if=talent.improved_whirlwind&buff.whirlwind.stack=0"
+    },
+    {
+      "list": "slayer_aoe",
+      "expression": "recklessness"
+    },
+    {
+      "list": "slayer_aoe",
+      "expression": "avatar"
+    },
+    {
+      "list": "slayer_aoe",
+      "expression": "rampage"
+    },
+    {
+      "list": "slayer_aoe",
+      "expression": "bladestorm,if=buff.recklessness.up|target.time_to_die<=5"
+    },
+    {
+      "list": "slayer_aoe",
+      "expression": "execute,if=buff.sudden_death.up"
+    },
+    {
+      "list": "slayer_aoe",
+      "expression": "odyns_fury"
+    },
+    {
+      "list": "slayer_aoe",
+      "expression": "crushing_blow"
+    },
+    {
+      "list": "slayer_aoe",
+      "expression": "bloodbath"
+    },
+    {
+      "list": "slayer_aoe",
+      "expression": "execute"
+    },
+    {
+      "list": "slayer_aoe",
+      "expression": "raging_blow"
+    },
+    {
+      "list": "slayer_aoe",
+      "expression": "bloodthirst"
+    },
+    {
+      "list": "slayer_aoe",
+      "expression": "whirlwind"
+    },
+    {
+      "list": "slayer_aoe",
+      "expression": "storm_bolt,if=buff.bladestorm.up"
+    },
+    {
+      "list": "thane",
+      "expression": "recklessness"
+    },
+    {
+      "list": "thane",
+      "expression": "avatar"
+    },
+    {
+      "list": "thane",
+      "expression": "rampage,if=buff.enrage.remains<gcd|rage>=100"
+    },
+    {
+      "list": "thane",
+      "expression": "bloodbath,if=buff.recklessness.up&buff.fury_mid2_4pc_crit.stack<2"
+    },
+    {
+      "list": "thane",
+      "expression": "thunder_blast,if=buff.thunder_blast.stack=2|buff.avatar.remains<2|buff.thunder_blast.remains<2"
+    },
+    {
+      "list": "thane",
+      "expression": "crushing_blow,if=buff.hack_and_slash.up"
+    },
+    {
+      "list": "thane",
+      "expression": "bloodbath"
+    },
+    {
+      "list": "thane",
+      "expression": "rampage,if=buff.recklessness.up"
+    },
+    {
+      "list": "thane",
+      "expression": "thunder_blast,if=buff.avatar.up"
+    },
+    {
+      "list": "thane",
+      "expression": "crushing_blow"
+    },
+    {
+      "list": "thane",
+      "expression": "raging_blow,if=buff.hack_and_slash.up"
+    },
+    {
+      "list": "thane",
+      "expression": "thunder_blast"
+    },
+    {
+      "list": "thane",
+      "expression": "rampage"
+    },
+    {
+      "list": "thane",
+      "expression": "bloodthirst"
+    },
+    {
+      "list": "thane",
+      "expression": "execute,if=talent.deep_wounds"
+    },
+    {
+      "list": "thane",
+      "expression": "raging_blow"
+    },
+    {
+      "list": "thane",
+      "expression": "odyns_fury"
+    },
+    {
+      "list": "thane",
+      "expression": "thunder_clap,if=buff.avatar.up&!talent.wrath_and_fury"
+    },
+    {
+      "list": "thane",
+      "expression": "execute"
+    },
+    {
+      "list": "thane",
+      "expression": "thunder_clap"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "odyns_fury"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "recklessness"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "avatar"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "rampage,if=!buff.enrage.up"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "thunder_blast"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "thunder_blast,if=buff.thunder_blast.stack=2"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "thunder_blast,if=buff.avatar.up"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "thunder_clap,if=talent.improved_whirlwind&buff.whirlwind.stack=0|(buff.avatar.up&active_enemies>6)"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "rampage,if=buff.enrage.remains<gcd|rage>=100"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "bloodbath"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "crushing_blow,if=buff.hack_and_slash.up"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "rampage,if=buff.recklessness.up"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "thunder_clap,if=buff.avatar.up"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "crushing_blow"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "bloodthirst"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "thunder_blast"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "raging_blow,if=buff.hack_and_slash.up"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "execute"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "rampage"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "thunder_clap"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "raging_blow"
+    },
+    {
+      "list": "thane_aoe",
+      "expression": "whirlwind"
+    },
+    {
+      "list": "trinkets",
+      "expression": "use_item,name=algethar_puzzle_box,if=cooldown.recklessness.remains<2"
+    },
+    {
+      "list": "trinkets",
+      "expression": "use_item,slot=trinket1,if=variable.trinket_1_buffs&(variable.trinket_priority=1|!variable.trinket_2_buffs|!trinket.2.has_cooldown)&(buff.recklessness.up)"
+    },
+    {
+      "list": "trinkets",
+      "expression": "use_item,slot=trinket2,if=variable.trinket_2_buffs&(variable.trinket_priority=2|!variable.trinket_1_buffs|!trinket.1.has_cooldown)&(buff.recklessness.up)"
+    },
+    {
+      "list": "trinkets",
+      "expression": "use_item,slot=trinket1,if=!variable.trinket_1_buffs&(variable.damage_trinket_priority=1|!variable.trinket_2_buffs|!trinket.2.has_cooldown)"
+    },
+    {
+      "list": "trinkets",
+      "expression": "use_item,slot=trinket2,if=!variable.trinket_2_buffs&(variable.damage_trinket_priority=2|!variable.trinket_1_buffs|!trinket.1.has_cooldown)"
+    },
+    {
+      "list": "variables",
+      "expression": "variable,name=st_planning,value=active_enemies=1&(raid_event.adds.in>15|!raid_event.adds.exists)"
+    },
+    {
+      "list": "variables",
+      "expression": "variable,name=adds_remain,value=active_enemies>=2&(!raid_event.adds.exists|raid_event.adds.exists&raid_event.adds.remains>5)"
+    },
+    {
+      "list": "variables",
+      "expression": "variable,name=execute_phase,value=(talent.massacre.enabled&target.health.pct<35)|target.health.pct<20"
+    },
+    {
+      "list": "variables",
+      "expression": "variable,name=on_gcd_racials,value=buff.recklessness.down&buff.recklessness.down&rage<80&buff.sudden_death.down&!cooldown.bladestorm.ready&(!cooldown.execute.ready|!variable.execute_phase)"
+    }
+  ],
+  "references": [
+    "buff.avatar.remains",
+    "buff.avatar.up",
+    "buff.bladestorm.up",
+    "buff.enrage.remains",
+    "buff.enrage.up",
+    "buff.fury_mid2_4pc_crit.stack",
+    "buff.hack_and_slash.up",
+    "buff.recklessness.down",
+    "buff.recklessness.remains",
+    "buff.recklessness.up",
+    "buff.sudden_death.down",
+    "buff.sudden_death.up",
+    "buff.thunder_blast.remains",
+    "buff.thunder_blast.stack",
+    "buff.whirlwind.stack",
+    "cooldown.bladestorm.ready",
+    "cooldown.execute.ready",
+    "cooldown.recklessness.duration",
+    "cooldown.recklessness.remains",
+    "movement.distance",
+    "raid_event.adds.exists",
+    "raid_event.adds.in",
+    "raid_event.adds.remains",
+    "raid_event.movement.distance",
+    "raid_event.movement.in",
+    "talent.deep_wounds",
+    "talent.improved_whirlwind",
+    "talent.lightning_strikes",
+    "talent.massacre.enabled",
+    "talent.recklessness",
+    "talent.slayers_dominance",
+    "talent.wrath_and_fury",
+    "target.debuff.casting.react",
+    "target.health.pct",
+    "target.time_to_die",
+    "trinket.1.cooldown.duration",
+    "trinket.1.has_buff.strength",
+    "trinket.1.has_cooldown",
+    "trinket.1.has_use_buff",
+    "trinket.1.ilvl",
+    "trinket.1.is.algethar_puzzle_box",
+    "trinket.1.is.treacherous_transmitter",
+    "trinket.1.proc.any_dps.duration",
+    "trinket.2.cooldown.duration",
+    "trinket.2.has_buff.strength",
+    "trinket.2.has_cooldown",
+    "trinket.2.has_use_buff",
+    "trinket.2.ilvl",
+    "trinket.2.is.algethar_puzzle_box",
+    "trinket.2.is.treacherous_transmitter",
+    "trinket.2.proc.any_dps.duration",
+    "variable.damage_trinket_priority",
+    "variable.execute_phase",
+    "variable.on_gcd_racials",
+    "variable.trinket_1_buffs",
+    "variable.trinket_1_duration",
+    "variable.trinket_1_high_value",
+    "variable.trinket_1_sync",
+    "variable.trinket_2_buffs",
+    "variable.trinket_2_duration",
+    "variable.trinket_2_high_value",
+    "variable.trinket_2_sync",
+    "variable.trinket_priority"
+  ]
+}
