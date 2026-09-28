@@ -50,7 +50,14 @@ function T.Update()
       or (visible == 0 and "no_nameplates" or "no_melee_observation"))
     return nil
   end
-  if count ~= T.pending then
+  -- Enemies enter melee one by one on a pull (1, 2, ... 5). A further rise
+  -- during a rising stabilization keeps its start, so the window is 0.4 s from
+  -- the first new enemy instead of restarting per enemy; the latest count is
+  -- published. A drop still restarts the (longer) decrease window.
+  local rising = T.count == nil and T.pending ~= nil and T.delay == 0.4 and count > T.pending
+  if rising then
+    T.pending = count
+  elseif count ~= T.pending then
     local previous = T.count
     T.pending, T.pendingAt = count, now
     T.delay = previous and count < previous and 0.8 or 0.4

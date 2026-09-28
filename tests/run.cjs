@@ -30,4 +30,10 @@ for (const spec of specs) {
     throw new Error(`Invalid export for spec ${spec.specID}`);
   }
 }
-console.log(`Lua 5.1 syntax and exported JSON schema checked for specs ${specs.map(s => s.specID).join(', ')}`);
+{
+  const L = lauxlib.luaL_newstate();
+  lualib.luaL_openlibs(L);
+  if (lauxlib.luaL_dofile(L, to_luastring('tests/target-count.lua')) !== lua.LUA_OK)
+    throw new Error(`target count: ${to_jsstring(lua.lua_tostring(L, -1))}`);
+}
+console.log(`Lua 5.1 syntax, exported JSON schema (specs ${specs.map(s => s.specID).join(', ')}) and target count timing checked`);

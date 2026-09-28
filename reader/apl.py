@@ -127,6 +127,12 @@ class APLRuntime:
             action['expressions']={k:Expression(action[k]) for k in ('if','value','value_else','condition') if k in action}
             self.lists.setdefault(row['list'],[]).append(action)
         self.variables={}; self.data={}; self.current=None
+        # Every active_enemies use is a comparison with an integer, so 1..max+1
+        # covers every distinct outcome. Any other use disables the shortcut.
+        sources=[a['source'] for rows in self.lists.values() for a in rows]
+        uses=sum(src.count('active_enemies') for src in sources)
+        limits=[int(m) for src in sources for m in re.findall(r'active_enemies(?:=|!=|<=|>=|<|>)(\d+)',src)]
+        self.enemy_values=tuple(range(1,max(limits,default=0)+2)) if uses==len(limits) else ()
 
     def number(self,key):
         item=self.data.get('numbers',{}).get(key,{})
@@ -259,6 +265,26 @@ class APLRuntime:
         return None
 
     def decide(self,data):
+        result=self._decide(data)
+        # An unknown target count only matters if it changes the action. When
+        # every possible count yields the same ready action, that is exact.
+        if (result.get('status')=='blocked' and result.get('missing')==['context/targets']
+                and not self.settings.get('targets') and self.enemy_values):
+            saved=self.settings.get('targets')
+            try:
+                answers=[]
+                for count in self.enemy_values:
+                    self.settings['targets']=count
+                    answers.append(self._decide(data))
+            finally:
+                self.settings['targets']=saved
+            first=answers[0]
+            if first.get('status')=='ready' and all(a.get('status')=='ready' and a['action']==first['action']
+                                                    and a['binding']==first['binding'] for a in answers):
+                return dict(first,targetsIndependent=list(self.enemy_values))
+        return result
+
+    def _decide(self,data):
         self.data=data; self.variables={}
         if not data.get('valid') or data.get('expiresAt',0)<=time.time():
             return {'status':'blocked','reason':'Нет свежего кадра HUD'}
