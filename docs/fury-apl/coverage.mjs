@@ -1,6 +1,7 @@
 // Inventory HUD dependencies of reachable Fury/Slayer APL expressions; not an APL evaluator.
 // IDs carry their evidence: simc-source (pinned sc_warrior.cpp / trait table), research
-// (docs/research-apl.md), conflict or pending. Only a game check promotes an ID further.
+// (docs/research-apl.md), client-export (known to the client and shown in a HUD export),
+// conflict or pending. Only a game check promotes an ID further.
 import fs from 'node:fs';
 const root = new URL('./', import.meta.url);
 const build = JSON.parse(fs.readFileSync(new URL('build-requirements.json', root), 'utf8'));
@@ -33,14 +34,14 @@ const buffs = {
   enrage:{spellID:184362, evidence:'simc-source', note:'find_spell(184362); research-apl: verified'},
   recklessness:{spellID:1719, evidence:'simc-source', note:'spell.recklessness_buff'},
   whirlwind:{spellID:85739, evidence:'simc-source', note:'Meat Cleaver/Improved Whirlwind stacks; research-apl: verified'},
-  sudden_death:{spellID:52437, evidence:'conflict', note:'SimC spell.sudden_death_buff = 52437; research-apl and ClassData Fury preset use 280776. Check with /ahw procdebug.'},
+  sudden_death:{spellID:52437, evidence:'conflict', note:'SimC spell.sudden_death_buff = 52437; research-apl and ClassData Fury preset use 280776. Both are known to the client (export 2026-09-28); check which one lights with /ahw procdebug.'},
   hack_and_slash:{spellID:null, evidence:'pending', note:'Trigger of talent 383877 effect 1; numeric ID absent from the pinned source'},
   bladestorm:{spellID:onslaught === false ? 227847 : 446035, evidence:onslaught === undefined ? 'pending' : 'simc-source',
     note:'446035 with Unrelenting Onslaught + Bladestorm, otherwise 227847'},
 };
 const spells = {
-  bladestorm:{spellID:227847, evidence:'simc-source', note:'Cast/override 446035 with Unrelenting Onslaught, as in Arms'},
-  execute:{spellID:null, evidence:'pending', note:'Fury find_specialization_spell("Execute"); 5308/280735 are unverified guesses'},
+  bladestorm:{spellID:227847, evidence:'client-export', note:'Export castSpellIDs [227847, 446035]: override present with Unrelenting Onslaught, as in Arms'},
+  execute:{spellID:5308, evidence:'client-export', note:'Shown as the Fury Execute square without override (no Massacre in the build); usability gating in combat not yet observed'},
   recklessness:{spellID:1719, evidence:'simc-source'},
 };
 function classify(ref) {
@@ -103,7 +104,7 @@ const result = {
     execute:spells.execute, recklessness:{spellID:1719, evidence:'simc-source'},
     avatar:{spellID:107574, evidence:'simc-source', note:'Only in slayer_aoe in this pinned APL'},
     bladestorm:spells.bladestorm, odyns_fury:{spellID:385059, evidence:'simc-source'},
-    whirlwind:{spellID:null, evidence:'pending', note:'find_class_spell("Whirlwind"); ID absent from the pinned source'},
+    whirlwind:{spellID:190411, evidence:'client-export', note:'Known to the client as Whirlwind; not yet observed in a cast receipt'},
     storm_bolt:{spellID:107570, evidence:'simc-source', note:'Only during Bladestorm; reuses the Arms channel exception'},
     berserker_stance:{spellID:386196, evidence:'simc-source', note:'Precombat toggle; needs aura-down guard like Arms battle_stance'},
     charge:100, pummel:6552,

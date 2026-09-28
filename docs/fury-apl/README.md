@@ -64,16 +64,39 @@ Slayer, 77 выбранных узлов. Для APL важно:
   Hack and Slash, Sudden Death, Odyn's Fury, Bladestorm, Unrelenting Onslaught
   (бафф Bladestorm — 446035, как у Arms), Storm Bolt, Berserker Stance.
 
+## Первый экспорт из игры (28 сентября)
+
+Сохранён локально как `reader/profile-spec-72.json` (игнорируется Git).
+Компактный вид, 3840×2160, 23 квадрата. Ридер разбирает экспорт; план OCR:
+таймер Enrage — 0.2 с, стаки Bladestorm берутся из Imminent Demise,
+модель APL для spec 72 ожидаемо отклоняется. Захват и нажатия не запускались.
+
+- Таланты из игры декодируются в тот же набор, что `build.txt`
+  (74 названия, ранги совпадают); строки различаются только хэшем дерева.
+- Execute показан как 5308 без override (Massacre нет); Whirlwind 190411
+  известен клиенту; Raging Blow — 2 заряда; Bladestorm `castSpellIDs`
+  [227847, 446035] — override Unrelenting Onslaught вне боя подтверждён.
+- Sudden Death: клиент знает оба ID (52437 и 280776) под одним именем.
+  Экспорт конфликт не решает — нужен `/ahw procdebug` при активном прок.
+- Hack and Slash в HUD нет (ID неизвестен).
+- В наборе остались квадраты из прежнего умолчания ClassData:
+  Enraged Regeneration 184364 (защитный, в APL не используется) и
+  Thunder Blast 435615 (Mountain Thane, для Slayer бесполезен).
+- Экипирован комплект «нефритового полководца» (4 предмета). Принадлежность
+  к MID2 не проверена; Slayer-списки на бонусы комплекта не ссылаются.
+- Аксессуары 265657/274493 без `useSpellID` в экспорте; trinket-модель — отсутствие.
+
 ## Итоги покрытия (`coverage.json`)
 
 54 зависимости; полного покрытия нет. ID со статусом **pending/conflict**:
 
 | Символ | Проблема |
 |---|---|
-| `buff.sudden_death` | **конфликт**: SimC — 52437; research-apl и пресет Fury в ClassData — 280776 |
+| `buff.sudden_death` | **конфликт**: SimC — 52437; research-apl и пресет Fury в ClassData — 280776; клиент знает оба |
 | `buff.hack_and_slash` | ID — trigger таланта 383877, числа нет в исходнике |
-| `execute` | Fury-версия через `find_specialization_spell`; 5308/280735 — догадки |
-| `whirlwind` | `find_class_spell("Whirlwind")`; ID нет в исходнике |
+
+Execute 5308 и Whirlwind 190411 получили статус `client-export` по первому
+экспорту (см. ниже); применение и подсветка в бою ещё не наблюдались.
 
 Проверять вне боя/в бою через `/ahw procdebug` и экспорт `castSpellIDs`, не
 вписывать догадку как подтверждённое значение.
