@@ -56,6 +56,18 @@ class FuryAPL(APLRuntime):
                     row.update({'if':condition, 'upstreamSource':row['source'],
                                 'source':'AHelperW adapted TTD gate: bladestorm,if='+condition,
                                 'expressions':dict(row['expressions'], **{'if':Expression(condition)})})
+        # Exact equivalence, not an adaptation: Meat Cleaver stacks exist only
+        # while the aura is up, so stack=0 <=> aura absent. The aura's presence
+        # comes from colour; the stack digit OCR misread 3 as 5 after the HUD
+        # moved (log 20260928T201539Z-96a28b7d) and blocked the list for ~10 s.
+        stack_zero = 'buff.whirlwind.stack=0'
+        for rows in self.lists.values():
+            for row in rows:
+                if stack_zero in row.get('if', ''):
+                    condition = row['if'].replace(stack_zero, 'buff.whirlwind.down')
+                    row.update({'if':condition, 'upstreamSource':row.get('upstreamSource', row['source']),
+                                'source':'AHelperW equivalent (stack=0 is aura down): '+row['action']+',if='+condition,
+                                'expressions':dict(row['expressions'], **{'if':Expression(condition)})})
         self.coverage_gaps = (
             'предметы и зелья: исполнение не подключено',
             'проверено одним боем на манекенах (5 целей, фаза добивания); ST и полный бой — нет',
