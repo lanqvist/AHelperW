@@ -17,7 +17,9 @@ local squares = {}
 ns.squares = squares
 
 -- Availability states; "engine" renders secret usability flags natively.
-local function GetSpellState(spellID)
+-- baseID: the square's own spell; its range proxy also covers an override (Graveyard
+-- for Epidemic, Blightfall for Dark Transformation stayed unknown in game).
+local function GetSpellState(spellID, baseID)
   local cd = C_Spell.GetSpellCooldown(spellID)
   if not cd then return "unknown" end
 
@@ -38,7 +40,7 @@ local function GetSpellState(spellID)
       -- A positive Mortal Strike check proves the target is close enough;
       -- a negative/nil check does NOT prove Cleave is out of range.
       -- Same for Frostscythe (cone) and Glacial Advance (line): nil in game, Obliterate's was not.
-      local proxy = inRange == nil and ns.rangeProxies[spellID]
+      local proxy = inRange == nil and (ns.rangeProxies[spellID] or (baseID and ns.rangeProxies[baseID]))
       if proxy then
         local near = proxy == true and ns.MeleeInRange("target") or (proxy ~= true and ns.ReadValue(C_Spell.IsSpellInRange, proxy, "target"))
         if near == true then
@@ -522,7 +524,7 @@ function ns.UpdateSquares()
         UpdateProcSquare(sq, pal)
       else
         local effectiveID = EffectiveSpell(sq.spellID)
-        local state, usable, noPower = GetSpellState(effectiveID)
+        local state, usable, noPower = GetSpellState(effectiveID, sq.spellID)
         if sq.effectiveID ~= effectiveID then
           sq.effectiveID = effectiveID
           local info = C_Spell.GetSpellInfo(effectiveID)

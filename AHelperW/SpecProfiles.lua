@@ -166,7 +166,8 @@ ns.specProfiles = {
 -- Area attacks without a usable unit range answer: a positive melee check proves range.
 -- Frostscythe and Glacial Advance stayed unknown in game while Obliterate was in range.
 -- true: the spec melee check with its fallbacks (Epidemic, Death and Decay stayed unknown).
-ns.rangeProxies = { [845] = 12294, [207230] = 49020, [194913] = 49020, [207317] = true, [43265] = true }
+-- A proxy for a square's own spell also covers its override (Graveyard, Blightfall).
+ns.rangeProxies = { [845] = 12294, [207230] = 49020, [194913] = 49020, [207317] = true, [43265] = true, [1233448] = true }
 
 function ns.GetAPLProfile()
   local _, spec = ns.GetSpecData()
