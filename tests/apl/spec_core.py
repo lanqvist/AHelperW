@@ -99,7 +99,9 @@ SCENARIOS = [
              numbers={'resource/runic_power': 100, 'context/maxrunic_power': 120},
              check=expressions({'runic_power.max': 120, 'runic_power.deficit': 20, 'rune.time_to_6': 0})),
     # Placeholder profiles refuse a model until the spec work adds one.
-    Scenario('Frost: модели ещё нет — отказ', ('refused', 'модель APL ещё не реализована'), fixture=FROST_DB),
+    # Frost has its model (reader/dk_frost_apl.py, scenarios in spec_251_frost.py).
+    Scenario('Frost: профиль создаёт FrostAPL', fixture=FROST_DB,
+             check=lambda m, _r: (type(m).__name__ == 'FrostAPL' and m.hero_tree == 'deathbringer', type(m).__name__)),
     Scenario('Unholy: модели ещё нет — отказ', ('refused', 'модель APL ещё не реализована'), fixture=UNHOLY_SAN),
 ]
 
