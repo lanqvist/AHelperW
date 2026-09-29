@@ -1,5 +1,6 @@
 param([string]$ISCC = "$PSScriptRoot\..\build\tools\inno\ISCC.exe")
 $ErrorActionPreference = 'Stop'
+$version = '0.4.0'  # keep equal to AppVersion in setup.iss
 $projectRoot = Split-Path $PSScriptRoot -Parent
 Push-Location $projectRoot
 try {
@@ -13,14 +14,14 @@ try {
     & $pythonExe -m PyInstaller --noconfirm --distpath dist --workpath build/pyinstaller packaging/AHelperW.spec
     if ($LASTEXITCODE -ne 0) { throw 'PyInstaller failed' }
     New-Item -ItemType Directory -Force -Path dist/release | Out-Null
-    git archive --format=zip --output=dist/release/AHelperW-Source-0.3.0.zip HEAD
+    git archive --format=zip --output=dist/release/AHelperW-Source-$version.zip HEAD
     if ($LASTEXITCODE -ne 0) { throw 'Source archive failed' }
     & $ISCC packaging/setup.iss
     if ($LASTEXITCODE -ne 0) { throw 'Installer compilation failed' }
     $commit = git rev-parse HEAD
-    $manifest = [ordered]@{ version='0.3.0'; commit=$commit; platform='windows-x64'; python=(& $pythonExe --version); innoSetup='6.7.3' }
+    $manifest = [ordered]@{ version=$version; commit=$commit; platform='windows-x64'; python=(& $pythonExe --version); innoSetup='6.7.3' }
     $manifest | ConvertTo-Json | Set-Content -Encoding utf8 dist/release/build-info.json
-    $releaseFiles = @('AHelperW-Setup-0.3.0-windows-x64.exe', 'AHelperW-Source-0.3.0.zip', 'build-info.json')
+    $releaseFiles = @("AHelperW-Setup-$version-windows-x64.exe", "AHelperW-Source-$version.zip", 'build-info.json')
     $checksums = foreach ($name in $releaseFiles) {
         $hash = Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path 'dist/release' $name)
         "$($hash.Hash.ToLowerInvariant())  $name"
