@@ -65,7 +65,8 @@ class FrostAPL(APLRuntime):
             'Без сценарных событий рейда: raid_event.* как в SimC без событий',
             'fight_remains<N — только при заданном прогнозе боя; без прогноза бой не считается заканчивающимся',
             'Без предметов, зелий, Anti-Magic Shell и внешнего PI',
-            'Действия вне GCD (Breath of Sindragosa, ERW, Raise Dead, расовые) — только при готовом GCD',
+            'Действия вне GCD (Breath of Sindragosa, ERW, расовые) — только при готовом GCD',
+            'Raise Dead не нажимается: состояние гуля не видно, квадрат в игре «неизвестно»',
         )
         for name, rows in self.lists.items():
             self.lists[name] = [self.adapt(row) for row in rows]
@@ -191,7 +192,13 @@ class FrostAPL(APLRuntime):
             return unknown(name)
         return super().resolve(name)
 
+    # In game (log 20260929T090556Z-18333389) the Raise Dead square stayed unknown in
+    # every frame and blocked the cooldown list; like Unholy, it is not pressed.
+    not_executed = frozenset({'raise_dead'})
+
     def available(self, action):
+        if action in self.not_executed:
+            return False
         if action in self.spells and not self.learned(action):
             return False
         result = super().available(action)

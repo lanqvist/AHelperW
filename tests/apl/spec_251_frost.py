@@ -44,6 +44,11 @@ def ready(action, **fields):
 
 
 SCENARIOS = [
+    # In game the Raise Dead square stayed unknown and blocked the cooldown list.
+    Scenario('Raise Dead «неизвестно» не блокирует ротацию (не нажимается)',
+             check=lambda m, r: (r.get('status') == 'ready' and r.get('action') != 'raise_dead',
+                                 f"{r.get('status')}: {r.get('action') or r.get('reason')}"),
+             spells=dict(CORE, raise_dead='unknown'), runes=6, numbers=rp(0)),
     # Cooldowns and hero-tree rules
     Scenario('Deathbringer, начало: Pillar of Frost при 2+ рунах', ('ready', 'pillar_of_frost'),
              spells=dict(CORE, pillar_of_frost='ready'), runes=4, numbers=rp(20, **{'context/time': 1.})),

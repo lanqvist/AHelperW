@@ -159,6 +159,9 @@ ns.specProfiles = {
   -- --- end of DK entries ---
 }
 
+-- Area attacks without a usable unit range answer: a positive melee check proves range.
+ns.rangeProxies = { [845] = 12294, [207230] = 49020 }
+
 function ns.GetAPLProfile()
   local _, spec = ns.GetSpecData()
   return ns.specProfiles[spec]

@@ -37,8 +37,10 @@ local function GetSpellState(spellID)
       -- Cleave's frontal area can have a range but no valid unit range check.
       -- A positive Mortal Strike check proves the target is close enough;
       -- a negative/nil check does NOT prove Cleave is out of range.
-      if inRange == nil and spellID == 845 then
-        if ns.ReadValue(C_Spell.IsSpellInRange, 12294, "target") == true then
+      -- Same for Frostscythe (cone): its range answer stayed nil in game, Obliterate's did not.
+      local proxy = inRange == nil and ns.rangeProxies[spellID]
+      if proxy then
+        if ns.ReadValue(C_Spell.IsSpellInRange, proxy, "target") == true then
           inRange = true
         end
       end
