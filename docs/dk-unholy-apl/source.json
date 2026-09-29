@@ -1,0 +1,10 @@
+{
+  "commit": "4c7c73621e596419b5bd6faa5d68940a9c640379",
+  "retrieved": "2026-09-29",
+  "url": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/class_modules/apl/apl_death_knight.cpp",
+  "localSource": "apl_death_knight.cpp",
+  "traitTable": "../traits/death_knight-traits.json",
+  "idReference": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/class_modules/sc_death_knight.cpp",
+  "spellDataReference": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/dbc/generated/sc_spell_data.inc",
+  "clientBuild": "12.1.0.69933"
+}

@@ -1,0 +1,797 @@
+{
+  "clientBuild": "12.1.0.69933",
+  "specID": 252,
+  "heroTrees": [
+    "rider_of_the_apocalypse",
+    "sanlayn"
+  ],
+  "complete": false,
+  "note": "Display coverage only. Native rendering, OCR accuracy and APL evaluation are separate concerns. The pinned unholy() has no hero_tree.* conditions.",
+  "talentGates": "pending: supply build.txt, run docs/traits/decode-build.mjs death_knight 252, then extract.mjs",
+  "actionsWithoutSelectedTalent": "pending",
+  "unusedVariables": [],
+  "perHeroTree": {
+    "rider_of_the_apocalypse": {
+      "squares": {
+        "spells": [
+          85948,
+          55090,
+          47541,
+          207317,
+          1247378,
+          343294,
+          77575,
+          42650,
+          1233448,
+          43265
+        ],
+        "procs": [
+          42650,
+          81340,
+          458123,
+          1235391,
+          1242223,
+          1242654,
+          1254252,
+          1271199,
+          1271975
+        ],
+        "debuffs": [
+          191587,
+          1240996,
+          1241077,
+          1241521
+        ]
+      },
+      "constantDown": [
+        "buff.essence_of_the_blood_queen.max_stack",
+        "buff.essence_of_the_blood_queen.remains",
+        "buff.essence_of_the_blood_queen.stack",
+        "buff.essence_of_the_blood_queen.up",
+        "buff.vampiric_strike.react",
+        "buff.vampiric_strike.up"
+      ],
+      "note": "The pinned APL has no Rider-specific rule or buff; horsemen are passive pets and are not tracked"
+    },
+    "sanlayn": {
+      "squares": {
+        "spells": [
+          85948,
+          55090,
+          47541,
+          207317,
+          1247378,
+          343294,
+          77575,
+          42650,
+          1233448,
+          43265
+        ],
+        "procs": [
+          42650,
+          81340,
+          433899,
+          433925,
+          434153,
+          458123,
+          1235391,
+          1242223,
+          1242654,
+          1254252,
+          1271199,
+          1271975
+        ],
+        "debuffs": [
+          191587,
+          1240996,
+          1241077,
+          1241521
+        ]
+      },
+      "constantDown": [],
+      "note": "Vampiric Strike replaces Scourge Strike on its button while 433899 or Gift of the San'layn is up"
+    }
+  },
+  "dependencies": [
+    {
+      "symbol": "active_enemies",
+      "mode": "native-display",
+      "source": "TargetCount estimate or manual override; unknown blocks aoe/single_target choice"
+    },
+    {
+      "symbol": "buff.blighted.up",
+      "mode": "native-display",
+      "spellID": 1271199,
+      "evidence": "simc-source",
+      "note": "MID1 4-piece set buff (spell.blighted_buff); set bonus is not in the export, the square decides"
+    },
+    {
+      "symbol": "buff.blightfall.up",
+      "mode": "native-display",
+      "spellID": 1271975,
+      "evidence": "simc-source",
+      "talent": "blightfall",
+      "note": "spell.blightfall_buff: Dark Transformation becomes Blightfall"
+    },
+    {
+      "symbol": "buff.dark_transformation.remains",
+      "mode": "native-display+ocr",
+      "spellID": 1235391,
+      "evidence": "simc-source",
+      "talent": "dark_transformation",
+      "note": "spell.dark_transformation_player_buff (player aura, 15 s)"
+    },
+    {
+      "symbol": "buff.dark_transformation.up",
+      "mode": "native-display",
+      "spellID": 1235391,
+      "evidence": "simc-source",
+      "talent": "dark_transformation",
+      "note": "spell.dark_transformation_player_buff (player aura, 15 s)"
+    },
+    {
+      "symbol": "buff.essence_of_the_blood_queen.max_stack",
+      "mode": "static-model",
+      "value": 5,
+      "source": "sc_spell_data.inc 433925 max_stack",
+      "spellID": 433925,
+      "evidence": "simc-source",
+      "talent": "vampiric_strike",
+      "tree": "sanlayn",
+      "note": "max_stack 5 and 20 s from pinned sc_spell_data.inc; stacks via OCR"
+    },
+    {
+      "symbol": "buff.essence_of_the_blood_queen.remains",
+      "mode": "native-display+ocr",
+      "spellID": 433925,
+      "evidence": "simc-source",
+      "talent": "vampiric_strike",
+      "tree": "sanlayn",
+      "note": "max_stack 5 and 20 s from pinned sc_spell_data.inc; stacks via OCR"
+    },
+    {
+      "symbol": "buff.essence_of_the_blood_queen.stack",
+      "mode": "native-display+ocr",
+      "spellID": 433925,
+      "evidence": "simc-source",
+      "talent": "vampiric_strike",
+      "tree": "sanlayn",
+      "note": "max_stack 5 and 20 s from pinned sc_spell_data.inc; stacks via OCR"
+    },
+    {
+      "symbol": "buff.essence_of_the_blood_queen.up",
+      "mode": "native-display",
+      "spellID": 433925,
+      "evidence": "simc-source",
+      "talent": "vampiric_strike",
+      "tree": "sanlayn",
+      "note": "max_stack 5 and 20 s from pinned sc_spell_data.inc; stacks via OCR"
+    },
+    {
+      "symbol": "buff.festering_scythe.remains",
+      "mode": "native-display+ocr",
+      "spellID": 458123,
+      "evidence": "simc-source",
+      "talent": "festering_scythe",
+      "note": "spell.festering_scythe_buff: next Festering Strike is Festering Scythe (15 s)"
+    },
+    {
+      "symbol": "buff.festering_scythe.up",
+      "mode": "native-display",
+      "spellID": 458123,
+      "evidence": "simc-source",
+      "talent": "festering_scythe",
+      "note": "spell.festering_scythe_buff: next Festering Strike is Festering Scythe (15 s)"
+    },
+    {
+      "symbol": "buff.festering_scythe_tt.remains",
+      "mode": "native-display+ocr",
+      "spellID": 1241077,
+      "kind": "debuff",
+      "evidence": "simc-source",
+      "talent": "festering_scythe",
+      "note": "SimC tracks spell.festering_scythe_debuff as a player buff; in game it is a debuff on the target hit (Wowhead: \"Hastens your Plagues on the target\", 25 s). Read on the current target (adaptation)"
+    },
+    {
+      "symbol": "buff.festering_scythe_tt.up",
+      "mode": "native-display",
+      "spellID": 1241077,
+      "kind": "debuff",
+      "evidence": "simc-source",
+      "talent": "festering_scythe",
+      "note": "SimC tracks spell.festering_scythe_debuff as a player buff; in game it is a debuff on the target hit (Wowhead: \"Hastens your Plagues on the target\", 25 s). Read on the current target (adaptation)"
+    },
+    {
+      "symbol": "buff.forbidden_knowledge.up",
+      "mode": "native-display",
+      "spellID": 1242223,
+      "evidence": "simc-source",
+      "talent": "forbidden_knowledge",
+      "note": "spell.forbidden_knowledge_buff; Death Coil/Epidemic become Necrotic Coil/Graveyard for 30 s"
+    },
+    {
+      "symbol": "buff.lesser_ghoul_ready.stack",
+      "mode": "native-display",
+      "spellID": 1254252,
+      "evidence": "simc-source",
+      "note": "spell.lesser_ghoul_buff (baseline with Festering Strike); stack=0/>=1 read as aura down/up"
+    },
+    {
+      "symbol": "buff.sudden_doom.react",
+      "mode": "native-display",
+      "spellID": 81340,
+      "evidence": "wowhead",
+      "talent": "sudden_doom",
+      "note": "SimC: trigger of talent 49530 effect 1 (buffs.sudden_doom); Wowhead 81340: 10 s buff, next Death Coil/Epidemic cheaper; spell data max stack 1"
+    },
+    {
+      "symbol": "buff.vampiric_strike.react",
+      "mode": "native-display",
+      "spellID": 433899,
+      "evidence": "simc-source",
+      "talent": "vampiric_strike",
+      "tree": "sanlayn",
+      "note": "spell.vampiric_strike_buff; SimC also triggers it when Gift of the San'layn (434153) starts, so the reader accepts either aura"
+    },
+    {
+      "symbol": "buff.vampiric_strike.up",
+      "mode": "native-display",
+      "spellID": 433899,
+      "evidence": "simc-source",
+      "talent": "vampiric_strike",
+      "tree": "sanlayn",
+      "note": "spell.vampiric_strike_buff; SimC also triggers it when Gift of the San'layn (434153) starts, so the reader accepts either aura"
+    },
+    {
+      "symbol": "charges",
+      "mode": "native-display+ocr",
+      "source": "Current action (death_and_decay): charge digit or cooldown state"
+    },
+    {
+      "symbol": "cooldown.any_dnd.duration",
+      "mode": "static-export",
+      "source": "baseCooldownMs of the HUD square",
+      "spellID": 43265,
+      "evidence": "simc-source",
+      "note": "find_spell(43265); 1 charge, 30 s recharge, 10 s duration (spell data); ground-targeted"
+    },
+    {
+      "symbol": "cooldown.army_of_the_dead.remains",
+      "mode": "native-display",
+      "spellID": 42650,
+      "evidence": "simc-source",
+      "talent": "army_of_the_dead",
+      "note": "Raise Abomination / Summon Gargoyle only modify it (no own button)"
+    },
+    {
+      "symbol": "cooldown.dark_transformation.duration",
+      "mode": "static-export",
+      "source": "baseCooldownMs of the HUD square",
+      "spellID": 1233448,
+      "evidence": "simc-source",
+      "talent": "dark_transformation",
+      "note": "ready() needs an active ghoul unless Blightfall is up; ghoul state is not in the HUD"
+    },
+    {
+      "symbol": "cooldown.dark_transformation.remains",
+      "mode": "native-display",
+      "spellID": 1233448,
+      "evidence": "simc-source",
+      "talent": "dark_transformation",
+      "note": "ready() needs an active ghoul unless Blightfall is up; ghoul state is not in the HUD"
+    },
+    {
+      "symbol": "cooldown.putrefy.charges",
+      "mode": "native-display+ocr",
+      "source": "Charge digit (multi-charge square) or cooldown state (single charge); maxCharges from export",
+      "spellID": 1247378,
+      "evidence": "simc-source",
+      "talent": "putrefy",
+      "note": "1 charge in spell data; Putrid Echoes adds 2 (Wowhead)"
+    },
+    {
+      "symbol": "cooldown.putrefy.max_charges",
+      "mode": "native-display+ocr",
+      "source": "Charge digit (multi-charge square) or cooldown state (single charge); maxCharges from export",
+      "spellID": 1247378,
+      "evidence": "simc-source",
+      "talent": "putrefy",
+      "note": "1 charge in spell data; Putrid Echoes adds 2 (Wowhead)"
+    },
+    {
+      "symbol": "cooldown.putrefy.remains",
+      "mode": "native-display",
+      "spellID": 1247378,
+      "evidence": "simc-source",
+      "talent": "putrefy",
+      "note": "1 charge in spell data; Putrid Echoes adds 2 (Wowhead)"
+    },
+    {
+      "symbol": "debuff.soul_reaper_debuff.remains",
+      "mode": "native-display+ocr",
+      "target": "current",
+      "spellID": 1241521,
+      "evidence": "simc-source",
+      "note": "td debuff \"soul_reaper_debuff\" = spell.soul_reaper_debuff"
+    },
+    {
+      "symbol": "debuff.soul_reaper_debuff.up",
+      "mode": "native-display",
+      "target": "current",
+      "spellID": 1241521,
+      "evidence": "simc-source",
+      "note": "td debuff \"soul_reaper_debuff\" = spell.soul_reaper_debuff"
+    },
+    {
+      "symbol": "dot.dread_plague.active_dots",
+      "mode": "adapted",
+      "source": "Current target debuff only: active_dots=0 <=> no plague on the current target",
+      "spellID": 1240996,
+      "evidence": "simc-source",
+      "note": "spell.dread_plague; one host at a time; active_dots from the current target only (adaptation)"
+    },
+    {
+      "symbol": "dot.virulent_plague.active_dots",
+      "mode": "adapted",
+      "source": "Current target debuff only: active_dots=0 <=> no plague on the current target",
+      "spellID": 191587,
+      "evidence": "simc-source",
+      "note": "spell.virulent_plague; active_dots from the current target only (adaptation)"
+    },
+    {
+      "symbol": "duration",
+      "mode": "static-model",
+      "value": 10,
+      "source": "death_and_decay 43265 duration 10 s (sc_spell_data.inc)"
+    },
+    {
+      "symbol": "fight_remains",
+      "mode": "manual-forecast+adapted",
+      "source": "fight cell; unknown: \"fight ends\" triggers off, \"fight continues\" guards pass (labelled)"
+    },
+    {
+      "symbol": "gcd",
+      "mode": "derived",
+      "source": "1.5 s adjusted by displayed haste; minimum 0.75"
+    },
+    {
+      "symbol": "gcd.max",
+      "mode": "derived",
+      "source": "Same as gcd"
+    },
+    {
+      "symbol": "max_charges",
+      "mode": "static-export",
+      "source": "maxCharges of the square, 1 for single-charge squares"
+    },
+    {
+      "symbol": "pet.army_ghoul.active",
+      "mode": "adapted",
+      "source": "buff.army_of_the_dead.up (42650, 30 s = army ghoul duration 30 s)"
+    },
+    {
+      "symbol": "pet.gargoyle.active",
+      "mode": "adapted",
+      "source": "talent.summon_gargoyle & buff.army_of_the_dead.remains>5 (gargoyle 25 s from the same cast, sc_spell_data.inc 49206)"
+    },
+    {
+      "symbol": "raid_event.adds.count",
+      "mode": "adapted",
+      "source": "No scheduled raid events: *.exists is false; other fields are never reached"
+    },
+    {
+      "symbol": "raid_event.adds.exists",
+      "mode": "adapted",
+      "source": "No scheduled raid events: *.exists is false; other fields are never reached"
+    },
+    {
+      "symbol": "raid_event.adds.in",
+      "mode": "adapted",
+      "source": "No scheduled raid events: *.exists is false; other fields are never reached"
+    },
+    {
+      "symbol": "raid_event.adds.remains",
+      "mode": "adapted",
+      "source": "No scheduled raid events: *.exists is false; other fields are never reached"
+    },
+    {
+      "symbol": "raid_event.pull.exists",
+      "mode": "adapted",
+      "source": "No scheduled raid events: *.exists is false; other fields are never reached"
+    },
+    {
+      "symbol": "raid_event.pull.in",
+      "mode": "adapted",
+      "source": "No scheduled raid events: *.exists is false; other fields are never reached"
+    },
+    {
+      "symbol": "raid_event.pull.remains",
+      "mode": "adapted",
+      "source": "No scheduled raid events: *.exists is false; other fields are never reached"
+    },
+    {
+      "symbol": "rune",
+      "mode": "native-display",
+      "source": "Six rune colour squares; one unreadable rune makes the count unknown"
+    },
+    {
+      "symbol": "runic_power",
+      "mode": "native-display",
+      "source": "Runic power number (OCR)"
+    },
+    {
+      "symbol": "runic_power.deficit",
+      "mode": "derived",
+      "source": "Live maximum (MAX СР cell, else export snapshot) minus runic power"
+    },
+    {
+      "symbol": "talent.army_of_the_dead",
+      "mode": "static-export",
+      "source": "Talent string of the HUD export",
+      "selected": "pending"
+    },
+    {
+      "symbol": "talent.blightburst",
+      "mode": "static-export",
+      "source": "Talent string of the HUD export",
+      "selected": "pending"
+    },
+    {
+      "symbol": "talent.cycle_of_death",
+      "mode": "static-export",
+      "source": "Talent string of the HUD export",
+      "selected": "pending"
+    },
+    {
+      "symbol": "talent.dark_transformation",
+      "mode": "static-export",
+      "source": "Talent string of the HUD export",
+      "selected": "pending"
+    },
+    {
+      "symbol": "talent.festering_scythe",
+      "mode": "static-export",
+      "source": "Talent string of the HUD export",
+      "selected": "pending"
+    },
+    {
+      "symbol": "talent.reaping",
+      "mode": "static-export",
+      "source": "Talent string of the HUD export",
+      "selected": "pending"
+    },
+    {
+      "symbol": "talent.soul_reaper",
+      "mode": "static-export",
+      "source": "Talent string of the HUD export",
+      "selected": "pending"
+    },
+    {
+      "symbol": "target.health.pct",
+      "mode": "native-display",
+      "source": "Current target only, Resources.lua"
+    },
+    {
+      "symbol": "time",
+      "mode": "observed",
+      "source": "Combat start event"
+    },
+    {
+      "symbol": "trinket.1.cast_time",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.1.cooldown.duration",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.1.cooldown.remains",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.1.has_buff.strength",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.1.has_cooldown",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.1.has_use_buff",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.1.ilvl",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.1.is.treacherous_transmitter",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.1.proc.any_dps.duration",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.1.proc.any_dps.remains",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.1.proc.any_dps.up",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.1.proc.mastery.duration",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.2.cast_time",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.2.cooldown.duration",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.2.cooldown.remains",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.2.has_buff.strength",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.2.has_cooldown",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.2.has_use_buff",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.2.ilvl",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.2.is.treacherous_transmitter",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.2.proc.any_dps.duration",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.2.proc.any_dps.remains",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.2.proc.any_dps.up",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "trinket.2.proc.mastery.duration",
+      "mode": "disabled-model",
+      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
+    },
+    {
+      "symbol": "variable.adds_remain",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.cds_active",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.damage_trinket_priority",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.epidemic_prio",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.spending_rp",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.st_planning",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.trinket_1_buffs",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.trinket_1_duration",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.trinket_1_high_value",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.trinket_1_sync",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.trinket_2_buffs",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.trinket_2_duration",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.trinket_2_high_value",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.trinket_2_sync",
+      "mode": "derived",
+      "source": "APL expression"
+    },
+    {
+      "symbol": "variable.trinket_priority",
+      "mode": "derived",
+      "source": "APL expression"
+    }
+  ],
+  "shadowed": [],
+  "actions": {
+    "festering_strike": {
+      "spellID": 85948,
+      "evidence": "simc-source",
+      "note": "spec.festering_strike (baseline); profile melee reference"
+    },
+    "scourge_strike": {
+      "spellID": 55090,
+      "evidence": "simc-source",
+      "talent": "scourge_strike",
+      "note": "Clawing Shadows (1241567) is a modifier talent in this build, not a replacement"
+    },
+    "death_coil": {
+      "spellID": 47541,
+      "evidence": "simc-source"
+    },
+    "epidemic": {
+      "spellID": 207317,
+      "evidence": "simc-source"
+    },
+    "putrefy": {
+      "spellID": 1247378,
+      "evidence": "simc-source",
+      "talent": "putrefy",
+      "note": "1 charge in spell data; Putrid Echoes adds 2 (Wowhead)"
+    },
+    "soul_reaper": {
+      "spellID": 343294,
+      "evidence": "simc-source",
+      "talent": "soul_reaper",
+      "note": "target_ready: HP <= 35% (spell data effect 2) or Reaping"
+    },
+    "outbreak": {
+      "spellID": 77575,
+      "evidence": "simc-source",
+      "talent": "outbreak"
+    },
+    "army_of_the_dead": {
+      "spellID": 42650,
+      "evidence": "simc-source",
+      "talent": "army_of_the_dead",
+      "note": "Raise Abomination / Summon Gargoyle only modify it (no own button)"
+    },
+    "dark_transformation": {
+      "spellID": 1233448,
+      "evidence": "simc-source",
+      "talent": "dark_transformation",
+      "note": "ready() needs an active ghoul unless Blightfall is up; ghoul state is not in the HUD"
+    },
+    "death_and_decay": {
+      "spellID": 43265,
+      "evidence": "simc-source",
+      "note": "find_spell(43265); 1 charge, 30 s recharge, 10 s duration (spell data); ground-targeted"
+    },
+    "raise_dead": {
+      "spellID": 46584,
+      "evidence": "simc-source",
+      "note": "spec.raise_dead; ready() needs no active ghoul — not observable, not executed"
+    },
+    "replacements": {
+      "festering_scythe": {
+        "spellID": 458128,
+        "displaySpellID": 85948,
+        "procID": 458123,
+        "evidence": "simc-source",
+        "note": "festering_strike_t replacement while buffs.festering_scythe"
+      },
+      "vampiric_strike": {
+        "spellID": 433895,
+        "displaySpellID": 55090,
+        "procID": 433899,
+        "evidence": "simc-source",
+        "note": "scourge_strike_t replacement while buffs.vampiric_strike (San'layn)"
+      },
+      "necrotic_coil": {
+        "spellID": 1242174,
+        "displaySpellID": 47541,
+        "procID": 1242223,
+        "evidence": "simc-source",
+        "note": "death_coil_t replacement while buffs.forbidden_knowledge"
+      },
+      "graveyard": {
+        "spellID": 383269,
+        "displaySpellID": 207317,
+        "procID": 1242223,
+        "evidence": "simc-source",
+        "note": "epidemic_t replacement while buffs.forbidden_knowledge"
+      },
+      "blightfall": {
+        "spellID": 1271967,
+        "displaySpellID": 1233448,
+        "procID": 1271975,
+        "evidence": "simc-source",
+        "note": "dark_transformation_t replacement while buffs.blightfall"
+      }
+    },
+    "racials": {
+      "arcane_torrent": 50613,
+      "blood_fury": 20572,
+      "berserking": 26297,
+      "fireblood": 265221,
+      "ancestral_call": 274738,
+      "lights_judgment": 255647,
+      "bag_of_tricks": 312411,
+      "arcane_pulse": 260364,
+      "evidence": "wowhead (50613: DK Arcane Torrent, 20 RP)"
+    },
+    "potion": "User-selected item; not executed",
+    "use_item": "Not executed; trinkets modelled as absent",
+    "auto_attack": "Footer indicator",
+    "snapshot_stats": "Simulation-only action",
+    "invoke_external_buff": "Player coordination; Power Infusion aura 10060 is displayed but cannot be requested"
+  },
+  "notInPinnedApl": [
+    "Apocalypse",
+    "Unholy Assault",
+    "Festering Wound stacks",
+    "Mind Freeze",
+    "Raise Abomination as a button",
+    "Rider horsemen buffs"
+  ]
+}
