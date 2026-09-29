@@ -32,7 +32,7 @@
 Ничего не доставляется в папку игры, ридер с захватом/вводом не запускается.
 Неизвестное не заменяется нулём/отсутствием ауры/готовностью (правило AGENTS.md).
 
-## Охват: 23 пары, готово 3
+## Охват: 23 пары, готово 3 (DK: основа готова, модели в работе)
 
 | Класс | Спек (ID) | Ветки | Ветвление в APL | Трудность | Статус |
 |---|---|---|---|---|---|
@@ -40,8 +40,8 @@
 | Warrior | Fury (72) | Slayer / Mountain Thane | списки `slayer*`/`thane*` | низкая | Slayer `experimental` |
 | Monk | Windwalker (269) | Shado-Pan / Conduit | общий список, таланты | средняя | Shado-Pan `experimental` |
 | Paladin | Retribution (70) | Templar / Herald of the Sun | общий список, `talent.*` | средняя | — |
-| Death Knight | Frost (251) | Deathbringer / Rider | `hero_tree.*` в условиях | высокая (руны) | — |
-| Death Knight | Unholy (252) | Rider / San'layn | `hero_tree.*`, питомцы, DoT | высокая | — |
+| Death Knight | Frost (251) | Deathbringer / Rider | `hero_tree.*` в условиях | высокая (руны) | основа (Фаза 0), модели нет |
+| Death Knight | Unholy (252) | Rider / San'layn | `hero_tree.*`, питомцы, DoT | высокая | основа (Фаза 0), модели нет |
 | Demon Hunter | Havoc (577) | Aldrachi Reaver / Fel-Scarred | `hero_tree.felscarred`, Demonsurge | высокая (рывки) | — |
 | Rogue | Assassination (259) | Deathstalker / Fatebound | таланты, DoT, стелс | высокая | — |
 | Rogue | Outlaw (260) | Trickster / Fatebound | `hero_tree.fatebound`, Roll the Bones | высокая | — |
@@ -72,6 +72,16 @@ Enhancement — `ActionPriorityLists/default/shaman_enhancement.simc`.
 
 ## Фаза 0 — общая основа (последовательно, до разветвления)
 
+**Статус для DK: сделано 29 сентября, только офлайн** (коммиты `aeac41e`, `0819060`,
+`7b6eaae`, `72c76fa` и документация; в игре не проверялось, в `_retail_` не доставлялось).
+Сделано: профили с несколькими ветками (Lua и ридер, `hero_tree.<key>` в APL), таблица
+DK `docs/traits/death_knight-traits.json` и общие `extract-traits.mjs`/`decode-build.mjs`,
+сила рун и руны (HUD → экспорт → ридер → `APLRuntime`), офлайн-стенд `tests/apl/`,
+табличные Lua-проверки экспорта, заготовки профилей 251/252 без модели. Поведение
+71/72/269 не изменилось: экспорт в Lua-моке побайтно тот же, области и план OCR
+на локальных экспортах те же, сценарии стенда дают те же ответы на прежнем коде.
+Для остальных классов пункты 2–3 ниже остаются планом.
+
 Без неё девять агентов параллельно переписывают одни и те же места.
 
 1. **Профили с несколькими ветками.** Профиль остаётся на спек, но несёт
@@ -87,6 +97,115 @@ Enhancement — `ActionPriorityLists/default/shaman_enhancement.simc`.
 4. **Общий офлайн-стенд сценариев** `tests/apl/`: синтетический кадр из экспорта,
    запуск модели, проверка выбора/блокировки с причиной. Arms/Fury/ВВ — первые сценарии.
 5. Регистрация: `AGENTS.md`/память — мили-DPS разрешены вслепую; танки отложены.
+
+## Как добавить спек (Frost, Unholy и следующие)
+
+Работать в своём worktree; всё офлайн. Пример — Frost (251); для Unholy (252) то же
+с `dk-unholy-apl`, `dk_unholy_apl.py`, `UnholyAPL`, ветками 32/31.
+
+**1. Пакет данных `docs/dk-frost-apl/`** (как `docs/fury-apl/`): `source.json` (коммит,
+URL `apl_death_knight.cpp` закреплённого коммита, `"traitTable": "../traits/death_knight-traits.json"`,
+`"clientBuild": "12.1.0.69933"`), `extract.mjs` → `requirements.json` и
+`build-requirements.json` (формат `{"actions": [{"list", "expression"}]}`, как у Fury;
+условия `hero_tree.*` оставлять — ридер их вычисляет), `coverage.mjs` → `coverage.json`,
+`README.md`, `COPYING` (копия `docs/traits/COPYING`). Личный билд — `build.txt`
+(игнорируется): `node docs/traits/decode-build.mjs death_knight 251 docs/dk-frost-apl/build.txt`
+→ `decoded-build.json` (тоже игнорируется). `packaging/AHelperW.spec` сам включит пакет,
+когда появятся `build-requirements.json`, `source.json` и `COPYING`.
+
+**2. Профиль аддона `AHelperW/SpecProfiles.lua`** — только своя запись между
+комментариями `--- Frost DK (251) ---` и `--- Unholy DK (252) ---`. Уже заполнено:
+`id`, `name`, `heroTrees` (ключи = SimC), ресурсы, `referenceSpellID`, `contextCells`
+(не менять). Добавить пресеты, алиасы, пороги:
+
+```lua
+[251] = {
+  id = "deathknight.frost", name = "Frost DK",
+  heroTrees = {
+    [33] = { key = "deathbringer", name = "Deathbringer",
+      preset = { spells = { 439843 }, procs = {}, debuffs = {} } },   -- только своё для ветки
+    [32] = { key = "rider_of_the_apocalypse", name = "Rider of the Apocalypse",
+      preset = { spells = {}, procs = {}, debuffs = {} } },
+  },
+  primary = "runic_power", powerType = Enum.PowerType.RunicPower,
+  secondary = "runes", secondaryType = Enum.PowerType.Runes,
+  referenceSpellID = 49020, executeThresholds = {},
+  contextCells = { ... },                                             -- как есть
+  preset = { spells = { 49020, 49143, 49184, 51271 }, procs = { 51124, 59052 }, debuffs = {} }, -- общее
+  -- aliases = { <действие> = { spellID = <замена>, displaySpellID = <кнопка>, sharesBindingWith = "<действие кнопки>" } },
+},
+```
+
+ID в примере показывают формат (взяты из `death_knight-traits.json` и `ClassData.lua`),
+это не проверенный набор: сверять по `sc_death_knight.cpp` и Wowhead. Алиас нужен,
+только если способность подменяет другую на той же кнопке (как Crushing Blow у Fury). `/ahw apl` добавит `preset`
+спека плюс `preset` активной ветки; при неизвестной или чужой ветке откажет. Новых
+команд `/ahw ...` не нужно. Отметки HP цели — `executeThresholds` (например, `{35}`
+для Soul Reaper у Unholy, если это нужно APL).
+
+**3. Профиль ридера `reader/spec_profiles.py`** — только своя запись:
+`model='dk_frost_apl:FrostAPL'`, при необходимости `fast_aura_timers` (таймеры аур,
+от которых зависят ключевые правила) и `binary_auras` (ауры без счётчика). Ветки
+`(DEATHBRINGER, RIDER)`, ресурсы и статус `in-development` не менять.
+
+**4. Модель `reader/dk_frost_apl.py`**:
+
+```python
+from apl import APLRuntime, Unknown, unknown, binary
+
+class FrostAPL(APLRuntime):
+    spec_id = 251
+    trait_file = '../traits/death_knight-traits.json'  # allowed_heroes не задавать: ветки из профиля
+    require_cast_confirmation = True
+    spells = {'obliterate': 49020, 'frost_strike': 49143, 'howling_blast': 49184}
+    buffs = {'killing_machine': 51124, 'rime': 59052}
+```
+
+Готово в `APLRuntime`: `hero_tree.<key>` (в том числе как число 0/1), `self.hero_tree` и
+`self.hero_tree_id`, `runic_power`, `runic_power.max`, `runic_power.deficit`, `rune`,
+`rune.max`, `rune.deficit`, `rune.time_to_N`, `talent.*`, `buff.*`/`cooldown.*` через
+`spells`/`buffs`. Своё (гейты `ready()` из `sc_death_knight.cpp`, `talent_actions`,
+помеченные адаптации) — переопределением `resolve()`/`available()`/`decide()`, как в
+`fury_apl.py`. Отдельные списки на ветку — атрибут `requirements_file`.
+
+**5. Сценарии `tests/apl/spec_251_frost.py`**: `FIXTURE` (синтетический билд: `hero`,
+`talents` — имена в нижнем регистре через `_`, `squares`, `aliases`,
+`resources=('runic_power',)`, `resourceMeta`, `runes=True`,
+`traitFile='../traits/death_knight-traits.json'`) и `SCENARIOS` из
+`harness.Scenario(имя, ('ready', действие) | ('blocked', текст) | ('waiting', текст) | ('refused', текст), ...)`.
+Кадр: `spells={'obliterate': 'ready'}`, `buffs={'killing_machine': (8, 2)}` (остаток, стаки),
+`runes=2` или список из шести состояний, `numbers={'resource/runic_power': 80, 'context/runeNext': 3.}`
+(`None` — неизвестно). Образцы — `spec_core.py` (руны, ветки) и `spec_72_fury.py`.
+Запуск: `python tests/apl/run.py 251`, весь стенд — без аргумента. Нужен только
+Python 3 без зависимостей; личные экспорты не используются и не коммитятся.
+
+**6. Lua-тест**: записи 251/252 для обеих веток уже есть в `tests/run.cjs` (свои строки
+между комментариями); при алиасах добавить в свою запись `alias: ['<действие>', spellID]`.
+Запуск: `node tests/run.cjs`.
+
+**Не трогать** (не должно понадобиться): `reader/apl.py`, `reader/reader.py`,
+`reader/ocr_plan.py`, `reader/talent_decode.py`, `AHelperW/Resources.lua`, `Export.lua`,
+`CombatContext.lua`, `Options.lua`, `tests/apl/harness.py`, `tests/hud-context.lua`,
+чужие записи профилей, `docs/traits/`, `packaging/AHelperW.spec`, `PROJECT_MEMORY.md`.
+Если без правки ядра нельзя — только аддитивно, отдельным коммитом, с перечислением в отчёте.
+
+**Известные ограничения основы:**
+
+- Руны: число готовых — по цвету шести квадратов (готова / восстанавливается /
+  неизвестно). `rune.time_to_N` известен только для N ≤ готовых + 1: ячейка «РУНА, С» —
+  отсчёт до следующей руны с поправкой на возраст кадра OCR, сбрасывается при смене
+  цвета любой руны; для остальных N — неизвестно. Секретность `GetRuneCooldown` в бою
+  12.1 не проверена (ресерч: не секретны); если секретны — руны «неизвестно», правила
+  с `rune` блокируются.
+- Сила рун — OCR числа, как ярость; максимум — из ячейки «MAX СР», иначе снимок экспорта.
+- Активная ветка в аддоне — `C_ClassTalents.GetActiveHeroTalentSpec` (в 12.1 не проверено);
+  ридер всё равно берёт ветку из строки талантов и сверяет с экспортом.
+- `target_if` при нескольких целях по-прежнему блокирует правило; во Frost это
+  `obliterate,target_if=max:(hero_tree.rider_of_the_apocalypse&...)`. Решение (например,
+  адаптация «текущая цель», как у ВВ) — в модели спека, с пометкой.
+- Питомцы Unholy, DoT на нескольких целях, каналы и переключатели (Breath of Sindragosa),
+  выражения `death_knight.*` (`first_ams_cast` и т. п.), предметы и зелья основой не покрыты.
+- Ничего из DK в игре не проверено: геометрия и цвета рун, OCR силы рун, ID.
 
 ## Фаза 1 — по агенту на класс (параллельно, отдельные worktree)
 

@@ -55,10 +55,15 @@ PROFILES = {
                      model='windwalker_apl:WindwalkerAPL'),
     # Death Knight: offline development (docs/melee-dps-plan.md). The spec work
     # adds the model, fast/binary auras and the data package.
+    # --- Frost DK (251): edited only by the Frost work ---
     251: SpecProfile('deathknight.frost', 251, 'Frost DK', 'dk-frost-apl',
-                     (DEATHBRINGER, RIDER), ('runic_power', 'runes'), 'in-development'),
+                     (DEATHBRINGER, RIDER), ('runic_power', 'runes'), 'in-development',
+                     model=''),
+    # --- Unholy DK (252): edited only by the Unholy work ---
     252: SpecProfile('deathknight.unholy', 252, 'Unholy DK', 'dk-unholy-apl',
-                     (RIDER, SANLAYN), ('runic_power', 'runes'), 'in-development'),
+                     (RIDER, SANLAYN), ('runic_power', 'runes'), 'in-development',
+                     model=''),
+    # --- end of DK entries ---
 }
 
 

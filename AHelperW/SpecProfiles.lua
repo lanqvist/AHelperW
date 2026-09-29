@@ -68,6 +68,7 @@ ns.specProfiles = {
   -- Death Knight: in development offline (docs/melee-dps-plan.md). Runic power is
   -- the primary number, the six runes are coloured squares (Resources.lua).
   -- Presets, aliases and the reader model are added by the Frost/Unholy work.
+  -- --- Frost DK (251): edited only by the Frost work ---
   [251] = {
     id = "deathknight.frost", name = "Frost DK",
     heroTrees = {
@@ -84,6 +85,7 @@ ns.specProfiles = {
         tip = "Секунды до следующей готовой руны (GetRuneCooldown). ? — значения скрыты клиентом, — — все руны готовы." },
     },
   },
+  -- --- Unholy DK (252): edited only by the Unholy work ---
   [252] = {
     id = "deathknight.unholy", name = "Unholy DK",
     heroTrees = {
@@ -100,6 +102,7 @@ ns.specProfiles = {
         tip = "Секунды до следующей готовой руны (GetRuneCooldown). ? — значения скрыты клиентом, — — все руны готовы." },
     },
   },
+  -- --- end of DK entries ---
 }
 
 function ns.GetAPLProfile()

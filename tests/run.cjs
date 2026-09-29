@@ -17,15 +17,17 @@ const specs = [
     heroTree: 'slayer', resources: ['rage'], context: ['chargeRange', 'maxrage'] },
   { specID: 269, profileID: 'monk.windwalker.shado-pan', reference: 100780, alias: ['rushing_wind_kick', 467307], heroID: 65,
     heroTree: 'shado_pan', resources: ['energy', 'chi'], context: ['energyRegen', 'maxenergy', 'zenithRecharge'], comboHistory: true },
-  // Death Knight placeholders: runic power number, six rune squares, no preset yet.
+  // Death Knight: runic power number, six rune squares. Frost entries — Frost work only.
   { specID: 251, profileID: 'deathknight.frost', reference: 49020, heroID: 33, heroTree: 'deathbringer',
     resources: ['runic_power'], context: ['runeNext', 'maxrunic_power'], runes: true },
   { specID: 251, profileID: 'deathknight.frost', reference: 49020, heroID: 32, heroTree: 'rider_of_the_apocalypse',
     resources: ['runic_power'], context: ['runeNext', 'maxrunic_power'], runes: true },
+  // Unholy entries — Unholy work only.
   { specID: 252, profileID: 'deathknight.unholy', reference: 85948, heroID: 32, heroTree: 'rider_of_the_apocalypse',
     resources: ['runic_power'], context: ['runeNext', 'maxrunic_power'], runes: true },
   { specID: 252, profileID: 'deathknight.unholy', reference: 85948, heroID: 31, heroTree: 'sanlayn',
     resources: ['runic_power'], context: ['runeNext', 'maxrunic_power'], runes: true },
+  // End of DK entries.
 ];
 const legacyTree = new Set([71, 72, 269]);
 for (const spec of specs) {
