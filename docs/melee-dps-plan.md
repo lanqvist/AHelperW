@@ -40,7 +40,7 @@
 | Warrior | Fury (72) | Slayer / Mountain Thane | списки `slayer*`/`thane*` | низкая | Slayer `experimental` |
 | Monk | Windwalker (269) | Shado-Pan / Conduit | общий список, таланты | средняя | Shado-Pan `experimental` |
 | Paladin | Retribution (70) | Templar / Herald of the Sun | общий список, `talent.*` | средняя | — |
-| Death Knight | Frost (251) | Deathbringer / Rider | `hero_tree.*` в условиях | высокая (руны) | основа (Фаза 0), модели нет |
+| Death Knight | Frost (251) | Deathbringer / Rider | `hero_tree.*` в условиях | высокая (руны) | пакет, профиль и модель офлайн (`docs/dk-frost-apl/`), в игре не проверены |
 | Death Knight | Unholy (252) | Rider / San'layn | `hero_tree.*`, питомцы, DoT | высокая | основа (Фаза 0), модели нет |
 | Demon Hunter | Havoc (577) | Aldrachi Reaver / Fel-Scarred | `hero_tree.felscarred`, Demonsurge | высокая (рывки) | — |
 | Rogue | Assassination (259) | Deathstalker / Fatebound | таланты, DoT, стелс | высокая | — |
