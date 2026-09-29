@@ -1,0 +1,9 @@
+{
+  "note": "Synthetic probe lists for tests/apl/spec_core.py (hero_tree, runes, runic power). Not a SimC APL.",
+  "actions": [
+    {"list": "default_", "expression": "howling_blast,if=rune.time_to_3<1&rune<2"},
+    {"list": "default_", "expression": "obliterate,if=hero_tree.deathbringer&rune>=2"},
+    {"list": "default_", "expression": "frost_strike,if=hero_tree.rider_of_the_apocalypse&runic_power.deficit<30"},
+    {"list": "default_", "expression": "death_coil,if=hero_tree.sanlayn&runic_power>=30-10*hero_tree.sanlayn"}
+  ]
+}

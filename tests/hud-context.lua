@@ -1,7 +1,9 @@
 -- Behavioral checks in a Lua VM. UI mocks do not validate WoW secure rendering.
 unpack = table.unpack or unpack
--- run.cjs sets SPEC_ID per VM; Arms (71) remains the default.
+-- run.cjs sets SPEC_ID (and HERO_ID, the client's active hero subtree) per VM;
+-- Arms (71) remains the default. Power types come from the spec profile.
 local specID = SPEC_ID or 71
+local heroID = HERO_ID
 local now, combat, target = 100, false, true
 local forbidden = { secret = true }
 function issecretvalue(v) return type(v) == "table" and rawget(v, "secret") == true end
@@ -19,12 +21,21 @@ function UnitPowerMax() return 130 end
 function GetPhysicalScreenSize() return 1920, 1080 end
 function GetBuildInfo() return "12.1.0", "69933", "", 120100 end
 function UnitRace() return "Night Elf", "NightElf" end
-function UnitClass() return "Warrior", "WARRIOR" end
+local classes = { [71] = "WARRIOR", [72] = "WARRIOR", [269] = "MONK", [251] = "DEATHKNIGHT", [252] = "DEATHKNIGHT" }
+function UnitClass() return "Class", classes[specID] end
+function GetPowerRegen() return 10, 12.5 end
+-- Rune i: ready flag; recharging runes end at now + 8 + i (queued runes later).
+local runeSecret = false
+function GetRuneCooldown(i)
+  if runeSecret then return forbidden, forbidden, forbidden end
+  if i <= 2 then return 0, 0, true end
+  return now - 2 + (i - 3) * 10, 10 + i - 3, false
+end
 function IsPlayerSpell() return true end
-Enum = { PowerType = { Rage = 1 }, NumericRuleFormatRounding = { Nearest = 0 } }
+Enum = { PowerType = { Mana = 0, Rage = 1, Energy = 3, Runes = 5, RunicPower = 6, Chi = 12 }, NumericRuleFormatRounding = { Nearest = 0 } }
 UISpecialFrames = {}
 C_SpecializationInfo = { GetSpecialization = function() return 1 end, GetSpecializationInfo = function() return specID end }
-C_ClassTalents = { GetActiveConfigID = function() return 1 end }
+C_ClassTalents = { GetActiveConfigID = function() return 1 end, GetActiveHeroTalentSpec = function() return heroID end }
 C_Traits = { GenerateImportString = function() return "test-build" end }
 local frames = {}
 local methods = {}
@@ -170,8 +181,34 @@ assert(C.forecasts.ttd == nil and C.forecasts.fight ~= nil)
 local rangeIDs = {}
 C_Spell.IsSpellInRange = function(id, unit) if unit == "target" then rangeIDs[id] = true end; return target and true or nil end
 C.Update(); C_Spell.IsSpellInRange = savedRangeAPI
-assert(rangeIDs[ns.specProfiles[specID].referenceSpellID] and rangeIDs[100], "range must use the spec melee reference and Charge")
-assert(C.cells.range.value.text == "ДА" and C.cells.chargeRange.value.text == "ДА")
+local profile = ns.specProfiles[specID]
+local aux = profile.contextCells.chargeRange
+assert(rangeIDs[profile.referenceSpellID] and C.cells.range.value.text == "ДА", "range must use the spec melee reference")
+if aux.source == "range" then
+  assert(rangeIDs[aux.spellID] and C.cells.chargeRange.value.text == "ДА", "Charge range cell")
+elseif aux.source == "powerRegen" then
+  assert(C.cells.chargeRange.value.text == "12.5", "energy regeneration cell")
+elseif aux.source == "runeNext" then
+  -- Rune 3 recharges from now-2 for 10 s; queued runes end later.
+  assert(C.cells.chargeRange.value.text == "8.0" and C.cells.chargeRange.bg.color[1] == ns.Palette().nores[1], "next rune countdown")
+  runeSecret = true; C.Update()
+  assert(C.cells.chargeRange.value.text == "?" and C.cells.chargeRange.bg.color[1] == ns.Palette().unknown[1], "secret runes must be unknown")
+  runeSecret = false; C.Update()
+end
+if aux.title then assert(C.cells.chargeRange.title.text == aux.title, "profile cell title") end
+-- Presets for /ahw apl: several hero trees need a known, supported active tree.
+local trees = 0
+for _ in pairs(profile.heroTrees) do trees = trees + 1 end
+local preset, why = ns.GetAPLPreset(profile)
+if trees == 1 then
+  assert(preset == profile.preset and preset, "single-tree profile keeps its preset")
+else
+  assert(preset or why, "preset or refusal")
+  local saved = heroID
+  heroID = nil; assert(not ns.GetAPLPreset(profile) and select(2, ns.GetAPLPreset(profile)):find("не определена", 1, true))
+  heroID = 999; assert(not ns.GetAPLPreset(profile) and select(2, ns.GetAPLPreset(profile)):find("не поддержана", 1, true))
+  heroID = saved
+end
 casting = "target"; C.Update()
 assert(C.cells.targetCast.value.text == "Cast")
 assert(C.cells.targetCast.shield.shown == forbidden, "secret interrupt state must flow into native display")
@@ -211,7 +248,7 @@ function UnitHealth() return 770280 end
 function UnitHealthMax() return 770280 end
 function UnitHealthPercent() return 0.93 end
 function UnitPower() return 71 end
-function UnitPowerType() return 1 end
+function UnitPowerType() return profile.powerType end
 Enum.PowerType.Mana = 0
 local ticker
 local afterFns = {}
@@ -231,9 +268,18 @@ ns.db.hudExports = nil
 assert(#afterFns >= 1, "a rebuild must schedule an automatic export")
 afterFns[1]()
 assert(ns.db.autoExportStatus and ns.db.hudExports and ns.db.hudExports[specID], "scheduled export must be stored for the spec")
+-- This export includes the resource row built by Core (runes, runic power, ...).
+HUD_EXPORT_FULL = ns.db.hudExports[specID].text
 local frameCount = #frames
 ticker(); ticker()
 assert(#frames == frameCount, "polling must not allocate frames")
+if ns.Resources.runeTextures then
+  local pal = ns.Palette()
+  assert(ns.Resources.runeTextures[1].color[1] == pal.ready[1] and ns.Resources.runeTextures[3].color[1] == pal.cd[1], "rune colours")
+  runeSecret = true; ticker()
+  assert(ns.Resources.runeTextures[1].color[1] == pal.unknown[1], "a secret rune state must be unknown, not spent")
+  runeSecret = false; ticker()
+end
 assert(ns.Resources.regions.targetHealth.percent.text == "?", "missing formatter must not display 0.93 as 0.93 percent")
 -- The export measures a plain frame: the text itself is sized by a secret value in game.
 assert(ns.Resources.regions.targetHealthPercent == ns.Resources.regions.targetHealth.percentArea
