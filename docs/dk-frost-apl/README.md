@@ -159,3 +159,10 @@ ID: 40 из `simc-source` (закреплённые `sc_death_knight.cpp`, та�
 для DK не сверялись). `unresolved` — нет. `game-observed` — нет.
 Расхождение: ClassData/`research-apl.md` дают Breath of Sindragosa 152279, закреплённая
 таблица — 1249658 (использован он).
+
+## Первые бои в игре (29 сентября, Deathbringer)
+
+Итог и исправления — `docs/PROJECT_MEMORY.md`, раздел «Первые бои Frost DK / Deathbringer».
+Коротко: руны/сила рун/стаки Killing Machine читаются; Raise Dead не нажимается (квадрат
+всегда «неизвестно»); дальность Frostscythe и Glacial Advance подтверждается по Obliterate
+(`ns.rangeProxies`). После правок 77/78 подтверждено, все окна GCD с нажатием.
