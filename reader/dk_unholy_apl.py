@@ -22,17 +22,17 @@ class UnholyAPL(APLRuntime):
         'arcane_torrent':50613, 'lights_judgment':255647, 'bag_of_tricks':312411, 'berserking':26297,
         'blood_fury':20572, 'fireblood':265221, 'ancestral_call':274738, 'arcane_pulse':260364,
     }
-    # Player auras (proc squares). festering_scythe_tt is a SimC player buff but a
-    # debuff on the target in game (1241077): read on the current target.
+    # Player auras (proc squares). festering_scythe_tt 1241077 is a player buff: Wowhead
+    # flags it a personal aura (speeds up own DoT ticks); as a target debuff it never lit
+    # in 4315 frames of Festering Scythe hits (log 20260929T092145Z-a4497b7f).
     buffs = {
         'sudden_doom':81340, 'dark_transformation':1235391, 'forbidden_knowledge':1242223,
         'lesser_ghoul_ready':1254252, 'festering_scythe':458123, 'blightfall':1271975,
         'blighted':1271199, 'essence_of_the_blood_queen':433925, 'vampiric_strike':433899,
         'gift_of_the_sanlayn':434153, 'army_of_the_dead':42650, 'reaping':1242654,
-        'power_infusion':10060,
+        'power_infusion':10060, 'festering_scythe_tt':1241077,
     }
-    debuffs = {'soul_reaper_debuff':1241521, 'virulent_plague':191587, 'dread_plague':1240996,
-               'festering_scythe_tt':1241077}
+    debuffs = {'soul_reaper_debuff':1241521, 'virulent_plague':191587, 'dread_plague':1240996}
     # SimC make_fallback: without the talent the buff exists but is never up.
     buff_talents = {
         'sudden_doom':'sudden_doom', 'dark_transformation':'dark_transformation',
@@ -77,7 +77,6 @@ class UnholyAPL(APLRuntime):
             'Время боя неизвестно: «бой кончается» не срабатывает, «бой продолжится» выполняется',
             'Питомцы: армия — по ауре Army of the Dead, горгулья — по её остатку >5 с; Raise Dead не нажимается',
             'Dark Transformation: наличие вурдалака — по готовности кнопки в HUD',
-            'festering_scythe_tt — дебафф 1241077 на текущей цели вместо баффа SimC',
         )
         for rows in self.lists.values():
             for row in rows:

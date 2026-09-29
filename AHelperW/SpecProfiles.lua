@@ -146,12 +146,13 @@ ns.specProfiles = {
     -- Outbreak, Army of the Dead, Dark Transformation, Death and Decay, racials (DK Arcane
     -- Torrent 50613). Procs: Sudden Doom, Dark Transformation, Forbidden Knowledge, Lesser
     -- Ghoul, Festering Scythe, Blightfall, Blighted (set), Army of the Dead, Reaping, PI.
-    -- Debuffs: Virulent Plague, Dread Plague, Soul Reaper, Festering Scythe (target).
+    -- Debuffs: Virulent Plague, Dread Plague, Soul Reaper. Festering Scythe 1241077 is a
+    -- player buff (it never lit as a target debuff in game).
     preset = {
       spells = { 85948, 55090, 47541, 207317, 1247378, 343294, 77575, 42650, 1233448, 43265,
         50613, 255647, 312411, 26297, 20572, 265221, 274738, 260364 },
-      procs = { 81340, 1235391, 1242223, 1254252, 458123, 1271975, 1271199, 42650, 1242654, 10060 },
-      debuffs = { 191587, 1240996, 1241521, 1241077 },
+      procs = { 81340, 1235391, 1242223, 1254252, 458123, 1271975, 1271199, 42650, 1242654, 10060, 1241077 },
+      debuffs = { 191587, 1240996, 1241521 },
     },
     contextCells = {
       maxrage = { export = "maxrunic_power", title = "MAX СР" },

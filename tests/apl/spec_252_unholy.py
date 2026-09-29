@@ -2,9 +2,9 @@
 from harness import Scenario
 
 SPELLS = (85948, 55090, 47541, 207317, 1247378, 343294, 77575, 42650, 1233448, 43265)
-PROCS = (81340, 1235391, 1242223, 1254252, 458123, 1271975, 1271199, 42650, 1242654, 10060)
+PROCS = (81340, 1235391, 1242223, 1254252, 458123, 1271975, 1271199, 42650, 1242654, 10060, 1241077)
 SANLAYN_PROCS = (433899, 433925, 434153)
-DEBUFFS = (191587, 1240996, 1241521, 1241077)
+DEBUFFS = (191587, 1240996, 1241521)
 ALIASES = {
     'festering_scythe': {'spellID': 458128, 'displaySpellID': 85948, 'sharesBindingWith': 'festering_strike'},
     'vampiric_strike': {'spellID': 433895, 'displaySpellID': 55090, 'sharesBindingWith': 'scourge_strike'},
@@ -141,8 +141,8 @@ SCENARIOS = [
              spells={'epidemic': 'ready', 'death_coil': 'ready', 'death_and_decay': ('cd', 10.)},
              buffs={'forbidden_knowledge': (20., 1), 'army_of_the_dead': 'up'}, debuffs=PLAGUED, runes=3,
              numbers={'resource/runic_power': 60, 'context/targets': 4}),
-    Scenario('нет квадрата дебаффа Festering Scythe — блокировка', ('blocked', 'debuff:1241077'),
-             fixture=unholy(32, CORE, debuffs=(191587, 1240996, 1241521)),
+    Scenario('нет квадрата баффа Festering Scythe 1241077 — блокировка', ('blocked', 'proc:1241077'),
+             fixture=unholy(32, CORE, procs=tuple(p for p in PROCS if p != 1241077)),
              spells={'festering_strike': 'ready', 'death_coil': 'ready'}, debuffs={191587: (20, 1), 1240996: (20, 1)},
              runes=3, numbers={'resource/runic_power': 40}),
     Scenario('сила рун неизвестна там, где решает — блокировка', ('blocked', 'resource/runic_power'), fixture=RIDER,
@@ -160,3 +160,11 @@ SCENARIOS = [
              spells={46584: 'ready'}, debuffs=PLAGUED, runes=6, numbers={'resource/runic_power': 0}),
     Scenario('экспорт без рун: отказ', ('refused', 'рунами'), fixture=unholy(32, CORE, runes=False)),
 ]
+
+# Festering Scythe 1241077 is a player buff (proc square), not a target debuff; the
+# scenarios above list it with the plagues for brevity, so move it to the buffs here.
+for _scenario in SCENARIOS:
+    _debuffs = _scenario.frame_args.get('debuffs')
+    if _debuffs and 1241077 in _debuffs:
+        _scenario.frame_args['debuffs'] = {k: v for k, v in _debuffs.items() if k != 1241077}
+        _scenario.frame_args['buffs'] = dict(_scenario.frame_args.get('buffs') or {}, festering_scythe_tt=_debuffs[1241077])
