@@ -5,6 +5,9 @@ local function msg(text)
 end
 
 SLASH_AHELPERW1 = "/ahw"
+-- Legacy per-spec aliases of /ahw apl; new specs need no command of their own.
+local presetCommands = { armsapl = 71, furyapl = 72, wwapl = 269 }
+
 SlashCmdList.AHELPERW = function(input)
   local cmd, arg = input:match("^(%S*)%s*(.-)$")
   cmd = cmd:lower()
@@ -103,14 +106,14 @@ SlashCmdList.AHELPERW = function(input)
     ns.ResetProcContainers()
     ns.Rebuild()
     msg("превью: " .. (ns.db.preview and "вкл" or "выкл"))
-  elseif cmd == "armsapl" or cmd == "wwapl" or cmd == "furyapl" or cmd == "apl" then
+  elseif cmd == "apl" or presetCommands[cmd] then
     if InCombatLockdown() then
       msg("добавление набора APL доступно вне боя")
       return
     end
     local _, specID = ns.GetSpecData()
     local profile = ns.GetAPLProfile()
-    if not profile or (cmd == "armsapl" and specID ~= 71) or (cmd == "wwapl" and specID ~= 269) or (cmd == "furyapl" and specID ~= 72) then
+    if not profile or (presetCommands[cmd] and specID ~= presetCommands[cmd]) then
       msg("для этого спека набор APL не подключён; /ahw apl выбирает текущий спек")
       return
     end
@@ -119,13 +122,13 @@ SlashCmdList.AHELPERW = function(input)
       msg("набор сверялся со сборкой 69933; текущая сборка требует повторной сверки")
       return
     end
-    local preset = profile.preset or ns.armsAplPreset
+    local preset, why, hero = ns.GetAPLPreset(profile)
+    if not preset then msg(why); return end
     local custom = ns.EnsureCustom()
-    if not custom or not preset then return end
-    if specID == 269 then
-      -- Replace the historical talent ID with its actual tracked buff ID.
+    if not custom then return end
+    for old, new in pairs(profile.procReplacements or {}) do
       for i, id in ipairs(custom.procs) do
-        if id == 1261844 then custom.procs[i] = 1261724 end
+        if id == old then custom.procs[i] = new end
       end
     end
     local count = 0
@@ -133,7 +136,7 @@ SlashCmdList.AHELPERW = function(input)
     for _, kind in ipairs({ "spells", "procs", "debuffs" }) do
       local present = {}
       for _, id in ipairs(custom[kind]) do present[id] = true end
-      for _, id in ipairs(preset[kind]) do
+      for _, id in ipairs(preset[kind] or {}) do
         if not present[id] then
           if C_Spell.GetSpellInfo(id) then
             table.insert(custom[kind], id)
@@ -149,7 +152,7 @@ SlashCmdList.AHELPERW = function(input)
     ns.db.auraTimers = true
     ns.Rebuild()
     ns.ApplyCdTextOption()
-    msg("добавлено индикаторов " .. profile.name .. ": " .. count .. "; таймеры КД и баффов включены")
+    msg("добавлено индикаторов " .. profile.name .. (hero and (" / " .. hero.name) or "") .. ": " .. count .. "; таймеры КД и баффов включены")
     msg("набор для присланного билда 69933; активные таланты автоматически не сверяются")
     if #missing > 0 then msg("клиент не знает ID: " .. table.concat(missing, ", ")) end
   elseif cmd == "auratimers" then

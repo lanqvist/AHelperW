@@ -10,6 +10,14 @@ data += [(str(root/'docs'/'fury-apl'/name), 'apl-data/fury-apl')
          for name in ('build-requirements.json', 'source.json', 'COPYING')]
 data += [(str(root/'docs'/'windwalker-apl'/name), 'apl-data/windwalker-apl')
          for name in ('build-requirements.json', 'monk-traits.json', 'source.json', 'COPYING')]
+# Shared class trait tables (docs/traits); models refer to them as ../traits/.
+data += [(str(root/'docs'/'traits'/name), 'apl-data/traits')
+         for name in ('death_knight-traits.json', 'COPYING')]
+# DK packages are filled by the Frost/Unholy work; bundled once their lists exist.
+for directory in ('dk-frost-apl', 'dk-unholy-apl'):
+    if (root/'docs'/directory/'build-requirements.json').exists():
+        data += [(str(root/'docs'/directory/name), 'apl-data/'+directory)
+                 for name in ('build-requirements.json', 'source.json', 'COPYING')]
 data += [(str(root/'build'/'licenses'), 'licenses')]
 a = Analysis([str(root/'reader'/'reader.py')], pathex=[str(root/'reader')],
              binaries=collect_dynamic_libs('onnxruntime'), datas=data,

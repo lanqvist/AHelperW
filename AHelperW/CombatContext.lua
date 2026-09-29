@@ -31,7 +31,7 @@ local function Cell(key, title, tip)
   c.value:SetPoint("BOTTOMLEFT", 3, 3)
   c.value:SetJustifyH("LEFT")
   c.value:SetWordWrap(false)
-  c.tip = tip
+  c.tip, c.defaultTip = tip, tip
   c:SetScript("OnEnter", function(self)
     GameTooltip:SetOwner(self, "ANCHOR_TOP")
     GameTooltip:SetText(title)
@@ -149,7 +149,6 @@ end
 
 function C.Build(width, resourceHeight)
   EnsureBuilt()
-  local _, spec = ns.GetSpecData()
   C.profile = ns.GetAPLProfile()
   C.active = C.profile ~= nil and ns.db.context ~= false
   frame:SetShown(C.active)
@@ -182,8 +181,10 @@ function C.Build(width, resourceHeight)
     c:SetPoint("TOPLEFT", frame, "TOPLEFT", col * (cellW + gap), -rowIndex * (smallH + gap))
     c:SetSize(w, i <= 12 and smallH or lastH)
     c.title:SetText(layout.compact and shortTitles[key] or c.fullTitle)
-    if spec == 269 and key == "maxrage" then c.title:SetText("MAX ЭН.") end
-    if spec == 269 and key == "chargeRange" then c.title:SetText("ЭН./С") end
+    local profileCell = (C.profile.contextCells or {})[key]
+    if profileCell and profileCell.title then c.title:SetText(profileCell.title) end
+    if profileCell and profileCell.tip then c.tip, c.profileTip = profileCell.tip, true
+    elseif c.profileTip then c.tip, c.profileTip = c.defaultTip, nil end
     ns.SetFont(c.title, layout.compact and 7 or 8, "OUTLINE")
     c.title:SetWidth(w - 6 - (key == "targets" and 11 or 0))
     c.value:ClearAllPoints()
@@ -212,8 +213,8 @@ function C.Build(width, resourceHeight)
     ns.SetFont(c.value, 11, "OUTLINE")
     c:Show()
   end
-  ns.ComboHistory.Build(frame, cellW * 5 + gap * 4, smallH, spec == 269)
-  if spec == 269 then
+  ns.ComboHistory.Build(frame, cellW * 5 + gap * 4, smallH, C.profile.comboHistory == true)
+  if C.profile.comboHistory then
     ns.ComboHistory.frame:ClearAllPoints()
     ns.ComboHistory.frame:SetPoint("TOPLEFT", frame, "TOPLEFT", cellW + gap,
       -(smallH * 2 + lastH + gap * 3))
@@ -313,6 +314,26 @@ local function UpdateCast(c, unit)
   end
 end
 
+-- Seconds until the next rune is ready. Rune values are computed only when the
+-- client exposes them as plain numbers; any secret or partial answer is "?".
+local function UpdateRuneNext(cell)
+  local best, pending = nil, false
+  for i = 1, 6 do
+    local ok, start, duration, ready = pcall(GetRuneCooldown, i)
+    if not ok or secret(start) or secret(duration) or secret(ready) then SetCell(cell, "?", "unknown"); return end
+    if ready == false then
+      pending = true
+      if type(start) == "number" and type(duration) == "number" and start > 0 and duration > 0 then
+        local left = start + duration - GetTime()
+        if left > 0 and (not best or left < best) then best = left end
+      end
+    elseif ready ~= true then SetCell(cell, "?", "unknown"); return end
+  end
+  if not pending then SetCell(cell, "—")
+  elseif best then SetCell(cell, string.format("%.1f", best), "nores")
+  else SetCell(cell, "?", "unknown") end
+end
+
 local function Number(cell, fn, kind, ...)
   SetCell(cell, "?", "unknown")
   local ok, value = pcall(fn, ...)
@@ -361,10 +382,12 @@ function C.Update()
   local attack = read(UnitCanAttack, "player", "target")
   local dead = read(UnitIsDeadOrGhost, "target")
   local rangeEntries = { { "range", C.profile.referenceSpellID } }
-  if C.profile.primary == "rage" then rangeEntries[#rangeEntries + 1] = { "chargeRange", 100 }
-  else
+  local aux = (C.profile.contextCells or {}).chargeRange or {}
+  if aux.source == "range" then rangeEntries[#rangeEntries + 1] = { "chargeRange", aux.spellID }
+  elseif aux.source == "powerRegen" then
     Number(C.cells.chargeRange, function() local _, active = GetPowerRegen(); return active end, "decimal")
-  end
+  elseif aux.source == "runeNext" then UpdateRuneNext(C.cells.chargeRange)
+  else SetCell(C.cells.chargeRange, "—") end
   for _, entry in ipairs(rangeEntries) do
     local value = read(C_Spell.IsSpellInRange, entry[2], "target")
     if target == false then SetCell(C.cells[entry[1]], "НЕТ ЦЕЛИ")

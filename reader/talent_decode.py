@@ -58,7 +58,9 @@ def decode(text, table, spec_id, allowed_heroes):
         raise ValueError('Неизвестный остаток строки талантов')
     heroes = {t['subtree'] for t in selected if t['tree'] == 4 and t['nodeType'] == 3}
     if len(heroes) != 1 or not heroes.issubset(allowed_heroes):
-        raise ValueError('Для этой героической ветки пакет ещё не подготовлен')
+        names = table.get('subtrees', {})
+        found = ', '.join(f"{h} {names.get(str(h), {}).get('name', '')}".strip() for h in sorted(heroes)) or 'нет'
+        raise ValueError(f'Для этой героической ветки пакет ещё не подготовлен (ветка: {found})')
     ranks = {}
     for trait in selected:
         if not trait['spellId'] or (trait['subtree'] and trait['subtree'] not in heroes):

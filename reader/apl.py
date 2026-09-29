@@ -4,6 +4,7 @@ import math
 import re
 import time
 from dataclasses import dataclass
+from spec_profiles import PROFILES
 SPELLS={'mortal_strike':12294,'overpower':7384,'cleave':845,'sweeping_strikes':260708,
         'colossus_smash':167105,'avatar':107574,'bladestorm':227847,'execute':163201,
         'slam':1464,'heroic_strike':1269383,'storm_bolt':107570,'charge':100,
@@ -108,18 +109,32 @@ def decode_talents(text,table):
 
 
 class APLRuntime:
+    # Lists narrowed for this integration; a model may override per hero tree.
+    requirements_file='build-requirements.json'
+
     def __init__(self,reader,root,bindings,settings):
         self.reader=reader; self.cfg=reader.cfg; self.bindings=bindings; self.settings=settings
         if self.cfg.get('specID')!=self.spec_id: raise ValueError('Неверная специализация пакета APL')
+        self.profile=PROFILES.get(self.spec_id)
         table=json.loads((root/self.trait_file).read_text(encoding='utf-8'))
         if str(self.cfg['client']['build'])!=table['build'].split('.')[-1]: raise ValueError('Экспорт HUD и дерево талантов относятся к разным сборкам')
         from talent_decode import decode
-        self.talent_ranks,self.hero_trees=decode(self.cfg['talents'],table,self.spec_id,self.allowed_heroes)
+        # Legacy models pin allowed_heroes; otherwise every tree of the profile.
+        allowed=getattr(self,'allowed_heroes',None) or {t.subtree for t in self.profile.hero_trees}
+        self.talent_ranks,self.hero_trees=decode(self.cfg['talents'],table,self.spec_id,allowed)
         self.talents=set(self.talent_ranks)
+        # Exactly one subtree is active (decode enforces it); hero_tree.<key>
+        # in APL conditions compares against its SimC key.
+        self.hero_tree_id=next(iter(self.hero_trees))
+        tree=self.profile.hero_tree(self.hero_tree_id) if self.profile else None
+        self.hero_tree=tree.key if tree else None
+        declared=self.cfg.get('apl',{}).get('heroTreeID')
+        if declared is not None and declared!=self.hero_tree_id:
+            raise ValueError('Героическая ветка в экспорте не совпадает со строкой талантов')
         self.squares={(s['kind'],s['spellID']):(key,s) for key,s in reader.square_specs.items()}
         self.aliases={a['spellID']:a['displaySpellID'] for a in self.cfg.get('aliases',{}).values() if 'spellID' in a and 'displaySpellID' in a}
         self.lists={}
-        source=json.loads((root/'build-requirements.json').read_text(encoding='utf-8'))
+        source=json.loads((root/self.requirements_file).read_text(encoding='utf-8'))
         for row in source['actions']:
             pieces=[p for p in row['expression'].split(',') if p]; action={'action':pieces[0],'source':row['expression'],'list':row['list']}
             for p in pieces[1:]:
@@ -156,6 +171,8 @@ class APLRuntime:
     def resolve(self,name):
         if name.startswith('talent.'):
             return name.split('.')[1] in self.talents
+        if name.startswith('hero_tree.'):
+            return self.hero_tree==name[10:] if self.hero_tree else unknown(name)
         if name.startswith('variable.'):
             if name=='variable.execute_phase' and self.settings.get('phase') in ('normal','execute'):
                 return self.settings['phase']=='execute'

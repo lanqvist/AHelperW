@@ -98,11 +98,14 @@ function ns.MakeHUDExport()
   local talents = configID and ns.ReadValue(C_Traits.GenerateImportString, configID)
   local screenW, screenH = GetPhysicalScreenSize()
   local layout = ns.HUDLayout()
+  -- Single-tree profiles keep their static tree; with several trees the export
+  -- names the client's active subtree (the reader re-checks it from talents).
+  local hero, heroID = ns.GetActiveHeroTree(profile)
   local result = {
     schema = "AHelperW.HUD", version = 1, static = true,
     client = { version = version, build = build, interface = interface },
     specID = spec, race = race, talents = talents or "unknown",
-    apl = { profileID = profile.id, sourceCommit = "4c7c73621e596419b5bd6faa5d68940a9c640379", assumedBuild = "69933", heroTree = profile.heroTree, talentsVerified = false },
+    apl = { profileID = profile.id, sourceCommit = "4c7c73621e596419b5bd6faa5d68940a9c640379", assumedBuild = "69933", heroTree = profile.heroTree or (hero and hero.key), heroTreeID = not profile.heroTree and heroID or nil, talentsVerified = false },
     screen = { width = screenW, height = screenH, origin = "top-left", units = "physical-pixels" },
     display = { palette = ns.db.palette, preview = ns.db.preview, cdText = ns.db.cdText, scale = ns.db.scale, dock = ns.db.dock,
       size = ns.db.size, gap = layout.gap, perRow = layout.perRow, compact = layout.compact, stable = ns.db.stable, colors = ns.Palette(), timerLayout = "split-v1", chargeText = "white-on-black", stateLabelLayout = "bottom-center-v1",
@@ -151,7 +154,7 @@ function ns.MakeHUDExport()
   result.context.autoAttack = Rect(ns.CombatContext.footer)
   result.castReceipt = { version = 2, rect = Rect(ns.CastReceipt.frame), rows = ns.CastReceipt.ROWS, columns = 56,
     source = "public UNIT_SPELLCAST_SUCCEEDED; matching event does not prove which input caused it" }
-  if spec == 269 then
+  if profile.comboHistory then
     result.comboHistory = { version = 1, diagnosticOnly = true, markers = Array(),
       colors = { active = { 0, 1, 0.53 }, inactive = { 0.16, 0.16, 0.16 }, unknown = { 0.48, 0.35, 0 } } }
     for _, marker in ipairs(ns.ComboHistory.markers) do
@@ -165,11 +168,14 @@ function ns.MakeHUDExport()
   if profile.secondary then
     result.resourceMeta[profile.secondary] = { powerType = profile.secondaryType,
       max = ns.ReadValue(UnitPowerMax, "player", profile.secondaryType) }
-    for _, section in ipairs({ "context", "contextNumbers", "contextSamples" }) do
-      result[section].energyRegen = result[section].chargeRange
-      result[section].chargeRange = nil
-      result[section].maxenergy = result[section].maxrage
-      result[section].maxrage = nil
+  end
+  -- Context cells whose meaning depends on the profile are exported by name.
+  for cellKey, cell in pairs(profile.contextCells or {}) do
+    if cell.export then
+      for _, section in ipairs({ "context", "contextNumbers", "contextSamples" }) do
+        result[section][cell.export] = result[section][cellKey]
+        result[section][cellKey] = nil
+      end
     end
   end
   for slot = 1, 19 do
