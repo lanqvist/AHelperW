@@ -121,6 +121,15 @@ SCENARIOS = [
              spells={'epidemic': 'ready', 'death_coil': 'ready', 'death_and_decay': ('cd', 10.)},
              buffs={'forbidden_knowledge': (20., 1)}, debuffs=PLAGUED, runes=2,
              numbers={'resource/runic_power': 60, 'context/targets': 4}, check=cast('epidemic', 383269)),
+    # In game the client rejected Epidemic twice with no Virulent Plague on the target.
+    Scenario('5 целей, на цели нет Virulent Plague — не Epidemic',
+             check=lambda m, r: (r.get('action') != 'epidemic' and r.get('status') in ('ready', 'waiting'),
+                                 f"{r.get('status')}: {r.get('action') or r.get('reason')}"),
+             spells={'epidemic': 'ready', 'death_coil': 'ready', 'festering_strike': 'ready', 'outbreak': ('cd', 20.)},
+             debuffs={1241077: (20, 1)}, runes=1, numbers={'resource/runic_power': 69, 'context/targets': 5}),
+    Scenario('5 целей, Virulent Plague на цели не прочитана — блокировка', ('blocked', 'debuff:191587'),
+             spells={'epidemic': 'ready', 'death_coil': 'ready', 'festering_strike': 'ready', 'outbreak': ('cd', 20.)},
+             debuffs={1241077: (20, 1), 191587: 'unknown'}, runes=1, numbers={'resource/runic_power': 69, 'context/targets': 5}),
     # Blocked / waiting with a reason
     Scenario('AoE: руны не прочитаны — блокировка', ('blocked', 'руны'),
              spells={'epidemic': 'ready', 'death_coil': 'ready'}, debuffs=PLAGUED,

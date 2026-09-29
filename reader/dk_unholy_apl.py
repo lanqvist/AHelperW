@@ -71,7 +71,7 @@ class UnholyAPL(APLRuntime):
         if 'runic_power' not in self.cfg.get('resources', {}) or not self.cfg.get('runes'):
             raise ValueError('Нужен экспорт рыцаря смерти с силой рун и рунами')
         self.adaptations = (
-            'Текущая выбранная цель: target_if не переключает цели, active_dots — по дебаффу текущей цели',
+            'Текущая выбранная цель: target_if не переключает цели, active_dots — по дебаффу текущей цели; Epidemic — только при Virulent Plague на ней',
             'Без предметов, зелий и планирования внешнего PI',
             'Событий рейда нет: raid_event.*.exists = ложь',
             'Время боя неизвестно: «бой кончается» не срабатывает, «бой продолжится» выполняется',
@@ -227,6 +227,11 @@ class UnholyAPL(APLRuntime):
             hp = self.number('resource/targetHealthPercent')
             allowed = binary('|', self.resolve('buff.reaping.up'), binary('<=', hp, self.soul_reaper_threshold))
             result = binary('&', result, allowed)
+        if action == 'epidemic':
+            # epidemic_base_t: target_filter_callback = virulent_plague only. Without a
+            # plagued target the client rejected the press (log 20260929T092145Z-a4497b7f,
+            # twice); adaptation: the current target's Virulent Plague stands for all.
+            result = binary('&', result, self.aura('debuff', self.debuffs['virulent_plague'], 'up'))
         return result
 
     def decide(self, data):

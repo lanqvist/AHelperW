@@ -129,7 +129,7 @@ def frame(model, spells=None, buffs=None, debuffs=None, numbers=None, combat=Tru
 
     spells: {action or spellID: state | (state, timer) | (state, timer, stacks)};
       unlisted spell squares are on cooldown (timer 20 s).
-    buffs/debuffs: {name or ID: 'up' | 'down' | (remains, stacks)}; unlisted
+    buffs/debuffs: {name or ID: 'up' | 'down' | 'unknown' | (remains, stacks)}; unlisted
       auras are absent (procoff). Names map through model.buffs.
     numbers: OCR values by key; None removes a default (unknown).
     runes: six states ('ready' / 'cd' / 'unknown') or a ready count.
@@ -164,6 +164,9 @@ def frame(model, spells=None, buffs=None, debuffs=None, numbers=None, combat=Tru
         for name, value in (auras or {}).items():
             key = square_key(kind, name, table)
             if value == 'down':
+                continue
+            if value == 'unknown':
+                rows[key]['state'] = 'unknown'
                 continue
             rows[key]['state'] = kind
             if value != 'up':
