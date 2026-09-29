@@ -78,6 +78,14 @@ class UnholyAPL(APLRuntime):
             'Питомцы: армия — по ауре Army of the Dead, горгулья — по её остатку >5 с; Raise Dead не нажимается',
             'Dark Transformation: наличие вурдалака — по готовности кнопки в HUD',
         )
+        # The player's Dark Transformation aura 1235391 has "No Aura Icon" (Wowhead) and
+        # never lit in game. SimC starts Gift of the San'layn with it and expires Gift
+        # with it (dark_transformation_buff_t), so with that talent Gift stands for it.
+        if 'gift_of_the_sanlayn' in self.talents:
+            self.buffs = dict(self.buffs, dark_transformation=self.buffs['gift_of_the_sanlayn'])
+            self.adaptations += ("Бафф Dark Transformation (без иконки у клиента) — по Gift of the San'layn, который SimC запускает и снимает вместе с ним",)
+        else:
+            self.adaptations += ("Бафф Dark Transformation не виден клиенту (без иконки): без Gift of the San'layn Putrefy и правила с ним не выбираются",)
         for rows in self.lists.values():
             for row in rows:
                 if 'target_if' in row:

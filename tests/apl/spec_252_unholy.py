@@ -121,6 +121,18 @@ SCENARIOS = [
              spells={'epidemic': 'ready', 'death_coil': 'ready', 'death_and_decay': ('cd', 10.)},
              buffs={'forbidden_knowledge': (20., 1)}, debuffs=PLAGUED, runes=2,
              numbers={'resource/runic_power': 60, 'context/targets': 4}, check=cast('epidemic', 383269)),
+    # The player's DT aura has no icon and never lit in game; with Gift of the San'layn
+    # (started and expired with DT in SimC) the model sees DT and picks Putrefy.
+    Scenario("San'layn: Gift горит = Dark Transformation — Putrefy (AoE)", ('ready', 'putrefy'),
+             spells={'putrefy': 'ready', 'epidemic': 'ready', 'death_coil': 'ready', 'festering_strike': 'ready',
+                     'dark_transformation': ('cd', 40.), 'army_of_the_dead': ('cd', 100.), 'outbreak': ('cd', 20.)},
+             buffs={'gift_of_the_sanlayn': (12., 1)}, debuffs=PLAGUED, runes=3,
+             numbers={'resource/runic_power': 40, 'context/targets': 5}),
+    Scenario("San'layn: Gift не горит — Putrefy не выбирается", 
+             check=lambda m, r: (r.get('action') != 'putrefy', f"{r.get('status')}: {r.get('action') or r.get('reason')}"),
+             spells={'putrefy': 'ready', 'epidemic': 'ready', 'death_coil': 'ready', 'festering_strike': 'ready',
+                     'dark_transformation': ('cd', 20.), 'army_of_the_dead': ('cd', 100.), 'outbreak': ('cd', 20.)},
+             debuffs=PLAGUED, runes=3, numbers={'resource/runic_power': 40, 'context/targets': 5}),
     # In game the client rejected Epidemic twice with no Virulent Plague on the target.
     Scenario('5 целей, на цели нет Virulent Plague — не Epidemic',
              check=lambda m, r: (r.get('action') != 'epidemic' and r.get('status') in ('ready', 'waiting'),

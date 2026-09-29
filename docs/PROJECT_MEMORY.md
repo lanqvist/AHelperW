@@ -83,7 +83,12 @@
   Vampiric Strike, Army, DT, Soul Reaper, Outbreak. Одно нажатие Festering Strike клиент
   отклонил (GCD мигнул, кнопка осталась ready; вероятно, разворот/движение) → блокировка
   по правилу «кнопка осталась ready — блокировать». По решению пользователя смягчено (ниже).
-- Не проверено: Putrefy (не выбирался в этих боях), Death and Decay, Rider после исправлений.
+- **Putrefy не выбирался никогда:** бафф игрока Dark Transformation 1235391 не горел ни разу
+  (Wowhead: флаг «No Aura Icon» — контейнер аур его не видит; сама DT 1233448 висит на гуле).
+  По SimC Gift of the San'layn 434153 запускается и снимается вместе с DT → при таланте Gift
+  `buff.dark_transformation` читается по Gift (адаптация). Для Rider без Gift DT по-прежнему
+  не видна — Putrefy и правила с `buff.dark_transformation` там не срабатывают.
+- Не проверено: Putrefy в игре после этой правки, Death and Decay, Rider после исправлений.
 - **Мягкая блокировка расширена** (решение пользователя, общее для Fury/ВВ/DK): GCD, который
   начался и отпустил быстрее 0.5 с после нажатия без события применения, — тоже
   `input_rejected_by_client` (`buttonState=gcd_flicker`), даже при кнопке ready; не чаще раза
