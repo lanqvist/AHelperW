@@ -11,6 +11,9 @@ docs/windwalker-apl/build.txt
 docs/windwalker-apl/decoded-build.json
 docs/fury-apl/build.txt
 docs/fury-apl/decoded-build.json
+# Personal talent strings of any package (DK and later specs)
+docs/**/build.txt
+docs/**/decoded-build.json
 
 # Environments and generated artifacts
 .venv/

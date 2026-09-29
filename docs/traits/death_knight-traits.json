@@ -1,0 +1,3689 @@
+{
+  "build": "12.1.0.69933",
+  "source": {
+    "commit": "4c7c73621e596419b5bd6faa5d68940a9c640379",
+    "retrieved": "2026-09-29",
+    "url": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/dbc/generated/trait_data.inc",
+    "clientBuild": "12.1.0.69933"
+  },
+  "subtrees": {
+    "31": {
+      "name": "San'layn",
+      "specs": [
+        250,
+        252
+      ]
+    },
+    "32": {
+      "name": "Rider of the Apocalypse",
+      "specs": [
+        251,
+        252
+      ]
+    },
+    "33": {
+      "name": "Deathbringer",
+      "specs": [
+        250,
+        251
+      ]
+    }
+  },
+  "entries": [
+    {
+      "tree": 1,
+      "entryId": 96172,
+      "nodeId": 76044,
+      "maxRanks": 1,
+      "spellId": 207167,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blinding Sleet",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96173,
+      "nodeId": 76045,
+      "maxRanks": 1,
+      "spellId": 207104,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Runic Attenuation",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96174,
+      "nodeId": 76046,
+      "maxRanks": 1,
+      "spellId": 205727,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Anti-Magic Barrier",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96176,
+      "nodeId": 76048,
+      "maxRanks": 1,
+      "spellId": 374383,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Assimilation",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96178,
+      "nodeId": 76050,
+      "maxRanks": 1,
+      "spellId": 457574,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Unyielding Will",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96179,
+      "nodeId": 76051,
+      "maxRanks": 1,
+      "spellId": 391566,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Insidious Chill",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96180,
+      "nodeId": 76052,
+      "maxRanks": 2,
+      "spellId": 391571,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Gloom Ward",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96181,
+      "nodeId": 76053,
+      "maxRanks": 1,
+      "spellId": 454851,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Vestigial Shell",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96182,
+      "nodeId": 76054,
+      "maxRanks": 2,
+      "spellId": 206967,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Will of the Necropolis",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96183,
+      "nodeId": 76055,
+      "maxRanks": 1,
+      "spellId": 454788,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Runic Protection",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96184,
+      "nodeId": 76056,
+      "maxRanks": 1,
+      "spellId": 374598,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blood Draw",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96186,
+      "nodeId": 76057,
+      "maxRanks": 1,
+      "spellId": 273952,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Grip of the Dead",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96187,
+      "nodeId": 76058,
+      "maxRanks": 1,
+      "spellId": 389682,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Unholy Endurance",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96188,
+      "nodeId": 76059,
+      "maxRanks": 1,
+      "spellId": 111673,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Control Undead",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96189,
+      "nodeId": 76060,
+      "maxRanks": 1,
+      "spellId": 1267028,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blood Bond",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96190,
+      "nodeId": 76061,
+      "maxRanks": 1,
+      "spellId": 374504,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Brittle",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96193,
+      "nodeId": 76064,
+      "maxRanks": 1,
+      "spellId": 221562,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Asphyxiate",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 136526,
+      "nodeId": 76064,
+      "maxRanks": 1,
+      "spellId": 276079,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Death's Reach",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 96194,
+      "nodeId": 76065,
+      "maxRanks": 1,
+      "spellId": 51052,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Anti-Magic Zone",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96195,
+      "nodeId": 76066,
+      "maxRanks": 1,
+      "spellId": 207200,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Permafrost",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96196,
+      "nodeId": 76067,
+      "maxRanks": 1,
+      "spellId": 374277,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Improved Death Strike",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96197,
+      "nodeId": 76068,
+      "maxRanks": 1,
+      "spellId": 48263,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Veteran of the Third War",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96198,
+      "nodeId": 76069,
+      "maxRanks": 2,
+      "spellId": 374265,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Unholy Momentum",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96200,
+      "nodeId": 76071,
+      "maxRanks": 1,
+      "spellId": 49998,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Death Strike",
+      "specs": [],
+      "grantedSpecs": [
+        250
+      ],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96201,
+      "nodeId": 76072,
+      "maxRanks": 1,
+      "spellId": 46585,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Raise Dead",
+      "specs": [],
+      "grantedSpecs": [
+        252
+      ],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96202,
+      "nodeId": 76073,
+      "maxRanks": 1,
+      "spellId": 316916,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Cleaving Strikes",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96203,
+      "nodeId": 76074,
+      "maxRanks": 1,
+      "spellId": 391546,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "March of Darkness",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 133518,
+      "nodeId": 76074,
+      "maxRanks": 1,
+      "spellId": 212552,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Wraith Walk",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 96204,
+      "nodeId": 76075,
+      "maxRanks": 1,
+      "spellId": 48743,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Death Pact",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96205,
+      "nodeId": 76076,
+      "maxRanks": 1,
+      "spellId": 374261,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Unholy Bond",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96207,
+      "nodeId": 76078,
+      "maxRanks": 1,
+      "spellId": 374030,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blood Scent",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96208,
+      "nodeId": 76079,
+      "maxRanks": 2,
+      "spellId": 374574,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Rune Mastery",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96209,
+      "nodeId": 76080,
+      "maxRanks": 1,
+      "spellId": 454822,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Subduing Grasp",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96210,
+      "nodeId": 76081,
+      "maxRanks": 1,
+      "spellId": 48792,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Icebound Fortitude",
+      "specs": [],
+      "grantedSpecs": [
+        251
+      ],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96212,
+      "nodeId": 76083,
+      "maxRanks": 1,
+      "spellId": 378848,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Coldthirst",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96213,
+      "nodeId": 76084,
+      "maxRanks": 1,
+      "spellId": 47528,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Mind Freeze",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96214,
+      "nodeId": 76085,
+      "maxRanks": 1,
+      "spellId": 194878,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Icy Talons",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96215,
+      "nodeId": 76086,
+      "maxRanks": 1,
+      "spellId": 454786,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Ice Prison",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96216,
+      "nodeId": 76087,
+      "maxRanks": 1,
+      "spellId": 374049,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Suppression",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 96217,
+      "nodeId": 76088,
+      "maxRanks": 1,
+      "spellId": 454835,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Osmosis",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 125606,
+      "nodeId": 101708,
+      "maxRanks": 1,
+      "spellId": 373930,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Proliferating Chill",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 126015,
+      "nodeId": 102007,
+      "maxRanks": 1,
+      "spellId": 356367,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Death's Echo",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 126016,
+      "nodeId": 102008,
+      "maxRanks": 1,
+      "spellId": 454842,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Null Magic",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136523,
+      "nodeId": 110029,
+      "maxRanks": 1,
+      "spellId": 392566,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Enfeeble",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136524,
+      "nodeId": 110030,
+      "maxRanks": 1,
+      "spellId": 1266819,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Death Notes",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136525,
+      "nodeId": 110031,
+      "maxRanks": 1,
+      "spellId": 1266818,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Death Defiance",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96161,
+      "nodeId": 76033,
+      "maxRanks": 2,
+      "spellId": 392950,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Icebreaker",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96165,
+      "nodeId": 76037,
+      "maxRanks": 1,
+      "spellId": 1230223,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Howling Blades",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96167,
+      "nodeId": 76039,
+      "maxRanks": 1,
+      "spellId": 1265790,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Boiling Point",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96168,
+      "nodeId": 76040,
+      "maxRanks": 1,
+      "spellId": 391517,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Umbilicus Eternus",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96169,
+      "nodeId": 76041,
+      "maxRanks": 1,
+      "spellId": 391477,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Coagulopathy",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96170,
+      "nodeId": 76042,
+      "maxRanks": 1,
+      "spellId": 108199,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Gorefiend's Grasp",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 136213,
+      "nodeId": 76042,
+      "maxRanks": 1,
+      "spellId": 1263569,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Abomination Limb",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 96171,
+      "nodeId": 76043,
+      "maxRanks": 1,
+      "spellId": 273953,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Voracious",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96220,
+      "nodeId": 76091,
+      "maxRanks": 1,
+      "spellId": 281238,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Obliteration",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96221,
+      "nodeId": 76092,
+      "maxRanks": 1,
+      "spellId": 377073,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Frigid Executioner",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96222,
+      "nodeId": 76093,
+      "maxRanks": 1,
+      "spellId": 1249658,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Breath of Sindragosa",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96223,
+      "nodeId": 76094,
+      "maxRanks": 1,
+      "spellId": 455993,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Frostbane",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96224,
+      "nodeId": 76095,
+      "maxRanks": 1,
+      "spellId": 207057,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Shattering Blade",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96225,
+      "nodeId": 76096,
+      "maxRanks": 1,
+      "spellId": 47568,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Empower Rune Weapon",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96228,
+      "nodeId": 76098,
+      "maxRanks": 1,
+      "spellId": 1230301,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Frostreaper",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96229,
+      "nodeId": 76099,
+      "maxRanks": 1,
+      "spellId": 376938,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Everfrost",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96230,
+      "nodeId": 76100,
+      "maxRanks": 1,
+      "spellId": 253593,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Inexorable Assault",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96231,
+      "nodeId": 76101,
+      "maxRanks": 1,
+      "spellId": 435005,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Smothering Offense",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96232,
+      "nodeId": 76102,
+      "maxRanks": 2,
+      "spellId": 376251,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Runic Command",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96233,
+      "nodeId": 76103,
+      "maxRanks": 2,
+      "spellId": 316803,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Runic Overflow",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96235,
+      "nodeId": 76105,
+      "maxRanks": 1,
+      "spellId": 207142,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Avalanche",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96236,
+      "nodeId": 76106,
+      "maxRanks": 1,
+      "spellId": 279302,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Frostwyrm's Fury",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96238,
+      "nodeId": 76108,
+      "maxRanks": 1,
+      "spellId": 456238,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Hyperpyrexia",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96239,
+      "nodeId": 76109,
+      "maxRanks": 1,
+      "spellId": 1230284,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Northwinds",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96240,
+      "nodeId": 76110,
+      "maxRanks": 1,
+      "spellId": 194912,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Gathering Storm",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96242,
+      "nodeId": 76112,
+      "maxRanks": 1,
+      "spellId": 377056,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Biting Cold",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96243,
+      "nodeId": 76113,
+      "maxRanks": 1,
+      "spellId": 207230,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Frostscythe",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96244,
+      "nodeId": 76114,
+      "maxRanks": 1,
+      "spellId": 49184,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Howling Blast",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96245,
+      "nodeId": 76115,
+      "maxRanks": 1,
+      "spellId": 49143,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Frost Strike",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96246,
+      "nodeId": 76116,
+      "maxRanks": 1,
+      "spellId": 49020,
+      "replacementId": 316239,
+      "overrideId": 0,
+      "name": "Obliterate",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96247,
+      "nodeId": 76117,
+      "maxRanks": 1,
+      "spellId": 51128,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Killing Machine",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96248,
+      "nodeId": 76118,
+      "maxRanks": 1,
+      "spellId": 456230,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Arctic Assault",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96252,
+      "nodeId": 76121,
+      "maxRanks": 1,
+      "spellId": 207061,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Murderous Efficiency",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96253,
+      "nodeId": 76122,
+      "maxRanks": 2,
+      "spellId": 377098,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Bonegrinder",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96254,
+      "nodeId": 76123,
+      "maxRanks": 1,
+      "spellId": 1230153,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Killing Streak",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96255,
+      "nodeId": 76124,
+      "maxRanks": 1,
+      "spellId": 374747,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Perseverance of the Ebon Blade",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96256,
+      "nodeId": 76125,
+      "maxRanks": 1,
+      "spellId": 391398,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Bloodshot",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96257,
+      "nodeId": 76126,
+      "maxRanks": 2,
+      "spellId": 374717,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Improved Heart Strike",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96258,
+      "nodeId": 76127,
+      "maxRanks": 1,
+      "spellId": 1263781,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sanguinary Burst",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96259,
+      "nodeId": 76128,
+      "maxRanks": 1,
+      "spellId": 1263743,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blood Mist",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96260,
+      "nodeId": 76129,
+      "maxRanks": 1,
+      "spellId": 377637,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Insatiable Blade",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96261,
+      "nodeId": 76130,
+      "maxRanks": 1,
+      "spellId": 377668,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Everlasting Bond",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96262,
+      "nodeId": 76131,
+      "maxRanks": 1,
+      "spellId": 391458,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sanguine Ground",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96263,
+      "nodeId": 76132,
+      "maxRanks": 1,
+      "spellId": 205723,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Red Thirst",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96264,
+      "nodeId": 76133,
+      "maxRanks": 1,
+      "spellId": 114556,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Purgatory",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96266,
+      "nodeId": 76135,
+      "maxRanks": 1,
+      "spellId": 221536,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Heartbreaker",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96268,
+      "nodeId": 76137,
+      "maxRanks": 1,
+      "spellId": 273946,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Hemostasis",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96269,
+      "nodeId": 76138,
+      "maxRanks": 1,
+      "spellId": 49028,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Dancing Rune Weapon",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96271,
+      "nodeId": 76139,
+      "maxRanks": 1,
+      "spellId": 1279633,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Bloody Reflection",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96272,
+      "nodeId": 76140,
+      "maxRanks": 2,
+      "spellId": 317133,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Improved Vampiric Blood",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96273,
+      "nodeId": 76141,
+      "maxRanks": 1,
+      "spellId": 194662,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Rapid Decomposition",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96274,
+      "nodeId": 76142,
+      "maxRanks": 1,
+      "spellId": 374715,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Improved Bone Shield",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96276,
+      "nodeId": 76143,
+      "maxRanks": 1,
+      "spellId": 1264296,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Lifeblood",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96277,
+      "nodeId": 76144,
+      "maxRanks": 1,
+      "spellId": 219786,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Ossuary",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96278,
+      "nodeId": 76145,
+      "maxRanks": 1,
+      "spellId": 377629,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Leeching Strike",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96279,
+      "nodeId": 76146,
+      "maxRanks": 1,
+      "spellId": 317610,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Relish in Blood",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96280,
+      "nodeId": 76147,
+      "maxRanks": 1,
+      "spellId": 195679,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Bloodworms",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96282,
+      "nodeId": 76148,
+      "maxRanks": 1,
+      "spellId": 390196,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Magus of the Dead",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96283,
+      "nodeId": 76149,
+      "maxRanks": 2,
+      "spellId": 390259,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Commander of the Dead",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96284,
+      "nodeId": 76150,
+      "maxRanks": 2,
+      "spellId": 377440,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Unholy Aura",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96286,
+      "nodeId": 76152,
+      "maxRanks": 2,
+      "spellId": 377590,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Ancient Power",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96289,
+      "nodeId": 76155,
+      "maxRanks": 1,
+      "spellId": 1290864,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Cycle of Death",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96290,
+      "nodeId": 76156,
+      "maxRanks": 1,
+      "spellId": 390270,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Coil of Devastation",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96294,
+      "nodeId": 76160,
+      "maxRanks": 1,
+      "spellId": 377592,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Morbidity",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96296,
+      "nodeId": 76162,
+      "maxRanks": 1,
+      "spellId": 455396,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Foul Infections",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96301,
+      "nodeId": 76166,
+      "maxRanks": 1,
+      "spellId": 1264235,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Deadly Reach",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96302,
+      "nodeId": 76167,
+      "maxRanks": 1,
+      "spellId": 206974,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Foul Bulwark",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96303,
+      "nodeId": 76168,
+      "maxRanks": 1,
+      "spellId": 195182,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Marrowrend",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96304,
+      "nodeId": 76169,
+      "maxRanks": 1,
+      "spellId": 206930,
+      "replacementId": 316239,
+      "overrideId": 0,
+      "name": "Heart Strike",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96305,
+      "nodeId": 76170,
+      "maxRanks": 1,
+      "spellId": 50842,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blood Boil",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96306,
+      "nodeId": 76171,
+      "maxRanks": 1,
+      "spellId": 458572,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Bone Collector",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96307,
+      "nodeId": 76172,
+      "maxRanks": 1,
+      "spellId": 391395,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Iron Heart",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96308,
+      "nodeId": 76173,
+      "maxRanks": 1,
+      "spellId": 55233,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Vampiric Blood",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96309,
+      "nodeId": 76174,
+      "maxRanks": 1,
+      "spellId": 391386,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blood Feast",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96311,
+      "nodeId": 76176,
+      "maxRanks": 1,
+      "spellId": 1242608,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Raise Abomination",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 133514,
+      "nodeId": 76176,
+      "maxRanks": 1,
+      "spellId": 1242147,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Summon Gargoyle",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 96313,
+      "nodeId": 76178,
+      "maxRanks": 1,
+      "spellId": 276023,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Harbinger of Doom",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96314,
+      "nodeId": 76179,
+      "maxRanks": 1,
+      "spellId": 343294,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Soul Reaper",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96317,
+      "nodeId": 76181,
+      "maxRanks": 1,
+      "spellId": 194916,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "All Will Serve",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96318,
+      "nodeId": 76182,
+      "maxRanks": 1,
+      "spellId": 1241705,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Outnumber",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96321,
+      "nodeId": 76184,
+      "maxRanks": 1,
+      "spellId": 1241858,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Unholy Devotion",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96322,
+      "nodeId": 76185,
+      "maxRanks": 1,
+      "spellId": 1233448,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Dark Transformation",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96323,
+      "nodeId": 76186,
+      "maxRanks": 1,
+      "spellId": 390166,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Plague Mastery",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 133365,
+      "nodeId": 76186,
+      "maxRanks": 1,
+      "spellId": 1238900,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Grave Mastery",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 96324,
+      "nodeId": 76187,
+      "maxRanks": 1,
+      "spellId": 207272,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Infected Claws",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96326,
+      "nodeId": 76189,
+      "maxRanks": 1,
+      "spellId": 77575,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Outbreak",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96327,
+      "nodeId": 76190,
+      "maxRanks": 1,
+      "spellId": 55090,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Scourge Strike",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96328,
+      "nodeId": 76191,
+      "maxRanks": 1,
+      "spellId": 49530,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sudden Doom",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96329,
+      "nodeId": 76192,
+      "maxRanks": 1,
+      "spellId": 390283,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Superstrain",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96330,
+      "nodeId": 76193,
+      "maxRanks": 1,
+      "spellId": 455397,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Festering Scythe",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96331,
+      "nodeId": 76194,
+      "maxRanks": 1,
+      "spellId": 377587,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Ghoulish Frenzy",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96333,
+      "nodeId": 76196,
+      "maxRanks": 1,
+      "spellId": 42650,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Army of the Dead",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 96334,
+      "nodeId": 76197,
+      "maxRanks": 1,
+      "spellId": 207269,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Ebon Fever",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125815,
+      "nodeId": 101882,
+      "maxRanks": 1,
+      "spellId": 455135,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Menacing Magus",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125874,
+      "nodeId": 101929,
+      "maxRanks": 1,
+      "spellId": 51271,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Pillar of Frost",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125875,
+      "nodeId": 101930,
+      "maxRanks": 1,
+      "spellId": 377190,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Enduring Strength",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125876,
+      "nodeId": 101931,
+      "maxRanks": 1,
+      "spellId": 377076,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Rage of the Frozen Champion",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125877,
+      "nodeId": 101932,
+      "maxRanks": 1,
+      "spellId": 456240,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "The Long Winter",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125878,
+      "nodeId": 101933,
+      "maxRanks": 1,
+      "spellId": 435010,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Icy Death Torrent",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 126017,
+      "nodeId": 102009,
+      "maxRanks": 1,
+      "spellId": 377226,
+      "replacementId": 196770,
+      "overrideId": 0,
+      "name": "Frozen Dominion",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 126296,
+      "nodeId": 102242,
+      "maxRanks": 1,
+      "spellId": 458753,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Bloodied Blade",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 126298,
+      "nodeId": 102243,
+      "maxRanks": 1,
+      "spellId": 1265869,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Plague Infusion",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 126300,
+      "nodeId": 102244,
+      "maxRanks": 1,
+      "spellId": 1263824,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Consumption",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 126301,
+      "nodeId": 102245,
+      "maxRanks": 1,
+      "spellId": 458752,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Carnage",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 131618,
+      "nodeId": 106790,
+      "maxRanks": 1,
+      "spellId": 456237,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Cryogenic Chamber",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 131619,
+      "nodeId": 106791,
+      "maxRanks": 1,
+      "spellId": 1230272,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Icy Onslaught",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 133513,
+      "nodeId": 108124,
+      "maxRanks": 1,
+      "spellId": 1271974,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blightfall",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 133515,
+      "nodeId": 108126,
+      "maxRanks": 1,
+      "spellId": 1254552,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blightburst",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 133516,
+      "nodeId": 108127,
+      "maxRanks": 2,
+      "spellId": 1242604,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Scourging",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 133522,
+      "nodeId": 108129,
+      "maxRanks": 1,
+      "spellId": 1247378,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Putrefy",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 125816,
+      "nodeId": 108130,
+      "maxRanks": 1,
+      "spellId": 455386,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Doomed Bidding",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 133523,
+      "nodeId": 108131,
+      "maxRanks": 1,
+      "spellId": 1241567,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Clawing Shadows",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 133546,
+      "nodeId": 108151,
+      "maxRanks": 1,
+      "spellId": 377580,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Putrid Echoes",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 133362,
+      "nodeId": 109258,
+      "maxRanks": 1,
+      "spellId": 1238680,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Frostbound Will",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 133517,
+      "nodeId": 109392,
+      "maxRanks": 1,
+      "spellId": 377514,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Reaping",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 135676,
+      "nodeId": 109458,
+      "maxRanks": 1,
+      "spellId": 1256813,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Lord of the Dead",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 136797,
+      "nodeId": 110260,
+      "maxRanks": 1,
+      "spellId": 288848,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Necromancer's Cunning",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 136917,
+      "nodeId": 110353,
+      "maxRanks": 1,
+      "spellId": 1264506,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Dance of Midnight",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 136916,
+      "nodeId": 110353,
+      "maxRanks": 2,
+      "spellId": 1264405,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Dance of Midnight",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 136915,
+      "nodeId": 110353,
+      "maxRanks": 1,
+      "spellId": 1264351,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Dance of Midnight",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 136920,
+      "nodeId": 110354,
+      "maxRanks": 1,
+      "spellId": 1242158,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Forbidden Knowledge",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 136919,
+      "nodeId": 110354,
+      "maxRanks": 2,
+      "spellId": 1256565,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Forbidden Knowledge",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 136918,
+      "nodeId": 110354,
+      "maxRanks": 1,
+      "spellId": 1256566,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Forbidden Knowledge",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 136968,
+      "nodeId": 110400,
+      "maxRanks": 1,
+      "spellId": 1265632,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Chosen of Frostbrood",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 136967,
+      "nodeId": 110400,
+      "maxRanks": 2,
+      "spellId": 1265633,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Chosen of Frostbrood",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 136966,
+      "nodeId": 110400,
+      "maxRanks": 1,
+      "spellId": 1265637,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Chosen of Frostbrood",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 3,
+      "entryId": 117629,
+      "nodeId": 95032,
+      "maxRanks": 1,
+      "spellId": 443560,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Swift and Painful",
+      "specs": [
+        250,
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 33,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117630,
+      "nodeId": 95033,
+      "maxRanks": 1,
+      "spellId": 434143,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Infliction of Sorrow",
+      "specs": [
+        250,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 31,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117631,
+      "nodeId": 95034,
+      "maxRanks": 1,
+      "spellId": 434905,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Grim Reaper",
+      "specs": [
+        250,
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 33,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117632,
+      "nodeId": 95035,
+      "maxRanks": 1,
+      "spellId": 440476,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Pact of the Deathbringer",
+      "specs": [
+        250,
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 33,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 123420,
+      "nodeId": 95035,
+      "maxRanks": 1,
+      "spellId": 440282,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Rune Carved Plates",
+      "specs": [
+        250,
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 33,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117633,
+      "nodeId": 95036,
+      "maxRanks": 1,
+      "spellId": 439851,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Wave of Souls",
+      "specs": [
+        250,
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 33,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117634,
+      "nodeId": 95037,
+      "maxRanks": 1,
+      "spellId": 444074,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Horsemen's Aid",
+      "specs": [
+        251,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 32,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 123410,
+      "nodeId": 95037,
+      "maxRanks": 1,
+      "spellId": 444083,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Pact of the Apocalypse",
+      "specs": [
+        251,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 32,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117637,
+      "nodeId": 95040,
+      "maxRanks": 1,
+      "spellId": 434151,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Incite Terror",
+      "specs": [
+        250,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 31,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117638,
+      "nodeId": 95041,
+      "maxRanks": 1,
+      "spellId": 444040,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Apocalypse Now",
+      "specs": [
+        251,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 32,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117639,
+      "nodeId": 95042,
+      "maxRanks": 1,
+      "spellId": 444069,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Fury of the Horsemen",
+      "specs": [
+        251,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 32,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 123411,
+      "nodeId": 95042,
+      "maxRanks": 1,
+      "spellId": 444072,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "A Feast of Souls",
+      "specs": [
+        251,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 32,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117640,
+      "nodeId": 95043,
+      "maxRanks": 1,
+      "spellId": 440031,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Bind in Darkness",
+      "specs": [
+        250,
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 33,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117641,
+      "nodeId": 95044,
+      "maxRanks": 1,
+      "spellId": 444037,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Hungering Thirst",
+      "specs": [
+        251,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 32,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117642,
+      "nodeId": 95045,
+      "maxRanks": 1,
+      "spellId": 1280658,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Inevitable",
+      "specs": [
+        250,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 31,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117643,
+      "nodeId": 95046,
+      "maxRanks": 1,
+      "spellId": 434260,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "The Blood is Life",
+      "specs": [
+        250,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 31,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117644,
+      "nodeId": 95047,
+      "maxRanks": 1,
+      "spellId": 444033,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Whitemane's Famine",
+      "specs": [
+        251,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 32,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117645,
+      "nodeId": 95048,
+      "maxRanks": 1,
+      "spellId": 434033,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blood-Soaked Ground",
+      "specs": [
+        250,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 31,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 136836,
+      "nodeId": 95048,
+      "maxRanks": 1,
+      "spellId": 1234559,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Desecrate",
+      "specs": [
+        250,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 31,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117646,
+      "nodeId": 95049,
+      "maxRanks": 1,
+      "spellId": 437122,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Death's Messenger",
+      "specs": [
+        250,
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 33,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 128234,
+      "nodeId": 95049,
+      "maxRanks": 1,
+      "spellId": 439948,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Expelling Shield",
+      "specs": [
+        250,
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 33,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117648,
+      "nodeId": 95051,
+      "maxRanks": 1,
+      "spellId": 433901,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Vampiric Strike",
+      "specs": [
+        250,
+        252
+      ],
+      "grantedSpecs": [
+        250,
+        252
+      ],
+      "subtree": 31,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117650,
+      "nodeId": 95053,
+      "maxRanks": 1,
+      "spellId": 434152,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Gift of the San'layn",
+      "specs": [
+        250,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 31,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117651,
+      "nodeId": 95054,
+      "maxRanks": 1,
+      "spellId": 444099,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Mawsworn Menace",
+      "specs": [
+        251,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 32,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117652,
+      "nodeId": 95055,
+      "maxRanks": 1,
+      "spellId": 434261,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Pact of the San'layn",
+      "specs": [
+        250,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 31,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117893,
+      "nodeId": 95055,
+      "maxRanks": 1,
+      "spellId": 434263,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sanguine Scent",
+      "specs": [
+        250,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 31,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117653,
+      "nodeId": 95056,
+      "maxRanks": 1,
+      "spellId": 434100,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Vampiric Aura",
+      "specs": [
+        250,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 31,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117891,
+      "nodeId": 95056,
+      "maxRanks": 1,
+      "spellId": 434136,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Bloody Fortitude",
+      "specs": [
+        250,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 31,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117654,
+      "nodeId": 95057,
+      "maxRanks": 1,
+      "spellId": 436687,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Dark Talons",
+      "specs": [
+        250,
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 33,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 128266,
+      "nodeId": 95057,
+      "maxRanks": 1,
+      "spellId": 469870,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Reaper's Onslaught",
+      "specs": [
+        250,
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 33,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117655,
+      "nodeId": 95058,
+      "maxRanks": 1,
+      "spellId": 441894,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Wither Away",
+      "specs": [
+        250,
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 33,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117656,
+      "nodeId": 95059,
+      "maxRanks": 1,
+      "spellId": 444052,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Nazgrim's Conquest",
+      "specs": [
+        251,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 32,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117657,
+      "nodeId": 95060,
+      "maxRanks": 1,
+      "spellId": 444008,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "On a Paler Horse",
+      "specs": [
+        251,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 32,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 123412,
+      "nodeId": 95060,
+      "maxRanks": 1,
+      "spellId": 444010,
+      "replacementId": 124285,
+      "overrideId": 0,
+      "name": "Death Charge",
+      "specs": [
+        251,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 32,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117658,
+      "nodeId": 95061,
+      "maxRanks": 1,
+      "spellId": 437161,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Soul Rupture",
+      "specs": [
+        250,
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 33,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117659,
+      "nodeId": 95062,
+      "maxRanks": 1,
+      "spellId": 439843,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Reaper's Mark",
+      "specs": [
+        250,
+        251
+      ],
+      "grantedSpecs": [
+        250,
+        251
+      ],
+      "subtree": 33,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117660,
+      "nodeId": 95063,
+      "maxRanks": 1,
+      "spellId": 444097,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Trollbane's Icy Fury",
+      "specs": [
+        251,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 32,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117661,
+      "nodeId": 95064,
+      "maxRanks": 1,
+      "spellId": 433934,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Newly Turned",
+      "specs": [
+        250,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 31,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117892,
+      "nodeId": 95064,
+      "maxRanks": 1,
+      "spellId": 434028,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Vampiric Speed",
+      "specs": [
+        250,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 31,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117662,
+      "nodeId": 95065,
+      "maxRanks": 1,
+      "spellId": 434075,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Frenzied Bloodthirst",
+      "specs": [
+        250,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 31,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117663,
+      "nodeId": 95066,
+      "maxRanks": 1,
+      "spellId": 444005,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Rider's Champion",
+      "specs": [
+        251,
+        252
+      ],
+      "grantedSpecs": [
+        251,
+        252
+      ],
+      "subtree": 32,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117664,
+      "nodeId": 95067,
+      "maxRanks": 1,
+      "spellId": 444047,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Mograine's Might",
+      "specs": [
+        251,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 32,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117665,
+      "nodeId": 95068,
+      "maxRanks": 1,
+      "spellId": 441378,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Exterminate",
+      "specs": [
+        250,
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 33,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 135991,
+      "nodeId": 109733,
+      "maxRanks": 1,
+      "spellId": 1265855,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Echoing Fury",
+      "specs": [
+        250,
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 33,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 135992,
+      "nodeId": 109734,
+      "maxRanks": 1,
+      "spellId": 1265932,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Deathly Blows",
+      "specs": [
+        250,
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 33,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 135993,
+      "nodeId": 109735,
+      "maxRanks": 1,
+      "spellId": 1265859,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Frigid Resolve",
+      "specs": [
+        250,
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 33,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 135994,
+      "nodeId": 109736,
+      "maxRanks": 1,
+      "spellId": 1265574,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Transfusion",
+      "specs": [
+        250,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 31,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 135995,
+      "nodeId": 109737,
+      "maxRanks": 1,
+      "spellId": 1265547,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Thrill of Blood",
+      "specs": [
+        250,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 31,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 135996,
+      "nodeId": 109738,
+      "maxRanks": 1,
+      "spellId": 434157,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Visceral Strength",
+      "specs": [
+        250,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 31,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 135997,
+      "nodeId": 109739,
+      "maxRanks": 1,
+      "spellId": 1265971,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Unholy Armaments",
+      "specs": [
+        251,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 32,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 135998,
+      "nodeId": 109740,
+      "maxRanks": 1,
+      "spellId": 1265949,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Let Terror Reign",
+      "specs": [
+        251,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 32,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 135999,
+      "nodeId": 109741,
+      "maxRanks": 1,
+      "spellId": 1265959,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Ride or Die!",
+      "specs": [
+        251,
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 32,
+      "nodeType": 0
+    },
+    {
+      "tree": 4,
+      "entryId": 123322,
+      "nodeId": 99820,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 32,
+      "nodeType": 3
+    },
+    {
+      "tree": 4,
+      "entryId": 123321,
+      "nodeId": 99820,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        252
+      ],
+      "grantedSpecs": [],
+      "subtree": 31,
+      "nodeType": 3
+    },
+    {
+      "tree": 4,
+      "entryId": 123324,
+      "nodeId": 99821,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 33,
+      "nodeType": 3
+    },
+    {
+      "tree": 4,
+      "entryId": 123323,
+      "nodeId": 99821,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        251
+      ],
+      "grantedSpecs": [],
+      "subtree": 32,
+      "nodeType": 3
+    },
+    {
+      "tree": 4,
+      "entryId": 123326,
+      "nodeId": 99822,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 33,
+      "nodeType": 3
+    },
+    {
+      "tree": 4,
+      "entryId": 123325,
+      "nodeId": 99822,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        250
+      ],
+      "grantedSpecs": [],
+      "subtree": 31,
+      "nodeType": 3
+    }
+  ]
+}
