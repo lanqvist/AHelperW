@@ -160,7 +160,8 @@ ns.specProfiles = {
 }
 
 -- Area attacks without a usable unit range answer: a positive melee check proves range.
-ns.rangeProxies = { [845] = 12294, [207230] = 49020 }
+-- Frostscythe and Glacial Advance stayed unknown in game while Obliterate was in range.
+ns.rangeProxies = { [845] = 12294, [207230] = 49020, [194913] = 49020 }
 
 function ns.GetAPLProfile()
   local _, spec = ns.GetSpecData()
