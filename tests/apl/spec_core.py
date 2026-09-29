@@ -100,7 +100,8 @@ SCENARIOS = [
              check=expressions({'runic_power.max': 120, 'runic_power.deficit': 20, 'rune.time_to_6': 0})),
     # Placeholder profiles refuse a model until the spec work adds one.
     Scenario('Frost: модели ещё нет — отказ', ('refused', 'модель APL ещё не реализована'), fixture=FROST_DB),
-    Scenario('Unholy: модели ещё нет — отказ', ('refused', 'модель APL ещё не реализована'), fixture=UNHOLY_SAN),
+    Scenario('Unholy: модель из профиля (UnholyAPL)', fixture=UNHOLY_SAN,
+             check=lambda m, _r: (type(m).__name__ == 'UnholyAPL' and m.hero_tree == 'sanlayn', type(m).__name__)),
 ]
 
 FIXTURE = FROST_DB
