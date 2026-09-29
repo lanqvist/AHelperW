@@ -154,7 +154,13 @@ class Reader:
                     cut = receipt['y'] + receipt['height'] - r['y']
                     r['y'] += cut; r['height'] -= cut
             self.regions['context/' + key] = r
+        # Death Knight runes: one colour sample per rune square (ready / cd / unknown).
+        runes = c.get('runes') or {}
+        rune_rects = runes.get('rects') or []
+        self.rune_rects = ({f'rune/{i+1}':r for i,r in enumerate(rune_rects)}
+                           if runes.get('version')==1 and runes.get('count')==6 and len(rune_rects)==6 else {})
         rects = [s['rect'] for _,_,_,s in self.entries] + list(c['resources'].values()) + list(c['context'].values())
+        rects += list(self.rune_rects.values())
         if c.get('castReceipt',{}).get('rect'): rects.append(c['castReceipt']['rect'])
         rects += [m['rect'] for m in c.get('comboHistory',{}).get('markers',[]) if m.get('rect')]
         for r in rects + list(self.regions.values()):
@@ -188,6 +194,22 @@ class Reader:
         # Live maxima read from the HUD (context/maxenergy); the export's value
         # is a snapshot and can be lower than the current maximum.
         self.live_max = {}
+
+    def observation_version(self, key, versions):
+        """Row versions an OCR value depends on; a changed row voids the cached value.
+
+        The next-rune countdown belongs to the rune squares: when a rune's colour
+        changes, the old countdown may describe another rune.
+        """
+        if key == 'context/runeNext':
+            return tuple(versions.get(k) for k in self.rune_rects)
+        return versions.get(key.rsplit('/',1)[0])
+
+    def rune_rows(self, image):
+        """Colour of each rune square: ready, cd (recharging) or unknown."""
+        return {key:(self.color(image,int(r['x']+r['width']/2),int(r['y']+r['height']/2),['ready','cd','unknown'])
+                     if min(r['width'],r['height'])>=7 else {'state':'unknown','colorConfidence':0.,'rgb':[0,0,0]})
+                for key,r in self.rune_rects.items()}
 
     def crop(self, image, r):
         x,y,x2,y2 = box(r); bx,by,_,_ = self.bounds
@@ -297,21 +319,21 @@ class Reader:
             maximum=spec.get('maxCharges')
             if key.endswith('/stacks') and isinstance(maximum,(int,float)) and value>maximum: return None
             if key=='resource/targetHealthPercent' and value>100: return None
-            if key in ('resource/chi','resource/energy'):
+            if key in ('resource/chi','resource/energy','resource/runic_power'):
                 resource=key.split('/')[1]
                 maximum=self.cfg.get('resourceMeta',{}).get(resource,{}).get('max')
                 live=self.live_max.get(resource)
                 if isinstance(live,(int,float)) and (not isinstance(maximum,(int,float)) or live>maximum): maximum=live
                 if isinstance(maximum,(int,float)) and value>maximum: return None
-                if key=='resource/chi' and not value.is_integer(): return None
+                if key in ('resource/chi','resource/runic_power') and not value.is_integer(): return None
             if key=='context/targets' and (not value.is_integer() or not 1<=value<=80): return None
             return value
         # Read the live maximum first so this batch's resource value can use it.
         for key, result in zip(keys, results):
-            if key=='context/maxenergy':
+            if key in ('context/maxenergy','context/maxrunic_power'):
                 raw, confidence = result[0].strip(), float(result[1])
                 if confidence>=.92 and re.fullmatch(r'\d{2,3}', raw) and 50<=int(raw)<=300:
-                    self.live_max['energy']=int(raw)
+                    self.live_max[key.removeprefix('context/max')]=int(raw)
         for key, result in zip(keys, results):
             raw, confidence = result[0].strip(), float(result[1])
             value=parse(key,raw,confidence)
@@ -407,6 +429,7 @@ class Reader:
                 {'ready': [0,1,.53], 'cd': [.65,.12,.12], 'unknown': [.16,.16,.16]})
             rows['gcd']=self.color(image,gcd['x']+5,gcd['y']+gcd['height']-5,
                                    ['ready','cd','unknown'],gcd_palette)
+        rows.update(self.rune_rows(image))
         return {'schema':'AHelperW.Reader','version':1,'profileHash':self.hash,'valid':True,
                 'capturedAt':timestamp,'expiresAt':timestamp+.8,'rows':rows,'numbers':{},
                 'castReceipt':decode_cast_receipt(image,self.cfg.get('castReceipt'),self.bounds),
@@ -530,6 +553,7 @@ class App(tk.Tk):
         self.table.delete(*self.table.get_children())
         for key,name,kind,_ in reader.entries: self.table.insert('', 'end',iid=key,text=name,values=(kind,'?','?','?','—'))
         self.table.insert('','end',iid='gcd',text='GCD',values=('resource','?','?','?','—'))
+        for key in reader.rune_rects: self.table.insert('','end',iid=key,text='Руна '+key[5:],values=('rune','?','—','—','—'))
         for key in reader.regions:
             if key.startswith(('resource/','context/')): self.table.insert('','end',iid=key,text=key,values=('OCR','?','—','—','—'))
         for key in reader.context_colors:
@@ -784,7 +808,7 @@ class App(tk.Tk):
                         accepted=False
                         with shared_lock:
                             if epoch==shared['epoch'] and not halt.is_set():
-                                shared['cache'].update({key:(value,versions.get(key.rsplit('/',1)[0]))
+                                shared['cache'].update({key:(value,reader.observation_version(key,versions))
                                                        for key,value in numbers.items()})
                                 accepted=True
                         self.debug.event('ocr_result', generation=token, profileHash=reader.hash,
@@ -834,7 +858,7 @@ class App(tk.Tk):
                             source=reader.plan.aliases.get(key,key)
                             cached=shared['cache'].get(source)
                             owner=source.rsplit('/',1)[0]
-                            same_observation = cached and cached[1]==shared['versions'].get(owner)
+                            same_observation = cached and cached[1]==reader.observation_version(source,shared['versions'])
                             if cached and source in charge_pixels:
                                 # A changed colour alone does not invalidate a
                                 # charge. Changed digits do, even if colour stays.
@@ -988,7 +1012,7 @@ class App(tk.Tk):
         selected=self.table.selection()
         if not selected or not self.last_good: return
         key=selected[0]; data,img=self.last_ocr_good or self.last_good
-        r=self.reader.regions.get(key)
+        r=self.reader.regions.get(key) or self.reader.rune_rects.get(key)
         if r is None:
             r=self.reader.context_colors.get(key.removeprefix('context/'))
         if r is None:

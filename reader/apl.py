@@ -155,6 +155,44 @@ class APLRuntime:
         if value is None or item.get('expiresAt',0)<=time.time(): return unknown(key)
         return value
 
+    def resource_max(self,name):
+        # The HUD shows the live maximum (context/max<name>); the export's value
+        # is a snapshot and can be lower than the current maximum.
+        live=self.number('context/max'+name)
+        if not isinstance(live,Unknown) and live>0: return live
+        value=self.cfg.get('resourceMeta',{}).get(name,{}).get('max')
+        return value if isinstance(value,(int,float)) and value>0 else unknown(name+'.max')
+
+    def rune_count(self):
+        """Ready runes from the six rune colours; one unreadable rune makes it unknown."""
+        rows=self.data.get('rows',{})
+        states=[rows.get(f'rune/{i}',{}).get('state') for i in range(1,7)]
+        if not all(state in ('ready','cd') for state in states):
+            return unknown('руны: состояние не прочитано')
+        return states.count('ready')
+
+    def rune(self,name):
+        count=self.rune_count()
+        field=name[5:]
+        if name=='rune': return count
+        if field in ('max','deficit'):
+            if not self.cfg.get('runes'): return unknown(name)
+            return 6 if field=='max' else binary('-',6,count)
+        match=re.fullmatch(r'time_to_(\d)',field)
+        if not match or not 1<=int(match.group(1))<=6: return unknown(name)
+        wanted=int(match.group(1))
+        if isinstance(count,Unknown): return count
+        if wanted<=count: return 0
+        if wanted==count+1:
+            # HUD countdown to the next rune, invalidated by any rune colour
+            # change; corrected by the age of the OCR frame it came from.
+            value=self.number('context/runeNext')
+            if not isinstance(value,Unknown):
+                captured=self.data.get('capturedAt',0)
+                age=captured-self.data['numbers']['context/runeNext'].get('capturedAt',captured)
+                return max(0.,value-max(0.,age))
+        return unknown(name+' (время восстановления рун)')
+
     def state(self,kind,spell):
         square=self.squares.get((kind,spell))
         return self.data['rows'].get(square[0],{}).get('state','unknown') if square else 'unknown'
@@ -197,6 +235,12 @@ class APLRuntime:
             if state=='nores' and flag in ('ready','cd'): return flag=='ready'
             return unknown('прерываемость каста цели')
         parts=name.split('.')
+        if parts[0]=='rune': return self.rune(name)
+        if parts[0] in self.cfg.get('resourceMeta',{}) and parts[0]!='runes' and len(parts)<=2:
+            # Numeric resources from the HUD: <name>, <name>.max, <name>.deficit.
+            if len(parts)==1: return self.number('resource/'+parts[0])
+            if parts[1]=='max': return self.resource_max(parts[0])
+            if parts[1]=='deficit': return binary('-',self.resource_max(parts[0]),self.number('resource/'+parts[0]))
         if parts[0]=='buff' and parts[1] in self.buffs:
             return self.aura('proc',self.buffs[parts[1]],parts[2])
         if name.startswith('debuff.colossus_smash.'):

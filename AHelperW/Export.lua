@@ -163,6 +163,19 @@ function ns.MakeHUDExport()
     end
   end
   for key, r in pairs(ns.Resources.regions or {}) do result.resources[key] = Rect(r) end
+  -- Death Knight runes: one colour sample per rune (display colours ready / cd /
+  -- unknown). Written only when every rune square is measurable.
+  if ns.Resources.runeTextures then
+    local rects, measured = Array(), 0
+    for i = 1, 6 do
+      local rect = Rect(ns.Resources.runeTextures[i])
+      if rect then rects[i], measured = rect, measured + 1 end
+    end
+    if measured == 6 then
+      result.runes = { version = 1, count = 6, rects = rects, source = "GetRuneCooldown isRuneReady",
+        states = { ready = "ready", recharging = "cd", unreadable = "unknown" } }
+    end
+  end
   result.resourceMeta = { [profile.primary] = { powerType = profile.powerType,
     max = ns.ReadValue(UnitPowerMax, "player", profile.powerType) } }
   if profile.secondary then

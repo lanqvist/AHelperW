@@ -159,7 +159,10 @@ function R.Build(specData)
   R.regions = { playerHealth = hpBar, targetHealth = targetBar,
     targetHealthPercent = targetBar.percentArea, gcd = gcdFrame }
   R.regions[profile and profile.primary or "primary"] = rageArea
-  if profile and profile.secondary then R.regions[profile.secondary] = hybrid end
+  -- Runes are six coloured squares, exported separately (Export.lua `runes`);
+  -- only a numeric secondary resource is an OCR region.
+  if profile and profile.secondary and R.secondary ~= "RUNES" then R.regions[profile.secondary] = hybrid end
+  R.runeTextures = R.secondary == "RUNES" and runes or nil
 
   hybrid.prev = nil -- иначе после смены спека вспышка «максимум» срабатывает ложно
   R.lastPowerMode = nil -- перепривязать якоря/шрифт ресурса после ребилда
@@ -377,9 +380,14 @@ end
 
 local function UpdateSecondary(pal)
   if R.secondary == "RUNES" then
+    -- Ready = ready colour, recharging = cd colour; the reader counts ready runes.
+    -- A secret or missing answer is shown as unknown, never as a spent rune.
     for i = 1, 6 do
-      local _, _, runeReady = GetRuneCooldown(i)
-      local c = runeReady and pal.ready or pal.pipOff
+      local ok, _, _, runeReady = pcall(GetRuneCooldown, i)
+      local c = pal.unknown
+      if ok and not IsSecretV(runeReady) then
+        if runeReady == true then c = pal.ready elseif runeReady == false then c = pal.cd end
+      end
       runes[i]:SetColorTexture(c[1], c[2], c[3], 1)
     end
     return

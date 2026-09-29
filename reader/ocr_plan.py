@@ -20,6 +20,8 @@ class OcrPlan:
         profile = PROFILES.get(reader.cfg.get('specID'))
         binary = profile.binary_auras if profile else frozenset()
         fast_timers = profile.fast_aura_timers if profile else frozenset()
+        # Profile resources (rage, energy, chi, runic power) are read every 0.15 s.
+        resources = {'resource/rage','resource/energy','resource/chi'} | {'resource/'+r for r in (profile.resources if profile else ())}
         for key in reader.regions:
             owner, field = key.rsplit('/',1)
             spec = specs.get(owner)
@@ -41,11 +43,11 @@ class OcrPlan:
                     self.periods[key] = .2
                 elif spec['spellID'] in (386164, 386196) and spec['kind']=='proc':
                     self.disabled[key] = 'no_duration_display'
-            elif key in ('resource/rage','resource/energy','resource/chi'): self.periods[key]=.15
+            elif key in resources: self.periods[key]=.15
             elif key=='context/energyRegen': self.periods[key]=.5
             elif key=='context/zenithRecharge': self.periods[key]=.5
-            elif key=='context/targets': self.periods[key]=.2
-            elif key in ('resource/playerHealth','context/maxrage','context/maxenergy'): self.periods[key]=2.
+            elif key in ('context/targets','context/runeNext'): self.periods[key]=.2
+            elif key in ('resource/playerHealth','context/maxrage','context/maxenergy','context/maxrunic_power'): self.periods[key]=2.
             elif key=='resource/targetHealth': self.disabled[key]='use_targetHealthPercent'
             elif key in ('context/range','context/chargeRange','context/potion','context/trinket1','context/trinket2'):
                 self.disabled[key]='text_status_not_numeric'
