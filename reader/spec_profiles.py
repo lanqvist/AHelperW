@@ -60,8 +60,15 @@ PROFILES = {
                      (DEATHBRINGER, RIDER), ('runic_power', 'runes'), 'in-development',
                      model=''),
     # --- Unholy DK (252): edited only by the Unholy work ---
+    # Fast timers: Dark Transformation (remains<gcd*2 / >5), Essence of the Blood
+    # Queen (remains<gcd*3), Festering Scythe (remains<=3). Binary: on/off auras and
+    # target debuffs; Lesser Ghoul stack=0/>=1 is read as aura down/up.
     252: SpecProfile('deathknight.unholy', 252, 'Unholy DK', 'dk-unholy-apl',
                      (RIDER, SANLAYN), ('runic_power', 'runes'), 'in-development',
+                     fast_aura_timers=frozenset({1235391, 433925, 458123}),
+                     binary_auras=frozenset({81340, 1235391, 1242223, 1254252, 458123, 1271975, 1271199,
+                                             42650, 1242654, 433899, 434153, 10060,
+                                             191587, 1240996, 1241521, 1241077}),
                      model=''),
     # --- end of DK entries ---
 }

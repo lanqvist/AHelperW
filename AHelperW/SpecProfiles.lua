@@ -86,16 +86,42 @@ ns.specProfiles = {
     },
   },
   -- --- Unholy DK (252): edited only by the Unholy work ---
+  -- In development, not seen in game; reader model: reader/dk_unholy_apl.py. IDs and
+  -- evidence: docs/dk-unholy-apl/coverage.json. The pinned APL shares its lists
+  -- between both trees; San'layn adds only its Vampiric Strike auras.
   [252] = {
     id = "deathknight.unholy", name = "Unholy DK",
     heroTrees = {
-      [32] = { key = "rider_of_the_apocalypse", name = "Rider of the Apocalypse" },
-      [31] = { key = "sanlayn", name = "San'layn" },
+      [32] = { key = "rider_of_the_apocalypse", name = "Rider of the Apocalypse",
+        preset = { spells = {}, procs = {}, debuffs = {} } },
+      -- Vampiric Strike 433899, Essence of the Blood Queen 433925, Gift of the San'layn 434153.
+      [31] = { key = "sanlayn", name = "San'layn",
+        preset = { spells = {}, procs = { 433899, 433925, 434153 }, debuffs = {} } },
     },
     primary = "runic_power", powerType = Enum.PowerType.RunicPower,
     secondary = "runes", secondaryType = Enum.PowerType.Runes,
     referenceSpellID = 85948, -- Festering Strike (specialization_spells.inc, spec 252)
-    executeThresholds = {},
+    executeThresholds = {35}, -- Soul Reaper: target at or below 35% (or Reaping)
+    -- Replacements cast from the base button while their aura is up (sc_death_knight.cpp
+    -- set_replacement_action); they share its binding.
+    aliases = {
+      festering_scythe = { spellID = 458128, displaySpellID = 85948, procID = 458123, sharesBindingWith = "festering_strike", label = "Festering Scythe" },
+      vampiric_strike = { spellID = 433895, displaySpellID = 55090, procID = 433899, sharesBindingWith = "scourge_strike", label = "Vampiric Strike" },
+      necrotic_coil = { spellID = 1242174, displaySpellID = 47541, procID = 1242223, sharesBindingWith = "death_coil", label = "Necrotic Coil" },
+      graveyard = { spellID = 383269, displaySpellID = 207317, procID = 1242223, sharesBindingWith = "epidemic", label = "Graveyard" },
+      blightfall = { spellID = 1271967, displaySpellID = 1233448, procID = 1271975, sharesBindingWith = "dark_transformation", label = "Blightfall" },
+    },
+    -- Spells: Festering Strike, Scourge Strike, Death Coil, Epidemic, Putrefy, Soul Reaper,
+    -- Outbreak, Army of the Dead, Dark Transformation, Death and Decay, racials (DK Arcane
+    -- Torrent 50613). Procs: Sudden Doom, Dark Transformation, Forbidden Knowledge, Lesser
+    -- Ghoul, Festering Scythe, Blightfall, Blighted (set), Army of the Dead, Reaping, PI.
+    -- Debuffs: Virulent Plague, Dread Plague, Soul Reaper, Festering Scythe (target).
+    preset = {
+      spells = { 85948, 55090, 47541, 207317, 1247378, 343294, 77575, 42650, 1233448, 43265,
+        50613, 255647, 312411, 26297, 20572, 265221, 274738, 260364 },
+      procs = { 81340, 1235391, 1242223, 1254252, 458123, 1271975, 1271199, 42650, 1242654, 10060 },
+      debuffs = { 191587, 1240996, 1241521, 1241077 },
+    },
     contextCells = {
       maxrage = { export = "maxrunic_power", title = "MAX СР" },
       chargeRange = { export = "runeNext", title = "РУНА, С", source = "runeNext",

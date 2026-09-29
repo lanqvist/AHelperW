@@ -23,10 +23,10 @@ const specs = [
   { specID: 251, profileID: 'deathknight.frost', reference: 49020, heroID: 32, heroTree: 'rider_of_the_apocalypse',
     resources: ['runic_power'], context: ['runeNext', 'maxrunic_power'], runes: true },
   // Unholy entries — Unholy work only.
-  { specID: 252, profileID: 'deathknight.unholy', reference: 85948, heroID: 32, heroTree: 'rider_of_the_apocalypse',
-    resources: ['runic_power'], context: ['runeNext', 'maxrunic_power'], runes: true },
-  { specID: 252, profileID: 'deathknight.unholy', reference: 85948, heroID: 31, heroTree: 'sanlayn',
-    resources: ['runic_power'], context: ['runeNext', 'maxrunic_power'], runes: true },
+  { specID: 252, profileID: 'deathknight.unholy', reference: 85948, alias: ['vampiric_strike', 433895], heroID: 32,
+    heroTree: 'rider_of_the_apocalypse', resources: ['runic_power'], context: ['runeNext', 'maxrunic_power'], runes: true },
+  { specID: 252, profileID: 'deathknight.unholy', reference: 85948, alias: ['vampiric_strike', 433895], heroID: 31,
+    heroTree: 'sanlayn', resources: ['runic_power'], context: ['runeNext', 'maxrunic_power'], runes: true },
   // End of DK entries.
 ];
 const legacyTree = new Set([71, 72, 269]);
