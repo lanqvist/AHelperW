@@ -18,7 +18,7 @@
 | Fury / Slayer (72) | `experimental` | ST и AoE, два персонажа на разных аккаунтах; старт вне боя; до 121/121 подтверждений, все окна GCD с нажатием |
 | ВВ / Шадо-Пан (269) | `experimental` | после исправлений 150/151, 142/142 окна GCD; блокировок по энергии/комбо нет |
 | Frost DK (251): Deathbringer, Rider | `in-development`, модель `dk_frost_apl.py` | Deathbringer: ST и AoE с автонажатиями, 77/78 подтверждено, все окна GCD с нажатием |
-| Unholy DK (252): Rider, San'layn | `in-development`, модель `dk_unholy_apl.py` | ничего — сделано вслепую, офлайн |
+| Unholy DK (252): Rider, San'layn | `in-development`, модель `dk_unholy_apl.py` | San'layn: AoE/ST с автонажатиями, 68/69 подтверждено, все окна GCD с нажатием; Rider — только ранние бои |
 
 Автонажатия после загрузки профиля выключены для всех не-`game-observed` профилей.
 Репозиторий: GitHub `main` отправлен. Релиз **`v0.4.0`** (prerelease, 29 сентября) включает
@@ -56,6 +56,34 @@
   (`rune_pooling` к Reaper's Mark, `rp_pooling` к Breath), затем Pillar of Frost.
 - Frozen Dominion: кнопка Remorseless Winter не нажимается (так и задумано моделью).
 - Не проверено: Rider, Unholy, Breath of Sindragosa целиком, Frostbane/Chosen of Frostbrood.
+
+### Первые бои Unholy DK (29 сентября, в игре)
+
+Логи `20260929T092145Z-a4497b7f` (конец), `20260929T094017Z-2451e932`, `20260929T094508Z-4b691660`,
+`20260929T095028Z-88a4d40a`. Сначала Rider, затем San'layn (экспорт сменён пользователем).
+Исправления по порядку (каждое подтверждено следующим боем, кроме последнего):
+- **Эталон мили.** Пока Festering Scythe (аура 458123) заменяет Festering Strike, клиент не
+  отвечает на дальность 85948 → ячейка дальности и число целей «неизвестно», ротация ждала
+  цель. `ns.MeleeInRange` + `profile.rangeFallbacks` (Death Strike 49998): запасной эталон
+  спрашивается, только когда основной молчит; «вне» основного не перекрывается.
+- **Epidemic, Death and Decay** «неизвестно» при цели в мили → `ns.rangeProxies[id] = true`
+  (проверка мили). Прокси исходной кнопки действует и на её замену (Graveyard 383269 при
+  Forbidden Knowledge, Blightfall 1271967 при ауре 1271975) — `GetSpellState(effective, base)`.
+- **Epidemic без Virulent Plague на цели клиент отклоняет** (дважды) — по SimC
+  `target_filter_callback = virulent_plague`; модель требует дебафф 191587 на текущей цели.
+- **Окно Festering Scythe 1241077 — бафф игрока**, а не дебафф цели (как дебафф не горел
+  ни разу за 4315 кадров; квадрат баффа горел в 514). Без него Army of the Dead не выбиралась,
+  а за ней Dark Transformation и Putrefy.
+- **Vampiric Strike 433895 применялся без горящих 433899/Gift 434153** → блокировка
+  подтверждения Scourge Strike. Решение может нести `acceptSpellIDs` (cast_receipt,
+  input_sender); у кнопок с заменой при взятом таланте подтверждают оба ID, неизвестная
+  аура замены больше не блокирует.
+- Итог (лог `20260929T095028Z-88a4d40a`, ~110 с, в основном 5 целей): 69 нажатий, 68
+  подтверждено, 66/66 окон GCD с нажатием, пауз >2.5 с нет. Нажимались Graveyard, Blightfall,
+  Vampiric Strike, Army, DT, Soul Reaper, Outbreak. Одно нажатие Festering Strike клиент
+  отклонил (GCD мигнул, кнопка осталась ready; вероятно, разворот/движение) → блокировка
+  по правилу «кнопка осталась ready — блокировать». Не менялось; вопрос пользователю.
+- Не проверено: Putrefy (не выбирался в этих боях), Death and Decay, Rider после исправлений.
 
 ### Автоматический набор APL (29 сентября, в игре не проверено)
 
