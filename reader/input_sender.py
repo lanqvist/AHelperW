@@ -128,8 +128,17 @@ class Executor:
                 # back above 20%) turns the button unusable. A button that stays
                 # ready without an event remains unexplained and still latches.
                 state=data['rows'].get(request['row'],{}).get('state')
-                if data.get('capturedAt',0)>request['sentAt'] and state in ('unusable','nores','outofrange'):
+                captured=data.get('capturedAt',0)
+                if captured>request['sentAt'] and state in ('unusable','nores','outofrange'):
                     request.setdefault('rejectedState',state)
+                # A GCD that starts and clears within 0.5 s (a real one lasts >= 0.75 s)
+                # is the client refusing the press even with the button still ready
+                # (seen: Festering Strike, log 20260929T095028Z-88a4d40a). User decision.
+                gcd=data['rows'].get('gcd',{}).get('state')
+                if captured>request['sentAt']:
+                    if gcd=='cd': request.setdefault('gcdBusyAt',captured)
+                    elif gcd=='ready' and 'gcdBusyAt' in request and captured-request['gcdBusyAt']<0.5:
+                        request.setdefault('rejectedState','gcd_flicker')
                 if matched:
                     self.receipt_pending=None
                     self.pending=None
@@ -142,7 +151,7 @@ class Executor:
                         self.pending=None
                         self.debug.event('input_rejected_by_client',action=request['action'],
                                          buttonState=request['rejectedState'],
-                                         note='No cast event; button became unavailable after the press')
+                                         note='No cast event; button became unavailable or the GCD only flickered after the press')
                         return {'status':'waiting','reason':'Клиент отклонил '+request['action']+'; повторная оценка APL'}
                     self.failure_reason='Применение '+request['action']+' не подтверждено; автонажатия заблокированы. Останови запись для разбора.'
                     other=self.cast_observer.unexpected_after(request['sentAt'],request.get('expected',()))
