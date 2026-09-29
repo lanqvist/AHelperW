@@ -68,6 +68,7 @@ class CastObserver:
             return
         expected = set(square.get('castSpellIDs', [decision['bindingSpellID']]))
         expected.add(decision['spellID'])
+        expected.update(decision.get('acceptSpellIDs', ()))
         self.waiting.append({'action': decision['action'], 'expected': expected, 'sentAt': sent_at})
 
     def update(self, data):

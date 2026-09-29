@@ -151,7 +151,11 @@ SCENARIOS = [
     Scenario("San'layn: стаки Essence не прочитаны — блокировка", ('blocked', 'proc:433925'),
              spells={'scourge_strike': 'ready', 'death_coil': 'ready'}, buffs={'essence_of_the_blood_queen': 'up'},
              debuffs=PLAGUED, runes=3, numbers={'resource/runic_power': 40}),
-    Scenario("San'layn без квадратов Vampiric Strike: замена кнопки неизвестна — блокировка", ('blocked', 'замена кнопки'),
+    # In game the client cast Vampiric Strike with neither 433899 nor Gift lit: the press
+    # is chosen and either ID confirms it.
+    Scenario("San'layn без квадратов Vampiric Strike: Scourge Strike, подтверждают 55090 и 433895",
+             check=lambda m, r: (r.get('action') == 'scourge_strike' and r.get('acceptSpellIDs') == [55090, 433895],
+                                 f"{r.get('status')}: {r.get('action') or r.get('reason')} · {r.get('acceptSpellIDs')}"),
              fixture=unholy(31, CORE + ['vampiric_strike', 'gift_of_the_sanlayn'], procs=PROCS + (433925,)),
              spells={'scourge_strike': 'ready', 'death_coil': 'nores', 'festering_strike': 'ready'},
              buffs={'lesser_ghoul_ready': 'up'}, debuffs=PLAGUED, runes=3, numbers={'resource/runic_power': 20}),

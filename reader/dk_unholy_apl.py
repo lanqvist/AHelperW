@@ -238,12 +238,12 @@ class UnholyAPL(APLRuntime):
         if result.get('status') == 'ready' and result['action'] in self.replacements:
             cast, spell, aura, talent = self.replacements[result['action']]
             if talent in self.talents:
+                # Same key, either spell: the client cast Vampiric Strike with neither
+                # 433899 nor Gift lit (log 20260929T094508Z-4b691660), so both confirm.
+                result = dict(result, acceptSpellIDs=sorted({result['spellID'], spell}))
                 active = self.resolve('buff.'+aura+'.up')
-                if isinstance(active, Unknown):
-                    result = {'status':'blocked', 'missing':sorted(active.reasons), 'rule':result['rule'], 'list':result['list'],
-                              'reason':'Нужны данные: замена кнопки '+result['action']+' на '+cast+': '+', '.join(sorted(active.reasons))}
-                elif active:
-                    # The press casts the replacement; confirmation expects its ID.
+                if active is True:
+                    # The press should cast the replacement: log and name it by its ID.
                     result = dict(result, spellID=spell, castAs=cast)
         result['mode'] = 'unholy-current-target-no-items'
         result['adaptations'] = self.adaptations

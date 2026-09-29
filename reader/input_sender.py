@@ -201,6 +201,7 @@ class Executor:
         self.cast_observer.sent(decision,square,self.last_send,data.get('castReceipt',{}))
         if getattr(self.apl, 'require_cast_confirmation', False):
             expected=set(square.get('castSpellIDs') or [decision['bindingSpellID']]); expected.add(decision['spellID'])
+            expected.update(decision.get('acceptSpellIDs',()))
             self.receipt_pending={'action':decision['action'],'sentAt':self.last_send,'row':row,
                                   'binding':decision['binding'],'expected':expected,
                                   'label':square.get('name') or decision['action']}
