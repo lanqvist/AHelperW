@@ -2,7 +2,7 @@
 ## Title: AHelperW
 ## Notes: Ultra-contrast cooldown & resource HUD
 ## Author: lanqvist
-## Version: 0.2.14
+## Version: 0.2.15
 ## SavedVariables: AHelperWDB
 
 Palette.lua
