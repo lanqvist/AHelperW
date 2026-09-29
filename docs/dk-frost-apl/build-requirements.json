@@ -1,0 +1,372 @@
+{
+  "specId": 251,
+  "clientBuild": "12.1.0.69933",
+  "heroTrees": {
+    "32": "Rider of the Apocalypse",
+    "33": "Deathbringer"
+  },
+  "heroTreeKeys": {
+    "32": "rider_of_the_apocalypse",
+    "33": "deathbringer"
+  },
+  "decodedHeroTree": null,
+  "talentGates": null,
+  "note": "Pinned Frost lists are shared by both hero trees and kept whole: hero_tree.* and talent.* are evaluated at runtime. Conditions and target selectors are verbatim; reader adaptations are labelled in reader/dk_frost_apl.py. Unknown inputs must remain unknown.",
+  "heroTreeRules": {
+    "32": [
+      "aoe: obliterate,target_if=max:(hero_tree.rider_of_the_apocalypse&debuff.chains_of_ice_trollbane_slow.react),if=buff.killing_machine.react=2|(buff.killing_machine.react&rune>=3)",
+      "aoe: obliterate,target_if=max:(hero_tree.rider_of_the_apocalypse&debuff.chains_of_ice_trollbane_slow.react),if=buff.killing_machine.react&!variable.rune_pooling",
+      "aoe: obliterate,target_if=max:(hero_tree.rider_of_the_apocalypse&debuff.chains_of_ice_trollbane_slow.react),if=!variable.rune_pooling&!(talent.obliteration&buff.pillar_of_frost.up)",
+      "trinkets: use_item,slot=trinket1,if=trinket.1.cast_time>0&(!hero_tree.rider_of_the_apocalypse|cooldown.frostwyrms_fury.remains)&variable.trinket_1_buffs&!variable.trinket_1_manual&cooldown.pillar_of_frost.remains<trinket.1.cast_time&(!talent.breath_of_sindragosa|variable.breath_of_sindragosa_check)&variable.sending_cds&(!trinket.2.has_cooldown|trinket.2.cooldown.remains|variable.trinket_priority=1)|variable.trinket_1_duration>=fight_remains",
+      "trinkets: use_item,slot=trinket2,if=trinket.2.cast_time>0&(!hero_tree.rider_of_the_apocalypse|cooldown.frostwyrms_fury.remains)&variable.trinket_2_buffs&!variable.trinket_2_manual&cooldown.pillar_of_frost.remains<trinket.2.cast_time&(!talent.breath_of_sindragosa|variable.breath_of_sindragosa_check)&variable.sending_cds&(!trinket.1.has_cooldown|trinket.1.cooldown.remains|variable.trinket_priority=2)|variable.trinket_2_duration>=fight_remains"
+    ],
+    "33": [
+      "cooldowns: pillar_of_frost,if=!talent.breath_of_sindragosa&variable.sending_cds&(!hero_tree.deathbringer|rune>=2)|fight_remains<20",
+      "cooldowns: pillar_of_frost,if=talent.breath_of_sindragosa&variable.sending_cds&variable.breath_of_sindragosa_check&(!hero_tree.deathbringer|rune>=2)",
+      "variables: variable,name=rune_pooling,value=hero_tree.deathbringer&cooldown.reapers_mark.remains<6&rune<3&variable.sending_cds",
+      "variables: variable,name=breath_of_sindragosa_check,value=!talent.breath_of_sindragosa|(cooldown.breath_of_sindragosa.remains>20|(cooldown.breath_of_sindragosa.remains<1*gcd.max&runic_power>=(60-20*hero_tree.deathbringer)))"
+    ]
+  },
+  "actions": [
+    {
+      "list": "precombat",
+      "expression": "snapshot_stats"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_1_sync,op=setif,value=1,value_else=0.5,condition=trinket.1.has_use_buff&(talent.pillar_of_frost&!talent.breath_of_sindragosa&(trinket.1.cooldown.duration%%cooldown.pillar_of_frost.duration=0)|talent.breath_of_sindragosa&(cooldown.breath_of_sindragosa.duration%%trinket.1.cooldown.duration=0))"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_2_sync,op=setif,value=1,value_else=0.5,condition=trinket.2.has_use_buff&(talent.pillar_of_frost&!talent.breath_of_sindragosa&(trinket.2.cooldown.duration%%cooldown.pillar_of_frost.duration=0)|talent.breath_of_sindragosa&(cooldown.breath_of_sindragosa.duration%%trinket.2.cooldown.duration=0))"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_1_buffs,value=trinket.1.has_cooldown&!trinket.1.is.improvised_seaforium_pacemaker&(trinket.1.has_use_buff|trinket.1.has_buff.strength|trinket.1.has_buff.mastery|trinket.1.has_buff.versatility|trinket.1.has_buff.haste|trinket.1.has_buff.crit)"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_2_buffs,value=trinket.2.has_cooldown&!trinket.2.is.improvised_seaforium_pacemaker&(trinket.2.has_use_buff|trinket.2.has_buff.strength|trinket.2.has_buff.mastery|trinket.2.has_buff.versatility|trinket.2.has_buff.haste|trinket.2.has_buff.crit)"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_1_duration,value=trinket.1.proc.any_dps.duration"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_2_duration,value=trinket.2.proc.any_dps.duration,"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_priority,op=setif,value=2,value_else=1,condition=!variable.trinket_1_buffs&variable.trinket_2_buffs&(trinket.2.has_cooldown|!trinket.1.has_cooldown)|variable.trinket_2_buffs&((trinket.2.cooldown.duration%variable.trinket_2_duration)*(1.5+trinket.2.has_buff.strength)*(variable.trinket_2_sync)*(1+((trinket.2.ilvl-trinket.1.ilvl)%100)))>((trinket.1.cooldown.duration%variable.trinket_1_duration)*(1.5+trinket.1.has_buff.strength)*(variable.trinket_1_sync)*(1+((trinket.1.ilvl-trinket.2.ilvl)%100)))"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=damage_trinket_priority,op=setif,value=2,value_else=1,condition=!variable.trinket_1_buffs&!variable.trinket_2_buffs&trinket.2.ilvl>=trinket.1.ilvl"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_1_manual,value=trinket.1.is.unyielding_netherprism"
+    },
+    {
+      "list": "precombat",
+      "expression": "variable,name=trinket_2_manual,value=trinket.2.is.unyielding_netherprism"
+    },
+    {
+      "list": "default_",
+      "expression": "auto_attack"
+    },
+    {
+      "list": "default_",
+      "expression": "call_action_list,name=variables"
+    },
+    {
+      "list": "default_",
+      "expression": "call_action_list,name=trinkets"
+    },
+    {
+      "list": "default_",
+      "expression": "call_action_list,name=high_prio_actions"
+    },
+    {
+      "list": "default_",
+      "expression": "call_action_list,name=cooldowns"
+    },
+    {
+      "list": "default_",
+      "expression": "call_action_list,name=racials"
+    },
+    {
+      "list": "default_",
+      "expression": "run_action_list,name=aoe,if=active_enemies>=2"
+    },
+    {
+      "list": "default_",
+      "expression": "run_action_list,name=single_target"
+    },
+    {
+      "list": "aoe",
+      "expression": "frostscythe,if=buff.killing_machine.react=2&active_enemies>=variable.frostscythe_priority"
+    },
+    {
+      "list": "aoe",
+      "expression": "frost_strike,target_if=max:(talent.shattering_blade&debuff.razorice.react=5),if=debuff.razorice.react=5&buff.frostbane.react"
+    },
+    {
+      "list": "aoe",
+      "expression": "frostscythe,if=buff.killing_machine.react&rune>=3&active_enemies>=variable.frostscythe_priority"
+    },
+    {
+      "list": "aoe",
+      "expression": "obliterate,target_if=max:(hero_tree.rider_of_the_apocalypse&debuff.chains_of_ice_trollbane_slow.react),if=buff.killing_machine.react=2|(buff.killing_machine.react&rune>=3)"
+    },
+    {
+      "list": "aoe",
+      "expression": "howling_blast,if=buff.rime.react&talent.frostbound_will|!dot.frost_fever.ticking"
+    },
+    {
+      "list": "aoe",
+      "expression": "frost_strike,target_if=max:(talent.shattering_blade&debuff.razorice.react=5),if=debuff.razorice.react=5&talent.shattering_blade&active_enemies<5&!variable.rp_pooling&!talent.frostbane"
+    },
+    {
+      "list": "aoe",
+      "expression": "frostscythe,if=buff.killing_machine.react&!variable.rune_pooling&active_enemies>=variable.frostscythe_priority"
+    },
+    {
+      "list": "aoe",
+      "expression": "obliterate,target_if=max:(hero_tree.rider_of_the_apocalypse&debuff.chains_of_ice_trollbane_slow.react),if=buff.killing_machine.react&!variable.rune_pooling"
+    },
+    {
+      "list": "aoe",
+      "expression": "howling_blast,if=buff.rime.react"
+    },
+    {
+      "list": "aoe",
+      "expression": "glacial_advance,if=!variable.rp_pooling&active_enemies>=3+(1*talent.deathly_blows)"
+    },
+    {
+      "list": "aoe",
+      "expression": "frost_strike,if=!variable.rp_pooling"
+    },
+    {
+      "list": "aoe",
+      "expression": "frostscythe,if=!variable.rune_pooling&!(talent.obliteration&buff.pillar_of_frost.up)&active_enemies>=variable.frostscythe_priority"
+    },
+    {
+      "list": "aoe",
+      "expression": "obliterate,target_if=max:(hero_tree.rider_of_the_apocalypse&debuff.chains_of_ice_trollbane_slow.react),if=!variable.rune_pooling&!(talent.obliteration&buff.pillar_of_frost.up)"
+    },
+    {
+      "list": "aoe",
+      "expression": "howling_blast,if=!buff.killing_machine.react&(talent.obliteration&buff.pillar_of_frost.up)"
+    },
+    {
+      "list": "cooldowns",
+      "expression": "remorseless_winter,if=variable.sending_cds&(active_enemies>1|talent.gathering_storm)|(buff.gathering_storm.stack=10&buff.remorseless_winter.remains<gcd.max)&fight_remains>10"
+    },
+    {
+      "list": "cooldowns",
+      "expression": "pillar_of_frost,if=!talent.breath_of_sindragosa&variable.sending_cds&(!hero_tree.deathbringer|rune>=2)|fight_remains<20"
+    },
+    {
+      "list": "cooldowns",
+      "expression": "pillar_of_frost,if=talent.breath_of_sindragosa&variable.sending_cds&variable.breath_of_sindragosa_check&(!hero_tree.deathbringer|rune>=2)"
+    },
+    {
+      "list": "cooldowns",
+      "expression": "breath_of_sindragosa,use_off_gcd=1,if=!buff.breath_of_sindragosa.up&(buff.pillar_of_frost.up|fight_remains<20)"
+    },
+    {
+      "list": "cooldowns",
+      "expression": "reapers_mark,target_if=first:debuff.reapers_mark_debuff.down,if=buff.pillar_of_frost.up|cooldown.pillar_of_frost.remains>5|fight_remains<20"
+    },
+    {
+      "list": "cooldowns",
+      "expression": "frostwyrms_fury,if=((talent.apocalypse_now|talent.chosen_of_frostbrood)&!buff.chosen_of_frostbrood_fwf.up)&variable.sending_cds&buff.pillar_of_frost.up&buff.bonegrinder_frost.up|(fight_remains<20&!buff.chosen_of_frostbrood_haste.up)"
+    },
+    {
+      "list": "cooldowns",
+      "expression": "frostwyrms_fury,if=buff.chosen_of_frostbrood_fwf.up&variable.fwf_buffs"
+    },
+    {
+      "list": "cooldowns",
+      "expression": "frostwyrms_fury,if=!(talent.apocalypse_now|talent.chosen_of_frostbrood)&active_enemies=1&(talent.pillar_of_frost&buff.pillar_of_frost.up&!talent.obliteration|!talent.pillar_of_frost)&(!raid_event.adds.exists|raid_event.adds.in>cooldown.frostwyrms_fury.duration+raid_event.adds.duration)&variable.fwf_buffs|fight_remains<3"
+    },
+    {
+      "list": "cooldowns",
+      "expression": "frostwyrms_fury,if=!(talent.apocalypse_now|talent.chosen_of_frostbrood)&active_enemies>=2&(talent.pillar_of_frost&buff.pillar_of_frost.up|raid_event.adds.exists&raid_event.adds.up&raid_event.adds.in<cooldown.pillar_of_frost.remains-raid_event.adds.in-raid_event.adds.duration)&variable.fwf_buffs"
+    },
+    {
+      "list": "cooldowns",
+      "expression": "frostwyrms_fury,if=!(talent.apocalypse_now|talent.chosen_of_frostbrood)&talent.obliteration&(talent.pillar_of_frost&buff.pillar_of_frost.up&!main_hand.2h|!buff.pillar_of_frost.up&main_hand.2h&cooldown.pillar_of_frost.remains|!talent.pillar_of_frost)&variable.fwf_buffs&(!raid_event.adds.exists|raid_event.adds.in>cooldown.frostwyrms_fury.duration+raid_event.adds.duration)"
+    },
+    {
+      "list": "cooldowns",
+      "expression": "raise_dead,use_off_gcd=1"
+    },
+    {
+      "list": "cooldowns",
+      "expression": "empower_rune_weapon,if=(rune<2|!buff.killing_machine.react)&runic_power<35+(talent.icy_onslaught*buff.icy_onslaught.stack*5)"
+    },
+    {
+      "list": "cooldowns",
+      "expression": "empower_rune_weapon,if=cooldown.empower_rune_weapon.full_recharge_time<=6&buff.killing_machine.react<2-(talent.killing_streak)"
+    },
+    {
+      "list": "cooldowns",
+      "expression": "empower_rune_weapon,if=talent.breath_of_sindragosa&(cooldown.empower_rune_weapon.full_recharge_time-30<=cooldown.breath_of_sindragosa.remains+6)&(cooldown.breath_of_sindragosa.remains<=6)&(buff.killing_machine.react<2-(talent.killing_streak))"
+    },
+    {
+      "list": "cooldowns",
+      "expression": "empower_rune_weapon,if=talent.obliteration&buff.pillar_of_frost.remains>4*gcd.max&rune<=2&buff.killing_machine.react=1"
+    },
+    {
+      "list": "high_prio_actions",
+      "expression": "mind_freeze,if=target.debuff.casting.react"
+    },
+    {
+      "list": "high_prio_actions",
+      "expression": "invoke_external_buff,name=power_infusion,if=variable.cooldown_check"
+    },
+    {
+      "list": "high_prio_actions",
+      "expression": "antimagic_shell,if=runic_power.deficit>40&death_knight.first_ams_cast<time"
+    },
+    {
+      "list": "racials",
+      "expression": "blood_fury,use_off_gcd=1,if=variable.cooldown_check"
+    },
+    {
+      "list": "racials",
+      "expression": "berserking,use_off_gcd=1,if=variable.cooldown_check"
+    },
+    {
+      "list": "racials",
+      "expression": "arcane_pulse,if=variable.cooldown_check"
+    },
+    {
+      "list": "racials",
+      "expression": "lights_judgment,if=variable.cooldown_check"
+    },
+    {
+      "list": "racials",
+      "expression": "ancestral_call,use_off_gcd=1,if=variable.cooldown_check"
+    },
+    {
+      "list": "racials",
+      "expression": "fireblood,use_off_gcd=1,if=variable.cooldown_check"
+    },
+    {
+      "list": "racials",
+      "expression": "bag_of_tricks,if=talent.obliteration&!buff.pillar_of_frost.up&buff.unholy_strength.up"
+    },
+    {
+      "list": "racials",
+      "expression": "bag_of_tricks,if=!talent.obliteration&buff.pillar_of_frost.up&(buff.unholy_strength.up&buff.unholy_strength.remains<gcd*3|buff.pillar_of_frost.remains<gcd*3)"
+    },
+    {
+      "list": "single_target",
+      "expression": "obliterate,if=buff.killing_machine.react=2|(buff.killing_machine.react&rune>=3)"
+    },
+    {
+      "list": "single_target",
+      "expression": "howling_blast,if=buff.rime.react&talent.frostbound_will"
+    },
+    {
+      "list": "single_target",
+      "expression": "frost_strike,target_if=max:(talent.shattering_blade&debuff.razorice.react=5),if=debuff.razorice.react=5&talent.shattering_blade&!variable.rp_pooling"
+    },
+    {
+      "list": "single_target",
+      "expression": "howling_blast,if=buff.rime.react"
+    },
+    {
+      "list": "single_target",
+      "expression": "frost_strike,if=!talent.shattering_blade&!variable.rp_pooling&runic_power.deficit<30"
+    },
+    {
+      "list": "single_target",
+      "expression": "obliterate,if=buff.killing_machine.react&!variable.rune_pooling"
+    },
+    {
+      "list": "single_target",
+      "expression": "frost_strike,if=!variable.rp_pooling"
+    },
+    {
+      "list": "single_target",
+      "expression": "obliterate,if=!variable.rune_pooling&!(talent.obliteration&buff.pillar_of_frost.up)"
+    },
+    {
+      "list": "single_target",
+      "expression": "howling_blast,if=!buff.killing_machine.react&(talent.obliteration&buff.pillar_of_frost.up)"
+    },
+    {
+      "list": "trinkets",
+      "expression": "potion,use_off_gcd=1,if=variable.cooldown_check|fight_remains<25"
+    },
+    {
+      "list": "trinkets",
+      "expression": "use_item,slot=trinket1,if=!trinket.1.cast_time>0&variable.trinket_1_buffs&!variable.trinket_1_manual&buff.pillar_of_frost.remains&(!trinket.2.has_cooldown|trinket.2.cooldown.remains|variable.trinket_priority=1)"
+    },
+    {
+      "list": "trinkets",
+      "expression": "use_item,slot=trinket2,if=!trinket.2.cast_time>0&variable.trinket_2_buffs&!variable.trinket_2_manual&buff.pillar_of_frost.remains&(!trinket.1.has_cooldown|trinket.1.cooldown.remains|variable.trinket_priority=2)"
+    },
+    {
+      "list": "trinkets",
+      "expression": "use_item,slot=trinket1,if=trinket.1.cast_time>0&(!hero_tree.rider_of_the_apocalypse|cooldown.frostwyrms_fury.remains)&variable.trinket_1_buffs&!variable.trinket_1_manual&cooldown.pillar_of_frost.remains<trinket.1.cast_time&(!talent.breath_of_sindragosa|variable.breath_of_sindragosa_check)&variable.sending_cds&(!trinket.2.has_cooldown|trinket.2.cooldown.remains|variable.trinket_priority=1)|variable.trinket_1_duration>=fight_remains"
+    },
+    {
+      "list": "trinkets",
+      "expression": "use_item,slot=trinket2,if=trinket.2.cast_time>0&(!hero_tree.rider_of_the_apocalypse|cooldown.frostwyrms_fury.remains)&variable.trinket_2_buffs&!variable.trinket_2_manual&cooldown.pillar_of_frost.remains<trinket.2.cast_time&(!talent.breath_of_sindragosa|variable.breath_of_sindragosa_check)&variable.sending_cds&(!trinket.1.has_cooldown|trinket.1.cooldown.remains|variable.trinket_priority=2)|variable.trinket_2_duration>=fight_remains"
+    },
+    {
+      "list": "trinkets",
+      "expression": "use_item,slot=trinket1,if=!variable.trinket_1_buffs&!variable.trinket_1_manual&(variable.damage_trinket_priority=1|(!trinket.2.has_cooldown|trinket.2.cooldown.remains))&((trinket.1.cast_time>0&(!talent.breath_of_sindragosa|!buff.breath_of_sindragosa.up)&!buff.pillar_of_frost.up|!trinket.1.cast_time>0)&(!variable.trinket_2_buffs|(cooldown.pillar_of_frost.remains<trinket.1.cooldown.remains))|!talent.pillar_of_frost)|fight_remains<15"
+    },
+    {
+      "list": "trinkets",
+      "expression": "use_item,slot=trinket2,if=!variable.trinket_2_buffs&!variable.trinket_2_manual&(variable.damage_trinket_priority=2|(!trinket.1.has_cooldown|trinket.1.cooldown.remains))&(((trinket.2.cast_time>0&(!talent.breath_of_sindragosa|!buff.breath_of_sindragosa.up)&!buff.pillar_of_frost.up)|!trinket.2.cast_time>0)&(!variable.trinket_1_buffs|(cooldown.pillar_of_frost.remains<trinket.1.cooldown.remains))|!talent.pillar_of_frost)|fight_remains<15"
+    },
+    {
+      "list": "trinkets",
+      "expression": "use_item,slot=main_hand,if=buff.pillar_of_frost.up|(buff.breath_of_sindragosa.up&cooldown.pillar_of_frost.remains)|(variable.trinket_1_buffs&variable.trinket_2_buffs&(trinket.1.cooldown.remains<cooldown.pillar_of_frost.remains|trinket.2.cooldown.remains<cooldown.pillar_of_frost.remains)&cooldown.pillar_of_frost.remains>20)|fight_remains<15"
+    },
+    {
+      "list": "variables",
+      "expression": "variable,name=st_planning,op=setif,value=1,value_else=0,condition=active_enemies=1&(!raid_event.adds.exists|!raid_event.adds.in|raid_event.adds.in>15)"
+    },
+    {
+      "list": "variables",
+      "expression": "variable,name=adds_remain,value=active_enemies>=2&(!raid_event.adds.exists|!raid_event.pull.exists&raid_event.adds.remains>5|raid_event.pull.exists&raid_event.adds.in>20)"
+    },
+    {
+      "list": "variables",
+      "expression": "variable,name=sending_cds,value=(variable.st_planning|variable.adds_remain)"
+    },
+    {
+      "list": "variables",
+      "expression": "variable,name=cooldown_check,value=(talent.pillar_of_frost&buff.pillar_of_frost.up)|!talent.pillar_of_frost|fight_remains<20"
+    },
+    {
+      "list": "variables",
+      "expression": "variable,name=fwf_buffs,value=(buff.pillar_of_frost.remains<gcd.max|(buff.unholy_strength.up&buff.unholy_strength.remains<gcd.max)|(talent.bonegrinder.rank=2&buff.bonegrinder_frost.up&buff.bonegrinder_frost.remains<gcd.max))&(active_enemies>1|debuff.razorice.stack=5|talent.shattering_blade)"
+    },
+    {
+      "list": "variables",
+      "expression": "variable,name=rune_pooling,value=hero_tree.deathbringer&cooldown.reapers_mark.remains<6&rune<3&variable.sending_cds"
+    },
+    {
+      "list": "variables",
+      "expression": "variable,name=rp_pooling,value=talent.breath_of_sindragosa&cooldown.breath_of_sindragosa.remains<4*gcd.max&runic_power<60+(35+5*buff.icy_onslaught.up)-(10*rune)&variable.sending_cds"
+    },
+    {
+      "list": "variables",
+      "expression": "variable,name=frostscythe_priority,value=3"
+    },
+    {
+      "list": "variables",
+      "expression": "variable,name=breath_of_sindragosa_check,value=!talent.breath_of_sindragosa|(cooldown.breath_of_sindragosa.remains>20|(cooldown.breath_of_sindragosa.remains<1*gcd.max&runic_power>=(60-20*hero_tree.deathbringer)))"
+    }
+  ]
+}
