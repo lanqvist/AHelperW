@@ -41,7 +41,7 @@
 | Monk | Windwalker (269) | Shado-Pan / Conduit | общий список, таланты | средняя | Shado-Pan `experimental` |
 | Paladin | Retribution (70) | Templar / Herald of the Sun | общий список, `talent.*` | средняя | — |
 | Death Knight | Frost (251) | Deathbringer / Rider | `hero_tree.*` в условиях | высокая (руны) | основа (Фаза 0), модели нет |
-| Death Knight | Unholy (252) | Rider / San'layn | `hero_tree.*`, питомцы, DoT | высокая | основа (Фаза 0), модели нет |
+| Death Knight | Unholy (252) | Rider / San'layn | общий список (в закреплённой APL нет `hero_tree.*`), питомцы, DoT | высокая | модель офлайн (`dk-unholy-apl/README.md`), в игре нет |
 | Demon Hunter | Havoc (577) | Aldrachi Reaver / Fel-Scarred | `hero_tree.felscarred`, Demonsurge | высокая (рывки) | — |
 | Rogue | Assassination (259) | Deathstalker / Fatebound | таланты, DoT, стелс | высокая | — |
 | Rogue | Outlaw (260) | Trickster / Fatebound | `hero_tree.fatebound`, Roll the Bones | высокая | — |
