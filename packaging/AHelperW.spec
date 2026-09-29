@@ -19,9 +19,11 @@ for directory in ('dk-frost-apl', 'dk-unholy-apl'):
         data += [(str(root/'docs'/directory/name), 'apl-data/'+directory)
                  for name in ('build-requirements.json', 'source.json', 'COPYING')]
 data += [(str(root/'build'/'licenses'), 'licenses')]
+# Spec models are loaded by name (spec_profiles.model), invisible to the import scan.
+models = sorted(path.stem for path in (root/'reader').glob('*_apl.py'))
 a = Analysis([str(root/'reader'/'reader.py')], pathex=[str(root/'reader')],
              binaries=collect_dynamic_libs('onnxruntime'), datas=data,
-             hiddenimports=[], hookspath=[], runtime_hooks=[], excludes=[])
+             hiddenimports=models, hookspath=[], runtime_hooks=[], excludes=[])
 pyz = PYZ(a.pure)
 exe = EXE(pyz, a.scripts, [], exclude_binaries=True, name='AHelperW',
           console=False, debug=False, strip=False, upx=False)

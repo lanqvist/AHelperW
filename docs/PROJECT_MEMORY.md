@@ -17,8 +17,8 @@
 | Arms / Slayer (71) | `game-observed` | на экспорте v2: 69/69 подтверждений, 67/67 окон GCD; Collateral Damage «3» читается |
 | Fury / Slayer (72) | `experimental` | ST и AoE, два персонажа на разных аккаунтах; старт вне боя; до 121/121 подтверждений, все окна GCD с нажатием |
 | ВВ / Шадо-Пан (269) | `experimental` | после исправлений 150/151, 142/142 окна GCD; блокировок по энергии/комбо нет |
-
-| Frost DK (251), Unholy DK (252) | `in-development`, модели нет | ничего: только офлайн-основа (ниже) |
+| Frost DK (251): Deathbringer, Rider | `in-development`, модель `dk_frost_apl.py` | ничего — сделано вслепую, офлайн |
+| Unholy DK (252): Rider, San'layn | `in-development`, модель `dk_unholy_apl.py` | ничего — сделано вслепую, офлайн |
 
 Автонажатия после загрузки профиля выключены для всех не-`game-observed` профилей.
 Репозиторий: GitHub `main` отправлен на `9b3f94a` (эта сводка добавлена позже). Релиз
@@ -37,7 +37,36 @@
 следующей руны); `rune.time_to_N` известен только до готовых + 1. Офлайн-стенд
 `python tests/apl/run.py`; Lua-тест покрывает 71/72/269 и 251/252 по веткам.
 Поведение 71/72/269 проверено как неизменное (экспорт в моке, план OCR, сценарии),
-в `_retail_` ничего не доставлялось. Модели и пресеты Frost/Unholy — следующий шаг.
+в `_retail_` ничего не доставлялось. Модели Frost/Unholy — ниже.
+
+### Frost и Unholy DK (29 сентября, вслепую, в игре не проверено)
+
+Сделаны по образцу Fury до первого боя двумя агентами параллельно, слиты в `main`:
+пакеты `docs/dk-frost-apl/`, `docs/dk-unholy-apl/` (списки дословно, `coverage.json`
+с источником каждого ID; нерешённых ID нет, в клиенте не видели ни одного), профили
+`[251]`/`[252]` с пресетами по веткам и алиасами замен, модели `FrostAPL`/`UnholyAPL`,
+сценарии `tests/apl/spec_251_frost.py` (27) и `spec_252_unholy.py` (32); всего 95/95.
+Статус `in-development`: автонажатия после загрузки выключены. Подробности, адаптации,
+блокирующие условия и чек-лист первой игровой проверки — README пакетов.
+
+- **Закреплённые APL почти не ветвятся по героическим веткам:** Frost — 85 общих правил,
+  Deathbringer упомянут в Pillar of Frost/`rune_pooling`/Breath, Rider — только в `target_if`
+  и аксессуарах; Unholy — 64 общих правила без `hero_tree.*`, San'layn отличается аурами.
+  В Midnight-APL Unholy нет Apocalypse, Unholy Assault и Festering Wounds.
+- **Замены с общим биндом** (подтверждение ждёт ID замены): Frost — Frostbane 1228433 на
+  Frost Strike, отзыв Chosen of Frostbrood 1265384 на Frostwyrm's Fury; Unholy — Festering
+  Scythe 458128, Vampiric Strike 433895, Necrotic Coil 1242174, Graveyard 383269, Blightfall 1271967.
+- **Адаптации:** текущая цель вместо `target_if`; `raid_event.*` — как без событий в SimC;
+  `fight_remains` — только при заданном прогнозе; Raise Dead не нажимается (гуля не видно);
+  готовность Dark Transformation как признак гуля — гипотеза; предметы/зелья/PI/AMS не исполняются.
+- **Breath of Sindragosa:** в таблице талантов закреплённой сборки 1249658; `ClassData.lua`
+  и ранний `research-apl.md` содержат 152279 — не исправлялось, сверить в игре.
+- **Death and Decay** ставится на землю: нужен бинд без круга выбора (`[@player]`-макрос),
+  иначе нет события применения и подтверждение блокирует.
+- Не проверено в 12.1: secret ли `GetRuneCooldown` в бою, `C_ClassTalents.GetActiveHeroTalentSpec`,
+  геометрия/цвета рун и OCR силы рун. Персонажа DK у пользователя в памяти не записано.
+- Упаковка: модели грузятся по имени (`spec_profiles.model`), поэтому `AHelperW.spec`
+  добавляет `reader/*_apl.py` в `hiddenimports`; сборка не выполнялась.
 
 ### Реализовано и проверено в игре
 
