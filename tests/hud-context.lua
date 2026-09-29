@@ -184,6 +184,17 @@ C.Update(); C_Spell.IsSpellInRange = savedRangeAPI
 local profile = ns.specProfiles[specID]
 local aux = profile.contextCells.chargeRange
 assert(rangeIDs[profile.referenceSpellID] and C.cells.range.value.text == "ДА", "range must use the spec melee reference")
+-- Fallbacks answer only when the reference gives none; a "no" is never overridden.
+for _, fallback in ipairs(profile.rangeFallbacks or {}) do
+  local answers = { [profile.referenceSpellID] = nil, [fallback] = true }
+  C_Spell.IsSpellInRange = function(id) return answers[id] end
+  C.Update(); assert(C.cells.range.value.text == "ДА", "fallback proves melee range when the reference is silent")
+  answers[profile.referenceSpellID] = false
+  C.Update(); assert(C.cells.range.value.text == "ВНЕ", "a negative reference answer stays out of range")
+  answers[profile.referenceSpellID], answers[fallback] = nil, nil
+  C.Update(); assert(C.cells.range.value.text == "?", "no answer at all stays unknown")
+  C_Spell.IsSpellInRange = savedRangeAPI; C.Update()
+end
 if aux.source == "range" then
   assert(rangeIDs[aux.spellID] and C.cells.chargeRange.value.text == "ДА", "Charge range cell")
 elseif aux.source == "powerRegen" then

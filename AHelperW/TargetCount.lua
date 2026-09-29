@@ -28,7 +28,7 @@ local function scan()
       local hostile = read(UnitCanAttack, "player", unit)
       local dead = read(UnitIsDeadOrGhost, unit)
       if hostile == true and dead == false then
-        local range = reference and read(C_Spell.IsSpellInRange, reference, unit)
+        local range = reference and ns.MeleeInRange(unit)
         if range == true then count = count + 1
         elseif range == nil then unresolved = unresolved + 1; unknownRange = unknownRange + 1 end
       elseif hostile ~= false and dead ~= true then unresolved = unresolved + 1; unknownUnit = unknownUnit + 1 end

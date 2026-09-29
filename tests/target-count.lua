@@ -8,7 +8,8 @@ function UnitCanAttack() return true end
 function UnitIsDeadOrGhost() return false end
 C_Spell = { IsSpellInRange = function(_, unit) return inRange[unit] end }
 function CreateFrame() return { RegisterEvent = function() end, SetScript = function() end } end
-local ns = { ReadValue = function(fn, ...) return fn(...) end, GetMeleeReference = function() return 23881 end }
+local ns = { ReadValue = function(fn, ...) return fn(...) end, GetMeleeReference = function() return 23881 end,
+  MeleeInRange = function(unit) return C_Spell.IsSpellInRange(23881, unit) end }
 assert(loadfile("AHelperW/TargetCount.lua"))("AHelperW", ns)
 local T = ns.TargetCount
 T.Reset()

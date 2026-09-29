@@ -389,7 +389,9 @@ function C.Update()
   elseif aux.source == "runeNext" then UpdateRuneNext(C.cells.chargeRange)
   else SetCell(C.cells.chargeRange, "—") end
   for _, entry in ipairs(rangeEntries) do
-    local value = read(C_Spell.IsSpellInRange, entry[2], "target")
+    local value
+    if entry[1] == "range" then value = ns.MeleeInRange("target", C.profile)
+    else value = read(C_Spell.IsSpellInRange, entry[2], "target") end
     if target == false then SetCell(C.cells[entry[1]], "НЕТ ЦЕЛИ")
     elseif dead == true or attack == false then SetCell(C.cells[entry[1]], "НЕЛЬЗЯ", "unusable")
     elseif target == nil or attack == nil or dead == nil then SetCell(C.cells[entry[1]], "?", "unknown")

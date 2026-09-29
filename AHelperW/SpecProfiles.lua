@@ -119,6 +119,9 @@ ns.specProfiles = {
   -- between both trees; San'layn adds only its Vampiric Strike auras.
   [252] = {
     id = "deathknight.unholy", name = "Unholy DK",
+    -- While Festering Scythe (aura 458123) replaces Festering Strike, the client gives
+    -- no range answer for 85948 (log 20260929T092145Z-a4497b7f); Death Strike is melee.
+    rangeFallbacks = { 49998 },
     heroTrees = {
       [32] = { key = "rider_of_the_apocalypse", name = "Rider of the Apocalypse",
         preset = { spells = {}, procs = {}, debuffs = {} } },
@@ -161,11 +164,25 @@ ns.specProfiles = {
 
 -- Area attacks without a usable unit range answer: a positive melee check proves range.
 -- Frostscythe and Glacial Advance stayed unknown in game while Obliterate was in range.
-ns.rangeProxies = { [845] = 12294, [207230] = 49020, [194913] = 49020 }
+-- true: the spec melee check with its fallbacks (Epidemic, Death and Decay stayed unknown).
+ns.rangeProxies = { [845] = 12294, [207230] = 49020, [194913] = 49020, [207317] = true, [43265] = true }
 
 function ns.GetAPLProfile()
   local _, spec = ns.GetSpecData()
   return ns.specProfiles[spec]
+end
+
+-- Melee range to a unit: the reference spell, then profile.rangeFallbacks when the
+-- reference gives no answer. nil stays unknown; a false answer is never overridden.
+function ns.MeleeInRange(unit, profile)
+  profile = profile or ns.GetAPLProfile()
+  if not profile or not profile.referenceSpellID then return nil end
+  local value = ns.ReadValue(C_Spell.IsSpellInRange, profile.referenceSpellID, unit)
+  for _, spellID in ipairs(profile.rangeFallbacks or {}) do
+    if value ~= nil then break end
+    value = ns.ReadValue(C_Spell.IsSpellInRange, spellID, unit)
+  end
+  return value
 end
 
 function ns.GetMeleeReference()

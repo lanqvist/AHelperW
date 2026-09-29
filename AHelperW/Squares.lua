@@ -40,7 +40,8 @@ local function GetSpellState(spellID)
       -- Same for Frostscythe (cone) and Glacial Advance (line): nil in game, Obliterate's was not.
       local proxy = inRange == nil and ns.rangeProxies[spellID]
       if proxy then
-        if ns.ReadValue(C_Spell.IsSpellInRange, proxy, "target") == true then
+        local near = proxy == true and ns.MeleeInRange("target") or (proxy ~= true and ns.ReadValue(C_Spell.IsSpellInRange, proxy, "target"))
+        if near == true then
           inRange = true
         end
       end
