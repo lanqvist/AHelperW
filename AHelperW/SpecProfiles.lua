@@ -69,11 +69,18 @@ ns.specProfiles = {
   -- the primary number, the six runes are coloured squares (Resources.lua).
   -- Presets, aliases and the reader model are added by the Frost/Unholy work.
   -- --- Frost DK (251): edited only by the Frost work ---
+  -- Reader model: reader/dk_frost_apl.py. IDs and evidence: docs/dk-frost-apl/coverage.json
+  -- (pinned sc_death_knight.cpp, trait table, Wowhead); nothing observed in game yet.
   [251] = {
     id = "deathknight.frost", name = "Frost DK",
     heroTrees = {
-      [33] = { key = "deathbringer", name = "Deathbringer" },
-      [32] = { key = "rider_of_the_apocalypse", name = "Rider of the Apocalypse" },
+      -- Reaper's Mark and its target debuff (rune_pooling, cooldowns).
+      [33] = { key = "deathbringer", name = "Deathbringer",
+        preset = { spells = { 439843 }, procs = {}, debuffs = { 434765 } } },
+      -- The pinned APL names Rider only in target_if/trinket rules; Apocalypse
+      -- Now acts through Frostwyrm's Fury (shared preset).
+      [32] = { key = "rider_of_the_apocalypse", name = "Rider of the Apocalypse",
+        preset = { spells = {}, procs = {}, debuffs = {} } },
     },
     primary = "runic_power", powerType = Enum.PowerType.RunicPower,
     secondary = "runes", secondaryType = Enum.PowerType.Runes,
@@ -83,6 +90,27 @@ ns.specProfiles = {
       maxrage = { export = "maxrunic_power", title = "MAX СР" },
       chargeRange = { export = "runeNext", title = "РУНА, С", source = "runeNext",
         tip = "Секунды до следующей готовой руны (GetRuneCooldown). ? — значения скрыты клиентом, — — все руны готовы." },
+    },
+    -- sc_death_knight.cpp set_replacement_action: the APL keeps frost_strike /
+    -- frostwyrms_fury; while the buff is up the same button casts the replacement.
+    aliases = {
+      frostbane = { spellID = 1228433, displaySpellID = 49143, procID = 1229310, sharesBindingWith = "frost_strike", label = "Frostbane" },
+      chosen_of_frostbrood = { spellID = 1265384, displaySpellID = 279302, procID = 1265639, sharesBindingWith = "frostwyrms_fury", label = "Chosen of Frostbrood" },
+    },
+    -- Shared by both hero trees. Spells: Obliterate, Frost Strike, Howling Blast,
+    -- Frostscythe, Glacial Advance, Remorseless Winter, Pillar of Frost, Breath of
+    -- Sindragosa (1249658 in the pinned trait table), Frostwyrm's Fury, Empower Rune
+    -- Weapon, Raise Dead, Mind Freeze, racials. Procs: Killing Machine, Rime, Pillar,
+    -- Breath, Remorseless Winter (196770; 1233152 with Frozen Dominion), Gathering
+    -- Storm, Icy Onslaught, Bonegrinder, Frostbane, Unholy Strength, Chosen of
+    -- Frostbrood (haste, recall), PI. Debuffs: Razorice, Frost Fever.
+    preset = {
+      spells = { 49020, 49143, 49184, 207230, 194913, 196770, 51271, 1249658, 279302, 47568,
+        46585, 47528,
+        20572, 26297, 260364, 255647, 274738, 265221, 312411 },
+      procs = { 51124, 59052, 51271, 1249658, 196770, 1233152, 211805, 1230273, 377103, 1229310,
+        53365, 1265630, 1265639, 10060 },
+      debuffs = { 51714, 55095 },
     },
   },
   -- --- Unholy DK (252): edited only by the Unholy work ---

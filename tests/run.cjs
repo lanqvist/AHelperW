@@ -18,9 +18,9 @@ const specs = [
   { specID: 269, profileID: 'monk.windwalker.shado-pan', reference: 100780, alias: ['rushing_wind_kick', 467307], heroID: 65,
     heroTree: 'shado_pan', resources: ['energy', 'chi'], context: ['energyRegen', 'maxenergy', 'zenithRecharge'], comboHistory: true },
   // Death Knight: runic power number, six rune squares. Frost entries — Frost work only.
-  { specID: 251, profileID: 'deathknight.frost', reference: 49020, heroID: 33, heroTree: 'deathbringer',
+  { specID: 251, profileID: 'deathknight.frost', reference: 49020, alias: ['frostbane', 1228433], heroID: 33, heroTree: 'deathbringer',
     resources: ['runic_power'], context: ['runeNext', 'maxrunic_power'], runes: true },
-  { specID: 251, profileID: 'deathknight.frost', reference: 49020, heroID: 32, heroTree: 'rider_of_the_apocalypse',
+  { specID: 251, profileID: 'deathknight.frost', reference: 49020, alias: ['frostbane', 1228433], heroID: 32, heroTree: 'rider_of_the_apocalypse',
     resources: ['runic_power'], context: ['runeNext', 'maxrunic_power'], runes: true },
   // Unholy entries — Unholy work only.
   { specID: 252, profileID: 'deathknight.unholy', reference: 85948, alias: ['vampiric_strike', 433895], heroID: 32,

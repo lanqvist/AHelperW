@@ -98,8 +98,10 @@ SCENARIOS = [
     Scenario('максимум силы рун из HUD важнее снимка экспорта', fixture=FROST_DB, factory=probe, runes=6,
              numbers={'resource/runic_power': 100, 'context/maxrunic_power': 120},
              check=expressions({'runic_power.max': 120, 'runic_power.deficit': 20, 'rune.time_to_6': 0})),
-    # Placeholder profiles refuse a model until the spec work adds one.
-    Scenario('Frost: модели ещё нет — отказ', ('refused', 'модель APL ещё не реализована'), fixture=FROST_DB),
+    # Both DK profiles now build their models (dk_frost_apl.py, dk_unholy_apl.py).
+    # Frost has its model (reader/dk_frost_apl.py, scenarios in spec_251_frost.py).
+    Scenario('Frost: профиль создаёт FrostAPL', fixture=FROST_DB,
+             check=lambda m, _r: (type(m).__name__ == 'FrostAPL' and m.hero_tree == 'deathbringer', type(m).__name__)),
     Scenario('Unholy: модель из профиля (UnholyAPL)', fixture=UNHOLY_SAN,
              check=lambda m, _r: (type(m).__name__ == 'UnholyAPL' and m.hero_tree == 'sanlayn', type(m).__name__)),
 ]

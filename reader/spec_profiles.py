@@ -56,9 +56,15 @@ PROFILES = {
     # Death Knight: offline development (docs/melee-dps-plan.md). The spec work
     # adds the model, fast/binary auras and the data package.
     # --- Frost DK (251): edited only by the Frost work ---
+    # Pillar of Frost 51271 and Remorseless Winter 196770 / Frozen Dominion
+    # 1233152 remains gate rules against gcd.max. Stacks are read only for
+    # Killing Machine 51124, Razorice 51714, Gathering Storm 211805, Icy Onslaught 1230273.
     251: SpecProfile('deathknight.frost', 251, 'Frost DK', 'dk-frost-apl',
                      (DEATHBRINGER, RIDER), ('runic_power', 'runes'), 'in-development',
-                     model=''),
+                     fast_aura_timers=frozenset({51271, 196770, 1233152}),
+                     binary_auras=frozenset({59052, 51271, 1249658, 196770, 1233152, 377103, 1229310, 53365,
+                                             1265630, 1265639, 10060, 55095, 434765}),
+                     model='dk_frost_apl:FrostAPL'),
     # --- Unholy DK (252): edited only by the Unholy work ---
     # Fast timers: Dark Transformation (remains<gcd*2 / >5), Essence of the Blood
     # Queen (remains<gcd*3), Festering Scythe (remains<=3). Binary: on/off auras and

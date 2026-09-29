@@ -1,0 +1,1487 @@
+{
+  "clientBuild": "12.1.0.69933",
+  "specID": 251,
+  "complete": false,
+  "note": "Display coverage only. Native rendering, OCR accuracy and APL evaluation are separate concerns. Nothing is game-observed yet.",
+  "talentGates": "pending: supply build.txt, run docs/traits/decode-build.mjs death_knight 251, then extract.mjs",
+  "fallbackBuffs": "Buffs of unselected talents are absent exactly (make_fallback); Chosen of Frostbrood recall needs apex tier 3",
+  "replacements": {
+    "frost_strike": {
+      "spellID": 1228433,
+      "buff": 1229310,
+      "evidence": "simc-source"
+    },
+    "frostwyrms_fury": {
+      "spellID": 1265384,
+      "buff": 1265639,
+      "evidence": "simc-source"
+    }
+  },
+  "heroTrees": {
+    "32": {
+      "heroTree": "rider_of_the_apocalypse",
+      "dependencies": [
+        {
+          "symbol": "active_enemies",
+          "mode": "native-display",
+          "source": "TargetCount estimate or manual override; unknown blocks only when the choice depends on it"
+        },
+        {
+          "symbol": "buff.bonegrinder_frost.remains",
+          "mode": "native-display+ocr",
+          "spellID": 377103,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp spell.bonegrinder_frost_buff"
+        },
+        {
+          "symbol": "buff.bonegrinder_frost.up",
+          "mode": "native-display",
+          "spellID": 377103,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp spell.bonegrinder_frost_buff"
+        },
+        {
+          "symbol": "buff.breath_of_sindragosa.up",
+          "mode": "native-display",
+          "spellID": 1249658,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp: buff uses the talent spell (trait table (death_knight-traits.json)); fixed-duration buff, not a toggle. ClassData/research-apl list the older 152279"
+        },
+        {
+          "symbol": "buff.chosen_of_frostbrood_fwf.up",
+          "mode": "native-display",
+          "spellID": 1265639,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp apex tier 3 buff; Frostwyrm's Fury is replaced by the recall 1265384 while up"
+        },
+        {
+          "symbol": "buff.chosen_of_frostbrood_haste.up",
+          "mode": "native-display",
+          "spellID": 1265630,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp apex tier 1 buff"
+        },
+        {
+          "symbol": "buff.frostbane.react",
+          "mode": "native-display",
+          "spellID": 1229310,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp spell.frostbane_buff; Frost Strike is replaced by Frostbane 1228433 while up"
+        },
+        {
+          "symbol": "buff.gathering_storm.stack",
+          "mode": "native-display+ocr",
+          "spellID": 211805,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp spell.gathering_storm_buff"
+        },
+        {
+          "symbol": "buff.icy_onslaught.stack",
+          "mode": "native-display+ocr",
+          "spellID": 1230273,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp spell.icy_onslaught_buff"
+        },
+        {
+          "symbol": "buff.icy_onslaught.up",
+          "mode": "native-display",
+          "spellID": 1230273,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp spell.icy_onslaught_buff"
+        },
+        {
+          "symbol": "buff.killing_machine.react",
+          "mode": "native-display+ocr",
+          "spellID": 51124,
+          "evidence": "wowhead",
+          "note": "sc_death_knight.cpp: talent 51128 effect#1 trigger (no literal ID); Wowhead 51124 \"Killing Machine\" 10 s buff modifying Obliterate/Frostscythe crit; research-apl: verified, 2 stacks"
+        },
+        {
+          "symbol": "buff.pillar_of_frost.remains",
+          "mode": "native-display+ocr",
+          "spellID": 51271,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp: buff uses the talent spell (trait table (death_knight-traits.json))"
+        },
+        {
+          "symbol": "buff.pillar_of_frost.up",
+          "mode": "native-display",
+          "spellID": 51271,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp: buff uses the talent spell (trait table (death_knight-traits.json))"
+        },
+        {
+          "symbol": "buff.remorseless_winter.remains",
+          "mode": "native-display+ocr",
+          "spellID": 196770,
+          "evidence": "simc-source",
+          "note": "specialization_spells.inc spec spell; with Frozen Dominion the buff is 1233152 (spell.frozen_dominion_remorseless_winter_buff)"
+        },
+        {
+          "symbol": "buff.rime.react",
+          "mode": "native-display",
+          "spellID": 59052,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp spell.rime_buff"
+        },
+        {
+          "symbol": "buff.unholy_strength.remains",
+          "mode": "native-display+ocr",
+          "spellID": 53365,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp runeforge_spell.unholy_strength (Rune of the Fallen Crusader)"
+        },
+        {
+          "symbol": "buff.unholy_strength.up",
+          "mode": "native-display",
+          "spellID": 53365,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp runeforge_spell.unholy_strength (Rune of the Fallen Crusader)"
+        },
+        {
+          "symbol": "cooldown.breath_of_sindragosa.duration",
+          "mode": "static-model-required",
+          "spellID": 1249658,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json); use_off_gcd"
+        },
+        {
+          "symbol": "cooldown.breath_of_sindragosa.remains",
+          "mode": "native-display",
+          "spellID": 1249658,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json); use_off_gcd"
+        },
+        {
+          "symbol": "cooldown.empower_rune_weapon.full_recharge_time",
+          "mode": "native-display+ocr (exact at max or max-1 charges)",
+          "spellID": 47568,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json); charges from spell data, off-GCD (min_gcd 0)"
+        },
+        {
+          "symbol": "cooldown.frostwyrms_fury.duration",
+          "mode": "static-model-required",
+          "spellID": 279302,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json); replacement Chosen of Frostbrood 1265384 (sc_death_knight.cpp chosen_of_frostbrood_fwf_action, off-GCD)"
+        },
+        {
+          "symbol": "cooldown.frostwyrms_fury.remains",
+          "mode": "native-display",
+          "spellID": 279302,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json); replacement Chosen of Frostbrood 1265384 (sc_death_knight.cpp chosen_of_frostbrood_fwf_action, off-GCD)"
+        },
+        {
+          "symbol": "cooldown.pillar_of_frost.duration",
+          "mode": "static-model-required",
+          "spellID": 51271,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json)"
+        },
+        {
+          "symbol": "cooldown.pillar_of_frost.remains",
+          "mode": "native-display",
+          "spellID": 51271,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json)"
+        },
+        {
+          "symbol": "death_knight.first_ams_cast",
+          "mode": "unavailable",
+          "source": "SimC option; only in the Anti-Magic Shell rule, which is not executed"
+        },
+        {
+          "symbol": "debuff.razorice.react",
+          "mode": "native-display+ocr",
+          "spellID": 51714,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp runeforge_spell.razorice_debuff; stacks to 5"
+        },
+        {
+          "symbol": "debuff.razorice.stack",
+          "mode": "native-display+ocr",
+          "spellID": 51714,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp runeforge_spell.razorice_debuff; stacks to 5"
+        },
+        {
+          "symbol": "dot.frost_fever.ticking",
+          "mode": "native-display",
+          "spellID": 55095,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp spell.frost_fever"
+        },
+        {
+          "symbol": "fight_remains",
+          "mode": "manual-forecast",
+          "source": "fight cell; fight_remains<N applies only when set (adaptation)"
+        },
+        {
+          "symbol": "gcd",
+          "mode": "derived",
+          "source": "1.5 s adjusted by displayed haste; minimum 0.75"
+        },
+        {
+          "symbol": "gcd.max",
+          "mode": "derived",
+          "source": "Same as gcd"
+        },
+        {
+          "symbol": "hero_tree.deathbringer",
+          "mode": "static-export",
+          "source": "Subtree switch of the talent string"
+        },
+        {
+          "symbol": "hero_tree.rider_of_the_apocalypse",
+          "mode": "static-export",
+          "source": "Subtree switch of the talent string"
+        },
+        {
+          "symbol": "main_hand.2h",
+          "mode": "partial",
+          "source": "False with an off-hand weapon in the export (slot 17); otherwise unknown"
+        },
+        {
+          "symbol": "raid_event.adds.duration",
+          "mode": "adapted",
+          "source": "No scripted raid events: in/cooldown huge, others 0 (raid_event.cpp without matching events)"
+        },
+        {
+          "symbol": "raid_event.adds.exists",
+          "mode": "adapted",
+          "source": "No scripted raid events: in/cooldown huge, others 0 (raid_event.cpp without matching events)"
+        },
+        {
+          "symbol": "raid_event.adds.in",
+          "mode": "adapted",
+          "source": "No scripted raid events: in/cooldown huge, others 0 (raid_event.cpp without matching events)"
+        },
+        {
+          "symbol": "raid_event.adds.remains",
+          "mode": "adapted",
+          "source": "No scripted raid events: in/cooldown huge, others 0 (raid_event.cpp without matching events)"
+        },
+        {
+          "symbol": "raid_event.adds.up",
+          "mode": "adapted",
+          "source": "No scripted raid events: in/cooldown huge, others 0 (raid_event.cpp without matching events)"
+        },
+        {
+          "symbol": "raid_event.pull.exists",
+          "mode": "adapted",
+          "source": "No scripted raid events: in/cooldown huge, others 0 (raid_event.cpp without matching events)"
+        },
+        {
+          "symbol": "rune",
+          "mode": "native-display",
+          "source": "Six rune colours (ready / recharging / unknown)"
+        },
+        {
+          "symbol": "runic_power",
+          "mode": "native-display",
+          "source": "Runic power OCR"
+        },
+        {
+          "symbol": "runic_power.deficit",
+          "mode": "derived",
+          "source": "MAX СР cell or export max minus runic power"
+        },
+        {
+          "symbol": "talent.apocalypse_now",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.bonegrinder.rank",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.breath_of_sindragosa",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.chosen_of_frostbrood",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.frostbane",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.frostbound_will",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.gathering_storm",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.icy_onslaught",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.killing_streak",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.obliteration",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.pillar_of_frost",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.shattering_blade",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "target.debuff.casting.react",
+          "mode": "native-display",
+          "source": "Target cast/channel + interruptibility marker"
+        },
+        {
+          "symbol": "time",
+          "mode": "observed",
+          "source": "Combat start event"
+        },
+        {
+          "symbol": "trinket.1.cast_time",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.cooldown.duration",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.cooldown.remains",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.has_buff.crit",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.has_buff.haste",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.has_buff.mastery",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.has_buff.strength",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.has_buff.versatility",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.has_cooldown",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.has_use_buff",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.ilvl",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.is.improvised_seaforium_pacemaker",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.is.unyielding_netherprism",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.proc.any_dps.duration",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.cast_time",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.cooldown.duration",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.cooldown.remains",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.has_buff.crit",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.has_buff.haste",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.has_buff.mastery",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.has_buff.strength",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.has_buff.versatility",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.has_cooldown",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.has_use_buff",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.ilvl",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.is.improvised_seaforium_pacemaker",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.is.unyielding_netherprism",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.proc.any_dps.duration",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "variable.adds_remain",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.breath_of_sindragosa_check",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.cooldown_check",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.damage_trinket_priority",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.frostscythe_priority",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.fwf_buffs",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.rp_pooling",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.rune_pooling",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.sending_cds",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.st_planning",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.trinket_1_buffs",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.trinket_1_duration",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.trinket_1_manual",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.trinket_1_sync",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.trinket_2_buffs",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.trinket_2_duration",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.trinket_2_manual",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.trinket_2_sync",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.trinket_priority",
+          "mode": "derived",
+          "source": "APL expression"
+        }
+      ],
+      "targetIf": [
+        {
+          "list": "aoe",
+          "targetIf": "max:(talent.shattering_blade&debuff.razorice.react=5)",
+          "adaptation": "current target (selector dropped)"
+        },
+        {
+          "list": "aoe",
+          "targetIf": "max:(hero_tree.rider_of_the_apocalypse&debuff.chains_of_ice_trollbane_slow.react)",
+          "adaptation": "current target (selector dropped)"
+        },
+        {
+          "list": "aoe",
+          "targetIf": "max:(talent.shattering_blade&debuff.razorice.react=5)",
+          "adaptation": "current target (selector dropped)"
+        },
+        {
+          "list": "aoe",
+          "targetIf": "max:(hero_tree.rider_of_the_apocalypse&debuff.chains_of_ice_trollbane_slow.react)",
+          "adaptation": "current target (selector dropped)"
+        },
+        {
+          "list": "aoe",
+          "targetIf": "max:(hero_tree.rider_of_the_apocalypse&debuff.chains_of_ice_trollbane_slow.react)",
+          "adaptation": "current target (selector dropped)"
+        },
+        {
+          "list": "single_target",
+          "targetIf": "max:(talent.shattering_blade&debuff.razorice.react=5)",
+          "adaptation": "current target (selector dropped)"
+        }
+      ],
+      "unusedVariables": [],
+      "actions": {
+        "obliterate": {
+          "spellID": 49020,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json)"
+        },
+        "frost_strike": {
+          "spellID": 49143,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json); replacement Frostbane 1228433 (sc_death_knight.cpp spell.frostbane_driver) on the same button"
+        },
+        "howling_blast": {
+          "spellID": 49184,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json)"
+        },
+        "frostscythe": {
+          "spellID": 207230,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json)"
+        },
+        "glacial_advance": {
+          "spellID": 194913,
+          "evidence": "simc-source",
+          "note": "specialization_spells.inc (baseline Frost spec spell)"
+        },
+        "remorseless_winter": {
+          "spellID": 196770,
+          "evidence": "simc-source",
+          "note": "specialization_spells.inc; removed by Frozen Dominion (trait 377226 replacementId 196770)"
+        },
+        "pillar_of_frost": {
+          "spellID": 51271,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json)"
+        },
+        "breath_of_sindragosa": {
+          "spellID": 1249658,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json); use_off_gcd"
+        },
+        "frostwyrms_fury": {
+          "spellID": 279302,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json); replacement Chosen of Frostbrood 1265384 (sc_death_knight.cpp chosen_of_frostbrood_fwf_action, off-GCD)"
+        },
+        "empower_rune_weapon": {
+          "spellID": 47568,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json); charges from spell data, off-GCD (min_gcd 0)"
+        },
+        "raise_dead": {
+          "spellID": 46585,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json) (class); temporary ghoul, ready() false while it lives — the HUD cooldown covers it"
+        },
+        "mind_freeze": {
+          "spellID": 47528,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json) (class); target_ready needs a casting target"
+        },
+        "blood_fury": {
+          "spellID": 20572,
+          "evidence": "profile-reuse",
+          "note": "Same ID as Fury/Windwalker profiles; not re-checked for DK"
+        },
+        "berserking": {
+          "spellID": 26297,
+          "evidence": "profile-reuse"
+        },
+        "arcane_pulse": {
+          "spellID": 260364,
+          "evidence": "profile-reuse"
+        },
+        "lights_judgment": {
+          "spellID": 255647,
+          "evidence": "profile-reuse"
+        },
+        "ancestral_call": {
+          "spellID": 274738,
+          "evidence": "profile-reuse"
+        },
+        "fireblood": {
+          "spellID": 265221,
+          "evidence": "profile-reuse"
+        },
+        "bag_of_tricks": {
+          "spellID": 312411,
+          "evidence": "profile-reuse"
+        },
+        "antimagic_shell": "Defensive; not executed (death_knight.first_ams_cast is a simulation option)",
+        "potion": "User-selected item; not executed",
+        "use_item": "Not executed; trinkets modelled as absent",
+        "auto_attack": "Footer indicator",
+        "snapshot_stats": "Simulation-only action",
+        "invoke_external_buff": "Player coordination; Power Infusion aura 10060 is displayed but cannot be requested"
+      }
+    },
+    "33": {
+      "heroTree": "deathbringer",
+      "dependencies": [
+        {
+          "symbol": "active_enemies",
+          "mode": "native-display",
+          "source": "TargetCount estimate or manual override; unknown blocks only when the choice depends on it"
+        },
+        {
+          "symbol": "buff.bonegrinder_frost.remains",
+          "mode": "native-display+ocr",
+          "spellID": 377103,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp spell.bonegrinder_frost_buff"
+        },
+        {
+          "symbol": "buff.bonegrinder_frost.up",
+          "mode": "native-display",
+          "spellID": 377103,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp spell.bonegrinder_frost_buff"
+        },
+        {
+          "symbol": "buff.breath_of_sindragosa.up",
+          "mode": "native-display",
+          "spellID": 1249658,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp: buff uses the talent spell (trait table (death_knight-traits.json)); fixed-duration buff, not a toggle. ClassData/research-apl list the older 152279"
+        },
+        {
+          "symbol": "buff.chosen_of_frostbrood_fwf.up",
+          "mode": "native-display",
+          "spellID": 1265639,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp apex tier 3 buff; Frostwyrm's Fury is replaced by the recall 1265384 while up"
+        },
+        {
+          "symbol": "buff.chosen_of_frostbrood_haste.up",
+          "mode": "native-display",
+          "spellID": 1265630,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp apex tier 1 buff"
+        },
+        {
+          "symbol": "buff.frostbane.react",
+          "mode": "native-display",
+          "spellID": 1229310,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp spell.frostbane_buff; Frost Strike is replaced by Frostbane 1228433 while up"
+        },
+        {
+          "symbol": "buff.gathering_storm.stack",
+          "mode": "native-display+ocr",
+          "spellID": 211805,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp spell.gathering_storm_buff"
+        },
+        {
+          "symbol": "buff.icy_onslaught.stack",
+          "mode": "native-display+ocr",
+          "spellID": 1230273,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp spell.icy_onslaught_buff"
+        },
+        {
+          "symbol": "buff.icy_onslaught.up",
+          "mode": "native-display",
+          "spellID": 1230273,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp spell.icy_onslaught_buff"
+        },
+        {
+          "symbol": "buff.killing_machine.react",
+          "mode": "native-display+ocr",
+          "spellID": 51124,
+          "evidence": "wowhead",
+          "note": "sc_death_knight.cpp: talent 51128 effect#1 trigger (no literal ID); Wowhead 51124 \"Killing Machine\" 10 s buff modifying Obliterate/Frostscythe crit; research-apl: verified, 2 stacks"
+        },
+        {
+          "symbol": "buff.pillar_of_frost.remains",
+          "mode": "native-display+ocr",
+          "spellID": 51271,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp: buff uses the talent spell (trait table (death_knight-traits.json))"
+        },
+        {
+          "symbol": "buff.pillar_of_frost.up",
+          "mode": "native-display",
+          "spellID": 51271,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp: buff uses the talent spell (trait table (death_knight-traits.json))"
+        },
+        {
+          "symbol": "buff.remorseless_winter.remains",
+          "mode": "native-display+ocr",
+          "spellID": 196770,
+          "evidence": "simc-source",
+          "note": "specialization_spells.inc spec spell; with Frozen Dominion the buff is 1233152 (spell.frozen_dominion_remorseless_winter_buff)"
+        },
+        {
+          "symbol": "buff.rime.react",
+          "mode": "native-display",
+          "spellID": 59052,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp spell.rime_buff"
+        },
+        {
+          "symbol": "buff.unholy_strength.remains",
+          "mode": "native-display+ocr",
+          "spellID": 53365,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp runeforge_spell.unholy_strength (Rune of the Fallen Crusader)"
+        },
+        {
+          "symbol": "buff.unholy_strength.up",
+          "mode": "native-display",
+          "spellID": 53365,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp runeforge_spell.unholy_strength (Rune of the Fallen Crusader)"
+        },
+        {
+          "symbol": "cooldown.breath_of_sindragosa.duration",
+          "mode": "static-model-required",
+          "spellID": 1249658,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json); use_off_gcd"
+        },
+        {
+          "symbol": "cooldown.breath_of_sindragosa.remains",
+          "mode": "native-display",
+          "spellID": 1249658,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json); use_off_gcd"
+        },
+        {
+          "symbol": "cooldown.empower_rune_weapon.full_recharge_time",
+          "mode": "native-display+ocr (exact at max or max-1 charges)",
+          "spellID": 47568,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json); charges from spell data, off-GCD (min_gcd 0)"
+        },
+        {
+          "symbol": "cooldown.frostwyrms_fury.duration",
+          "mode": "static-model-required",
+          "spellID": 279302,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json); replacement Chosen of Frostbrood 1265384 (sc_death_knight.cpp chosen_of_frostbrood_fwf_action, off-GCD)"
+        },
+        {
+          "symbol": "cooldown.frostwyrms_fury.remains",
+          "mode": "native-display",
+          "spellID": 279302,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json); replacement Chosen of Frostbrood 1265384 (sc_death_knight.cpp chosen_of_frostbrood_fwf_action, off-GCD)"
+        },
+        {
+          "symbol": "cooldown.pillar_of_frost.duration",
+          "mode": "static-model-required",
+          "spellID": 51271,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json)"
+        },
+        {
+          "symbol": "cooldown.pillar_of_frost.remains",
+          "mode": "native-display",
+          "spellID": 51271,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json)"
+        },
+        {
+          "symbol": "cooldown.reapers_mark.remains",
+          "mode": "native-display",
+          "spellID": 439843,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json) (Deathbringer, subtree 33)",
+          "heroTree": "deathbringer"
+        },
+        {
+          "symbol": "death_knight.first_ams_cast",
+          "mode": "unavailable",
+          "source": "SimC option; only in the Anti-Magic Shell rule, which is not executed"
+        },
+        {
+          "symbol": "debuff.razorice.react",
+          "mode": "native-display+ocr",
+          "spellID": 51714,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp runeforge_spell.razorice_debuff; stacks to 5"
+        },
+        {
+          "symbol": "debuff.razorice.stack",
+          "mode": "native-display+ocr",
+          "spellID": 51714,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp runeforge_spell.razorice_debuff; stacks to 5"
+        },
+        {
+          "symbol": "debuff.reapers_mark_debuff.down",
+          "mode": "native-display",
+          "spellID": 434765,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp spell.reapers_mark_debuff; only in target_if=first: (current-target adaptation)"
+        },
+        {
+          "symbol": "dot.frost_fever.ticking",
+          "mode": "native-display",
+          "spellID": 55095,
+          "evidence": "simc-source",
+          "note": "sc_death_knight.cpp spell.frost_fever"
+        },
+        {
+          "symbol": "fight_remains",
+          "mode": "manual-forecast",
+          "source": "fight cell; fight_remains<N applies only when set (adaptation)"
+        },
+        {
+          "symbol": "gcd",
+          "mode": "derived",
+          "source": "1.5 s adjusted by displayed haste; minimum 0.75"
+        },
+        {
+          "symbol": "gcd.max",
+          "mode": "derived",
+          "source": "Same as gcd"
+        },
+        {
+          "symbol": "hero_tree.deathbringer",
+          "mode": "static-export",
+          "source": "Subtree switch of the talent string"
+        },
+        {
+          "symbol": "hero_tree.rider_of_the_apocalypse",
+          "mode": "static-export",
+          "source": "Subtree switch of the talent string"
+        },
+        {
+          "symbol": "main_hand.2h",
+          "mode": "partial",
+          "source": "False with an off-hand weapon in the export (slot 17); otherwise unknown"
+        },
+        {
+          "symbol": "raid_event.adds.duration",
+          "mode": "adapted",
+          "source": "No scripted raid events: in/cooldown huge, others 0 (raid_event.cpp without matching events)"
+        },
+        {
+          "symbol": "raid_event.adds.exists",
+          "mode": "adapted",
+          "source": "No scripted raid events: in/cooldown huge, others 0 (raid_event.cpp without matching events)"
+        },
+        {
+          "symbol": "raid_event.adds.in",
+          "mode": "adapted",
+          "source": "No scripted raid events: in/cooldown huge, others 0 (raid_event.cpp without matching events)"
+        },
+        {
+          "symbol": "raid_event.adds.remains",
+          "mode": "adapted",
+          "source": "No scripted raid events: in/cooldown huge, others 0 (raid_event.cpp without matching events)"
+        },
+        {
+          "symbol": "raid_event.adds.up",
+          "mode": "adapted",
+          "source": "No scripted raid events: in/cooldown huge, others 0 (raid_event.cpp without matching events)"
+        },
+        {
+          "symbol": "raid_event.pull.exists",
+          "mode": "adapted",
+          "source": "No scripted raid events: in/cooldown huge, others 0 (raid_event.cpp without matching events)"
+        },
+        {
+          "symbol": "rune",
+          "mode": "native-display",
+          "source": "Six rune colours (ready / recharging / unknown)"
+        },
+        {
+          "symbol": "runic_power",
+          "mode": "native-display",
+          "source": "Runic power OCR"
+        },
+        {
+          "symbol": "runic_power.deficit",
+          "mode": "derived",
+          "source": "MAX СР cell or export max minus runic power"
+        },
+        {
+          "symbol": "talent.bonegrinder.rank",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.breath_of_sindragosa",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.chosen_of_frostbrood",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.deathly_blows",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.frostbane",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.frostbound_will",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.gathering_storm",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.icy_onslaught",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.killing_streak",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.obliteration",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.pillar_of_frost",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "talent.shattering_blade",
+          "mode": "static-export",
+          "source": "Talent string of the HUD export",
+          "selected": "pending"
+        },
+        {
+          "symbol": "target.debuff.casting.react",
+          "mode": "native-display",
+          "source": "Target cast/channel + interruptibility marker"
+        },
+        {
+          "symbol": "time",
+          "mode": "observed",
+          "source": "Combat start event"
+        },
+        {
+          "symbol": "trinket.1.cast_time",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.cooldown.duration",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.cooldown.remains",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.has_buff.crit",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.has_buff.haste",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.has_buff.mastery",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.has_buff.strength",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.has_buff.versatility",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.has_cooldown",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.has_use_buff",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.ilvl",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.is.improvised_seaforium_pacemaker",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.is.unyielding_netherprism",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.1.proc.any_dps.duration",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.cast_time",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.cooldown.duration",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.cooldown.remains",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.has_buff.crit",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.has_buff.haste",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.has_buff.mastery",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.has_buff.strength",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.has_buff.versatility",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.has_cooldown",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.has_use_buff",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.ilvl",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.is.improvised_seaforium_pacemaker",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.is.unyielding_netherprism",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "trinket.2.proc.any_dps.duration",
+          "mode": "manual-metadata",
+          "source": "Equipment export; runtime models trinkets as absent"
+        },
+        {
+          "symbol": "variable.adds_remain",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.breath_of_sindragosa_check",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.cooldown_check",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.damage_trinket_priority",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.frostscythe_priority",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.fwf_buffs",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.rp_pooling",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.rune_pooling",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.sending_cds",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.st_planning",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.trinket_1_buffs",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.trinket_1_duration",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.trinket_1_manual",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.trinket_1_sync",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.trinket_2_buffs",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.trinket_2_duration",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.trinket_2_manual",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.trinket_2_sync",
+          "mode": "derived",
+          "source": "APL expression"
+        },
+        {
+          "symbol": "variable.trinket_priority",
+          "mode": "derived",
+          "source": "APL expression"
+        }
+      ],
+      "targetIf": [
+        {
+          "list": "aoe",
+          "targetIf": "max:(talent.shattering_blade&debuff.razorice.react=5)",
+          "adaptation": "current target (selector dropped)"
+        },
+        {
+          "list": "aoe",
+          "targetIf": "max:(hero_tree.rider_of_the_apocalypse&debuff.chains_of_ice_trollbane_slow.react)",
+          "adaptation": "current target (selector dropped)"
+        },
+        {
+          "list": "aoe",
+          "targetIf": "max:(talent.shattering_blade&debuff.razorice.react=5)",
+          "adaptation": "current target (selector dropped)"
+        },
+        {
+          "list": "aoe",
+          "targetIf": "max:(hero_tree.rider_of_the_apocalypse&debuff.chains_of_ice_trollbane_slow.react)",
+          "adaptation": "current target (selector dropped)"
+        },
+        {
+          "list": "aoe",
+          "targetIf": "max:(hero_tree.rider_of_the_apocalypse&debuff.chains_of_ice_trollbane_slow.react)",
+          "adaptation": "current target (selector dropped)"
+        },
+        {
+          "list": "cooldowns",
+          "targetIf": "first:debuff.reapers_mark_debuff.down",
+          "adaptation": "current target must satisfy the selector"
+        },
+        {
+          "list": "single_target",
+          "targetIf": "max:(talent.shattering_blade&debuff.razorice.react=5)",
+          "adaptation": "current target (selector dropped)"
+        }
+      ],
+      "unusedVariables": [],
+      "actions": {
+        "obliterate": {
+          "spellID": 49020,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json)"
+        },
+        "frost_strike": {
+          "spellID": 49143,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json); replacement Frostbane 1228433 (sc_death_knight.cpp spell.frostbane_driver) on the same button"
+        },
+        "howling_blast": {
+          "spellID": 49184,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json)"
+        },
+        "frostscythe": {
+          "spellID": 207230,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json)"
+        },
+        "glacial_advance": {
+          "spellID": 194913,
+          "evidence": "simc-source",
+          "note": "specialization_spells.inc (baseline Frost spec spell)"
+        },
+        "remorseless_winter": {
+          "spellID": 196770,
+          "evidence": "simc-source",
+          "note": "specialization_spells.inc; removed by Frozen Dominion (trait 377226 replacementId 196770)"
+        },
+        "pillar_of_frost": {
+          "spellID": 51271,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json)"
+        },
+        "breath_of_sindragosa": {
+          "spellID": 1249658,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json); use_off_gcd"
+        },
+        "frostwyrms_fury": {
+          "spellID": 279302,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json); replacement Chosen of Frostbrood 1265384 (sc_death_knight.cpp chosen_of_frostbrood_fwf_action, off-GCD)"
+        },
+        "empower_rune_weapon": {
+          "spellID": 47568,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json); charges from spell data, off-GCD (min_gcd 0)"
+        },
+        "reapers_mark": {
+          "spellID": 439843,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json) (Deathbringer, subtree 33)",
+          "heroTree": "deathbringer"
+        },
+        "raise_dead": {
+          "spellID": 46585,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json) (class); temporary ghoul, ready() false while it lives — the HUD cooldown covers it"
+        },
+        "mind_freeze": {
+          "spellID": 47528,
+          "evidence": "simc-source",
+          "note": "trait table (death_knight-traits.json) (class); target_ready needs a casting target"
+        },
+        "blood_fury": {
+          "spellID": 20572,
+          "evidence": "profile-reuse",
+          "note": "Same ID as Fury/Windwalker profiles; not re-checked for DK"
+        },
+        "berserking": {
+          "spellID": 26297,
+          "evidence": "profile-reuse"
+        },
+        "arcane_pulse": {
+          "spellID": 260364,
+          "evidence": "profile-reuse"
+        },
+        "lights_judgment": {
+          "spellID": 255647,
+          "evidence": "profile-reuse"
+        },
+        "ancestral_call": {
+          "spellID": 274738,
+          "evidence": "profile-reuse"
+        },
+        "fireblood": {
+          "spellID": 265221,
+          "evidence": "profile-reuse"
+        },
+        "bag_of_tricks": {
+          "spellID": 312411,
+          "evidence": "profile-reuse"
+        },
+        "antimagic_shell": "Defensive; not executed (death_knight.first_ams_cast is a simulation option)",
+        "potion": "User-selected item; not executed",
+        "use_item": "Not executed; trinkets modelled as absent",
+        "auto_attack": "Footer indicator",
+        "snapshot_stats": "Simulation-only action",
+        "invoke_external_buff": "Player coordination; Power Infusion aura 10060 is displayed but cannot be requested"
+      }
+    }
+  },
+  "unresolved": []
+}
