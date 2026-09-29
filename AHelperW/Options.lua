@@ -8,6 +8,98 @@ SLASH_AHELPERW1 = "/ahw"
 -- Legacy per-spec aliases of /ahw apl; new specs need no command of their own.
 local presetCommands = { armsapl = 71, furyapl = 72, wwapl = 269 }
 
+-- Specs whose sets were tuned (and exported/bound) before the automatic preset:
+-- the first automatic pass only records the preset, it adds nothing.
+local tunedBeforeAutoPreset = { [71] = true, [72] = true, [269] = true }
+
+local function PresetSignature(preset, heroID)
+  local parts = { tostring(heroID or 0) }
+  for _, kind in ipairs({ "spells", "procs", "debuffs" }) do
+    parts[#parts + 1] = table.concat(preset[kind] or {}, ",")
+  end
+  return table.concat(parts, "|")
+end
+
+-- Adds the APL preset of the current spec and active hero tree (additive only).
+-- auto: once per preset signature, silent when nothing changes; /ahw apl: always.
+function ns.ApplyAPLPreset(auto)
+  if InCombatLockdown() then
+    if auto then ns.aplPresetAfterCombat = true else msg("добавление набора APL доступно вне боя") end
+    return
+  end
+  local _, specID = ns.GetSpecData()
+  local profile = ns.GetAPLProfile()
+  if not profile then
+    if not auto then msg("для этого спека набор APL не подключён; /ahw apl выбирает текущий спек") end
+    return
+  end
+  local _, build = GetBuildInfo()
+  if tostring(build) ~= "69933" then
+    if not auto then msg("набор сверялся со сборкой 69933; текущая сборка требует повторной сверки") end
+    return
+  end
+  local preset, why, hero = ns.GetAPLPreset(profile)
+  if not preset then
+    if not auto then msg(why) end
+    return
+  end
+  local _, heroID = ns.GetActiveHeroTree(profile)
+  local signature = PresetSignature(preset, heroID)
+  ns.db.aplPresetApplied = ns.db.aplPresetApplied or {}
+  local applied = ns.db.aplPresetApplied
+  if auto then
+    if applied[specID] == signature then return end
+    if applied[specID] == nil and tunedBeforeAutoPreset[specID] then
+      applied[specID] = signature
+      return
+    end
+  end
+  local custom = ns.EnsureCustom()
+  if not custom then return end
+  for old, new in pairs(profile.procReplacements or {}) do
+    for i, id in ipairs(custom.procs) do
+      if id == old then custom.procs[i] = new end
+    end
+  end
+  local count = 0
+  local missing = {}
+  for _, kind in ipairs({ "spells", "procs", "debuffs" }) do
+    local present = {}
+    for _, id in ipairs(custom[kind]) do present[id] = true end
+    for _, id in ipairs(preset[kind] or {}) do
+      if not present[id] then
+        if C_Spell.GetSpellInfo(id) then
+          table.insert(custom[kind], id)
+          present[id] = true
+          count = count + 1
+        else
+          missing[#missing + 1] = tostring(id)
+        end
+      end
+    end
+  end
+  applied[specID] = signature
+  ns.db.cdText = true
+  ns.db.auraTimers = true
+  ns.Rebuild()
+  ns.ApplyCdTextOption()
+  local name = profile.name .. (hero and (" / " .. hero.name) or "")
+  if auto and count == 0 and #missing == 0 then return end
+  msg((auto and "набор APL добавлен автоматически, " or "добавлено индикаторов ") .. name .. ": " .. count .. "; таймеры КД и баффов включены")
+  if not auto then msg("набор для присланного билда 69933; активные таланты автоматически не сверяются") end
+  if #missing > 0 then msg("клиент не знает ID: " .. table.concat(missing, ", ")) end
+end
+
+-- Coalesces login/spec/talent events; the hero tree may be unknown right at login.
+function ns.ScheduleAPLPreset()
+  if ns.aplPresetPending then return end
+  ns.aplPresetPending = true
+  C_Timer.After(1, function()
+    ns.aplPresetPending = nil
+    ns.ApplyAPLPreset(true)
+  end)
+end
+
 SlashCmdList.AHELPERW = function(input)
   local cmd, arg = input:match("^(%S*)%s*(.-)$")
   cmd = cmd:lower()
@@ -107,54 +199,12 @@ SlashCmdList.AHELPERW = function(input)
     ns.Rebuild()
     msg("превью: " .. (ns.db.preview and "вкл" or "выкл"))
   elseif cmd == "apl" or presetCommands[cmd] then
-    if InCombatLockdown() then
-      msg("добавление набора APL доступно вне боя")
-      return
-    end
     local _, specID = ns.GetSpecData()
-    local profile = ns.GetAPLProfile()
-    if not profile or (presetCommands[cmd] and specID ~= presetCommands[cmd]) then
+    if presetCommands[cmd] and specID ~= presetCommands[cmd] then
       msg("для этого спека набор APL не подключён; /ahw apl выбирает текущий спек")
       return
     end
-    local _, build = GetBuildInfo()
-    if tostring(build) ~= "69933" then
-      msg("набор сверялся со сборкой 69933; текущая сборка требует повторной сверки")
-      return
-    end
-    local preset, why, hero = ns.GetAPLPreset(profile)
-    if not preset then msg(why); return end
-    local custom = ns.EnsureCustom()
-    if not custom then return end
-    for old, new in pairs(profile.procReplacements or {}) do
-      for i, id in ipairs(custom.procs) do
-        if id == old then custom.procs[i] = new end
-      end
-    end
-    local count = 0
-    local missing = {}
-    for _, kind in ipairs({ "spells", "procs", "debuffs" }) do
-      local present = {}
-      for _, id in ipairs(custom[kind]) do present[id] = true end
-      for _, id in ipairs(preset[kind] or {}) do
-        if not present[id] then
-          if C_Spell.GetSpellInfo(id) then
-            table.insert(custom[kind], id)
-            present[id] = true
-            count = count + 1
-          else
-            missing[#missing + 1] = tostring(id)
-          end
-        end
-      end
-    end
-    ns.db.cdText = true
-    ns.db.auraTimers = true
-    ns.Rebuild()
-    ns.ApplyCdTextOption()
-    msg("добавлено индикаторов " .. profile.name .. (hero and (" / " .. hero.name) or "") .. ": " .. count .. "; таймеры КД и баффов включены")
-    msg("набор для присланного билда 69933; активные таланты автоматически не сверяются")
-    if #missing > 0 then msg("клиент не знает ID: " .. table.concat(missing, ", ")) end
+    ns.ApplyAPLPreset(false)
   elseif cmd == "auratimers" then
     if arg ~= "on" and arg ~= "off" then
       msg("/ahw auratimers on|off — время действия баффов")

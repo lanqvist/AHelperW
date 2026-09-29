@@ -290,6 +290,31 @@ SlashCmdList.AHELPERW("trinket 1 buff 120 20 strength")
 assert(ns.db.trinketMetadata[1000].buffDuration == 20)
 assert(ns.db.trinketMetadata[1000].strength == true)
 SlashCmdList.AHELPERW("trinket invalid")
+-- Automatic APL preset: once per preset signature; tuned specs are only recorded.
+if ns.GetAPLPreset(profile) then
+  local key = select(2, ns.GetSpecData())
+  local function total() local c = (ns.db.custom or {})[key] or { spells = {}, procs = {}, debuffs = {} }
+    return #c.spells + #c.procs + #(c.debuffs or {}) end
+  ns.db.aplPresetApplied = nil
+  local before = total()
+  combat = true; ns.ApplyAPLPreset(true)
+  assert(ns.aplPresetAfterCombat and not ns.db.aplPresetApplied, "in combat the preset waits")
+  combat = false; ns.aplPresetAfterCombat = nil
+  ns.ApplyAPLPreset(true)
+  assert(ns.db.aplPresetApplied[specID], "automatic preset records its signature")
+  if specID == 71 or specID == 72 or specID == 269 then
+    assert(total() == before, "tuned specs: the first automatic pass adds nothing")
+  else
+    assert(total() > before, "new specs get the preset automatically")
+  end
+  local c = ns.EnsureCustom(); table.remove(c.spells)
+  local removed = total()
+  ns.ApplyAPLPreset(true)
+  assert(total() == removed, "a manual removal survives the next login")
+  ns.db.aplPresetApplied[specID] = "old"
+  ns.ApplyAPLPreset(true)
+  assert(total() >= removed and ns.db.aplPresetApplied[specID] ~= "old", "a changed preset is added again")
+end
 -- Check formatting recipes with a minimal native-formatter stand-in.
 C_StringUtil = { CreateNumericRuleFormatter = function()
   local f = { rules = {} }

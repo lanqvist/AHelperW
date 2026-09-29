@@ -102,11 +102,15 @@ ev:SetScript("OnEvent", function(_, event, ...)
       or event == "TRAIT_CONFIG_UPDATED" or event == "SPELLS_CHANGED"
       or event == "UI_SCALE_CHANGED" or event == "DISPLAY_SIZE_CHANGED" then
     Rebuild()
+    if event ~= "UI_SCALE_CHANGED" and event ~= "DISPLAY_SIZE_CHANGED" and event ~= "SPELLS_CHANGED" then
+      ns.ScheduleAPLPreset()
+    end
   elseif event == "PLAYER_TARGET_CHANGED" then
     ns.RefreshTargetContainers()
     ns.Resources.Update()
   elseif event == "PLAYER_REGEN_ENABLED" then
     if ns.autoExportAfterCombat then ns.autoExportAfterCombat = nil; ns.ScheduleAutoExport(2) end
+    if ns.aplPresetAfterCombat then ns.aplPresetAfterCombat = nil; ns.ScheduleAPLPreset() end
     if ns.pendingRebuild then
       ns.pendingRebuild = nil
       Rebuild()
