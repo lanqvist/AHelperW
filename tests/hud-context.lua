@@ -325,22 +325,29 @@ SlashCmdList.AHELPERW("trinket 1 buff 120 20 strength")
 assert(ns.db.trinketMetadata[1000].buffDuration == 20)
 assert(ns.db.trinketMetadata[1000].strength == true)
 SlashCmdList.AHELPERW("trinket invalid")
--- Automatic APL preset: once per preset signature; tuned specs are only recorded.
+-- Automatic APL preset: once per preset signature. A saved 71/72/269 set predates
+-- the automatic preset and is only recorded; a profile without a set gets the preset.
 if ns.GetAPLPreset(profile) then
   local key = select(2, ns.GetSpecData())
   local function total() local c = (ns.db.custom or {})[key] or { spells = {}, procs = {}, debuffs = {} }
     return #c.spells + #c.procs + #(c.debuffs or {}) end
-  ns.db.aplPresetApplied = nil
-  local before = total()
+  ns.db.custom = ns.db.custom or {}
+  ns.db.custom[key] = nil; ns.db.aplPresetApplied = nil
   combat = true; ns.ApplyAPLPreset(true)
   assert(ns.aplPresetAfterCombat and not ns.db.aplPresetApplied, "in combat the preset waits")
   combat = false; ns.aplPresetAfterCombat = nil
   ns.ApplyAPLPreset(true)
   assert(ns.db.aplPresetApplied[specID], "automatic preset records its signature")
+  assert(total() > 0, "a profile without a saved set gets the preset automatically")
+  local signature = ns.db.aplPresetApplied[specID]
+  -- Older releases recorded the signature without creating the set: repair it.
+  ns.db.custom[key] = nil
+  ns.ApplyAPLPreset(true)
+  assert(total() > 0 and ns.db.aplPresetApplied[specID] == signature, "a recorded signature without a set is repaired")
   if specID == 71 or specID == 72 or specID == 269 then
-    assert(total() == before, "tuned specs: the first automatic pass adds nothing")
-  else
-    assert(total() > before, "new specs get the preset automatically")
+    ns.db.custom[key] = { spells = { 999 }, procs = {}, debuffs = {} }; ns.db.aplPresetApplied = nil
+    ns.ApplyAPLPreset(true)
+    assert(total() == 1 and ns.db.aplPresetApplied[specID] == signature, "tuned specs: a saved set is only recorded")
   end
   local c = ns.EnsureCustom(); table.remove(c.spells)
   local removed = total()
