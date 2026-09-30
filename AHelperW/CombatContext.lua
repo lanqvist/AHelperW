@@ -5,10 +5,12 @@ local frame, started, lastSpell, lastAt
 -- Target changes for the reader's health-based TTD: PLAYER_TARGET_CHANGED is
 -- public. Four colours cycle per change, so a reader sampling every frame sees
 -- each switch; health samples captured before it belong to the old target.
+-- No dark entry: a tooltip over the HUD dims every colour to ~18%, and a dark
+-- "no target" would then match (white -> 47,47,48); dimmed pixels must be unknown.
 local targetGeneration = 0
 C.targetGenerationColors = {
   g0 = { 0, 1, 0.53 }, g1 = { 1, 0.15, 0.15 }, g2 = { 0.25, 0.45, 1 }, g3 = { 1, 1, 1 },
-  none = { 0.16, 0.16, 0.16 }, unknown = { 0.48, 0.35, 0 },
+  none = { 0.75, 0, 0.75 }, unknown = { 0.48, 0.35, 0 },
 }
 local dirtyCasts = true
 local read = ns.ReadValue
@@ -105,7 +107,7 @@ local function EnsureBuilt()
   Cell("range", "ДИСТАНЦИЯ", "Доступность цели для Смертельного удара. Ничего не сообщает о линии видимости и направлении взгляда.")
   Cell("haste", "СКОРОСТЬ %", "Текущий процент haste. Базовый GCD Arms = max(0.75, 1.5 / (1 + haste / 100)).")
   Cell("maxrage", "МАКС. ЯРОСТЬ", "Максимум ярости; текущее значение показано выше.")
-  Cell("ttd", "TTD: ОЦЕНКА", "Ручной прогноз смерти текущей цели: /ahw ttd 60. Сбрасывается при смене цели. ? — прогноз не задан. Цветной квадрат справа меняет цвет при каждой смене цели (серый — нет цели): по нему ридер оценивает TTD из процента здоровья.")
+  Cell("ttd", "TTD: ОЦЕНКА", "Ручной прогноз смерти текущей цели: /ahw ttd 60. Сбрасывается при смене цели. ? — прогноз не задан. Цветной квадрат справа меняет цвет при каждой смене цели (пурпурный — нет цели): по нему ридер оценивает TTD из процента здоровья.")
   C.cells.ttd.targetFlag = C.cells.ttd:CreateTexture(nil, "OVERLAY")
   C.cells.ttd.targetFlag:SetSize(9, 9)
   C.cells.ttd.targetFlag:SetPoint("TOPRIGHT", -2, -2)

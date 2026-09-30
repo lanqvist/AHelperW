@@ -70,6 +70,8 @@ LABELS.update(estimate='Автооценка получена',manual='Ручн�
               no_nameplates='Нет видимых неймплейтов',no_melee_observation='Нет подтверждённых ближних врагов',
               range_unknown='Дистанция соседних целей неизвестна',unit_unknown='Данные соседних целей недоступны',
               waiting='Ожидание первого подсчёта')
+# Target-change flag colours: identity only, never a readiness state.
+LABELS.update(g0='Цель · цвет 1',g1='Цель · цвет 2',g2='Цель · цвет 3',g3='Цель · цвет 4',none='Нет цели')
 
 # Game folders seen via the focused WoW process; used to find SavedVariables.
 WOW_DIRS = set()
@@ -1009,7 +1011,7 @@ class App(tk.Tk):
                     value=item.get('value') if item.get('expiresAt',0)>time.time() else None
                     return '?' if value is None else f'{value:g}'
                 for key,state in data['rows'].items():
-                    self.table.set(key,'state',LABELS[state['state']])
+                    self.table.set(key,'state',LABELS.get(state['state'],state['state']))
                     self.table.set(key,'confidence',f"{state['colorConfidence']:.0%}")
                     for col,suffix in [('timer','timer'),('stacks','stacks')]:
                         self.table.set(key,col,number(key+'/'+suffix))
