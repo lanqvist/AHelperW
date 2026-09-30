@@ -28,6 +28,7 @@ from spec_profiles import create_apl, PROFILES
 from input_sender import Executor, stop_pressed
 from capture_backend import HudCapture
 from cast_receipt import decode as decode_cast_receipt
+from ttd_estimator import TTDEstimator
 import saved_exports
 
 ASSETS = Path(__file__).resolve().parent
@@ -142,7 +143,7 @@ class Reader:
         for key, r in c['resources'].items():
             if key != 'gcd': self.regions['resource/' + key] = r
         for key, r in c['context'].items():
-            if key in ('autoAttack','targetCast','playerCast','inputAllowed','targetInterrupt','targetCountStatus'): continue
+            if key in ('autoAttack','targetCast','playerCast','inputAllowed','targetInterrupt','targetCountStatus','targetGeneration'): continue
             explicit = c.get('contextNumbers',{}).get(key)
             r = dict(explicit or r)
             if not explicit:
@@ -176,6 +177,7 @@ class Reader:
         self.context_colors={k:r for k,r in c['context'].items()
                              if k in ('targets','time','range','chargeRange','playerCast','targetCast',
                                       'trinket1','trinket2','potion','inputAllowed','targetInterrupt','targetCountStatus')
+                             or (k=='targetGeneration' and c.get('targetGeneration',{}).get('version')==1)
                              or 'context/'+k in self.telemetry_contexts}
         self.lock = threading.Lock()
         # Only these counters have a constant, opaque background. Their pixels
@@ -406,6 +408,11 @@ class Reader:
         for key,r in self.context_colors.items():
             if key=='targetCountStatus':
                 palette=self.cfg.get('targetCounting',{}).get('statusColors',TARGET_STATUS_COLORS)
+                rows['context/'+key]=self.color(image,int(r['x']+r['width']/2),int(r['y']+r['height']/2),list(palette),palette)
+                continue
+            if key=='targetGeneration':
+                # Target-change flag: colour identity only, read every frame.
+                palette=self.cfg['targetGeneration']['colors']
                 rows['context/'+key]=self.color(image,int(r['x']+r['width']/2),int(r['y']+r['height']/2),list(palette),palette)
                 continue
             flag=key in ('inputAllowed','targetInterrupt')
@@ -843,6 +850,7 @@ class App(tk.Tk):
 
         def color_worker():
             last_target_diagnostic = None
+            ttd=TTDEstimator()
             last_capture_at = None
             grabber=HudCapture(reader.capture_backend)
             while not halt.is_set():
@@ -918,6 +926,7 @@ class App(tk.Tk):
                     if target_signature != last_target_diagnostic:
                         self.debug.event('target_count_changed',generation=token,diagnostic=data['targetCountDiagnostic'])
                         last_target_diagnostic=target_signature
+                    data['ttdEstimate']=ttd.update(data)
                     decision_started=time.perf_counter()
                     if executor and not halt.is_set():
                         window=data['window']
@@ -941,6 +950,7 @@ class App(tk.Tk):
                         self.enqueue((token,data,img,None))
                 except Exception as e:
                     if executor: executor.pause()
+                    ttd.reset()
                     with shared_lock:
                         shared['epoch']+=1; shared['pending']=None; shared['cache']={}
                         shared['states']={}; shared['versions']={}

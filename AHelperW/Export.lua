@@ -166,6 +166,9 @@ function ns.MakeHUDExport()
   result.context.targetCountStatus = Rect(ns.CombatContext.cells.targets.statusFlag, true)
   result.targetCounting.statusColors = ns.TargetCount.statusColors
   result.context.targetInterrupt = Rect(ns.CombatContext.cells.targetCast.interruptFlag, true)
+  result.context.targetGeneration = Rect(ns.CombatContext.cells.ttd.targetFlag, true)
+  result.targetGeneration = { version = 1, colors = ns.CombatContext.targetGenerationColors,
+    source = "PLAYER_TARGET_CHANGED counter mod 4; none = no target, unknown = unreadable" }
   result.context.autoAttack = Rect(ns.CombatContext.footer)
   result.castReceipt = { version = 2, rect = Rect(ns.CastReceipt.frame), rows = ns.CastReceipt.ROWS, columns = 56,
     source = "public UNIT_SPELLCAST_SUCCEEDED; matching event does not prove which input caused it" }

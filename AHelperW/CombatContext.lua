@@ -2,6 +2,14 @@ local _, ns = ...
 local C = { cells = {}, forecasts = {}, active = false }
 ns.CombatContext = C
 local frame, started, lastSpell, lastAt
+-- Target changes for the reader's health-based TTD: PLAYER_TARGET_CHANGED is
+-- public. Four colours cycle per change, so a reader sampling every frame sees
+-- each switch; health samples captured before it belong to the old target.
+local targetGeneration = 0
+C.targetGenerationColors = {
+  g0 = { 0, 1, 0.53 }, g1 = { 1, 0.15, 0.15 }, g2 = { 0.25, 0.45, 1 }, g3 = { 1, 1, 1 },
+  none = { 0.16, 0.16, 0.16 }, unknown = { 0.48, 0.35, 0 },
+}
 local dirtyCasts = true
 local read = ns.ReadValue
 local function secret(v) return issecretvalue and issecretvalue(v) end
@@ -21,6 +29,15 @@ local function SetCell(cell, text, state)
   cell.bg:SetColorTexture(color[1], color[2], color[3], 1)
   local tc = state == "ready" and p.textOnBright or { 1, 1, 1 }
   cell.value:SetTextColor(tc[1], tc[2], tc[3])
+end
+
+local function PaintTargetFlag()
+  local flag = C.cells.ttd and C.cells.ttd.targetFlag
+  if not flag then return end
+  local target = read(UnitExists, "target")
+  local color = target == true and C.targetGenerationColors["g" .. targetGeneration]
+    or target == false and C.targetGenerationColors.none or C.targetGenerationColors.unknown
+  flag:SetColorTexture(color[1], color[2], color[3], 1)
 end
 
 local function Cell(key, title, tip)
@@ -88,7 +105,10 @@ local function EnsureBuilt()
   Cell("range", "ДИСТАНЦИЯ", "Доступность цели для Смертельного удара. Ничего не сообщает о линии видимости и направлении взгляда.")
   Cell("haste", "СКОРОСТЬ %", "Текущий процент haste. Базовый GCD Arms = max(0.75, 1.5 / (1 + haste / 100)).")
   Cell("maxrage", "МАКС. ЯРОСТЬ", "Максимум ярости; текущее значение показано выше.")
-  Cell("ttd", "TTD: ОЦЕНКА", "Ручной прогноз смерти текущей цели: /ahw ttd 60. Сбрасывается при смене цели. ? — прогноз не задан.")
+  Cell("ttd", "TTD: ОЦЕНКА", "Ручной прогноз смерти текущей цели: /ahw ttd 60. Сбрасывается при смене цели. ? — прогноз не задан. Цветной квадрат справа меняет цвет при каждой смене цели (серый — нет цели): по нему ридер оценивает TTD из процента здоровья.")
+  C.cells.ttd.targetFlag = C.cells.ttd:CreateTexture(nil, "OVERLAY")
+  C.cells.ttd.targetFlag:SetSize(9, 9)
+  C.cells.ttd.targetFlag:SetPoint("TOPRIGHT", -2, -2)
   Cell("fight", "БОЙ: ОЦЕНКА", "Ручной прогноз оставшегося времени боя: /ahw fight 120. ? — прогноз не задан.")
   Cell("chargeRange", "РЫВОК", "Попадает ли цель в диапазон Рывка. Это не точное расстояние в ярдах.")
   for _, spec in ipairs({ { "trinket1", "ТРИНКЕТ 1", 13 }, { "trinket2", "ТРИНКЕТ 2", 14 }, { "potion", "ЗЕЛЬЕ" } }) do
@@ -194,7 +214,7 @@ function C.Build(width, resourceHeight)
     if profileCell and profileCell.tip then c.tip, c.profileTip = profileCell.tip, true
     elseif c.profileTip then c.tip, c.profileTip = c.defaultTip, nil end
     ns.SetFont(c.title, layout.compact and 7 or 8, "OUTLINE")
-    c.title:SetWidth(w - 6 - (key == "targets" and 11 or 0))
+    c.title:SetWidth(w - 6 - ((key == "targets" or key == "ttd") and 11 or 0))
     c.value:ClearAllPoints()
     c.value:SetPoint("BOTTOMLEFT", layout.compact and 2 or 3, 3)
     c.value:SetWidth(w - (c.cooldown and 28 or (layout.compact and 4 or 6)))
@@ -431,6 +451,7 @@ function C.Update()
     elseif value == false then SetCell(C.cells[entry[1]], "ВНЕ", "cd")
     else SetCell(C.cells[entry[1]], "?", "unknown") end
   end
+  PaintTargetFlag()
   for _, key in ipairs({ "ttd", "fight" }) do
     local estimate = C.forecasts[key]
     local remaining = estimate and (estimate.deadline and estimate.deadline - GetTime() or estimate.seconds)
@@ -471,9 +492,12 @@ events:SetScript("OnEvent", function(_, event, unit, _, spellID)
   elseif event == "PLAYER_REGEN_ENABLED" or event == "PLAYER_ENTERING_WORLD" then
     started, lastAt, lastSpell, C.targets = nil, nil, nil, nil
     wipe(C.forecasts)
+    if event == "PLAYER_ENTERING_WORLD" then targetGeneration = (targetGeneration + 1) % 4; PaintTargetFlag() end
   elseif event == "PLAYER_TARGET_CHANGED" then
     C.forecasts.ttd = nil
     dirtyCasts = true
+    targetGeneration = (targetGeneration + 1) % 4
+    PaintTargetFlag()
   elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
     lastSpell, lastAt = spellID, GetTime()
   elseif event:find("^UNIT_SPELLCAST") then

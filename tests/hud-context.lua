@@ -191,6 +191,16 @@ assert(C.cells.ttd.value.text == "~15")
 now = 141; C.Update(); assert(C.cells.ttd.value.text == "?", "expired forecast must not stay zero")
 C.SetForecast("ttd", 20); C.SetForecast("fight", 60); event("PLAYER_TARGET_CHANGED")
 assert(C.forecasts.ttd == nil and C.forecasts.fight ~= nil)
+-- Target-change flag: a new colour per change; grey without a target; brown unknown.
+local flag = C.cells.ttd.targetFlag
+local before = flag.color[1] .. "," .. flag.color[2] .. "," .. flag.color[3]
+event("PLAYER_TARGET_CHANGED")
+assert(flag.color[1] .. "," .. flag.color[2] .. "," .. flag.color[3] ~= before, "target change must change the flag colour")
+target = false; event("PLAYER_TARGET_CHANGED")
+assert(flag.color[1] == C.targetGenerationColors.none[1] and flag.color[3] == C.targetGenerationColors.none[3], "no target must be grey")
+target = nil; C.Update()
+assert(flag.color[1] == C.targetGenerationColors.unknown[1] and flag.color[2] == C.targetGenerationColors.unknown[2], "unreadable target must be unknown")
+target = true; C.Update()
 local rangeIDs = {}
 C_Spell.IsSpellInRange = function(id, unit) if unit == "target" then rangeIDs[id] = true end; return target and true or nil end
 C.Update(); C_Spell.IsSpellInRange = savedRangeAPI
@@ -266,6 +276,7 @@ assert(refused == nil and why:find("secret", 1, true), "secret geometry must ref
 C.cells.targets.GetRect = nil
 assert(ns.MakeHUDExport(), "export recovers once geometry is readable again")
 assert(HUD_EXPORT:find('"static":true', 1, true))
+assert(HUD_EXPORT:find('"targetGeneration":{', 1, true) and HUD_EXPORT:find('"g3":[', 1, true), "export must describe the target-change flag")
 combat = true; assert(ns.MakeHUDExport() == nil, "combat export must be rejected")
 combat = false; target = true; usable = true; noPower = false
 function UnitHealth() return 770280 end
