@@ -8,8 +8,8 @@ SLASH_AHELPERW1 = "/ahw"
 -- Legacy per-spec aliases of /ahw apl; new specs need no command of their own.
 local presetCommands = { armsapl = 71, furyapl = 72, wwapl = 269 }
 
--- Specs whose sets were tuned (and exported/bound) before the automatic preset:
--- the first automatic pass only records the preset, it adds nothing.
+-- Existing custom sets of these specs predate the automatic preset. Preserve
+-- them on migration; a new character with no saved set still needs the preset.
 local tunedBeforeAutoPreset = { [71] = true, [72] = true, [269] = true }
 
 local function PresetSignature(preset, heroID)
@@ -48,8 +48,11 @@ function ns.ApplyAPLPreset(auto)
   ns.db.aplPresetApplied = ns.db.aplPresetApplied or {}
   local applied = ns.db.aplPresetApplied
   if auto then
-    if applied[specID] == signature then return end
-    if applied[specID] == nil and tunedBeforeAutoPreset[specID] then
+    local savedSet = ns.db.custom and ns.db.custom[specID]
+    -- Older releases recorded a signature even on a fresh install without
+    -- creating the set. Repair that case instead of preserving an empty setup.
+    if applied[specID] == signature and savedSet then return end
+    if applied[specID] == nil and tunedBeforeAutoPreset[specID] and savedSet then
       applied[specID] = signature
       return
     end

@@ -78,7 +78,7 @@ function classify(ref) {
     'target.debuff.casting.react':{mode:'native-display', source:'Target cast/channel + interruptibility marker'},
     gcd:{mode:'derived', source:'1.5 s adjusted by displayed haste; minimum 0.75'}, 'gcd.max':{mode:'derived', source:'Same as gcd'},
     time:{mode:'observed', source:'Combat start event'},
-    'main_hand.2h':{mode:'partial', source:'False with an off-hand weapon in the export (slot 17); otherwise unknown'},
+    'main_hand.2h':{mode:'static-export', source:'equipment slot 16 equipLoc (C_Item.GetItemInfoInstant): INVTYPE_2HWEAPON vs one-handed weapon. Legacy exports: false with an off-hand item; otherwise unknown'},
     'death_knight.first_ams_cast':{mode:'unavailable', source:'SimC option; only in the Anti-Magic Shell rule, which is not executed'},
   };
   if (table[ref]) return table[ref];
@@ -132,6 +132,10 @@ const result = {
   talentGates:gates ?? 'pending: supply build.txt, run docs/traits/decode-build.mjs death_knight 251, then extract.mjs',
   fallbackBuffs:'Buffs of unselected talents are absent exactly (make_fallback); Chosen of Frostbrood recall needs apex tier 3',
   replacements:{frost_strike:{spellID:1228433, buff:1229310, evidence:'simc-source'}, frostwyrms_fury:{spellID:1265384, buff:1265639, evidence:'simc-source'}},
+  readinessObservations: {
+    empower_rune_weapon: { spellID:47568, freeChargeAuraID:1269322, evidence:'simc-source',
+      note:'sc_death_knight.cpp empower_rune_weapon_t::ready/update_ready; item_set_bonus.inc Frost MID1 4pc = 1264802; sc_spell_data.inc effect #2 triggers 1269322. A separate native player aura bypasses ordinary charges, not their recharge timer. Legacy exports without it retain ordinary charged casts only. Not game-observed.' },
+  },
   heroTrees:perTree,
   unresolved,
 };

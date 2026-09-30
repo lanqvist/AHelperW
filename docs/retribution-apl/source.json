@@ -1,0 +1,31 @@
+{
+  "commit": "4c7c73621e596419b5bd6faa5d68940a9c640379",
+  "retrieved": "2026-09-30",
+  "clientBuild": "12.1.0.69933",
+  "url": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/class_modules/apl/retribution_apl.inc",
+  "localSource": "retribution_apl.inc",
+  "localSourceSha256": "22e21f1f56ce9152d9abd19a31b0c0cd12da857015236cea9648014a1ecd5239",
+  "traitTable": "../traits/paladin-traits.json",
+  "references": [
+    {
+      "url": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/class_modules/paladin/sc_paladin.cpp",
+      "sha256": "3c457b733359ec0110490e2aea40b5120e1263f413c359567d5788ca7f609d6f"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/class_modules/paladin/sc_paladin_retribution.cpp",
+      "sha256": "d506568b89406c30bd78479a4449f13bc878a5acf6094ef9b3bf7e035ec6b6cf"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/class_modules/paladin/sc_paladin.hpp",
+      "sha256": "96a231aebc9b7249f4b3627498189d09c205906e7396ba447ca291da49a9068c"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/dbc/generated/sc_spell_data.inc",
+      "sha256": "439073313917b668ae889b340629638fac62a69de349ad7baf14ae50019b5f9d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/dbc/generated/specialization_spells.inc",
+      "sha256": "1361f7c66a5e2f38bcf5b8eaef15dbd9038658b186d1dbf0ea6abfee4c7b185d"
+    }
+  ]
+}

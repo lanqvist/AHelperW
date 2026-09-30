@@ -39,6 +39,14 @@ RIDER = HeroTree(32, 'rider_of_the_apocalypse', 'Rider of the Apocalypse')
 SANLAYN = HeroTree(31, 'sanlayn', "San'layn")
 
 PROFILES = {
+    70: SpecProfile('paladin.retribution', 70, 'Retribution', 'retribution-apl',
+                    (HeroTree(48, 'templar', 'Templar'),
+                     HeroTree(50, 'herald_of_the_sun', 'Herald of the Sun')),
+                    ('holy_power',), 'in-development',
+                    fast_aura_timers=frozenset({31884, 454351, 433732, 432629}),
+                    binary_auras=frozenset({427441, 433732, 432629, 1306161, 1306162,
+                                           387178, 406648, 408458, 326733, 1277026, 383346, 343527}),
+                    model='retribution_apl:RetributionAPL'),
     71: SpecProfile('warrior.arms.slayer', 71, 'Arms / Slayer', 'arms-apl',
                     (SLAYER,), ('rage',), 'game-observed',
                     binary_auras=frozenset({107574, 446035, 386164, 10060, 208086, 388539}),
@@ -63,15 +71,15 @@ PROFILES = {
                      (DEATHBRINGER, RIDER), ('runic_power', 'runes'), 'in-development',
                      fast_aura_timers=frozenset({51271, 196770, 1233152}),
                      binary_auras=frozenset({59052, 51271, 1249658, 196770, 1233152, 377103, 1229310, 53365,
-                                             1265630, 1265639, 10060, 55095, 434765}),
+                                             1265630, 1265639, 1269322, 10060, 55095, 434765}),
                      model='dk_frost_apl:FrostAPL'),
     # --- Unholy DK (252): edited only by the Unholy work ---
-    # Fast timers: Dark Transformation (remains<gcd*2 / >5), Essence of the Blood
+    # Fast timers: Dark Transformation or its Gift proxy (remains<gcd*2 / >5), Essence of the Blood
     # Queen (remains<gcd*3), Festering Scythe (remains<=3). Binary: on/off auras and
     # target debuffs; Lesser Ghoul stack=0/>=1 is read as aura down/up.
     252: SpecProfile('deathknight.unholy', 252, 'Unholy DK', 'dk-unholy-apl',
                      (RIDER, SANLAYN), ('runic_power', 'runes'), 'in-development',
-                     fast_aura_timers=frozenset({1235391, 433925, 458123, 1241077}),
+                     fast_aura_timers=frozenset({1235391, 434153, 433925, 458123, 1241077}),
                      binary_auras=frozenset({81340, 1235391, 1242223, 1254252, 458123, 1271975, 1271199,
                                              42650, 1242654, 433899, 434153, 10060,
                                              191587, 1240996, 1241521, 1241077}),

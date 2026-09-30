@@ -8,6 +8,47 @@ local _, ns = ...
 -- (export key, title, tooltip, source: range | powerRegen | runeNext).
 -- The field reference and a filled example: docs/melee-dps-plan.md, «Как добавить спек».
 ns.specProfiles = {
+  -- Retribution: first manual Templar recording; automation/Herald unverified.
+  [70] = {
+    id = "paladin.retribution", name = "Retribution",
+    heroTrees = {
+      [48] = { key = "templar", name = "Templar",
+        preset = { spells = {}, procs = { 427441, 433732, 432629 }, debuffs = {} } },
+      [50] = { key = "herald_of_the_sun", name = "Herald of the Sun",
+        preset = { spells = {}, procs = {}, debuffs = {} } },
+    },
+    primary = "mana", powerType = Enum.PowerType.Mana,
+    secondary = "holy_power", secondaryType = Enum.PowerType.HolyPower,
+    referenceSpellID = 184575, executeThresholds = {},
+    -- Learned class grant (trait data) versus executable action (SimC).
+    -- Visibility only: range, usability and cooldown still use the action ID.
+    knownSpellSources = { [24275] = 1241288 },
+    contextCells = { maxrage = { export = "maxmana", title = "MAX МАНА" } },
+    -- Wake's button becomes Hammer of Light; its base cooldown needs a separate
+    -- engine countdown. The replacement square is not a base-CD observation.
+    cooldownTelemetry = { { key = "wakeCooldown", spellID = 255937, title = "КД СЛЕДА" } },
+    aliases = {
+      -- Same action-bar key in both directions; keep the action's own HUD
+      -- observation separate from the canonical binding of Judgment.
+      hammer_of_wrath = { spellID = 24275, displaySpellID = 24275, bindingSpellID = 20271,
+        sharesBindingWith = "judgment", label = "Молот гнева" },
+      hammer_of_light = { spellID = 427453, displaySpellID = 255937, procID = 427441,
+        sharesBindingWith = "wake_of_ashes", label = "Hammer of Light" },
+      templar_strike = { spellID = 407480, displaySpellID = 35395,
+        sharesBindingWith = "crusader_strike", label = "Templar Strike" },
+      templar_slash = { spellID = 406647, displaySpellID = 35395, procID = 406648,
+        sharesBindingWith = "crusader_strike", label = "Templar Slash" },
+      final_verdict = { spellID = 383328, displaySpellID = 85256,
+        sharesBindingWith = "templars_verdict", label = "Final Verdict" },
+    },
+    preset = {
+      spells = { 184575, 20271, 255937, 24275, 343527, 375576, 31884,
+        53385, 85256, 35395, 96231, 155145, 255647, 265221 },
+      procs = { 31884, 454351, 387178, 406086, 402916, 406648, 408458,
+        326733, 1277026, 1306161, 1306162 },
+      debuffs = { 383346, 343527 },
+    },
+  },
   [71] = {
     id = "warrior.arms.slayer", name = "Arms / Slayer", heroTree = "slayer",
     heroTrees = { [60] = { key = "slayer", name = "Slayer" } },
@@ -109,7 +150,7 @@ ns.specProfiles = {
         46585, 47528,
         20572, 26297, 260364, 255647, 274738, 265221, 312411 },
       procs = { 51124, 59052, 51271, 1249658, 196770, 1233152, 211805, 1230273, 377103, 1229310,
-        53365, 1265630, 1265639, 10060 },
+        53365, 1265630, 1265639, 1269322, 10060 },
       debuffs = { 51714, 55095 },
     },
   },
@@ -172,6 +213,25 @@ ns.rangeProxies = { [845] = 12294, [207230] = 49020, [194913] = 49020, [207317] 
 function ns.GetAPLProfile()
   local _, spec = ns.GetSpecData()
   return ns.specProfiles[spec]
+end
+
+-- Public knowledge while building/exporting outside combat. An API failure or
+-- secret response cannot confirm knowledge; this never determines readiness.
+function ns.GetSpellKnowledge(spellID, profile)
+  profile = profile or ns.GetAPLProfile()
+  local function known(id)
+    local value = ns.ReadValue(IsPlayerSpell, id)
+    if type(value) == "boolean" then return value end
+  end
+  local base = known(spellID)
+  local grantID = profile and profile.knownSpellSources and profile.knownSpellSources[spellID]
+  local grant = grantID and known(grantID)
+  local result
+  if base == true or grant == true then result = true
+  elseif base == false and (not grantID or grant == false) then result = false end
+  return { spellID = spellID, known = result, baseKnown = base,
+    grantSpellID = grantID, grantKnown = grant,
+    status = result == true and "known" or (result == false and "not-known" or "unknown") }
 end
 
 -- Melee range to a unit: the reference spell, then profile.rangeFallbacks when the

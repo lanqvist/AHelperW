@@ -95,11 +95,16 @@ class BindingEditor(tk.Toplevel):
                 self.items[key]=name.split(' ',1)[-1]
                 self.notes[key]=''
         for alias_name,alias in reader.cfg.get('aliases',{}).items():
-            source=str(alias.get('displaySpellID',''))
+            source=str(alias.get('bindingSpellID',alias.get('displaySpellID','')))
             spell=alias.get('spellID')
             if source in self.items and type(spell) is int and str(spell)!=source:
                 self.aliases[str(spell)]=int(source)
                 self.notes[source]='Общая клавиша: '+('Героический удар' if alias_name=='heroic_strike' else alias.get('label',alias_name))
+                if str(spell) in self.items:
+                    self.items.pop(str(spell))
+                    self.notes.pop(str(spell),None)
+        if spell_id is not None:
+            spell_id=str(self.aliases.get(str(spell_id),spell_id))
         try:
             self.document,self.bindings=load_bindings(self.path,self.spec)
         except Exception:
@@ -160,6 +165,7 @@ class BindingEditor(tk.Toplevel):
         self.deiconify()
 
     def select_spell(self,spell_id):
+        spell_id=str(self.aliases.get(str(spell_id),spell_id))
         if spell_id in self.items:
             self.table.selection_set(spell_id)
             self.table.focus(spell_id)

@@ -92,10 +92,13 @@ function ns.PrintSpellDebug(id)
   end
   local effective = EffectiveSpell(id)
   print("AHelperW spell: " .. id .. " -> " .. effective)
+  local knowledge = ns.GetSpellKnowledge(id)
+  print("knowledge: " .. knowledge.status .. "; base=" .. describe(knowledge.baseKnown)
+    .. "; grant=" .. describe(knowledge.grantSpellID) .. ":" .. describe(knowledge.grantKnown))
   query("state", GetSpellState, effective)
   query("hasRange", C_Spell.SpellHasRange, effective)
   query("inRange", C_Spell.IsSpellInRange, effective, "target")
-  query("melee reference", C_Spell.IsSpellInRange, 12294, "target")
+  query("melee reference", C_Spell.IsSpellInRange, ns.GetMeleeReference(), "target")
   query("usable / noPower", C_Spell.IsSpellUsable, effective)
 end
 
@@ -362,9 +365,14 @@ function ns.BuildSquares(spells, procs, debuffs, stackLinks)
     local info = C_Spell.GetSpellInfo(spellID)
     local known = true
     if kind == "spell" then
-      pcall(function()
-        if IsPlayerSpell and not IsPlayerSpell(spellID) then known = false end
-      end)
+      local profile = ns.GetAPLProfile()
+      if profile and profile.knownSpellSources and profile.knownSpellSources[spellID] then
+        known = ns.GetSpellKnowledge(spellID, profile).known == true
+      else
+        pcall(function()
+          if IsPlayerSpell and not IsPlayerSpell(spellID) then known = false end
+        end)
+      end
     end
     if not (info and known) then return end
     shown = shown + 1

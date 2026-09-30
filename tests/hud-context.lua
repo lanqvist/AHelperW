@@ -95,6 +95,19 @@ C_Spell = {
   IsCurrentSpell = function() return true end,
 }
 loadAddon("Squares")
+-- Retribution visibility uses the learned grant, never readiness guesses.
+local savedProfileAPI, savedKnownAPI = ns.GetAPLProfile, IsPlayerSpell
+ns.GetAPLProfile = function() return ns.specProfiles[70] end
+function IsPlayerSpell(id) return id == 1241288 end
+ns.BuildSquares({24275}, {}, {})
+assert(ns.squares[1].spellID == 24275, "learned Hammer of Wrath grant must display its action")
+function IsPlayerSpell() return false end
+ns.BuildSquares({24275}, {}, {})
+assert(ns.squares[1].spellID == nil, "unlearned grant must not display the action")
+function IsPlayerSpell(id) if id == 24275 then return false end end
+ns.BuildSquares({24275}, {}, {})
+assert(ns.squares[1].spellID == nil, "unknown grant must not display the action")
+ns.GetAPLProfile, IsPlayerSpell = savedProfileAPI, savedKnownAPI
 ns.BuildSquares({1464}, {}, {})
 ns.UpdateSquares()
 assert(ns.squares[1].prevState == "ready")

@@ -100,6 +100,10 @@ local function ValidateDrop(id, targetKey)
   pcall(function()
     knows = (IsPlayerSpell and IsPlayerSpell(id)) and true or false
   end)
+  local profile = ns.GetAPLProfile()
+  if profile and profile.knownSpellSources and profile.knownSpellSources[id] then
+    knows = ns.GetSpellKnowledge(id, profile).known == true
+  end
   if targetKey == "spells" then
     if not knows then
       return false, info.name .. " (" .. id .. ") — не способность твоего персонажа; ауры клади в Проки/Дебаффы"

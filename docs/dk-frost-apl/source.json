@@ -7,6 +7,10 @@
   "traitTable": "../traits/death_knight-traits.json",
   "idReference": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/class_modules/sc_death_knight.cpp",
   "idReferenceSha256": "034ef1374fb095421f977d54fba26e3677bdf2aee406e39226dcb8111bd0d644",
+  "setBonusReference": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/dbc/generated/item_set_bonus.inc",
+  "setBonusReferenceSha256": "198af85fbdd6dd3aac8e42b969d050f874439d8038a7586af032615a73e1d358",
+  "spellDataReference": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/dbc/generated/sc_spell_data.inc",
+  "spellDataReferenceSha256": "439073313917b668ae889b340629638fac62a69de349ad7baf14ae50019b5f9d",
   "specSpellReference": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/dbc/generated/specialization_spells.inc",
   "raidEventReference": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/sim/raid_event.cpp",
   "clientBuild": "12.1.0.69933"

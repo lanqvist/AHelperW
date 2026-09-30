@@ -1,5 +1,13 @@
 local _, ns = ...
 local window, edit
+-- Static item metadata, not a guess from an empty off-hand slot. GetItemInfoInstant
+-- returns equipLoc fourth; missing/secret metadata is omitted from the export.
+local function EquipLoc(item)
+  if not C_Item or type(C_Item.GetItemInfoInstant) ~= "function" then return nil end
+  local ok, _, _, _, loc = pcall(C_Item.GetItemInfoInstant, item)
+  if not ok or (issecretvalue and issecretvalue(loc)) or type(loc) ~= "string" or loc == "" then return nil end
+  return loc
+end
 local function Array() return setmetatable({}, { __jsonArray = true }) end
 local function quote(s)
   return '"' .. s:gsub('[%z\1-\31\\"]', function(c)
@@ -111,12 +119,19 @@ function ns.MakeHUDExport()
       size = ns.db.size, gap = layout.gap, perRow = layout.perRow, compact = layout.compact, stable = ns.db.stable, colors = ns.Palette(), timerLayout = "split-v1", chargeText = "white-on-black", stateLabelLayout = "bottom-center-v1",
       gcdColors = { ready = {0, 1, 0.53}, cd = {0.65, 0.12, 0.12}, unknown = {0.16, 0.16, 0.16} } },
     squares = Array(), context = {}, contextNumbers = {}, contextSamples = {}, resources = {}, equipment = Array(),
-    aliases = profile.aliases,
+    aliases = profile.aliases, cooldownTelemetry = profile.cooldownTelemetry,
+    spellKnowledge = Array(),
     unknownInputs = { "target_if:min:target.health.pct across all enemies", "exact movement.distance", "line_of_sight", "future raid events", "unconfigured trinket metadata" },
     manualInputs = { target_time_to_die = "ttd", fight_remains = "fight" },
     targetCounting = { mode = ns.db.targetMode or "auto", method = "visible-hostile-nameplates", referenceSpellID = profile.referenceSpellID, estimated = true, unknownIsZero = false },
     notes = "Static geometry/config only. Re-export after moving, scaling, changing preview, equipment, talents or tracked spells. No live combat data. Unknown is never zero/ready."
   }
+  -- Hidden configured actions remain diagnosable in the static export.
+  for _, spellID in ipairs(ns.GetTrackList()) do
+    local knowledge = ns.GetSpellKnowledge(spellID, profile)
+    knowledge.infoAvailable = C_Spell.GetSpellInfo(spellID) ~= nil
+    result.spellKnowledge[#result.spellKnowledge + 1] = knowledge
+  end
   for i, sq in ipairs(ns.squares) do
     if sq.spellID and sq:IsShown() then
       local rect = Rect(sq)
@@ -197,6 +212,7 @@ function ns.MakeHUDExport()
       local link = ns.ReadValue(GetInventoryItemLink, "player", slot)
       local _, useSpell = C_Item.GetItemSpell(id)
       result.equipment[#result.equipment + 1] = { slot = slot, itemID = id, link = link, useSpellID = useSpell,
+        equipLoc = EquipLoc(link or id),
         itemLevel = link and ns.ReadValue(C_Item.GetDetailedItemLevelInfo, link) or nil,
         aplMetadata = ns.db.trinketMetadata and ns.db.trinketMetadata[id] or nil }
     end

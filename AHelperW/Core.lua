@@ -76,6 +76,7 @@ ev:SetScript("OnEvent", function(_, event, ...)
     ev:RegisterEvent("PLAYER_ENTERING_WORLD")
     ev:RegisterEvent("TRAIT_CONFIG_UPDATED")
     ev:RegisterEvent("SPELLS_CHANGED")
+    ev:RegisterEvent("PLAYER_EQUIPMENT_CHANGED")
     ev:RegisterEvent("PLAYER_REGEN_ENABLED")
     ev:RegisterEvent("PLAYER_TARGET_CHANGED")
     ev:RegisterEvent("UI_SCALE_CHANGED")
@@ -105,6 +106,10 @@ ev:SetScript("OnEvent", function(_, event, ...)
     if event ~= "UI_SCALE_CHANGED" and event ~= "DISPLAY_SIZE_CHANGED" and event ~= "SPELLS_CHANGED" then
       ns.ScheduleAPLPreset()
     end
+  elseif event == "PLAYER_EQUIPMENT_CHANGED" then
+    -- Weapon type is static APL input; refresh its export after a gear change.
+    -- ScheduleAutoExport already postpones exports until combat has ended.
+    ns.ScheduleAutoExport(1)
   elseif event == "PLAYER_TARGET_CHANGED" then
     ns.RefreshTargetContainers()
     ns.Resources.Update()

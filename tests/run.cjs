@@ -64,4 +64,10 @@ for (const spec of specs) {
   if (lauxlib.luaL_dofile(L, to_luastring('tests/target-count.lua')) !== lua.LUA_OK)
     throw new Error(`target count: ${to_jsstring(lua.lua_tostring(L, -1))}`);
 }
+{
+  const L = lauxlib.luaL_newstate();
+  lualib.luaL_openlibs(L);
+  if (lauxlib.luaL_dofile(L, to_luastring('tests/spell-knowledge.lua')) !== lua.LUA_OK)
+    throw new Error(`spell knowledge: ${to_jsstring(lua.lua_tostring(L, -1))}`);
+}
 console.log(`Lua 5.1 syntax, exported JSON schema (${specs.map(s => `${s.specID}/${s.heroTree}`).join(', ')}) and target count timing checked`);

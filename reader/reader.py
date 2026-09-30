@@ -172,9 +172,11 @@ class Reader:
         self.bounds = (min(r['x'] for r in rects), min(r['y'] for r in rects),
                        max(box(r)[2] for r in rects), max(box(r)[3] for r in rects))
         self.ocr = None
+        self.telemetry_contexts={'context/'+entry['key'] for entry in (c.get('cooldownTelemetry') or [])}
         self.context_colors={k:r for k,r in c['context'].items()
                              if k in ('targets','time','range','chargeRange','playerCast','targetCast',
-                                      'trinket1','trinket2','potion','inputAllowed','targetInterrupt','targetCountStatus')}
+                                      'trinket1','trinket2','potion','inputAllowed','targetInterrupt','targetCountStatus')
+                             or 'context/'+k in self.telemetry_contexts}
         self.lock = threading.Lock()
         # Only these counters have a constant, opaque background. Their pixels
         # can be validated independently from the square's changing state colour.
@@ -203,6 +205,8 @@ class Reader:
         """
         if key == 'context/runeNext':
             return tuple(versions.get(k) for k in self.rune_rects)
+        if key in self.telemetry_contexts:
+            return versions.get(key)
         return versions.get(key.rsplit('/',1)[0])
 
     def rune_rows(self, image):
@@ -225,9 +229,15 @@ class Reader:
         # Reject mixed pixels, unrecognised colors and ambiguous matches.
         confidence = max(0., 1-distance/50)
         agreement = np.mean(np.linalg.norm(patch-rgb,axis=2) < 25)
-        if distance > 35 or agreement < .8 or (len(distances)>1 and distances[1][0]-distance<12):
+        reasons=[]
+        if distance > 35: reasons.append('outside_palette')
+        if agreement < .8: reasons.append('mixed_pixels')
+        if len(distances)>1 and distances[1][0]-distance<12: reasons.append('ambiguous_palette')
+        if reasons:
             state = 'unknown'
-        return {'state':state,'colorConfidence':round(confidence,3),'rgb':rgb.astype(int).tolist()}
+        return {'state':state,'colorConfidence':round(confidence,3),'rgb':rgb.astype(int).tolist(),
+                'colorReason':'+'.join(reasons) if reasons else 'matched',
+                'paletteDistance':round(distance,3),'pixelAgreement':round(float(agreement),3)}
 
     def numbers(self, image, rows, captured_at):
         work_started=time.perf_counter()
@@ -319,13 +329,13 @@ class Reader:
             maximum=spec.get('maxCharges')
             if key.endswith('/stacks') and isinstance(maximum,(int,float)) and value>maximum: return None
             if key=='resource/targetHealthPercent' and value>100: return None
-            if key in ('resource/chi','resource/energy','resource/runic_power'):
+            if key in ('resource/chi','resource/energy','resource/runic_power','resource/holy_power'):
                 resource=key.split('/')[1]
                 maximum=self.cfg.get('resourceMeta',{}).get(resource,{}).get('max')
                 live=self.live_max.get(resource)
                 if isinstance(live,(int,float)) and (not isinstance(maximum,(int,float)) or live>maximum): maximum=live
                 if isinstance(maximum,(int,float)) and value>maximum: return None
-                if key in ('resource/chi','resource/runic_power') and not value.is_integer(): return None
+                if key in ('resource/chi','resource/runic_power','resource/holy_power') and not value.is_integer(): return None
             if key=='context/targets' and (not value.is_integer() or not 1<=value<=80): return None
             return value
         # Read the live maximum first so this batch's resource value can use it.
@@ -700,7 +710,11 @@ class App(tk.Tk):
             bindings={}
         for key in self.table.get_children():
             spec=self.reader.square_specs.get(key,{})
-            text=binding_label(bindings.get(str(spec['spellID']))) if spec.get('kind')=='spell' else '—'
+            source=spec.get('spellID')
+            for alias in self.reader.cfg.get('aliases',{}).values():
+                if alias.get('spellID')==source and 'bindingSpellID' in alias:
+                    source=alias['bindingSpellID']; break
+            text=binding_label(bindings.get(str(source))) if spec.get('kind')=='spell' else '—'
             self.table.set(key,'binding',text)
 
     def edit_row_binding(self,event):

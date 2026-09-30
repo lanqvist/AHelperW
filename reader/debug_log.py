@@ -54,6 +54,7 @@ class DebugLog:
 
     def save_samples(self, reader, image, data, numbers):
         """A few original spell squares, enough to diagnose missing countdowns."""
+        self.save_color_anomaly(reader, image, data)
         for key, _, kind, spec in reader.entries:
             rejected = (numbers.get(key+'/stacks') or {}).get('reason') == 'rejected'
             if kind != 'spell':
@@ -87,3 +88,35 @@ class DebugLog:
                 self.event('debug_crop_saved', key=key, directory=str(directory), sample=name, capturedAt=when)
             except OSError as exc:
                 self.event('debug_crop_error', key=key, error=str(exc))
+
+    def save_color_anomaly(self, reader, image, data):
+        """Save bounded HUD evidence on the OCR thread, away from input timing.
+
+        The image is already the HUD rectangle. Normal palette-coloured unknown
+        states are not colour failures; no extra desktop/audio capture is made.
+        """
+        rejected = {key: row for key, row in data.get('rows', {}).items()
+                    if key in reader.square_specs and row.get('state') == 'unknown'
+                    and row.get('colorReason') not in (None, 'matched')}
+        if len(rejected) < 3:
+            return
+        key = 'hud-color-anomaly/' + reader.hash
+        count = self.sample_counts.get(key, 0)
+        when = data['capturedAt']
+        if count >= 3 or when - self.sample_times.get(key, 0) < 5:
+            return
+        directory = self.path.parent / (self.session + '-crops')
+        name = 'hud-color-anomaly-' + reader.hash[:12] + f'-{count+1}'
+        try:
+            directory.mkdir(parents=True, exist_ok=True)
+            image.save(directory / (name + '.png'))
+            metadata = {'profileHash': reader.hash, 'capturedAt': when, 'bounds': reader.bounds,
+                        'rejected': rejected, 'rows': data['rows']}
+            (directory / (name + '.json')).write_text(
+                json.dumps(metadata, ensure_ascii=False, indent=2), encoding='utf-8')
+            self.sample_counts[key] = count + 1
+            self.sample_times[key] = when
+            self.event('hud_color_anomaly_saved', profileHash=reader.hash, capturedAt=when,
+                       rejectedKeys=list(rejected), directory=str(directory), sample=name)
+        except OSError as exc:
+            self.event('debug_crop_error', key=key, error=str(exc))

@@ -28,6 +28,9 @@ class FrostAPL(APLRuntime):
         'remorseless_winter':196770, 'gathering_storm':211805, 'icy_onslaught':1230273,
         'bonegrinder_frost':377103, 'frostbane':1229310, 'unholy_strength':53365,
         'chosen_of_frostbrood_haste':1265630, 'chosen_of_frostbrood_fwf':1265639, 'power_infusion':10060,
+        # MID1 Frost 4pc 1264802 effect #2 -> 1269322. SimC's ready()
+        # permits this free ERW cast independently of ordinary charges.
+        'mid1_4pc_buff':1269322,
     }
     debuffs = {'razorice':51714, 'frost_fever':55095, 'reapers_mark_debuff':434765}
     # Stacking auras: react is the stack count (react=2, react<2-...); a bare
@@ -85,6 +88,13 @@ class FrostAPL(APLRuntime):
             'target_if на нескольких целях: только текущая цель',
             'в игре не проверено ничего: ID, цвета рун, OCR силы рун и стаков',
         )
+        self.erw_free_cast_tracked = ('proc', self.buffs['mid1_4pc_buff']) in self.squares
+        if self.erw_free_cast_tracked:
+            self.adaptations += ('Бесплатное ERW от MID1 4pc — по отдельному баффу 1269322; обычные заряды и их перезарядка читаются отдельно',)
+        else:
+            # Older exports remain usable for the ordinary charged action. They
+            # do not carry the new observation and cannot enable free ERW casts.
+            self.coverage_gaps += ('Бесплатное ERW от MID1 4pc не подключено: нужен новый экспорт с баффом 1269322',)
 
     def adapt(self, row):
         """Labelled rewrites of one pinned rule; the upstream text is kept."""
@@ -149,8 +159,18 @@ class FrostAPL(APLRuntime):
             # huge in/cooldown and 0 for exists/up/remains/duration.
             return 1e10 if parts[-1] in ('in', 'cooldown') else 0
         if name == 'main_hand.2h':
-            # A second weapon means a one-handed main hand; otherwise not known.
-            if any(i.get('slot') == 17 and i.get('itemID') for i in self.cfg.get('equipment', [])):
+            equipment = self.cfg.get('equipment', [])
+            main = next((i for i in equipment if i.get('slot') == 16 and i.get('itemID')), {})
+            offhand = any(i.get('slot') == 17 and i.get('itemID') for i in equipment)
+            loc = main.get('equipLoc')
+            if loc == 'INVTYPE_2HWEAPON':
+                # Contradictory static exports must not imply a weapon type.
+                return unknown(name) if offhand else True
+            if loc in ('INVTYPE_WEAPON', 'INVTYPE_WEAPONMAINHAND'):
+                return False
+            # Preserve the legacy dual-wield inference only when type metadata
+            # is absent. One item alone never establishes a two-handed weapon.
+            if loc is None and offhand:
                 return False
             return unknown(name)
         if parts[0] == 'buff' and parts[1] in self.buffs:
@@ -202,6 +222,14 @@ class FrostAPL(APLRuntime):
         if action in self.spells and not self.learned(action):
             return False
         result = super().available(action)
+        if action == 'empower_rune_weapon' and self.erw_free_cast_tracked:
+            square = self.squares.get(('spell', self.spells[action]))
+            if not square or not self.bindings.get(str(self.spells[action])):
+                return False
+            # The cooldown colour and digits describe ordinary charges, which
+            # this specific proc bypasses. Do not bypass a refused/unknown button.
+            if self.state('spell', self.spells[action]) in ('ready', 'cd', 'almost'):
+                result = binary('|', result, self.buff('mid1_4pc_buff', 'up'))
         if result is False:
             return False
         replacement = self.replacements.get(action)
@@ -213,6 +241,9 @@ class FrostAPL(APLRuntime):
 
     def decide(self, data):
         result = super().decide(data)
+        if (result.get('status') == 'ready' and result['action'] == 'empower_rune_weapon'
+                and self.erw_free_cast_tracked and self.buff('mid1_4pc_buff', 'up') is True):
+            result = dict(result, freeChargeAuraID=self.buffs['mid1_4pc_buff'])
         if result.get('status') == 'ready' and result['action'] in self.replacements:
             name, spell, buff = self.replacements[result['action']]
             if self.buff(buff, 'up') is True:

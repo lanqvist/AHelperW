@@ -6,6 +6,14 @@ local dirtyCasts = true
 local read = ns.ReadValue
 local function secret(v) return issecretvalue and issecretvalue(v) end
 
+-- Additional profile observations; old recharge-only profiles keep their layout.
+local function Telemetry(profile)
+  local entries = {}
+  for _, entry in ipairs(profile.rechargeTelemetry or {}) do entries[#entries + 1] = entry end
+  for _, entry in ipairs(profile.cooldownTelemetry or {}) do entries[#entries + 1] = entry end
+  return entries
+end
+
 local function SetCell(cell, text, state)
   cell.value:SetText(text)
   local p = ns.Palette()
@@ -131,9 +139,9 @@ local function EnsureBuilt()
   end
   Cell("last", "ПРИМЕНЕНО: ID", "Последний UNIT_SPELLCAST_SUCCEEDED игрока: ID применённой способности. Отправка клавиши сама по себе не является применением.")
   for _, profile in pairs(ns.specProfiles) do
-    for _, entry in ipairs(profile.rechargeTelemetry or {}) do
+    for _, entry in ipairs(Telemetry(profile)) do
       if not C.cells[entry.key] then
-        Cell(entry.key, entry.title, "Текущая длительность восстановления одного заряда, секунды. Значение передаётся движку без чтения секретного числа.")
+        Cell(entry.key, entry.title, "Нативные данные восстановления, секунды. Числа передаются движку; отсутствующие данные показываются как ?.")
       end
     end
   end
@@ -162,7 +170,7 @@ function C.Build(width, resourceHeight)
   local footerH = ns.Round(layout.compact and 10 or 16)
   local cellW = (width - gap * 5) / 6
   local height = smallH * 2 + lastH + gap * 3 + footerH
-  local telemetry = C.profile.rechargeTelemetry or {}
+  local telemetry = Telemetry(C.profile)
   local telemetryRows = math.ceil(#telemetry / 6)
   height = height + telemetryRows * (smallH + gap)
   frame:ClearAllPoints()
@@ -200,7 +208,7 @@ function C.Build(width, resourceHeight)
     if c.icon then c.icon:SetShown(not layout.compact) end
   end
   for _, profile in pairs(ns.specProfiles) do
-    for _, entry in ipairs(profile.rechargeTelemetry or {}) do C.cells[entry.key]:Hide() end
+    for _, entry in ipairs(Telemetry(profile)) do C.cells[entry.key]:Hide() end
   end
   for i, entry in ipairs(telemetry) do
     local c = C.cells[entry.key]
@@ -343,6 +351,27 @@ local function Number(cell, fn, kind, ...)
   end
 end
 
+local function BaseCooldown(cell, entry)
+  SetCell(cell, "?", "unknown")
+  local ok, info = pcall(C_Spell.GetSpellCooldown, entry.spellID)
+  if not ok or secret(info) or type(info) ~= "table" then return end
+  if secret(info.isActive) or secret(info.isOnGCD) then return end
+  if info.isActive == false or info.isOnGCD == true then
+    SetCell(cell, "0", "ready")
+    return
+  end
+  if info.isActive ~= true or type(C_Spell.GetSpellCooldownDuration) ~= "function" then return end
+  local got, duration = pcall(C_Spell.GetSpellCooldownDuration, entry.spellID, true)
+  if not got or secret(duration) or not duration then return end
+  -- GetRemainingDuration can return a secret; it goes straight to the renderer.
+  local rendered = pcall(function()
+    local remaining = duration:GetRemainingDuration()
+    SetCell(cell, "", "cd")
+    if not ns.DisplayNumber(cell.value, remaining, "decimal") then error("renderer unavailable") end
+  end)
+  if not rendered then SetCell(cell, "?", "unknown") end
+end
+
 function C.Update()
   if not C.active or not frame:IsVisible() then return end
   local autoTargets = ns.db.targetMode ~= "manual"
@@ -377,6 +406,9 @@ function C.Update()
       local charges = C_Spell.GetSpellCharges(entry.spellID)
       if charges then return charges.cooldownDuration end
     end, "decimal")
+  end
+  for _, entry in ipairs(C.profile.cooldownTelemetry or {}) do
+    BaseCooldown(C.cells[entry.key], entry)
   end
   local target = read(UnitExists, "target")
   local attack = read(UnitCanAttack, "player", "target")

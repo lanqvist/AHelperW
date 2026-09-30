@@ -1,0 +1,568 @@
+{
+  "specID": 70,
+  "clientBuild": "12.1.0.69933",
+  "complete": false,
+  "status": "in-development",
+  "note": "Source inventory only, not an APL fidelity test. Partial manual Templar observations and remaining HUD issues are recorded separately in README.md; automatic inputs and Herald unverified.",
+  "source": {
+    "commit": "4c7c73621e596419b5bd6faa5d68940a9c640379",
+    "retrieved": "2026-09-30",
+    "clientBuild": "12.1.0.69933",
+    "url": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/class_modules/apl/retribution_apl.inc",
+    "localSource": "retribution_apl.inc",
+    "localSourceSha256": "22e21f1f56ce9152d9abd19a31b0c0cd12da857015236cea9648014a1ecd5239",
+    "traitTable": "../traits/paladin-traits.json",
+    "references": [
+      {
+        "url": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/class_modules/paladin/sc_paladin.cpp",
+        "sha256": "3c457b733359ec0110490e2aea40b5120e1263f413c359567d5788ca7f609d6f"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/class_modules/paladin/sc_paladin_retribution.cpp",
+        "sha256": "d506568b89406c30bd78479a4449f13bc878a5acf6094ef9b3bf7e035ec6b6cf"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/class_modules/paladin/sc_paladin.hpp",
+        "sha256": "96a231aebc9b7249f4b3627498189d09c205906e7396ba447ca291da49a9068c"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/dbc/generated/sc_spell_data.inc",
+        "sha256": "439073313917b668ae889b340629638fac62a69de349ad7baf14ae50019b5f9d"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/dbc/generated/specialization_spells.inc",
+        "sha256": "1361f7c66a5e2f38bcf5b8eaef15dbd9038658b186d1dbf0ea6abfee4c7b185d"
+      }
+    ]
+  },
+  "heroTrees": {
+    "48": "templar",
+    "50": "herald_of_the_sun"
+  },
+  "dependencies": [
+    {
+      "symbol": "active_enemies",
+      "mode": "native-display+ocr",
+      "note": "HUD estimate; unknown stays unknown unless result is count-independent"
+    },
+    {
+      "symbol": "buff.art_of_war.stack",
+      "mode": "native-display+ocr",
+      "spellID": 406086,
+      "evidence": "simc-source",
+      "note": "sc_paladin_retribution.cpp create_buffs; stacking under Light Within"
+    },
+    {
+      "symbol": "buff.avenging_wrath.remains",
+      "mode": "native-display+ocr",
+      "spellID": 31884,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp spells.avenging_wrath = 454351 under Radiant Glory, otherwise 31884; stacks with Crusade"
+    },
+    {
+      "symbol": "buff.avenging_wrath.stack",
+      "mode": "native-display+ocr",
+      "spellID": 31884,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp spells.avenging_wrath = 454351 under Radiant Glory, otherwise 31884; stacks with Crusade"
+    },
+    {
+      "symbol": "buff.avenging_wrath.up",
+      "mode": "native-display",
+      "spellID": 31884,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp spells.avenging_wrath = 454351 under Radiant Glory, otherwise 31884; stacks with Crusade"
+    },
+    {
+      "symbol": "buff.divine_arbiter_divine_storm.up",
+      "mode": "native-display",
+      "spellID": 1306162,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp spells.divine_arbiter_divine_storm; MID2 4pc effect, not a decoded talent (sc_paladin_retribution.cpp init_actions)"
+    },
+    {
+      "symbol": "buff.divine_arbiter_verdict.up",
+      "mode": "native-display",
+      "spellID": 1306161,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp spells.divine_arbiter_verdict; MID2 4pc effect, not a decoded talent (sc_paladin_retribution.cpp init_actions)"
+    },
+    {
+      "symbol": "buff.empyrean_legacy.up",
+      "mode": "native-display",
+      "spellID": 387178,
+      "evidence": "simc-source",
+      "note": "sc_paladin_retribution.cpp create_buffs"
+    },
+    {
+      "symbol": "buff.hammer_of_light_free.remains",
+      "mode": "native-display+ocr",
+      "spellID": 433732,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp buffs.templar.hammer_of_light_free"
+    },
+    {
+      "symbol": "buff.hammer_of_light_free.up",
+      "mode": "native-display",
+      "spellID": 433732,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp buffs.templar.hammer_of_light_free"
+    },
+    {
+      "symbol": "buff.righteous_cause.stack",
+      "mode": "native-display+ocr",
+      "spellID": 402916,
+      "evidence": "simc-source",
+      "note": "sc_paladin_retribution.cpp create_buffs; stacking under Light Within"
+    },
+    {
+      "symbol": "buff.undisputed_ruling.remains",
+      "mode": "native-display+ocr",
+      "spellID": 432629,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp buffs.templar.undisputed_ruling"
+    },
+    {
+      "symbol": "cooldown.avenging_wrath.duration",
+      "mode": "static-export",
+      "spellID": 31884,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp avenging_wrath_t; background with Radiant Glory"
+    },
+    {
+      "symbol": "cooldown.avenging_wrath.remains",
+      "mode": "native-display+ocr",
+      "spellID": 31884,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp avenging_wrath_t; background with Radiant Glory"
+    },
+    {
+      "symbol": "cooldown.execution_sentence.remains",
+      "mode": "native-display+ocr",
+      "spellID": 343527,
+      "evidence": "simc-source",
+      "note": "paladin-traits.json, sc_paladin_retribution.cpp execution_sentence_t"
+    },
+    {
+      "symbol": "cooldown.hammer_of_wrath.charges",
+      "mode": "native-display+ocr",
+      "spellID": 24275,
+      "evidence": "simc-source",
+      "note": "sc_paladin_retribution.cpp spells.hammer_of_wrath_ret; sc_paladin.cpp action_ready requires 1277026, not execute HP"
+    },
+    {
+      "symbol": "cooldown.wake_of_ashes.remains",
+      "mode": "base-cooldown-telemetry",
+      "spellID": 255937,
+      "evidence": "simc-source",
+      "note": "paladin-traits.json; wake_of_ashes_t::target_ready rejects while 427441 is up"
+    },
+    {
+      "symbol": "debuff.execution_sentence_debuff.up",
+      "mode": "native-display",
+      "spellID": 343527,
+      "evidence": "simc-source",
+      "note": "sc_paladin.hpp execution_sentence_debuff_t uses talent spell; trait table 343527"
+    },
+    {
+      "symbol": "dot.expurgation.ticking",
+      "mode": "native-display",
+      "spellID": 383346,
+      "evidence": "simc-source",
+      "note": "sc_paladin_retribution.cpp spells.expurgation; current target only"
+    },
+    {
+      "symbol": "equipped.algethar_puzzle_box",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "fight_remains",
+      "mode": "manual-forecast",
+      "note": "Short-fight clauses only with known forecast"
+    },
+    {
+      "symbol": "gcd",
+      "mode": "derived",
+      "note": "1.5 seconds scaled by displayed haste, lower bound 0.75"
+    },
+    {
+      "symbol": "holy_power",
+      "mode": "native-display+ocr",
+      "note": "Numeric secondary resource, white digits 00..05; exported maximum validates input"
+    },
+    {
+      "symbol": "raid_event.adds.exists",
+      "mode": "adapted",
+      "note": "No scripted raid events"
+    },
+    {
+      "symbol": "raid_event.adds.in",
+      "mode": "adapted",
+      "note": "No scripted raid events"
+    },
+    {
+      "symbol": "raid_event.adds.up",
+      "mode": "adapted",
+      "note": "No scripted raid events"
+    },
+    {
+      "symbol": "talent.crusade",
+      "mode": "static-export",
+      "note": "Actual v2 talent string decoded against the pinned class table"
+    },
+    {
+      "symbol": "talent.execution_sentence",
+      "mode": "static-export",
+      "note": "Actual v2 talent string decoded against the pinned class table"
+    },
+    {
+      "symbol": "talent.holy_flames",
+      "mode": "static-export",
+      "note": "Actual v2 talent string decoded against the pinned class table"
+    },
+    {
+      "symbol": "talent.radiant_glory",
+      "mode": "static-export",
+      "note": "Actual v2 talent string decoded against the pinned class table"
+    },
+    {
+      "symbol": "talent.walk_into_light",
+      "mode": "static-export",
+      "note": "Actual v2 talent string decoded against the pinned class table"
+    },
+    {
+      "symbol": "target.time_to_die",
+      "mode": "manual-forecast",
+      "note": "ES trigger disabled without TTD; Wake does not wait for that disabled trigger"
+    },
+    {
+      "symbol": "trinket.1.cooldown.duration",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "trinket.1.cooldown.remains",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "trinket.1.has_buff.crit",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "trinket.1.has_buff.haste",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "trinket.1.has_buff.mastery",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "trinket.1.has_buff.strength",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "trinket.1.has_buff.versatility",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "trinket.1.has_cooldown",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "trinket.1.is.algethar_puzzle_box",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "trinket.1.proc.any_dps.duration",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "trinket.2.cooldown.duration",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "trinket.2.cooldown.remains",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "trinket.2.has_buff.crit",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "trinket.2.has_buff.haste",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "trinket.2.has_buff.mastery",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "trinket.2.has_buff.strength",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "trinket.2.has_buff.versatility",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "trinket.2.has_cooldown",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "trinket.2.is.algethar_puzzle_box",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "trinket.2.proc.any_dps.duration",
+      "mode": "adapted",
+      "note": "No-items mode; these selectors are explicitly disabled, not discovered as absent"
+    },
+    {
+      "symbol": "variable.ds_castable",
+      "mode": "derived",
+      "note": "Pinned expression; pre_es_wake reset -> upstream default 0"
+    },
+    {
+      "symbol": "variable.pre_es_wake",
+      "mode": "derived",
+      "note": "Pinned expression; pre_es_wake reset -> upstream default 0"
+    },
+    {
+      "symbol": "variable.trinket_1_buffs",
+      "mode": "derived",
+      "note": "Pinned expression; pre_es_wake reset -> upstream default 0"
+    },
+    {
+      "symbol": "variable.trinket_1_sync",
+      "mode": "derived",
+      "note": "Pinned expression; pre_es_wake reset -> upstream default 0"
+    },
+    {
+      "symbol": "variable.trinket_2_buffs",
+      "mode": "derived",
+      "note": "Pinned expression; pre_es_wake reset -> upstream default 0"
+    },
+    {
+      "symbol": "variable.trinket_2_sync",
+      "mode": "derived",
+      "note": "Pinned expression; pre_es_wake reset -> upstream default 0"
+    },
+    {
+      "symbol": "variable.trinket_priority",
+      "mode": "derived",
+      "note": "Pinned expression; pre_es_wake reset -> upstream default 0"
+    }
+  ],
+  "actions": {
+    "rebuke": {
+      "spellID": 96231,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp: class Rebuke; sc_spell_data.inc 96231; only on an interruptible casting target"
+    },
+    "execution_sentence": {
+      "spellID": 343527,
+      "evidence": "simc-source",
+      "note": "paladin-traits.json, sc_paladin_retribution.cpp execution_sentence_t"
+    },
+    "avenging_wrath": {
+      "spellID": 31884,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp avenging_wrath_t; background with Radiant Glory"
+    },
+    "hammer_of_light": {
+      "spellID": 427453,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp spells.templar.hammer_of_light_driver; 255937 override in sc_spell_data.inc aura 427441"
+    },
+    "divine_storm": {
+      "spellID": 53385,
+      "evidence": "simc-source",
+      "note": "paladin-traits.json, divine_storm_t; 3 Holy Power or confirmed free proc"
+    },
+    "templars_verdict": {
+      "spellID": 85256,
+      "evidence": "simc-source",
+      "note": "sc_spell_data.inc 85256; Final Verdict 383328 replaces it (trait table, templars_verdict_t)"
+    },
+    "wake_of_ashes": {
+      "spellID": 255937,
+      "evidence": "simc-source",
+      "note": "paladin-traits.json; wake_of_ashes_t::target_ready rejects while 427441 is up"
+    },
+    "divine_toll": {
+      "spellID": 375576,
+      "evidence": "simc-source",
+      "note": "paladin-traits.json, sc_paladin.cpp divine_toll_t"
+    },
+    "blade_of_justice": {
+      "spellID": 184575,
+      "evidence": "simc-source",
+      "note": "paladin-traits.json, blade_of_justice_t"
+    },
+    "hammer_of_wrath": {
+      "spellID": 24275,
+      "evidence": "simc-source",
+      "note": "sc_paladin_retribution.cpp spells.hammer_of_wrath_ret; sc_paladin.cpp action_ready requires 1277026, not execute HP"
+    },
+    "judgment": {
+      "spellID": 20271,
+      "evidence": "simc-source",
+      "note": "sc_paladin_retribution.cpp spells.judgment_ret; sc_paladin.cpp action_ready rejects during 1277026"
+    },
+    "templar_strike": {
+      "spellID": 407480,
+      "evidence": "simc-source",
+      "note": "sc_paladin_retribution.cpp templar_strike_t; replaces 35395, follows absence of 406648"
+    },
+    "templar_slash": {
+      "spellID": 406647,
+      "evidence": "simc-source",
+      "note": "sc_paladin_retribution.cpp templar_slash_t; 406648 effect replaces 407480, shared 35395 bind"
+    },
+    "crusader_strike": {
+      "spellID": 35395,
+      "evidence": "simc-source",
+      "note": "sc_spell_data.inc, sc_paladin.cpp; background if Crusading Strikes or Templar Strikes selected"
+    },
+    "arcane_torrent": {
+      "spellID": 155145,
+      "evidence": "simc-source",
+      "note": "sc_spell_data.inc Paladin Arcane Torrent; racial, only with a configured bind/ready observation"
+    },
+    "lights_judgment": {
+      "spellID": 255647,
+      "evidence": "simc-source",
+      "note": "sc_spell_data.inc racial Light’s Judgment"
+    },
+    "fireblood": {
+      "spellID": 265221,
+      "evidence": "simc-source",
+      "note": "sc_spell_data.inc racial Fireblood"
+    }
+  },
+  "readinessDependencies": {
+    "avenging_wrath": {
+      "spellID": 31884,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp spells.avenging_wrath = 454351 under Radiant Glory, otherwise 31884; stacks with Crusade"
+    },
+    "hammer_of_light_ready": {
+      "spellID": 427441,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp buffs.templar.hammer_of_light_ready; readiness gate, not a timer assumption"
+    },
+    "hammer_of_light_free": {
+      "spellID": 433732,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp buffs.templar.hammer_of_light_free"
+    },
+    "undisputed_ruling": {
+      "spellID": 432629,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp buffs.templar.undisputed_ruling"
+    },
+    "divine_arbiter_verdict": {
+      "spellID": 1306161,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp spells.divine_arbiter_verdict; MID2 4pc effect, not a decoded talent (sc_paladin_retribution.cpp init_actions)"
+    },
+    "divine_arbiter_divine_storm": {
+      "spellID": 1306162,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp spells.divine_arbiter_divine_storm; MID2 4pc effect, not a decoded talent (sc_paladin_retribution.cpp init_actions)"
+    },
+    "empyrean_legacy": {
+      "spellID": 387178,
+      "evidence": "simc-source",
+      "note": "sc_paladin_retribution.cpp create_buffs"
+    },
+    "art_of_war": {
+      "spellID": 406086,
+      "evidence": "simc-source",
+      "note": "sc_paladin_retribution.cpp create_buffs; stacking under Light Within"
+    },
+    "righteous_cause": {
+      "spellID": 402916,
+      "evidence": "simc-source",
+      "note": "sc_paladin_retribution.cpp create_buffs; stacking under Light Within"
+    },
+    "templar_strikes": {
+      "spellID": 406648,
+      "evidence": "simc-source",
+      "note": "sc_paladin_retribution.cpp create_buffs; follow-up gate"
+    },
+    "divine_purpose": {
+      "spellID": 408458,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp spells.divine_purpose_buff for Retribution; holy_power_consumer_t cost"
+    },
+    "empyrean_power": {
+      "spellID": 326733,
+      "evidence": "simc-source",
+      "note": "sc_paladin_retribution.cpp create_buffs; Divine Storm free cast"
+    },
+    "hammer_of_wrath": {
+      "spellID": 1277026,
+      "evidence": "simc-source",
+      "note": "sc_paladin.cpp create_buffs; exact AW lifecycle proxy for up/down, native aura retained for diagnostics"
+    }
+  },
+  "readinessDebuffs": {
+    "execution_sentence_debuff": {
+      "spellID": 343527,
+      "evidence": "simc-source",
+      "note": "sc_paladin.hpp execution_sentence_debuff_t uses talent spell; trait table 343527"
+    },
+    "expurgation": {
+      "spellID": 383346,
+      "evidence": "simc-source",
+      "note": "sc_paladin_retribution.cpp spells.expurgation; current target only"
+    }
+  },
+  "adaptations": [
+    "current-target-no-items",
+    "known-forecast-clauses-only",
+    "ES disabled without TTD; Wake sync adapted accordingly",
+    "off-GCD waits for ready GCD"
+  ],
+  "replacements": {
+    "hammer_of_light": {
+      "spellID": 427453,
+      "displaySpellID": 255937,
+      "auraID": 427441
+    },
+    "templar_strike": {
+      "spellID": 407480,
+      "displaySpellID": 35395
+    },
+    "templar_slash": {
+      "spellID": 406647,
+      "displaySpellID": 35395,
+      "auraID": 406648
+    },
+    "final_verdict": {
+      "spellID": 383328,
+      "displaySpellID": 85256
+    }
+  },
+  "unresolved": []
+}

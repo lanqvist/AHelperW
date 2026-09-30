@@ -1,0 +1,4640 @@
+{
+  "build": "12.1.0.69933",
+  "source": {
+    "commit": "4c7c73621e596419b5bd6faa5d68940a9c640379",
+    "retrieved": "2026-09-30",
+    "url": "https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/dbc/generated/trait_data.inc",
+    "clientBuild": "12.1.0.69933"
+  },
+  "subtrees": {
+    "48": {
+      "name": "Templar",
+      "specs": [
+        66,
+        70
+      ]
+    },
+    "49": {
+      "name": "Lightsmith",
+      "specs": [
+        65,
+        66
+      ]
+    },
+    "50": {
+      "name": "Herald of the Sun",
+      "specs": [
+        65,
+        70
+      ]
+    }
+  },
+  "entries": [
+    {
+      "tree": 1,
+      "entryId": 102443,
+      "nodeId": 81479,
+      "maxRanks": 1,
+      "spellId": 386738,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Resonance",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 115168,
+      "nodeId": 81479,
+      "maxRanks": 1,
+      "spellId": 379391,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Quickened Invocation",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 102464,
+      "nodeId": 81495,
+      "maxRanks": 1,
+      "spellId": 406101,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Faith's Armor",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102465,
+      "nodeId": 81496,
+      "maxRanks": 1,
+      "spellId": 375576,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Toll",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 133480,
+      "nodeId": 81496,
+      "maxRanks": 1,
+      "spellId": 114165,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Holy Prism",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 102476,
+      "nodeId": 81507,
+      "maxRanks": 1,
+      "spellId": 213644,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Cleanse Toxins",
+      "specs": [
+        66,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102477,
+      "nodeId": 81508,
+      "maxRanks": 1,
+      "spellId": 393024,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Improved Cleanse",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 133481,
+      "nodeId": 81510,
+      "maxRanks": 1,
+      "spellId": 1241288,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Hammer of Wrath",
+      "specs": [],
+      "grantedSpecs": [
+        70
+      ],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102518,
+      "nodeId": 81543,
+      "maxRanks": 1,
+      "spellId": 204054,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Consecrated Ground",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102583,
+      "nodeId": 81597,
+      "maxRanks": 1,
+      "spellId": 633,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Lay on Hands",
+      "specs": [],
+      "grantedSpecs": [
+        65,
+        66
+      ],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102584,
+      "nodeId": 81598,
+      "maxRanks": 1,
+      "spellId": 115750,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blinding Light",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102587,
+      "nodeId": 81600,
+      "maxRanks": 1,
+      "spellId": 385633,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Auras of the Resolute",
+      "specs": [],
+      "grantedSpecs": [
+        65,
+        66,
+        70
+      ],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102590,
+      "nodeId": 81603,
+      "maxRanks": 1,
+      "spellId": 231663,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Greater Judgment",
+      "specs": [
+        66,
+        70
+      ],
+      "grantedSpecs": [
+        70
+      ],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102591,
+      "nodeId": 81604,
+      "maxRanks": 1,
+      "spellId": 96231,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Rebuke",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102592,
+      "nodeId": 81605,
+      "maxRanks": 1,
+      "spellId": 230332,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Cavalier",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102595,
+      "nodeId": 81607,
+      "maxRanks": 1,
+      "spellId": 384820,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sacrifice of the Just",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 102594,
+      "nodeId": 81607,
+      "maxRanks": 1,
+      "spellId": 384914,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Recompense",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 102596,
+      "nodeId": 81608,
+      "maxRanks": 1,
+      "spellId": 146956,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Light's Revocation",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102597,
+      "nodeId": 81609,
+      "maxRanks": 1,
+      "spellId": 385515,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Holy Aegis",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102601,
+      "nodeId": 81613,
+      "maxRanks": 1,
+      "spellId": 385414,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Afterimage",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102602,
+      "nodeId": 81614,
+      "maxRanks": 1,
+      "spellId": 6940,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blessing of Sacrifice",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102603,
+      "nodeId": 81615,
+      "maxRanks": 1,
+      "spellId": 114154,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Unbreakable Spirit",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102604,
+      "nodeId": 81616,
+      "maxRanks": 1,
+      "spellId": 1022,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blessing of Protection",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102606,
+      "nodeId": 81617,
+      "maxRanks": 1,
+      "spellId": 384909,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Improved Blessing of Protection",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102608,
+      "nodeId": 81618,
+      "maxRanks": 1,
+      "spellId": 469337,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sacred Strength",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 128243,
+      "nodeId": 81618,
+      "maxRanks": 1,
+      "spellId": 408459,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Purpose",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 102612,
+      "nodeId": 81621,
+      "maxRanks": 2,
+      "spellId": 385450,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Seal of Might",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102620,
+      "nodeId": 81628,
+      "maxRanks": 1,
+      "spellId": 469309,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Eye for an Eye",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102622,
+      "nodeId": 81630,
+      "maxRanks": 2,
+      "spellId": 385427,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Obduracy",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102624,
+      "nodeId": 81631,
+      "maxRanks": 1,
+      "spellId": 469304,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Steed of Liberty",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 128251,
+      "nodeId": 81631,
+      "maxRanks": 1,
+      "spellId": 1044,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blessing of Freedom",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 102625,
+      "nodeId": 81632,
+      "maxRanks": 1,
+      "spellId": 190784,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Steed",
+      "specs": [],
+      "grantedSpecs": [
+        65,
+        66
+      ],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 114292,
+      "nodeId": 92220,
+      "maxRanks": 1,
+      "spellId": 231644,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Greater Judgment",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 115239,
+      "nodeId": 93008,
+      "maxRanks": 1,
+      "spellId": 403479,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Lightforged Blessing",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 115034,
+      "nodeId": 93009,
+      "maxRanks": 2,
+      "spellId": 402964,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sanctified Plates",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 102623,
+      "nodeId": 93010,
+      "maxRanks": 1,
+      "spellId": 10326,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Turn Evil",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 115444,
+      "nodeId": 93165,
+      "maxRanks": 1,
+      "spellId": 403530,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Punishment",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 115447,
+      "nodeId": 93168,
+      "maxRanks": 1,
+      "spellId": 469476,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Reach",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 115454,
+      "nodeId": 93174,
+      "maxRanks": 1,
+      "spellId": 305394,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Unbound Freedom",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 115466,
+      "nodeId": 93180,
+      "maxRanks": 1,
+      "spellId": 386738,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Resonance",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 115465,
+      "nodeId": 93180,
+      "maxRanks": 1,
+      "spellId": 379391,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Quickened Invocation",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 115468,
+      "nodeId": 93181,
+      "maxRanks": 1,
+      "spellId": 384027,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Resonance",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 115467,
+      "nodeId": 93181,
+      "maxRanks": 1,
+      "spellId": 379391,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Quickened Invocation",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 115479,
+      "nodeId": 93187,
+      "maxRanks": 1,
+      "spellId": 305394,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Unbound Freedom",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 115480,
+      "nodeId": 93188,
+      "maxRanks": 1,
+      "spellId": 385414,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Afterimage",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 115482,
+      "nodeId": 93189,
+      "maxRanks": 1,
+      "spellId": 385414,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Afterimage",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 115481,
+      "nodeId": 93189,
+      "maxRanks": 1,
+      "spellId": 326734,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Healing Hands",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 115489,
+      "nodeId": 93191,
+      "maxRanks": 1,
+      "spellId": 469337,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sacred Strength",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 128246,
+      "nodeId": 93191,
+      "maxRanks": 1,
+      "spellId": 223817,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Purpose",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 115490,
+      "nodeId": 93192,
+      "maxRanks": 1,
+      "spellId": 469337,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sacred Strength",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 128244,
+      "nodeId": 93192,
+      "maxRanks": 1,
+      "spellId": 223817,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Purpose",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 115673,
+      "nodeId": 93357,
+      "maxRanks": 1,
+      "spellId": 183416,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blessing of Dawn",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 115872,
+      "nodeId": 93520,
+      "maxRanks": 1,
+      "spellId": 387801,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Echoing Blessings",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 131438,
+      "nodeId": 93520,
+      "maxRanks": 1,
+      "spellId": 305394,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Unbound Freedom",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 128240,
+      "nodeId": 103850,
+      "maxRanks": 1,
+      "spellId": 406468,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Lightforged Blessing",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 128241,
+      "nodeId": 103851,
+      "maxRanks": 2,
+      "spellId": 1241958,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Vengeful Wrath",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 128242,
+      "nodeId": 103852,
+      "maxRanks": 1,
+      "spellId": 406468,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Lightforged Blessing",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 128245,
+      "nodeId": 103853,
+      "maxRanks": 1,
+      "spellId": 406468,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Lightforged Blessing",
+      "specs": [
+        65,
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 128247,
+      "nodeId": 103854,
+      "maxRanks": 1,
+      "spellId": 469325,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Light's Countenance",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 128250,
+      "nodeId": 103855,
+      "maxRanks": 1,
+      "spellId": 460720,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Wrench Evil",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 128249,
+      "nodeId": 103855,
+      "maxRanks": 1,
+      "spellId": 469317,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Stand Against Evil",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 128252,
+      "nodeId": 103856,
+      "maxRanks": 1,
+      "spellId": 377128,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Golden Path",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 128309,
+      "nodeId": 103856,
+      "maxRanks": 1,
+      "spellId": 469434,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Selfless Healer",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 128253,
+      "nodeId": 103857,
+      "maxRanks": 1,
+      "spellId": 469409,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Spurs",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 128254,
+      "nodeId": 103858,
+      "maxRanks": 2,
+      "spellId": 469411,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "A Just Reward",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 128255,
+      "nodeId": 103859,
+      "maxRanks": 1,
+      "spellId": 387791,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Empyreal Ward",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 128256,
+      "nodeId": 103860,
+      "maxRanks": 1,
+      "spellId": 469445,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Holy Reprieve",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 128257,
+      "nodeId": 103861,
+      "maxRanks": 1,
+      "spellId": 469416,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Lightbearer",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 128258,
+      "nodeId": 103862,
+      "maxRanks": 1,
+      "spellId": 469316,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Stoicism",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 128259,
+      "nodeId": 103863,
+      "maxRanks": 1,
+      "spellId": 1241945,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blessing of Dusk",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 128260,
+      "nodeId": 103864,
+      "maxRanks": 1,
+      "spellId": 469439,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Inspired Guard",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 128261,
+      "nodeId": 103865,
+      "maxRanks": 1,
+      "spellId": 469279,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Worthy Sacrifice",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 128248,
+      "nodeId": 103865,
+      "maxRanks": 1,
+      "spellId": 469321,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Righteous Protection",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 1,
+      "entryId": 128262,
+      "nodeId": 103866,
+      "maxRanks": 1,
+      "spellId": 199422,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Holy Ritual",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 128263,
+      "nodeId": 103867,
+      "maxRanks": 1,
+      "spellId": 469780,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Lead the Charge",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 128264,
+      "nodeId": 103868,
+      "maxRanks": 1,
+      "spellId": 469770,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blessed Calling",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 135564,
+      "nodeId": 109368,
+      "maxRanks": 1,
+      "spellId": 375576,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Toll",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136127,
+      "nodeId": 109867,
+      "maxRanks": 1,
+      "spellId": 1261562,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Shield of Vengeance",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136485,
+      "nodeId": 109997,
+      "maxRanks": 1,
+      "spellId": 1265541,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Fear No Evil",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136486,
+      "nodeId": 109998,
+      "maxRanks": 1,
+      "spellId": 1265549,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Brought to Light",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136487,
+      "nodeId": 109999,
+      "maxRanks": 1,
+      "spellId": 234299,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Fist of Justice",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136496,
+      "nodeId": 110006,
+      "maxRanks": 1,
+      "spellId": 375576,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Toll",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136503,
+      "nodeId": 110012,
+      "maxRanks": 1,
+      "spellId": 404357,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Guided Prayer",
+      "specs": [],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136592,
+      "nodeId": 110091,
+      "maxRanks": 1,
+      "spellId": 403530,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Punishment",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136593,
+      "nodeId": 110092,
+      "maxRanks": 1,
+      "spellId": 1277443,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Armory of Light",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 1,
+      "entryId": 136594,
+      "nodeId": 110093,
+      "maxRanks": 1,
+      "spellId": 96231,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Rebuke",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102431,
+      "nodeId": 81469,
+      "maxRanks": 1,
+      "spellId": 53595,
+      "replacementId": 35395,
+      "overrideId": 0,
+      "name": "Hammer of the Righteous",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102430,
+      "nodeId": 81469,
+      "maxRanks": 1,
+      "spellId": 204019,
+      "replacementId": 35395,
+      "overrideId": 0,
+      "name": "Blessed Hammer",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102432,
+      "nodeId": 81470,
+      "maxRanks": 1,
+      "spellId": 1245354,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Vision of Sanctity",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102433,
+      "nodeId": 81471,
+      "maxRanks": 2,
+      "spellId": 391142,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Zealot's Paragon",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102437,
+      "nodeId": 81474,
+      "maxRanks": 2,
+      "spellId": 378285,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Tyr's Enforcer",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102439,
+      "nodeId": 81476,
+      "maxRanks": 1,
+      "spellId": 1245979,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Valiant Crusade",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 137505,
+      "nodeId": 81476,
+      "maxRanks": 1,
+      "spellId": 1301732,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blessed Word",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102440,
+      "nodeId": 81477,
+      "maxRanks": 1,
+      "spellId": 204074,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Righteous Protector",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102445,
+      "nodeId": 81481,
+      "maxRanks": 1,
+      "spellId": 31850,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Ardent Defender",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102446,
+      "nodeId": 81482,
+      "maxRanks": 2,
+      "spellId": 378762,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Ferren Marcus's Fervor",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102448,
+      "nodeId": 81483,
+      "maxRanks": 1,
+      "spellId": 31884,
+      "replacementId": 0,
+      "overrideId": 31884,
+      "name": "Avenging Wrath",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102449,
+      "nodeId": 81484,
+      "maxRanks": 1,
+      "spellId": 378279,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Gift of the Golden Val'kyr",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102450,
+      "nodeId": 81485,
+      "maxRanks": 2,
+      "spellId": 379022,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Consecration in Flame",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102452,
+      "nodeId": 81486,
+      "maxRanks": 1,
+      "spellId": 469883,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Refining Fire",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102453,
+      "nodeId": 81487,
+      "maxRanks": 1,
+      "spellId": 85043,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Grand Crusader",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 137858,
+      "nodeId": 81488,
+      "maxRanks": 1,
+      "spellId": 379021,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sanctuary",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102455,
+      "nodeId": 81489,
+      "maxRanks": 1,
+      "spellId": 321136,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Shining Light",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102456,
+      "nodeId": 81490,
+      "maxRanks": 1,
+      "spellId": 86659,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Guardian of Ancient Kings",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102457,
+      "nodeId": 81491,
+      "maxRanks": 1,
+      "spellId": 386653,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Bulwark of Righteous Fury",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102459,
+      "nodeId": 81492,
+      "maxRanks": 1,
+      "spellId": 1244019,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Undying Embers",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102461,
+      "nodeId": 81493,
+      "maxRanks": 1,
+      "spellId": 393071,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Strength in Adversity",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102460,
+      "nodeId": 81493,
+      "maxRanks": 1,
+      "spellId": 380188,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Crusader's Resolve",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102463,
+      "nodeId": 81494,
+      "maxRanks": 1,
+      "spellId": 1276945,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Imbued Shield",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102462,
+      "nodeId": 81494,
+      "maxRanks": 1,
+      "spellId": 280373,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Redoubt",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102466,
+      "nodeId": 81497,
+      "maxRanks": 1,
+      "spellId": 389539,
+      "replacementId": 31884,
+      "overrideId": 0,
+      "name": "Sentinel",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102467,
+      "nodeId": 81498,
+      "maxRanks": 1,
+      "spellId": 384815,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Seal of Charity",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102468,
+      "nodeId": 81499,
+      "maxRanks": 1,
+      "spellId": 209389,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Bulwark of Order",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102470,
+      "nodeId": 81501,
+      "maxRanks": 1,
+      "spellId": 1244070,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Searing Sunlight",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 137854,
+      "nodeId": 81501,
+      "maxRanks": 1,
+      "spellId": 315924,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Hand of the Protector",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102471,
+      "nodeId": 81502,
+      "maxRanks": 1,
+      "spellId": 31935,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Avenger's Shield",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102472,
+      "nodeId": 81503,
+      "maxRanks": 1,
+      "spellId": 378405,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Light of the Titans",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 125873,
+      "nodeId": 81503,
+      "maxRanks": 1,
+      "spellId": 392928,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Tirion's Devotion",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102473,
+      "nodeId": 81504,
+      "maxRanks": 1,
+      "spellId": 204077,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Final Stand",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102474,
+      "nodeId": 81505,
+      "maxRanks": 1,
+      "spellId": 1246488,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sweeping Verdict",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 136732,
+      "nodeId": 81505,
+      "maxRanks": 1,
+      "spellId": 1277005,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Adjudication",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102475,
+      "nodeId": 81506,
+      "maxRanks": 1,
+      "spellId": 383388,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Relentless Inquisitor",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 115475,
+      "nodeId": 81512,
+      "maxRanks": 1,
+      "spellId": 407067,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Rush of Light",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102491,
+      "nodeId": 81521,
+      "maxRanks": 1,
+      "spellId": 383228,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Swift Justice",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 114828,
+      "nodeId": 81521,
+      "maxRanks": 1,
+      "spellId": 404436,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Light of Justice",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102494,
+      "nodeId": 81523,
+      "maxRanks": 1,
+      "spellId": 402912,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Righteous Cause",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102493,
+      "nodeId": 81523,
+      "maxRanks": 1,
+      "spellId": 406064,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Art of War",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102497,
+      "nodeId": 81525,
+      "maxRanks": 1,
+      "spellId": 255937,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Wake of Ashes",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102498,
+      "nodeId": 81526,
+      "maxRanks": 1,
+      "spellId": 184575,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blade of Justice",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102499,
+      "nodeId": 81527,
+      "maxRanks": 1,
+      "spellId": 53385,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Storm",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102504,
+      "nodeId": 81532,
+      "maxRanks": 1,
+      "spellId": 383328,
+      "replacementId": 85256,
+      "overrideId": 0,
+      "name": "Final Verdict",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102505,
+      "nodeId": 81533,
+      "maxRanks": 1,
+      "spellId": 405461,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Improved Judgment",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 115021,
+      "nodeId": 81533,
+      "maxRanks": 1,
+      "spellId": 405278,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Boundless Judgment",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102506,
+      "nodeId": 81534,
+      "maxRanks": 1,
+      "spellId": 404512,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Highlord's Wrath",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102511,
+      "nodeId": 81537,
+      "maxRanks": 1,
+      "spellId": 406157,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Judge, Jury and Executioner",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102515,
+      "nodeId": 81541,
+      "maxRanks": 1,
+      "spellId": 403010,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blessed Champion",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102516,
+      "nodeId": 81542,
+      "maxRanks": 1,
+      "spellId": 402971,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Jurisdiction",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102519,
+      "nodeId": 81544,
+      "maxRanks": 1,
+      "spellId": 31884,
+      "replacementId": 0,
+      "overrideId": 31884,
+      "name": "Avenging Wrath",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102521,
+      "nodeId": 81545,
+      "maxRanks": 1,
+      "spellId": 403826,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blade of Vengeance",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102525,
+      "nodeId": 81549,
+      "maxRanks": 1,
+      "spellId": 458359,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Radiant Glory",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102533,
+      "nodeId": 81554,
+      "maxRanks": 1,
+      "spellId": 156910,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Beacon of Faith",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102532,
+      "nodeId": 81554,
+      "maxRanks": 1,
+      "spellId": 200025,
+      "replacementId": 53563,
+      "overrideId": 0,
+      "name": "Beacon of Virtue",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102534,
+      "nodeId": 81555,
+      "maxRanks": 1,
+      "spellId": 20473,
+      "replacementId": 35395,
+      "overrideId": 0,
+      "name": "Holy Shock",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102535,
+      "nodeId": 81556,
+      "maxRanks": 1,
+      "spellId": 461244,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Overflowing Light",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102536,
+      "nodeId": 81557,
+      "maxRanks": 1,
+      "spellId": 392961,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Imbued Infusions",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102537,
+      "nodeId": 81558,
+      "maxRanks": 1,
+      "spellId": 415364,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Reclamation",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102539,
+      "nodeId": 81560,
+      "maxRanks": 1,
+      "spellId": 448040,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Bestow Light",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102540,
+      "nodeId": 81561,
+      "maxRanks": 1,
+      "spellId": 447985,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Light of the Martyr",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102541,
+      "nodeId": 81562,
+      "maxRanks": 1,
+      "spellId": 414443,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Shining Righteousness",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102544,
+      "nodeId": 81564,
+      "maxRanks": 1,
+      "spellId": 417855,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Awestruck",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102545,
+      "nodeId": 81565,
+      "maxRanks": 1,
+      "spellId": 85222,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Light of Dawn",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102547,
+      "nodeId": 81566,
+      "maxRanks": 1,
+      "spellId": 392911,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Unwavering Spirit",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102546,
+      "nodeId": 81566,
+      "maxRanks": 1,
+      "spellId": 200430,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Protection of Tyr",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102548,
+      "nodeId": 81567,
+      "maxRanks": 1,
+      "spellId": 31821,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Aura Mastery",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102549,
+      "nodeId": 81568,
+      "maxRanks": 1,
+      "spellId": 197446,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Beacon of the Lightbringer",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102550,
+      "nodeId": 81569,
+      "maxRanks": 1,
+      "spellId": 53576,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Infusion of Light",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102551,
+      "nodeId": 81570,
+      "maxRanks": 1,
+      "spellId": 1270916,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Favor",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102553,
+      "nodeId": 81571,
+      "maxRanks": 1,
+      "spellId": 387786,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Moment of Compassion",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102552,
+      "nodeId": 81571,
+      "maxRanks": 1,
+      "spellId": 392902,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Resplendent Light",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102556,
+      "nodeId": 81573,
+      "maxRanks": 1,
+      "spellId": 414720,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Tirion's Devotion",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102557,
+      "nodeId": 81574,
+      "maxRanks": 1,
+      "spellId": 157047,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Saved by the Light",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102558,
+      "nodeId": 81575,
+      "maxRanks": 1,
+      "spellId": 1271221,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Unending Light",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102559,
+      "nodeId": 81576,
+      "maxRanks": 1,
+      "spellId": 1241805,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Glistening Radiance",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102562,
+      "nodeId": 81578,
+      "maxRanks": 1,
+      "spellId": 387808,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Revelations",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102563,
+      "nodeId": 81579,
+      "maxRanks": 1,
+      "spellId": 1232616,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Pillars of Light",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102564,
+      "nodeId": 81580,
+      "maxRanks": 1,
+      "spellId": 387781,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Commanding Light",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102565,
+      "nodeId": 81581,
+      "maxRanks": 1,
+      "spellId": 392938,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Veneration",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102567,
+      "nodeId": 81583,
+      "maxRanks": 2,
+      "spellId": 387879,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Breaking Dawn",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102569,
+      "nodeId": 81584,
+      "maxRanks": 1,
+      "spellId": 31884,
+      "replacementId": 0,
+      "overrideId": 31884,
+      "name": "Avenging Wrath",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102568,
+      "nodeId": 81584,
+      "maxRanks": 1,
+      "spellId": 394088,
+      "replacementId": 0,
+      "overrideId": 216331,
+      "name": "Avenging Crusader",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102570,
+      "nodeId": 81585,
+      "maxRanks": 1,
+      "spellId": 387805,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Glimpse",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102572,
+      "nodeId": 81587,
+      "maxRanks": 2,
+      "spellId": 1241511,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Call of the Righteous",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102573,
+      "nodeId": 81588,
+      "maxRanks": 1,
+      "spellId": 1241275,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Tyr's Deliverance",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 133501,
+      "nodeId": 81588,
+      "maxRanks": 1,
+      "spellId": 1242008,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Hand of Divinity",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102574,
+      "nodeId": 81589,
+      "maxRanks": 1,
+      "spellId": 1271077,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Overload",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102575,
+      "nodeId": 81590,
+      "maxRanks": 1,
+      "spellId": 461278,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Extrication",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102577,
+      "nodeId": 81591,
+      "maxRanks": 1,
+      "spellId": 392907,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Inflorescence of the Sunwell",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102578,
+      "nodeId": 81592,
+      "maxRanks": 1,
+      "spellId": 53376,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sanctified Wrath",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 116205,
+      "nodeId": 81592,
+      "maxRanks": 1,
+      "spellId": 414195,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Awakening",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102579,
+      "nodeId": 81593,
+      "maxRanks": 1,
+      "spellId": 1241714,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Seraphic Barrier",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102580,
+      "nodeId": 81594,
+      "maxRanks": 1,
+      "spellId": 1271016,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Seek Deliverance",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102581,
+      "nodeId": 81595,
+      "maxRanks": 1,
+      "spellId": 1277651,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Rising Sunlight",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102600,
+      "nodeId": 81612,
+      "maxRanks": 1,
+      "spellId": 204023,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Crusader's Judgment",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 111887,
+      "nodeId": 90062,
+      "maxRanks": 1,
+      "spellId": 393114,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Improved Ardent Defender",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 137855,
+      "nodeId": 90062,
+      "maxRanks": 1,
+      "spellId": 377053,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Seal of Reprisal",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 114824,
+      "nodeId": 92686,
+      "maxRanks": 1,
+      "spellId": 446663,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Burn to Ash",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 114830,
+      "nodeId": 92689,
+      "maxRanks": 1,
+      "spellId": 383344,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Expurgation",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 115023,
+      "nodeId": 92838,
+      "maxRanks": 1,
+      "spellId": 403745,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Improved Blade of Justice",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 115022,
+      "nodeId": 92838,
+      "maxRanks": 1,
+      "spellId": 383342,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Holy Blade",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 115024,
+      "nodeId": 92839,
+      "maxRanks": 1,
+      "spellId": 403026,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Burning Crusade",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 115043,
+      "nodeId": 92854,
+      "maxRanks": 1,
+      "spellId": 405355,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Seething Flames",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 115051,
+      "nodeId": 92860,
+      "maxRanks": 1,
+      "spellId": 326732,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Empyrean Power",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 115165,
+      "nodeId": 92952,
+      "maxRanks": 2,
+      "spellId": 403509,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Zealot's Fervor",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 115439,
+      "nodeId": 93160,
+      "maxRanks": 2,
+      "spellId": 406872,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Wrath",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 115440,
+      "nodeId": 93161,
+      "maxRanks": 1,
+      "spellId": 403495,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Judgment of Justice",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 115443,
+      "nodeId": 93164,
+      "maxRanks": 2,
+      "spellId": 403664,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blades of Light",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 115453,
+      "nodeId": 93173,
+      "maxRanks": 1,
+      "spellId": 387170,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Empyrean Legacy",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 115483,
+      "nodeId": 93190,
+      "maxRanks": 2,
+      "spellId": 406154,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Heart of the Crusader",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 115873,
+      "nodeId": 93521,
+      "maxRanks": 1,
+      "spellId": 461246,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Glorious Dawn",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 115874,
+      "nodeId": 93522,
+      "maxRanks": 1,
+      "spellId": 461243,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Light's Protection",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 115875,
+      "nodeId": 93523,
+      "maxRanks": 1,
+      "spellId": 414113,
+      "replacementId": 26573,
+      "overrideId": 0,
+      "name": "Righteous Judgment",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 116376,
+      "nodeId": 93927,
+      "maxRanks": 1,
+      "spellId": 414073,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Light's Conviction",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 102451,
+      "nodeId": 101927,
+      "maxRanks": 1,
+      "spellId": 1245891,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Solace",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102454,
+      "nodeId": 101927,
+      "maxRanks": 1,
+      "spellId": 1277162,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Instrument of the Divine",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102434,
+      "nodeId": 101928,
+      "maxRanks": 1,
+      "spellId": 378457,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Soaring Shield",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 137856,
+      "nodeId": 101928,
+      "maxRanks": 1,
+      "spellId": 378845,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Focused Enmity",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 126571,
+      "nodeId": 102502,
+      "maxRanks": 1,
+      "spellId": 461287,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Liberation",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 136574,
+      "nodeId": 102502,
+      "maxRanks": 1,
+      "spellId": 196926,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Crusader's Might",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 102576,
+      "nodeId": 103831,
+      "maxRanks": 1,
+      "spellId": 1241358,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Empyrean Legacy",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 128278,
+      "nodeId": 103877,
+      "maxRanks": 1,
+      "spellId": 1246481,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Empyrean Authority",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 133407,
+      "nodeId": 108034,
+      "maxRanks": 1,
+      "spellId": 461273,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Truth Prevails",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 133479,
+      "nodeId": 108099,
+      "maxRanks": 1,
+      "spellId": 1241542,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Ringing of the Heavens",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 135565,
+      "nodeId": 109369,
+      "maxRanks": 1,
+      "spellId": 1253598,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Crusade",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 115488,
+      "nodeId": 109370,
+      "maxRanks": 1,
+      "spellId": 382536,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sanctify",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 115438,
+      "nodeId": 109371,
+      "maxRanks": 1,
+      "spellId": 406545,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Holy Flames",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 115452,
+      "nodeId": 109372,
+      "maxRanks": 1,
+      "spellId": 383396,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Tempest of the Lightbringer",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 115435,
+      "nodeId": 109373,
+      "maxRanks": 1,
+      "spellId": 343527,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Execution Sentence",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 0
+    },
+    {
+      "tree": 2,
+      "entryId": 115473,
+      "nodeId": 109374,
+      "maxRanks": 1,
+      "spellId": 406646,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Templar Strikes",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 136809,
+      "nodeId": 109374,
+      "maxRanks": 1,
+      "spellId": 404542,
+      "replacementId": 35395,
+      "overrideId": 0,
+      "name": "Crusading Strikes",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 137019,
+      "nodeId": 110417,
+      "maxRanks": 1,
+      "spellId": 1244878,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Beacon of the Savior",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 137018,
+      "nodeId": 110417,
+      "maxRanks": 2,
+      "spellId": 1245367,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Beacon of the Savior",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 137017,
+      "nodeId": 110417,
+      "maxRanks": 1,
+      "spellId": 1245368,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Beacon of the Savior",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 137022,
+      "nodeId": 110418,
+      "maxRanks": 1,
+      "spellId": 1267203,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Glory of the Vanguard",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 137021,
+      "nodeId": 110418,
+      "maxRanks": 2,
+      "spellId": 1267211,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Glory of the Vanguard",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 137020,
+      "nodeId": 110418,
+      "maxRanks": 1,
+      "spellId": 1267215,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Glory of the Vanguard",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 137025,
+      "nodeId": 110419,
+      "maxRanks": 1,
+      "spellId": 1261113,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Light Within",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 137024,
+      "nodeId": 110419,
+      "maxRanks": 2,
+      "spellId": 1261111,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Light Within",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 137023,
+      "nodeId": 110419,
+      "maxRanks": 1,
+      "spellId": 1261159,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Light Within",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 1
+    },
+    {
+      "tree": 2,
+      "entryId": 111886,
+      "nodeId": 110862,
+      "maxRanks": 1,
+      "spellId": 204018,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blessing of Spellwarding",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 2,
+      "entryId": 137857,
+      "nodeId": 110862,
+      "maxRanks": 1,
+      "spellId": 378425,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Uther's Counsel",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 0,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117666,
+      "nodeId": 95069,
+      "maxRanks": 1,
+      "spellId": 439760,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Aurora",
+      "specs": [
+        65,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 50,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117668,
+      "nodeId": 95071,
+      "maxRanks": 1,
+      "spellId": 445200,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blessing of An'she",
+      "specs": [
+        65,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 50,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117779,
+      "nodeId": 95071,
+      "maxRanks": 1,
+      "spellId": 431407,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Lingering Radiance",
+      "specs": [
+        65,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 50,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117669,
+      "nodeId": 95072,
+      "maxRanks": 1,
+      "spellId": 431413,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sun Sear",
+      "specs": [
+        65,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 50,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117670,
+      "nodeId": 95073,
+      "maxRanks": 1,
+      "spellId": 431482,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Morning Star",
+      "specs": [
+        65,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 50,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117778,
+      "nodeId": 95073,
+      "maxRanks": 1,
+      "spellId": 431480,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Gleaming Rays",
+      "specs": [
+        65,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 50,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117677,
+      "nodeId": 95080,
+      "maxRanks": 1,
+      "spellId": 431402,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Luminosity",
+      "specs": [
+        65,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 50,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117683,
+      "nodeId": 95086,
+      "maxRanks": 1,
+      "spellId": 431474,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Second Sunrise",
+      "specs": [
+        65,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 50,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117691,
+      "nodeId": 95094,
+      "maxRanks": 1,
+      "spellId": 1263782,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Walk Into Light",
+      "specs": [
+        65,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 50,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117692,
+      "nodeId": 95095,
+      "maxRanks": 1,
+      "spellId": 156322,
+      "replacementId": 85673,
+      "overrideId": 0,
+      "name": "Eternal Flame",
+      "specs": [
+        65,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 50,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117695,
+      "nodeId": 95098,
+      "maxRanks": 1,
+      "spellId": 431423,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Illumine",
+      "specs": [
+        65,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 50,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117777,
+      "nodeId": 95098,
+      "maxRanks": 1,
+      "spellId": 431406,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Will of the Dawn",
+      "specs": [
+        65,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 50,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117696,
+      "nodeId": 95099,
+      "maxRanks": 1,
+      "spellId": 431377,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Dawnlight",
+      "specs": [
+        65,
+        70
+      ],
+      "grantedSpecs": [
+        65,
+        70
+      ],
+      "subtree": 50,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117702,
+      "nodeId": 95105,
+      "maxRanks": 1,
+      "spellId": 431425,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sun's Avatar",
+      "specs": [
+        65,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 50,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117810,
+      "nodeId": 95177,
+      "maxRanks": 1,
+      "spellId": 431551,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Wrathful Descent",
+      "specs": [
+        66,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 48,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117811,
+      "nodeId": 95178,
+      "maxRanks": 1,
+      "spellId": 431687,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Higher Calling",
+      "specs": [
+        66,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 48,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117812,
+      "nodeId": 95179,
+      "maxRanks": 1,
+      "spellId": 431730,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sacrosanct Crusade",
+      "specs": [
+        66,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 48,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117813,
+      "nodeId": 95180,
+      "maxRanks": 1,
+      "spellId": 427445,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Light's Guidance",
+      "specs": [
+        66,
+        70
+      ],
+      "grantedSpecs": [
+        66,
+        70
+      ],
+      "subtree": 48,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117814,
+      "nodeId": 95181,
+      "maxRanks": 1,
+      "spellId": 432992,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Bonds of Fellowship",
+      "specs": [
+        66,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 48,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117858,
+      "nodeId": 95181,
+      "maxRanks": 1,
+      "spellId": 432990,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Unrelenting Charger",
+      "specs": [
+        66,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 48,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117815,
+      "nodeId": 95182,
+      "maxRanks": 1,
+      "spellId": 425518,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Light's Deliverance",
+      "specs": [
+        66,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 48,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117816,
+      "nodeId": 95183,
+      "maxRanks": 1,
+      "spellId": 431463,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Zealous Vindication",
+      "specs": [
+        66,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 48,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117818,
+      "nodeId": 95184,
+      "maxRanks": 1,
+      "spellId": 432463,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Hammerfall",
+      "specs": [
+        66,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 48,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117820,
+      "nodeId": 95185,
+      "maxRanks": 1,
+      "spellId": 432615,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Endless Wrath",
+      "specs": [
+        66,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 48,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117819,
+      "nodeId": 95185,
+      "maxRanks": 1,
+      "spellId": 432977,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Sanctification",
+      "specs": [
+        66,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 48,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117822,
+      "nodeId": 95186,
+      "maxRanks": 1,
+      "spellId": 432626,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Undisputed Ruling",
+      "specs": [
+        66,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 48,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117823,
+      "nodeId": 95187,
+      "maxRanks": 1,
+      "spellId": 431533,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Shake the Heavens",
+      "specs": [
+        66,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 48,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117873,
+      "nodeId": 95228,
+      "maxRanks": 1,
+      "spellId": 432802,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Solidarity",
+      "specs": [
+        65,
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 49,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117874,
+      "nodeId": 95229,
+      "maxRanks": 1,
+      "spellId": 432919,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Valiance",
+      "specs": [
+        65,
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 49,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117875,
+      "nodeId": 95230,
+      "maxRanks": 1,
+      "spellId": 433011,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blessing of the Forge",
+      "specs": [
+        65,
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 49,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117877,
+      "nodeId": 95231,
+      "maxRanks": 1,
+      "spellId": 432964,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Inspiration",
+      "specs": [
+        65,
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 49,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117876,
+      "nodeId": 95231,
+      "maxRanks": 1,
+      "spellId": 432804,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Forewarning",
+      "specs": [
+        65,
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 49,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117879,
+      "nodeId": 95232,
+      "maxRanks": 1,
+      "spellId": 469886,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Authoritative Rebuke",
+      "specs": [
+        65,
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 49,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117878,
+      "nodeId": 95232,
+      "maxRanks": 1,
+      "spellId": 469701,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Tempered in Battle",
+      "specs": [
+        65,
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 49,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117881,
+      "nodeId": 95233,
+      "maxRanks": 1,
+      "spellId": 433568,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Rite of Sanctification",
+      "specs": [
+        65,
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 49,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117880,
+      "nodeId": 95233,
+      "maxRanks": 1,
+      "spellId": 433583,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Rite of Adjuration",
+      "specs": [
+        65,
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 49,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117882,
+      "nodeId": 95234,
+      "maxRanks": 1,
+      "spellId": 432459,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Holy Armaments",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [
+        66
+      ],
+      "subtree": 49,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117884,
+      "nodeId": 95235,
+      "maxRanks": 1,
+      "spellId": 433106,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Guidance",
+      "specs": [
+        65,
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 49,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117883,
+      "nodeId": 95235,
+      "maxRanks": 1,
+      "spellId": 433015,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Blessed Assurance",
+      "specs": [
+        65,
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 49,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 117885,
+      "nodeId": 95236,
+      "maxRanks": 1,
+      "spellId": 432866,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Laying Down Arms",
+      "specs": [
+        65,
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 49,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117886,
+      "nodeId": 95237,
+      "maxRanks": 1,
+      "spellId": 432821,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Shared Resolve",
+      "specs": [
+        65,
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 49,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 117887,
+      "nodeId": 95238,
+      "maxRanks": 1,
+      "spellId": 1271466,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Reflection of Radiance",
+      "specs": [
+        65,
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 49,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 136000,
+      "nodeId": 109742,
+      "maxRanks": 1,
+      "spellId": 1271387,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Masterwork",
+      "specs": [
+        65,
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 49,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 136001,
+      "nodeId": 109743,
+      "maxRanks": 1,
+      "spellId": 433718,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Hammer and Anvil",
+      "specs": [
+        65,
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 49,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 136002,
+      "nodeId": 109744,
+      "maxRanks": 1,
+      "spellId": 1271553,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Resounding Strike",
+      "specs": [
+        65,
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 49,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 136003,
+      "nodeId": 109745,
+      "maxRanks": 1,
+      "spellId": 1260429,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Exaction",
+      "specs": [
+        66,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 48,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 136184,
+      "nodeId": 109745,
+      "maxRanks": 1,
+      "spellId": 1263252,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Seal of the Templar",
+      "specs": [
+        66,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 48,
+      "nodeType": 2
+    },
+    {
+      "tree": 3,
+      "entryId": 136004,
+      "nodeId": 109746,
+      "maxRanks": 1,
+      "spellId": 1261525,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Light's Judicator",
+      "specs": [
+        66,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 48,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 136005,
+      "nodeId": 109747,
+      "maxRanks": 1,
+      "spellId": 432929,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Divine Hammer",
+      "specs": [
+        66,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 48,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 136006,
+      "nodeId": 109748,
+      "maxRanks": 1,
+      "spellId": 1263787,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Endless Gleam",
+      "specs": [
+        65,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 50,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 136007,
+      "nodeId": 109749,
+      "maxRanks": 1,
+      "spellId": 1263920,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Born in Sunlight",
+      "specs": [
+        65,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 50,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 136008,
+      "nodeId": 109750,
+      "maxRanks": 1,
+      "spellId": 431404,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "Solar Grace",
+      "specs": [
+        65,
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 50,
+      "nodeType": 0
+    },
+    {
+      "tree": 3,
+      "entryId": 136795,
+      "nodeId": 110257,
+      "maxRanks": 1,
+      "spellId": 1289728,
+      "replacementId": 0,
+      "overrideId": 432459,
+      "name": "Holy Armaments",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [
+        65
+      ],
+      "subtree": 49,
+      "nodeType": 0
+    },
+    {
+      "tree": 4,
+      "entryId": 123360,
+      "nodeId": 99837,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 50,
+      "nodeType": 3
+    },
+    {
+      "tree": 4,
+      "entryId": 123357,
+      "nodeId": 99837,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        70
+      ],
+      "grantedSpecs": [],
+      "subtree": 48,
+      "nodeType": 3
+    },
+    {
+      "tree": 4,
+      "entryId": 123361,
+      "nodeId": 99838,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 49,
+      "nodeType": 3
+    },
+    {
+      "tree": 4,
+      "entryId": 123358,
+      "nodeId": 99838,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        66
+      ],
+      "grantedSpecs": [],
+      "subtree": 48,
+      "nodeType": 3
+    },
+    {
+      "tree": 4,
+      "entryId": 123362,
+      "nodeId": 99839,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 50,
+      "nodeType": 3
+    },
+    {
+      "tree": 4,
+      "entryId": 123359,
+      "nodeId": 99839,
+      "maxRanks": 1,
+      "spellId": 0,
+      "replacementId": 0,
+      "overrideId": 0,
+      "name": "0",
+      "specs": [
+        65
+      ],
+      "grantedSpecs": [],
+      "subtree": 49,
+      "nodeType": 3
+    }
+  ]
+}

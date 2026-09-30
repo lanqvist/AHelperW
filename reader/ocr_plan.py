@@ -47,7 +47,8 @@ class OcrPlan:
             elif key=='context/energyRegen': self.periods[key]=.5
             elif key=='context/zenithRecharge': self.periods[key]=.5
             elif key in ('context/targets','context/runeNext'): self.periods[key]=.2
-            elif key in ('resource/playerHealth','context/maxrage','context/maxenergy','context/maxrunic_power'): self.periods[key]=2.
+            elif key=='context/wakeCooldown': self.periods[key]=.2
+            elif key in ('resource/playerHealth','context/maxrage','context/maxenergy','context/maxrunic_power','context/maxmana','resource/mana'): self.periods[key]=2.
             elif key=='resource/targetHealth': self.disabled[key]='use_targetHealthPercent'
             elif key in ('context/range','context/chargeRange','context/potion','context/trinket1','context/trinket2'):
                 self.disabled[key]='text_status_not_numeric'

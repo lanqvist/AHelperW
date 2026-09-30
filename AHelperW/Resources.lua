@@ -399,7 +399,7 @@ local function UpdateSecondary(pal)
   local displayed = pcall(hybrid.text.SetText, hybrid.text, cur)
   if not displayed then hybrid.text:SetText("?") end
   local profile = ns.GetAPLProfile()
-  if profile and profile.secondary == "chi" then
+  if profile and (profile.secondary == "chi" or profile.secondary == "holy_power") then
     -- Fixed white-on-black digits match the reader's numeric OCR channel.
     -- Two digits avoid the low-confidence isolated zero observed in the WW log.
     -- Formatting stays in the renderer; no arithmetic on secret resources.

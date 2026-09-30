@@ -17,6 +17,14 @@
       "evidence": "simc-source"
     }
   },
+  "readinessObservations": {
+    "empower_rune_weapon": {
+      "spellID": 47568,
+      "freeChargeAuraID": 1269322,
+      "evidence": "simc-source",
+      "note": "sc_death_knight.cpp empower_rune_weapon_t::ready/update_ready; item_set_bonus.inc Frost MID1 4pc = 1264802; sc_spell_data.inc effect #2 triggers 1269322. A separate native player aura bypasses ordinary charges, not their recharge timer. Legacy exports without it retain ordinary charged casts only. Not game-observed."
+    }
+  },
   "heroTrees": {
     "32": {
       "heroTree": "rider_of_the_apocalypse",
@@ -240,8 +248,8 @@
         },
         {
           "symbol": "main_hand.2h",
-          "mode": "partial",
-          "source": "False with an off-hand weapon in the export (slot 17); otherwise unknown"
+          "mode": "static-export",
+          "source": "equipment slot 16 equipLoc (C_Item.GetItemInfoInstant): INVTYPE_2HWEAPON vs one-handed weapon. Legacy exports: false with an off-hand item; otherwise unknown"
         },
         {
           "symbol": "raid_event.adds.duration",
@@ -974,8 +982,8 @@
         },
         {
           "symbol": "main_hand.2h",
-          "mode": "partial",
-          "source": "False with an off-hand weapon in the export (slot 17); otherwise unknown"
+          "mode": "static-export",
+          "source": "equipment slot 16 equipLoc (C_Item.GetItemInfoInstant): INVTYPE_2HWEAPON vs one-handed weapon. Legacy exports: false with an off-hand item; otherwise unknown"
         },
         {
           "symbol": "raid_event.adds.duration",
