@@ -7,6 +7,11 @@ import re
 from apl import APLRuntime, Expression, Unknown, unknown, binary
 
 COMMIT = '4c7c73621e596419b5bd6faa5d68940a9c640379'
+# Public cast journal events that start (Wake) or spend (Hammer) 427441.
+HAMMER_EVENTS = {255937:'wake', 427453:'hammer'}
+# Seconds a Light's Deliverance window must persist without a Wake event:
+# the journal may report Wake a frame after the aura appears.
+FREE_HAMMER_GRACE = .5
 
 
 class RetributionAPL(APLRuntime):
@@ -75,10 +80,108 @@ class RetributionAPL(APLRuntime):
         self.coverage_gaps = (
             'Templar: есть ручная запись ресурсов/событий; автонажатия и Herald ещё не проверены',
             'Judgment/Hammer of Wrath: общий бинд; чтение двух форм и автонажатия требуют проверки',
-            'Бесплатный Hammer of Light и target-аура Execution Sentence ещё не подтверждены',
+            'Бесплатный Hammer of Light выводится из журнала применений, нативный 433732 не виден; target-аура Execution Sentence не подтверждена',
             'Полная логика предметов, внешних баффов и неизвестного прогноза боя не подключена',
         )
         self.lists = {name:[self.adapt(row) for row in rows] for name,rows in self.lists.items()}
+        self.reset_observations()
+
+    def reset_observations(self):
+        # Journal position; latest Wake/Hammer event since the last observed
+        # end of a 427441 window ('gap' = events lost); window start time.
+        self.receipt_sequence = self.last_capture = None
+        self.hammer_event = self.hammer_event_at = None
+        self.ready_known = self.ready_since = None
+
+    def observe(self, data):
+        """Follow 427441 windows and the cast journal for Light's Deliverance.
+
+        Pinned SimC starts 427441 only from Wake of Ashes and from Light's
+        Deliverance, which grants 433732 with it (both 20 s, 427441 max 1
+        stack). 433732 never lit on this client although three Hammers in the
+        manual log spent no Holy Power, so its state is inferred here.
+        """
+        receipt = data.get('castReceipt', {})
+        captured = data.get('capturedAt')
+        if not data.get('valid') or receipt.get('status') != 'readable':
+            self.reset_observations()
+            return
+        if captured == self.last_capture:
+            return
+        self.last_capture = captured
+        # Window transitions first: a Wake event of this frame belongs to the
+        # next window, a Hammer event of this frame cannot open one.
+        state = data.get('rows',{}).get(self.squares[('proc',427441)][0],{}).get('state') \
+            if ('proc',427441) in self.squares else None
+        if state == 'procoff':
+            if self.ready_known == 'proc':
+                self.hammer_event = self.hammer_event_at = None
+            self.ready_since = None
+        elif state == 'proc' and self.ready_known != 'proc':
+            # Onset seen only after a known off state; a first frame that is
+            # already inside a window has an unobserved start.
+            self.ready_since = captured if self.ready_known == 'procoff' else 'unobserved'
+        if state in ('proc','procoff'):
+            self.ready_known = state
+        records = receipt.get('records', [])
+        seqs = [r['sequence'] for r in records]
+        fresh = []
+        if self.receipt_sequence is not None:
+            fresh = sorted((r for r in records if 0 < (r['sequence']-self.receipt_sequence)%65535 < 32768),
+                           key=lambda r:(r['sequence']-self.receipt_sequence)%65535)
+        if self.receipt_sequence is None or (records and self.receipt_sequence not in seqs and not fresh):
+            # Baseline or a reset journal: the newest known Wake/Hammer decides.
+            newest = next((s for s in seqs if all((s-t)%65535 < 32768 for t in seqs)), 0)
+            self.receipt_sequence = newest
+            latest = next((HAMMER_EVENTS[r['spellID']] for r in
+                           sorted(records, key=lambda r:(newest-r['sequence'])%65535)
+                           if r['spellID'] in HAMMER_EVENTS), None)
+            self.hammer_event, self.hammer_event_at = latest, captured
+            return
+        for event in fresh:
+            if (event['sequence']-self.receipt_sequence)%65535 != 1:
+                self.hammer_event, self.hammer_event_at = 'gap', captured
+            self.receipt_sequence = event['sequence']
+            kind = HAMMER_EVENTS.get(event['spellID'])
+            if kind:
+                self.hammer_event, self.hammer_event_at = kind, captured
+
+    def free_hammer(self, field):
+        native = self.state('proc',433732)
+        if native == 'proc':
+            return self.aura('proc',433732,field)
+        ready = self.aura('proc',427441,'up')
+        if ready is False:
+            return field=='down'
+        missing = 'buff.hammer_of_light_free: '
+        if isinstance(ready, Unknown):
+            return unknown(missing+'нет 427441')
+        if self.receipt_sequence is None or self.hammer_event == 'gap':
+            return unknown(missing+'нет непрерывного журнала применений')
+        if self.hammer_event == 'wake':
+            # The window of an observed Wake: an ordinary 5 Holy Power Hammer.
+            return field=='down'
+        # No Wake since the window opened, or the window survived a Hammer:
+        # only Light's Deliverance applies 427441 then (with 433732).
+        if self.hammer_event == 'hammer':
+            since = self.hammer_event_at
+            if isinstance(self.ready_since, (int,float)):
+                since = max(since, self.ready_since)
+        elif isinstance(self.ready_since, (int,float)):
+            since = self.ready_since
+        else:
+            return unknown(missing+'начало окна 427441 не наблюдалось')
+        if self.data.get('capturedAt',0)-since < FREE_HAMMER_GRACE:
+            return unknown(missing+'ожидание события Wake')
+        # Light's Deliverance does not trigger while Wake is ready.
+        if self.data.get('rows',{}).get('context/wakeCooldown',{}).get('state') != 'cd':
+            return unknown(missing+'Wake не на КД')
+        if field in ('up','react'): return True
+        if field == 'down': return False
+        if field == 'remains':
+            # Applied together with 427441, same 20 s duration.
+            return self.aura('proc',427441,'remains')
+        return unknown(missing+field)
 
     def adapt(self, row):
         text, labels = row['source'], []
@@ -117,6 +220,8 @@ class RetributionAPL(APLRuntime):
             # Exact pinned lifecycle: avenging_wrath_t::execute triggers it;
             # the AW expire callback expires it. No health threshold is used.
             return self.buff('avenging_wrath',field)
+        if name=='hammer_of_light_free':
+            return self.free_hammer(field)
         spell = self.buffs[name]
         if name=='avenging_wrath' and 'radiant_glory' in self.talents:
             spell=454351
@@ -218,6 +323,7 @@ class RetributionAPL(APLRuntime):
         return result
 
     def decide(self, data):
+        self.observe(data)
         result=super().decide(data)
         if result.get('status')=='ready' and result['action']=='hammer_of_wrath':
             # bindingSpellID stays the observation square used by Executor;

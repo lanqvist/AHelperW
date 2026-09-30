@@ -124,7 +124,7 @@ def make_model(fixture, settings=None, bindings=None):
 
 
 def frame(model, spells=None, buffs=None, debuffs=None, numbers=None, combat=True, target=True,
-          gcd='ready', casting=False, runes=None, age=0., **extra):
+          gcd='ready', casting=False, runes=None, age=0., context=None, **extra):
     """Frame dict as reader.py builds it.
 
     spells: {action or spellID: state | (state, timer) | (state, timer, stacks)};
@@ -133,6 +133,7 @@ def frame(model, spells=None, buffs=None, debuffs=None, numbers=None, combat=Tru
       auras are absent (procoff). Names map through model.buffs.
     numbers: OCR values by key; None removes a default (unknown).
     runes: six states ('ready' / 'cd' / 'unknown') or a ready count.
+    context: extra colour rows by name, e.g. {'wakeCooldown': 'cd'} -> context/wakeCooldown.
     age: seconds between the OCR frame and this frame for every number.
     """
     now = time.time()
@@ -176,6 +177,7 @@ def frame(model, spells=None, buffs=None, debuffs=None, numbers=None, combat=Tru
     rows['context/range'] = {'state': 'ready' if target else 'unusable'}
     rows['context/playerCast'] = {'state': 'nores' if casting else 'procoff'}
     rows['context/targetCast'] = {'state': 'procoff'}
+    rows.update({'context/' + k: {'state': v} for k, v in (context or {}).items()})
     if runes is not None:
         states = ['ready'] * runes + ['cd'] * (6 - runes) if isinstance(runes, int) else runes
         rows.update({f'rune/{i}': {'state': s} for i, s in enumerate(states, 1)})
