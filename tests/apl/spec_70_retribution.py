@@ -77,3 +77,27 @@ SCENARIOS = [
              factory=history((3., 'down', [BLADE]), (2., 'up', [BLADE]), (1., 'up', [BLADE])),
              **dict(final([BLADE]), context={'wakeCooldown': 'ready'})),
 ]
+
+# Execution Sentence and the Wake sync decided by TTD bounds (reader health slope).
+ES_FIXTURE = dict(FIXTURE, talents=FIXTURE['talents'] + ['execution_sentence', 'avenging_wrath'],
+                  squares=FIXTURE['squares'] + [('spell', 343527), ('spell', 31884)])
+ES_SPELLS = {'wake_of_ashes': 'ready', 'blade_of_justice': 'ready', 'execution_sentence': 'ready',
+             'avenging_wrath': ('cd', 60.)}
+LONG = {'status': 'estimate', 'low': 40., 'high': None, 'highUnbounded': True}
+UNDECIDED = {'status': 'estimate', 'low': 5., 'high': 30., 'highUnbounded': False}
+READY_WAKE = {'wakeCooldown': 'ready'}
+
+SCENARIOS += [
+    Scenario('TTD доказан >10 по границам: Execution Sentence', ('ready', 'execution_sentence'),
+             fixture=ES_FIXTURE, spells=ES_SPELLS, numbers=LOW, context=READY_WAKE, ttdEstimate=LONG),
+    Scenario('TTD не решён: ES пропускается, Wake не ждёт её', ('ready', 'wake_of_ashes'),
+             fixture=ES_FIXTURE, spells=ES_SPELLS, numbers=LOW, context=READY_WAKE, ttdEstimate=UNDECIDED),
+    Scenario('оценки нет: как раньше без прогноза, Wake', ('ready', 'wake_of_ashes'),
+             fixture=ES_FIXTURE, spells=ES_SPELLS, numbers=LOW, context=READY_WAKE),
+    Scenario('TTD доказан, но AW скоро: ES ждёт, Wake ждёт ES', ('ready', 'blade_of_justice'),
+             fixture=ES_FIXTURE, spells=dict(ES_SPELLS, avenging_wrath=('cd', 10.)), numbers=LOW,
+             context=READY_WAKE, ttdEstimate=LONG),
+    Scenario('ручной прогноз TTD 5 с важнее оценки: ES нет, Wake', ('ready', 'wake_of_ashes'),
+             fixture=ES_FIXTURE, spells=ES_SPELLS, numbers=dict(LOW, **{'context/ttd': 5}),
+             context=READY_WAKE, ttdEstimate=LONG),
+]

@@ -72,9 +72,9 @@ class RetributionAPL(APLRuntime):
             self.bindings['24275'] = self.bindings['20271']
         self.adaptations = (
             'Текущая цель; без предметов, зелий и планирования внешнего PI',
-            'Без сценарных событий рейда; неизвестный TTD не считается коротким или длинным боем',
-            'Execution Sentence требует TTD>10: без прогноза этот триггер пропускается, условие не считается истинным',
-            'Без прогноза TTD Wake не ждёт отключённый триггер Execution Sentence',
+            'Без сценарных событий рейда; TTD — ручной прогноз или границы по здоровью цели, нерешённое сравнение ложно',
+            'Execution Sentence требует доказанного TTD>10; пока границы его не подтверждают, триггер пропускается',
+            'Пока TTD>10 не доказан, Wake не ждёт триггер Execution Sentence',
             'Действия вне GCD исполняются только при готовом GCD; каналы не прерываются',
         )
         self.coverage_gaps = (
@@ -189,19 +189,20 @@ class RetributionAPL(APLRuntime):
         if row['action']=='variable' and row.get('op')=='reset':
             text = 'variable,name='+row['name']+',value='+row.get('default','0')
             labels.append('op=reset к upstream default')
+        for metric in ('target.time_to_die','fight_remains'):
+            # Decided by a manual forecast or the reader's health-slope bounds;
+            # an undecided comparison is false, as an unset forecast was before.
+            pattern = re.escape(metric)+r'([<>]=?)(gcd(?:\*\d+(?:\.\d+)?)?|\d+(?:\.\d+)?)'
+            new = re.sub(pattern,lambda m:'~('+m.group(0)+')',text)
+            if new!=text:
+                text=new; labels.append(metric+': нерешённое сравнение ложно')
         if row['action']=='wake_of_ashes':
-            # With unknown TTD, the adapted ES rule cannot fire. Do not wait
-            # forever for its cooldown; no talent or TTD observation is altered.
+            # While TTD>10 is not proven, the ES rule cannot fire. Do not wait
+            # for its cooldown; no talent or TTD observation is altered.
             sync='(!talent.execution_sentence|'
             if sync in text:
-                text=text.replace(sync,'(!ahw_ttd_known|!talent.execution_sentence|')
-                labels.append('без TTD не ждать отключённый триггер Execution Sentence')
-        for metric in ('target.time_to_die','fight_remains'):
-            token = 'ahw_ttd_known' if metric=='target.time_to_die' else 'ahw_fight_known'
-            pattern = re.escape(metric)+r'([<>]=?)(gcd(?:\*\d+(?:\.\d+)?)?|\d+(?:\.\d+)?)'
-            new = re.sub(pattern,lambda m:'('+token+'&'+m.group(0)+')',text)
-            if new!=text:
-                text=new; labels.append(metric+' сравнивается только при заданном прогнозе')
+                text=text.replace(sync,'(!~(target.time_to_die>10)|!talent.execution_sentence|')
+                labels.append('пока TTD>10 не доказан, не ждать триггер Execution Sentence')
         if not labels: return row
         parts = text.split(',')
         result = {'action':parts[0],'list':row['list'],'upstreamSource':row['source'],
@@ -271,8 +272,6 @@ class RetributionAPL(APLRuntime):
 
     def resolve(self, name):
         parts=name.split('.')
-        if name=='ahw_ttd_known': return not isinstance(self.number('context/ttd'),Unknown)
-        if name=='ahw_fight_known': return not isinstance(self.number('context/fight'),Unknown)
         if parts[0]=='buff' and len(parts)==3 and parts[1] in self.buffs:
             return self.buff(parts[1],parts[2])
         if name=='dot.expurgation.ticking':

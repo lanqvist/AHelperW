@@ -111,8 +111,10 @@
 2. **Нет сценарных событий рейда:** `raid_event.*.in/cooldown` — очень большое число,
    прочие — 0, как в `raid_event.cpp` без событий. Итог: `sending_cds` истинно при
    любом известном числе целей.
-3. **`fight_remains<N` — только при заданном прогнозе** (`/ahw fight`); `fight_remains>10`
-   (Remorseless Winter по стакам Gathering Storm) без прогноза считается выполненным.
+3. **`fight_remains<N` — только при решённом сравнении** (`~(…)`: прогноз `/ahw fight` или
+   нижняя граница по TTD текущей цели, у которой нет верхней — поэтому «бой кончается» без
+   прогноза не наступает); `fight_remains>10` (Remorseless Winter по стакам Gathering Storm)
+   при нерешённом сравнении считается выполненным (`!~(!(…))`).
 4. Не исполняются: зелья, `use_item`, Anti-Magic Shell (защитное; `death_knight.first_ams_cast`
    — опция симуляции), `invoke_external_buff` (PI). Аксессуары — модель «отсутствуют».
 5. Действия вне GCD (Breath, ERW, Raise Dead, расовые, возврат Chosen) выбираются только

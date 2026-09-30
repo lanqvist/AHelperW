@@ -43,16 +43,16 @@ class FuryAPL(APLRuntime):
             raise ValueError('Нужен экспорт воина с регионом ярости')
         self.adaptations = (
             'Без предметов, зелий и планирования внешнего PI',
-            'Bladestorm вне Recklessness по TTD<=5 только при заданном TTD',
+            'Bladestorm вне Recklessness по TTD<=5 только при решённом TTD (прогноз или границы по здоровью)',
         )
         # Upstream: bladestorm,if=buff.recklessness.up|target.time_to_die<=5.
-        # An unset TTD would block the whole list outside Recklessness; the
+        # An undecided TTD would block the whole list outside Recklessness; the
         # adaptation drops only the short-lifetime trigger, never assumes it.
         gate = 'target.time_to_die<=5'
         for rows in self.lists.values():
             for row in rows:
                 if row['action'] == 'bladestorm' and gate in row.get('if', ''):
-                    condition = row['if'].replace(gate, 'ahw_ttd_known&' + gate)
+                    condition = row['if'].replace(gate, '~(' + gate + ')')
                     row.update({'if':condition, 'upstreamSource':row['source'],
                                 'source':'AHelperW adapted TTD gate: bladestorm,if='+condition,
                                 'expressions':dict(row['expressions'], **{'if':Expression(condition)})})
@@ -78,8 +78,6 @@ class FuryAPL(APLRuntime):
 
     def resolve(self, name):
         parts = name.split('.')
-        if name == 'ahw_ttd_known':
-            return not isinstance(self.number('context/ttd'), Unknown)
         if parts[0] == 'cooldown' and parts[1] in self.spells:
             action, field = parts[1:3]
             talent = self.talent_actions.get(action)

@@ -95,9 +95,10 @@ class UnholyAPL(APLRuntime):
         # the aura is up; its presence comes from colour, the digit is not read.
         self.rewrite(r'buff\.lesser_ghoul_ready\.stack=0\b', 'buff.lesser_ghoul_ready.down', 'stack=0 = аура снята')
         self.rewrite(r'buff\.lesser_ghoul_ready\.stack>=1\b', 'buff.lesser_ghoul_ready.up', 'stack>=1 = аура есть')
-        # Unset fight length never assumes the fight is ending (as Fury's Bladestorm TTD).
-        self.rewrite(r'fight_remains>([^&|)]+)', r'(!ahw_fight_known|fight_remains>\1)', 'время боя неизвестно — бой продолжится')
-        self.rewrite(r'fight_remains<([^&|)]+)', r'(ahw_fight_known&fight_remains<\1)', 'время боя неизвестно — не конец боя')
+        # fight_remains is a lower bound (current target TTD) or a manual forecast;
+        # undecided never assumes the fight is ending (as Fury's Bladestorm TTD).
+        self.rewrite(r'fight_remains>([^&|)]+)', r'!~(!(fight_remains>\1))', 'время боя не решено — бой продолжится')
+        self.rewrite(r'fight_remains<([^&|)]+)', r'~(fight_remains<\1)', 'время боя не решено — не конец боя')
         self.coverage_gaps = (
             'питомцы: состояние вурдалака/армии/горгульи не видно; Raise Dead вручную',
             'Death and Decay — наземное заклинание: бинд должен ставить его без прицела (макрос @player)',
@@ -154,8 +155,6 @@ class UnholyAPL(APLRuntime):
 
     def resolve(self, name):
         parts = name.split('.')
-        if name == 'ahw_fight_known':
-            return not isinstance(self.number('context/fight'), Unknown)
         if name == 'gcd.max':
             return super().resolve('gcd')
         if name in ('charges', 'max_charges'):

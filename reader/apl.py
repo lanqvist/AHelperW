@@ -27,6 +27,36 @@ def unknown(reason):
     return Unknown(frozenset([reason]))
 
 
+@dataclass(frozen=True)
+class Interval:
+    """An observed bound, e.g. target TTD in [low, high]; high may be infinite.
+
+    A comparison is decided only when every value inside the bounds agrees;
+    otherwise it stays unknown. Arithmetic on bounds is not defined here.
+    """
+    low: float
+    high: float
+    source: str
+
+
+def compare_interval(op,a,b):
+    if isinstance(b,Interval):
+        if isinstance(a,Interval): return unknown('сравнение двух оценок: '+a.source+', '+b.source)
+        flipped={'<':'>','<=':'>=','>':'<','>=':'<=','=':'=','!=':'!='}
+        return compare_interval(flipped[op],b,a)
+    low,high=a.low,a.high
+    decided={'>':(low>b, high<=b), '>=':(low>=b, high<b), '<':(high<b, low>=b),
+             '<=':(high<=b, low>b), '=':(low==high==b, b<low or b>high)}
+    if op=='!=':
+        result=compare_interval('=',a,b)
+        return result if isinstance(result,Unknown) else not result
+    true,false=decided[op]
+    if true: return True
+    if false: return False
+    shown='∞' if math.isinf(high) else f'{high:g}'
+    return unknown(f'{a.source} [{low:g}, {shown}] не решает {op}{b:g}')
+
+
 def combine(a,b):
     return Unknown(frozenset().union(*(v.reasons for v in (a,b) if isinstance(v,Unknown))))
 
@@ -37,6 +67,9 @@ def binary(op,a,b):
     if op=='|':
         if (not isinstance(a,Unknown) and a) or (not isinstance(b,Unknown) and b): return True
     if isinstance(a,Unknown) or isinstance(b,Unknown): return combine(a,b)
+    if isinstance(a,Interval) or isinstance(b,Interval):
+        if op in ('<','<=','>','>=','=','!='): return compare_interval(op,a,b)
+        return unknown('арифметика над оценкой '+next(v.source for v in (a,b) if isinstance(v,Interval)))
     if op=='&': return bool(a and b)
     if op=='|': return bool(a or b)
     if op=='=': return a==b
@@ -55,7 +88,8 @@ def binary(op,a,b):
 
 
 class Expression:
-    token=re.compile(r'\s*(\d+(?:\.\d+)?|[A-Za-z_][A-Za-z0-9_.]*|%%|!=|<=|>=|[()!&|=<>+*%\-])')
+    # `~X` is an explicit adaptation: X when decided, false when unknown.
+    token=re.compile(r'\s*(\d+(?:\.\d+)?|[A-Za-z_][A-Za-z0-9_.]*|%%|!=|<=|>=|[()!~&|=<>+*%\-])')
     precedence={'|':1,'&':2,'=':3,'!=':3,'<':3,'<=':3,'>':3,'>=':3,'+':4,'-':4,'*':5,'%':5,'%%':5}
 
     def __init__(self,text):
@@ -71,7 +105,7 @@ class Expression:
     def parse(self,minimum):
         if self.pos>=len(self.tokens): raise ValueError('Оборванное выражение APL')
         token=self.tokens[self.pos]; self.pos+=1
-        if token in ('!','-','+'):
+        if token in ('!','-','+','~'):
             node=('unary',token,self.parse(6))
         elif token=='(':
             node=self.parse(0)
@@ -93,7 +127,9 @@ class Expression:
             if node[0]=='name': return resolve(node[1])
             if node[0]=='unary':
                 value=visit(node[2])
+                if node[1]=='~': return False if isinstance(value,(Unknown,Interval)) else value
                 if isinstance(value,Unknown): return value
+                if isinstance(value,Interval): return unknown('операция над оценкой '+value.source)
                 return not value if node[1]=='!' else (-value if node[1]=='-' else value)
             left=visit(node[2])
             if not isinstance(left,Unknown):
@@ -206,6 +242,29 @@ class APLRuntime:
         key=self.squares[(kind,spell)][0]
         return self.number(key+('/stacks' if field in ('stack','stacks') else '/timer'))
 
+    def time_to_die(self):
+        """Manual /ahw ttd forecast first, then the reader's health-slope bounds."""
+        manual=self.number('context/ttd')
+        if not isinstance(manual,Unknown): return manual
+        estimate=self.data.get('ttdEstimate') or {}
+        status=estimate.get('status','нет оценки')
+        if status=='dead': return 0.
+        if status=='estimate' and isinstance(estimate.get('low'),(int,float)):
+            high=math.inf if estimate.get('highUnbounded') else estimate.get('high')
+            if isinstance(high,(int,float)):
+                return Interval(float(estimate['low']),float(high),'TTD по здоровью цели')
+        return unknown('target.time_to_die: '+status)
+
+    def fight_remains(self):
+        """Manual /ahw fight forecast; otherwise only a lower bound: the fight
+        lasts at least as long as the current target. Other enemies are unseen."""
+        manual=self.number('context/fight')
+        if not isinstance(manual,Unknown): return manual
+        ttd=self.time_to_die()
+        if isinstance(ttd,Unknown): return unknown('fight_remains: '+', '.join(sorted(ttd.reasons)))
+        low=ttd.low if isinstance(ttd,Interval) else ttd
+        return Interval(float(low),math.inf,'fight_remains ≥ TTD цели')
+
     def resolve(self,name):
         if name.startswith('talent.'):
             return name.split('.')[1] in self.talents
@@ -217,9 +276,11 @@ class APLRuntime:
             return self.variables.get(name[9:],unknown(name))
         if name=='active_enemies':
             return self.settings.get('targets') or self.number('context/targets')
-        if name in ('rage','time','fight_remains','target.time_to_die','target.health.pct'):
-            return self.number({'rage':'resource/rage','time':'context/time','fight_remains':'context/fight',
-                                'target.time_to_die':'context/ttd','target.health.pct':'resource/targetHealthPercent'}[name])
+        if name=='target.time_to_die': return self.time_to_die()
+        if name=='fight_remains': return self.fight_remains()
+        if name in ('rage','time','target.health.pct'):
+            return self.number({'rage':'resource/rage','time':'context/time',
+                                'target.health.pct':'resource/targetHealthPercent'}[name])
         if name=='gcd':
             haste=self.number('context/haste')
             return haste if isinstance(haste,Unknown) else max(.75,1.5/(1+haste/100))

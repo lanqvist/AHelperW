@@ -118,7 +118,8 @@ Bloodbath, взаимодействие Unhinged с подтверждением
 - `cooldown.X.ready/remains` — только о кулдауне: `nores`/`unusable` кнопки
   не делает её «на КД».
 - **Адаптация** (помечена в каждом решении): `bladestorm,if=buff.recklessness.up|
-  target.time_to_die<=5` исполняется как `…|ahw_ttd_known&target.time_to_die<=5`.
+  target.time_to_die<=5` исполняется как `…|~(target.time_to_die<=5)`: сравнение решается
+  ручным прогнозом или границами TTD по здоровью цели, нерешённое — ложь.
   Без заданного TTD Bladestorm идёт только в Recklessness; догадки о TTD нет.
 - Предметы/зелья/PI не исполняются (как у Arms/ВВ).
 - Офлайн-сценарии на сохранённом экспорте (без захвата/ввода): открытие

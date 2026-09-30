@@ -107,10 +107,12 @@ class FrostAPL(APLRuntime):
                 gate = '(' + target_if[6:] + ')'
                 text = text.replace(',if=', ',if=' + gate + '&(', 1) + ')' if ',if=' in text else text + ',if=' + gate
             labels.append('текущая цель вместо target_if=' + target_if)
-        adapted = re.sub(r'fight_remains<(\d+)', r'(ahw_fight_known&fight_remains<\1)', text)
-        adapted = re.sub(r'fight_remains>(\d+)', r'(!ahw_fight_known|fight_remains>\1)', adapted)
+        # fight_remains is a lower bound (current target TTD) or a manual forecast.
+        # Undecided: never the end of the fight (<N false), the fight continues (>N true).
+        adapted = re.sub(r'fight_remains<(\d+)', r'~(fight_remains<\1)', text)
+        adapted = re.sub(r'fight_remains>(\d+)', r'!~(!(fight_remains>\1))', adapted)
         if adapted != text:
-            text = adapted; labels.append('fight_remains только при заданном прогнозе')
+            text = adapted; labels.append('fight_remains: нерешённое сравнение — бой продолжается')
         for aura in self.stacked:
             # react without a comparison is react>0, i.e. the aura is up.
             adapted = re.sub(re.escape(aura) + r'\.react(?![=<>!])', aura + '.up', text)
@@ -148,8 +150,6 @@ class FrostAPL(APLRuntime):
 
     def resolve(self, name):
         parts = name.split('.')
-        if name == 'ahw_fight_known':
-            return not isinstance(self.number('context/fight'), Unknown)
         if parts[0] == 'talent' and parts[-1] == 'rank':
             return self.talent_ranks.get(parts[1], 0)
         if name == 'gcd.max':

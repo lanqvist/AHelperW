@@ -80,8 +80,9 @@ Death and Decay, Raise Dead (только precombat), расовые.
 2. **Без предметов/зелий/PI:** `trinket.*` — «нет предмета» (как ВВ), `potion`/`use_item`/
    `invoke_external_buff` не исполняются.
 3. **Событий рейда нет:** `raid_event.*.exists` = ложь; остальные поля за ним не нужны.
-4. **Время боя:** при неизвестном `fight_remains` условия «бой продолжится»
-   (`fight_remains>N`) выполняются, «бой кончается» (`fight_remains<3`) — нет; с `/ahw fight`
+4. **Время боя:** при нерешённом `fight_remains` условия «бой продолжится»
+   (`fight_remains>N`, `!~(!(…))`) выполняются, «бой кончается» (`fight_remains<3`, `~(…)`) — нет.
+   Без `/ahw fight` известна только нижняя граница — TTD текущей цели по здоровью; с прогнозом
    работают как в SimC. Та же логика, что Bladestorm/TTD у Fury.
 5. **Питомцы:** `pet.army_ghoul.active` = аура Army of the Dead 42650 (30 с = армия 30 с);
    `pet.gargoyle.active` = талант Summon Gargoyle и остаток ауры армии >5 с (горгулья 25 с
