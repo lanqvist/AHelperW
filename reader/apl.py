@@ -474,3 +474,19 @@ class ArmsAPL(APLRuntime):
     allowed_heroes = {60}
     spells = SPELLS
     buffs = BUFFS
+
+    def __init__(self,reader,root,bindings,settings):
+        super().__init__(reader,root,bindings,settings)
+        # Upstream picks slayer_execute by target_if=min:target.health.pct. The
+        # other enemies' health is unseen, so with 2 targets that rule blocked
+        # the whole rotation in execute phase. The selected target decides.
+        self.adaptations=('Текущая выбранная цель; target_if не переключает цели',)
+        for rows in self.lists.values():
+            for row in rows:
+                if 'target_if' in row:
+                    row['original_target_if']=row.pop('target_if')
+
+    def decide(self,data):
+        result=super().decide(data)
+        result['adaptations']=self.adaptations
+        return result

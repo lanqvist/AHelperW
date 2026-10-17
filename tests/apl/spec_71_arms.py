@@ -31,6 +31,15 @@ SCENARIOS = [
     Scenario('число целей неизвестно и меняет выбор: блокировка', ('blocked', 'context/targets'),
              numbers={'context/targets': None}, spells={'mortal_strike': 'ready', 'sweeping_strikes': 'ready'},
              buffs=STANCE, debuffs=REND),
+    # Boss in execute + one add: slayer_execute has target_if=min:target.health.pct;
+    # the selected target decides instead of blocking the rotation.
+    Scenario('2 цели, фаза казни: Execute по выбранной цели', ('ready', 'execute'),
+             numbers={'context/targets': 2, 'resource/targetHealthPercent': 15., 'resource/rage': 60.},
+             spells={'execute': 'ready', 'mortal_strike': 'ready', 'overpower': 'ready'},
+             buffs=STANCE, debuffs=REND),
+    Scenario('2 цели вне фазы казни: slayer_st', ('ready', 'mortal_strike'),
+             numbers={'context/targets': 2},
+             spells={'execute': 'ready', 'mortal_strike': 'ready'}, buffs=STANCE, debuffs=REND),
     # 1269391 is hidden in game; the addon colours it from the Slam → Heroic Strike override.
     Scenario('прок Master of Warfare: Heroic Strike раньше Mortal Strike', ('ready', 'heroic_strike'),
              spells={'mortal_strike': 'ready', 'slam': 'ready'},
