@@ -19,7 +19,7 @@ function GetUnitSpeed() return 0 end
 function UnitSpellHaste() return 20 end
 function UnitPowerMax() return 130 end
 function GetPhysicalScreenSize() return 1920, 1080 end
-function GetBuildInfo() return "12.1.0", "69933", "", 120100 end
+function GetBuildInfo() return "12.1.5", "70448", "", 120105 end
 function UnitRace() return "Night Elf", "NightElf" end
 local classes = { [71] = "WARRIOR", [72] = "WARRIOR", [269] = "MONK", [251] = "DEATHKNIGHT", [252] = "DEATHKNIGHT" }
 function UnitClass() return "Class", classes[specID] end

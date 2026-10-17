@@ -80,7 +80,7 @@ PROFILES = {
     252: SpecProfile('deathknight.unholy', 252, 'Unholy DK', 'dk-unholy-apl',
                      (RIDER, SANLAYN), ('runic_power', 'runes'), 'in-development',
                      fast_aura_timers=frozenset({1235391, 434153, 433925, 458123, 1241077}),
-                     binary_auras=frozenset({81340, 1235391, 1242223, 1254252, 458123, 1271975, 1271199,
+                     binary_auras=frozenset({81340, 1235391, 1242223, 458123, 1271975, 1271199,
                                              42650, 1242654, 433899, 434153, 10060,
                                              191587, 1240996, 1241521, 1241077}),
                      model='dk_unholy_apl:UnholyAPL'),

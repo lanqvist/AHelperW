@@ -33,9 +33,9 @@ function ns.ApplyAPLPreset(auto)
     if not auto then msg("для этого спека набор APL не подключён; /ahw apl выбирает текущий спек") end
     return
   end
-  local _, build = GetBuildInfo()
-  if tostring(build) ~= "69933" then
-    if not auto then msg("набор сверялся со сборкой 69933; текущая сборка требует повторной сверки") end
+  local version = GetBuildInfo()
+  if tostring(version) ~= ns.aplSource.version then
+    if not auto then msg("набор сверялся с клиентом " .. ns.aplSource.version .. "; новый патч требует повторной сверки") end
     return
   end
   local preset, why, hero = ns.GetAPLPreset(profile)
@@ -89,7 +89,7 @@ function ns.ApplyAPLPreset(auto)
   local name = profile.name .. (hero and (" / " .. hero.name) or "")
   if auto and count == 0 and #missing == 0 then return end
   msg((auto and "набор APL добавлен автоматически, " or "добавлено индикаторов ") .. name .. ": " .. count .. "; таймеры КД и баффов включены")
-  if not auto then msg("набор для присланного билда 69933; активные таланты автоматически не сверяются") end
+  if not auto then msg("набор для клиента " .. ns.aplSource.version .. "; активные таланты автоматически не сверяются") end
   if #missing > 0 then msg("клиент не знает ID: " .. table.concat(missing, ", ")) end
 end
 
@@ -501,7 +501,7 @@ SlashCmdList.AHELPERW = function(input)
     print("  /ahw palette default|cvd — палитра (cvd — для дальтоников)")
     print("  /ahw cdtext on|off — секунды на кулдаунах (при <10 сек)")
     print("  /ahw auratimers on|off — время действия баффов")
-    print("  /ahw armsapl — дополнить набор под Arms/Slayer, сборка 69933")
+    print("  /ahw armsapl — дополнить набор под Arms/Slayer (клиент 12.1.5)")
     print("  /ahw wwapl — экспериментальный набор ВВ/Шадо-Пан; /ahw apl — текущий спек")
     print("  /ahw furyapl — набор Fury/Slayer в разработке")
     print("  /ahw preview on|off — иконки, номера и список квадратов")

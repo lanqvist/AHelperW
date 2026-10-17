@@ -4,8 +4,8 @@
 // keeps the schema of arms-apl/warrior-traits.json and windwalker-apl/monk-traits.json
 // (entries in source order) and adds `subtrees` (hero tree ID -> name, specs).
 import fs from 'node:fs';
-const COMMIT = '4c7c73621e596419b5bd6faa5d68940a9c640379';
-const BUILD = '12.1.0.69933';
+const COMMIT = 'b36fc0a2e299f925bc0f72375eea013d7ff5b1cf';
+const BUILD = '12.1.5.70448';
 const URL_ = `https://raw.githubusercontent.com/simulationcraft/simc/${COMMIT}/engine/dbc/generated/trait_data.inc`;
 // SimC class IDs (second field of a trait row; hero tree table uses the same).
 const CLASSES = {warrior:1, paladin:2, hunter:3, rogue:4, priest:5, death_knight:6, shaman:7,

@@ -8,7 +8,7 @@ own spellID for cast confirmation. Unknown inputs stay unknown; every adaptation
 labelled in each decision.
 """
 import re
-from apl import APLRuntime, Expression, Unknown, unknown, binary
+from apl import APLRuntime, Expression, Unknown, unknown, binary, SIMC_COMMIT
 
 
 class UnholyAPL(APLRuntime):
@@ -66,7 +66,7 @@ class UnholyAPL(APLRuntime):
 
     def __init__(self, reader, root, bindings, settings):
         super().__init__(reader, root, bindings, settings)
-        if self.cfg.get('apl',{}).get('sourceCommit') != '4c7c73621e596419b5bd6faa5d68940a9c640379':
+        if self.cfg.get('apl',{}).get('sourceCommit') != SIMC_COMMIT:
             raise ValueError('Экспорт и пакет Unholy используют разные версии SimC')
         if 'runic_power' not in self.cfg.get('resources', {}) or not self.cfg.get('runes'):
             raise ValueError('Нужен экспорт рыцаря смерти с силой рун и рунами')
@@ -92,8 +92,8 @@ class UnholyAPL(APLRuntime):
                     row['original_target_if'] = row.pop('target_if')
                     self.label(row, 'текущая цель вместо target_if='+row['original_target_if'])
         # Exact equivalence, not an adaptation: Lesser Ghoul stacks exist only while
-        # the aura is up; its presence comes from colour, the digit is not read.
-        self.rewrite(r'buff\.lesser_ghoul_ready\.stack=0\b', 'buff.lesser_ghoul_ready.down', 'stack=0 = аура снята')
+        # the aura is up, so stack>=1 comes from colour. The 12.1.5 AoE list also
+        # needs stack<3: that digit is read (unread while up = unknown).
         self.rewrite(r'buff\.lesser_ghoul_ready\.stack>=1\b', 'buff.lesser_ghoul_ready.up', 'stack>=1 = аура есть')
         # fight_remains is a lower bound (current target TTD) or a manual forecast;
         # undecided never assumes the fight is ending (as Fury's Bladestorm TTD).
@@ -132,6 +132,8 @@ class UnholyAPL(APLRuntime):
         """SimC fallback buff without its talent: never up."""
         talent = self.buff_talents.get(name)
         if talent and talent not in self.talents:
+            if field == 'max_stack':
+                return 1   # sim->auras.fallback: a buff_t without spell data
             return field == 'down' if field in ('up', 'react', 'down') else 0
         return None
 
@@ -162,8 +164,9 @@ class UnholyAPL(APLRuntime):
         if name == 'duration':
             return self.durations.get(self.current, unknown('длительность '+str(self.current)))
         if parts[0] == 'raid_event':
-            # Adaptation: no scheduled raid events; other fields sit behind .exists.
-            return False if parts[-1] == 'exists' else unknown(name)
+            # Adaptation: no scheduled raid events; other fields sit behind .exists,
+            # except pull.has_boss (12.1.5 Dark Transformation), false without pulls.
+            return False if parts[-1] in ('exists', 'has_boss') else unknown(name)
         if parts[0] == 'trinket':
             # Disabled coordination model, NOT a claim about equipped items.
             return False if '.is.' in name or '.has_' in name or parts[-1] in ('up', 'react') else 0

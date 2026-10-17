@@ -13,7 +13,7 @@ const specId = Number(specArg);
 if (!className || !specId || !buildFile) throw new Error('Usage: decode-build.mjs <class> <specId> <build.txt>');
 const table = className.endsWith('.json') ? path.resolve(className) : new URL(`./${className}-traits.json`, import.meta.url);
 const data = JSON.parse(fs.readFileSync(table, 'utf8'));
-if (data.build !== '12.1.0.69933') throw new Error('Wrong trait build');
+if (data.build !== '12.1.5.70448') throw new Error('Wrong trait build');
 const text = fs.readFileSync(buildFile, 'utf8').trim();
 const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 const bits = [...text].flatMap(c => {

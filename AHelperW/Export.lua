@@ -113,7 +113,7 @@ function ns.MakeHUDExport()
     schema = "AHelperW.HUD", version = 1, static = true,
     client = { version = version, build = build, interface = interface },
     specID = spec, race = race, talents = talents or "unknown",
-    apl = { profileID = profile.id, sourceCommit = "4c7c73621e596419b5bd6faa5d68940a9c640379", assumedBuild = "69933", heroTree = profile.heroTree or (hero and hero.key), heroTreeID = not profile.heroTree and heroID or nil, talentsVerified = false },
+    apl = { profileID = profile.id, sourceCommit = ns.aplSource.commit, assumedBuild = ns.aplSource.build, heroTree = profile.heroTree or (hero and hero.key), heroTreeID = not profile.heroTree and heroID or nil, talentsVerified = false },
     screen = { width = screenW, height = screenH, origin = "top-left", units = "physical-pixels" },
     display = { palette = ns.db.palette, preview = ns.db.preview, cdText = ns.db.cdText, scale = ns.db.scale, dock = ns.db.dock,
       size = ns.db.size, gap = layout.gap, perRow = layout.perRow, compact = layout.compact, stable = ns.db.stable, colors = ns.Palette(), timerLayout = "split-v1", chargeText = "white-on-black", stateLabelLayout = "bottom-center-v1",

@@ -4,7 +4,7 @@ Source lists: docs/fury-apl/build-requirements.json (Mountain Thane removed).
 Readiness gates follow the pinned sc_warrior.cpp ready() overrides; the HUD
 colour alone does not encode them. Unknown inputs stay unknown.
 """
-from apl import APLRuntime, Expression, Unknown, unknown, binary
+from apl import APLRuntime, Expression, Unknown, unknown, binary, SIMC_COMMIT
 
 
 class FuryAPL(APLRuntime):
@@ -37,7 +37,7 @@ class FuryAPL(APLRuntime):
 
     def __init__(self, reader, root, bindings, settings):
         super().__init__(reader, root, bindings, settings)
-        if self.cfg.get('apl',{}).get('sourceCommit') != '4c7c73621e596419b5bd6faa5d68940a9c640379':
+        if self.cfg.get('apl',{}).get('sourceCommit') != SIMC_COMMIT:
             raise ValueError('Экспорт и пакет Fury используют разные версии SimC')
         if 'rage' not in self.cfg.get('resources', {}):
             raise ValueError('Нужен экспорт воина с регионом ярости')

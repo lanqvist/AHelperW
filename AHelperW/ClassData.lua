@@ -260,8 +260,8 @@ end
 -- Later manual removals remain respected. The same list is available via /ahw armsapl.
 function ns.ExpandArmsHUD()
   local _, key = ns.GetSpecData()
-  local _, build = GetBuildInfo()
-  if key ~= 71 or tostring(build) ~= "69933" or ns.db.armsHudVersion == 2 then return end
+  local version = GetBuildInfo()
+  if key ~= 71 or tostring(version) ~= ns.aplSource.version or ns.db.armsHudVersion == 2 then return end
   local c = ns.EnsureCustom()
   for _, kind in ipairs({ "spells", "procs", "debuffs" }) do
     local present = {}

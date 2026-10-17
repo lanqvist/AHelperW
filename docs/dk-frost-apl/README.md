@@ -25,7 +25,7 @@
 
 Работа вслепую по `docs/melee-dps-plan.md` («Как добавить спек»), как Fury до первого
 входа в игру. Ветки: **Deathbringer** (hero subtree 33) и **Rider of the Apocalypse** (32),
-клиент 12.1.0.69933, SimC `4c7c73621e596419b5bd6faa5d68940a9c640379`.
+клиент 12.1.5.70448, SimC `b36fc0a2e299f925bc0f72375eea013d7ff5b1cf`. С 17.10 — патч 12.1.5, `docs/patch-12.1.5.md`.
 
 | Что | Состояние |
 |---|---|

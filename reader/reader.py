@@ -585,10 +585,12 @@ class App(tk.Tk):
                 self.debug.event('apl_model_loaded',profileHash=reader.hash,talents=sorted(model.talents),
                                  lists={k:len(v) for k,v in model.lists.items()},
                                  profileID=model.profile.id,coverageGaps=getattr(model,'coverage_gaps',()),
-                                 adaptations=getattr(model,'adaptations',()))
+                                 adaptations=getattr(model,'adaptations',()),buildNote=model.build_note)
                 self.apl_status.config(text=f'APL {model.profile.name}: {model.profile.status}. Назначь клавиши; F8 — остановить.')
                 if spec_id == 269:
                     self.apl_status.config(text='ВВ — адаптация: текущая цель, без синхронизации предметов; упрощённый Зенит. F8 — остановить.')
+                if model.build_note:
+                    self.apl_status.config(text=self.apl_status.cget('text')+' '+model.build_note+'.')
             except Exception as exc:
                 self.debug.event('apl_model_error',error=str(exc),traceback=traceback.format_exc())
                 self.apl_status.config(text='APL недоступен: '+str(exc))

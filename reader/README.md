@@ -150,7 +150,7 @@ HUD считает видимые живые враждебные неймпле
 
 В JSON-состоянии `execution` содержит результат решения. Журнал включает `apl_model_loaded`, `apl_decision`, `key_sent`, `action_response_observed`, `action_unconfirmed`, ошибки запуска и исполнения. Строка APL в окне объясняет ожидание или действие. Кнопка «Начать» фиксирует назначения/настройки до следующего запуска. Проверка боем и нажатиями в этом обновлении ещё не выполнялась.
 
-Источники: [сохранённый APL SimulationCraft](https://raw.githubusercontent.com/simulationcraft/simc/4c7c73621e596419b5bd6faa5d68940a9c640379/engine/class_modules/apl/apl_warrior.cpp), [Blizzard Unit API](https://raw.githubusercontent.com/Gethe/wow-ui-source/live/Interface/AddOns/Blizzard_APIDocumentationGenerated/UnitDocumentation.lua), [Microsoft SendInput](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendinput).
+Источники: [сохранённый APL SimulationCraft](https://raw.githubusercontent.com/simulationcraft/simc/b36fc0a2e299f925bc0f72375eea013d7ff5b1cf/engine/class_modules/apl/apl_warrior.cpp), [Blizzard Unit API](https://raw.githubusercontent.com/Gethe/wow-ui-source/live/Interface/AddOns/Blizzard_APIDocumentationGenerated/UnitDocumentation.lua), [Microsoft SendInput](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendinput).
 
 ## Дебаг-журнал
 

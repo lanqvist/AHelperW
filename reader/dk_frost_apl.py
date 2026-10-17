@@ -6,9 +6,9 @@ Readiness gates, fallback buffs and replacement actions follow the pinned
 sc_death_knight.cpp; the HUD colour alone does not encode them. Unknown stays unknown.
 """
 import re
-from apl import APLRuntime, Expression, Unknown, unknown, binary
+from apl import APLRuntime, Expression, Unknown, unknown, binary, SIMC_COMMIT
 
-COMMIT = '4c7c73621e596419b5bd6faa5d68940a9c640379'
+COMMIT = SIMC_COMMIT
 
 
 class FrostAPL(APLRuntime):

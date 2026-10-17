@@ -4,9 +4,9 @@ Explicit observations gate overrides; an unavailable/unknown HUD is not ready.
 See docs/retribution-apl/README.md for adaptations and outstanding game checks.
 """
 import re
-from apl import APLRuntime, Expression, Unknown, unknown, binary
+from apl import APLRuntime, Expression, Unknown, unknown, binary, SIMC_COMMIT
 
-COMMIT = '4c7c73621e596419b5bd6faa5d68940a9c640379'
+COMMIT = SIMC_COMMIT
 # Public cast journal events that start (Wake) or spend (Hammer) 427441.
 HAMMER_EVENTS = {255937:'wake', 427453:'hammer'}
 # Seconds a Light's Deliverance window must persist without a Wake event:

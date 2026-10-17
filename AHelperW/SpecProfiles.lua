@@ -7,6 +7,11 @@ local _, ns = ...
 -- contextCells: per-profile meaning of the "maxrage"/"chargeRange" context cells
 -- (export key, title, tooltip, source: range | powerRegen | runeNext).
 -- The field reference and a filled example: docs/melee-dps-plan.md, «Как добавить спек».
+
+-- SimC snapshot of the reader's APL packages (docs/*/source.json). Presets and talent
+-- tables follow its patch; hotfix builds of the same patch keep the trees.
+ns.aplSource = { commit = "b36fc0a2e299f925bc0f72375eea013d7ff5b1cf", version = "12.1.5", build = "70448" }
+
 ns.specProfiles = {
   -- Retribution: first manual Templar recording; automation/Herald unverified.
   [70] = {

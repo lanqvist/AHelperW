@@ -3,7 +3,7 @@
 No absent channel, target-selection or recharge input is replaced by a guess.
 Source IDs: docs/windwalker-apl/source.json, pinned sc_monk.cpp and spell dump.
 """
-from apl import APLRuntime, Expression, Unknown, unknown, binary
+from apl import APLRuntime, Expression, Unknown, unknown, binary, SIMC_COMMIT
 
 
 class WindwalkerAPL(APLRuntime):
@@ -87,7 +87,7 @@ class WindwalkerAPL(APLRuntime):
             'upstreamSource':sync['source'],
             'expressions':{'if':Expression(sync_condition)},
         }]
-        if self.cfg.get('apl',{}).get('sourceCommit') != '4c7c73621e596419b5bd6faa5d68940a9c640379':
+        if self.cfg.get('apl',{}).get('sourceCommit') != SIMC_COMMIT:
             raise ValueError('Экспорт и пакет ВВ используют разные версии SimC')
         for key in ('energy', 'chi'):
             if key not in self.cfg.get('resources', {}):

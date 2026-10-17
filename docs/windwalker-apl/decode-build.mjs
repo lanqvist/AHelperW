@@ -8,7 +8,7 @@ const writeJson = (name, value) => fs.writeFileSync(new URL(name, root), JSON.st
 if (process.argv[2]) {
   const raw = fs.readFileSync(process.argv[2], 'utf8');
   const build = raw.match(/wow build ([\d.]+)/)?.[1];
-  if (build !== '12.1.0.69933') throw new Error(`Unexpected trait data build: ${build}`);
+  if (build !== '12.1.5.70448') throw new Error(`Unexpected trait data build: ${build}`);
   const entries = [];
   for (const line of raw.split('\n')) {
     const match = line.match(/^\s*\{\s*(\d[^"\n]+),\s*"([^"]*)",\s*\{([^}]+)\},\s*\{([^}]+)\},\s*(\d+),\s*(\d+)\s*\},?$/);
@@ -25,7 +25,7 @@ if (process.argv[2]) {
   writeJson('monk-traits.json', {build, source:readJson('source.json'), entries});
 }
 const data = readJson('monk-traits.json');
-if (data.build !== '12.1.0.69933') throw new Error('Wrong trait build');
+if (data.build !== '12.1.5.70448') throw new Error('Wrong trait build');
 const text = fs.readFileSync(new URL('build.txt', root), 'utf8').trim();
 const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 const bits = [...text].flatMap(c => {

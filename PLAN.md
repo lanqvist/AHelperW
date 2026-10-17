@@ -15,7 +15,7 @@
 ## Структура файлов
 ```
 AHelperW/
-├── AHelperW.toc          # Interface: 120100, SavedVariables: AHelperWDB
+├── AHelperW.toc          # Interface: 120105, SavedVariables: AHelperWDB
 ├── Media/JetBrainsMono-ExtraBold.ttf
 ├── Core.lua              # инициализация, события, SavedVariables, спек-детект
 ├── Layout.lua            # фрейм, подложка, пиксель-чёткость, drag&drop, масштаб

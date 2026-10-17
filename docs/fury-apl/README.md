@@ -148,7 +148,7 @@ Bloodbath, взаимодействие Unhinged с подтверждением
 ## Источники
 
 - APL — функция `fury()` в `../arms-apl/apl_warrior.cpp`, тот же закреплённый
-  коммит SimC `4c7c73621e596419b5bd6faa5d68940a9c640379`, что и у Arms.
+  коммит SimC `b36fc0a2e299f925bc0f72375eea013d7ff5b1cf`, что и у Arms. С 17.10 — патч 12.1.5, `docs/patch-12.1.5.md`.
   `extract.mjs` проверяет совпадение коммитов в двух `source.json`.
 - Таблица талантов — общая `../arms-apl/warrior-traits.json` (узлы spec 72 и
   hero subtree 60/61 той же сборки). Копия не создаётся.

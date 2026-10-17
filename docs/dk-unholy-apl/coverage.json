@@ -1,5 +1,5 @@
 {
-  "clientBuild": "12.1.0.69933",
+  "clientBuild": "12.1.5.70448",
   "specID": 252,
   "heroTrees": [
     "rider_of_the_apocalypse",
@@ -37,7 +37,6 @@
           1271975
         ],
         "debuffs": [
-          191587,
           1240996,
           1241077,
           1241521
@@ -82,7 +81,6 @@
           1271975
         ],
         "debuffs": [
-          191587,
           1240996,
           1241077,
           1241521
@@ -211,10 +209,10 @@
     },
     {
       "symbol": "buff.lesser_ghoul_ready.stack",
-      "mode": "native-display",
+      "mode": "native-display+ocr",
       "spellID": 1254252,
       "evidence": "simc-source",
-      "note": "spell.lesser_ghoul_buff (baseline with Festering Strike); stack=0/>=1 read as aura down/up"
+      "note": "spell.lesser_ghoul_buff (baseline with Festering Strike), max 8; stack>=1 read as aura up, the 12.1.5 AoE stack<3 reads the digit"
     },
     {
       "symbol": "buff.sudden_doom.react",
@@ -246,14 +244,6 @@
       "symbol": "charges",
       "mode": "native-display+ocr",
       "source": "Current action (death_and_decay): charge digit or cooldown state"
-    },
-    {
-      "symbol": "cooldown.any_dnd.duration",
-      "mode": "static-export",
-      "source": "baseCooldownMs of the HUD square",
-      "spellID": 43265,
-      "evidence": "simc-source",
-      "note": "find_spell(43265); 1 charge, 30 s recharge, 10 s duration (spell data); ground-targeted"
     },
     {
       "symbol": "cooldown.army_of_the_dead.remains",
@@ -331,14 +321,6 @@
       "note": "spell.dread_plague; one host at a time; active_dots from the current target only (adaptation)"
     },
     {
-      "symbol": "dot.virulent_plague.active_dots",
-      "mode": "adapted",
-      "source": "Current target debuff only: active_dots=0 <=> no plague on the current target",
-      "spellID": 191587,
-      "evidence": "simc-source",
-      "note": "spell.virulent_plague; active_dots from the current target only (adaptation)"
-    },
-    {
       "symbol": "duration",
       "mode": "static-model",
       "value": 10,
@@ -370,11 +352,6 @@
       "source": "buff.army_of_the_dead.up (42650, 30 s = army ghoul duration 30 s)"
     },
     {
-      "symbol": "pet.gargoyle.active",
-      "mode": "adapted",
-      "source": "talent.summon_gargoyle & buff.army_of_the_dead.remains>5 (gargoyle 25 s from the same cast, sc_spell_data.inc 49206)"
-    },
-    {
       "symbol": "raid_event.adds.count",
       "mode": "adapted",
       "source": "No scheduled raid events: *.exists is false; other fields are never reached"
@@ -398,6 +375,11 @@
       "symbol": "raid_event.pull.exists",
       "mode": "adapted",
       "source": "No scheduled raid events: *.exists is false; other fields are never reached"
+    },
+    {
+      "symbol": "raid_event.pull.has_boss",
+      "mode": "adapted",
+      "source": "No scheduled pulls: has_boss is false (as SimC without pull events)"
     },
     {
       "symbol": "raid_event.pull.in",
@@ -532,11 +514,6 @@
       "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
     },
     {
-      "symbol": "trinket.1.proc.mastery.duration",
-      "mode": "disabled-model",
-      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
-    },
-    {
       "symbol": "trinket.2.cast_time",
       "mode": "disabled-model",
       "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
@@ -592,11 +569,6 @@
       "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
     },
     {
-      "symbol": "trinket.2.proc.mastery.duration",
-      "mode": "disabled-model",
-      "source": "No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)"
-    },
-    {
       "symbol": "variable.adds_remain",
       "mode": "derived",
       "source": "APL expression"
@@ -613,11 +585,6 @@
     },
     {
       "symbol": "variable.epidemic_prio",
-      "mode": "derived",
-      "source": "APL expression"
-    },
-    {
-      "symbol": "variable.spending_rp",
       "mode": "derived",
       "source": "APL expression"
     },

@@ -32,7 +32,7 @@ const buffs = {
   sudden_doom:{spellID:81340, evidence:'wowhead', talent:'sudden_doom', note:'SimC: trigger of talent 49530 effect 1 (buffs.sudden_doom); Wowhead 81340: 10 s buff, next Death Coil/Epidemic cheaper; spell data max stack 1'},
   dark_transformation:{spellID:1235391, evidence:'simc-source', talent:'dark_transformation', note:'spell.dark_transformation_player_buff (player aura, 15 s)'},
   forbidden_knowledge:{spellID:1242223, evidence:'simc-source', talent:'forbidden_knowledge', note:'spell.forbidden_knowledge_buff; Death Coil/Epidemic become Necrotic Coil/Graveyard for 30 s'},
-  lesser_ghoul_ready:{spellID:1254252, evidence:'simc-source', note:'spell.lesser_ghoul_buff (baseline with Festering Strike); stack=0/>=1 read as aura down/up'},
+  lesser_ghoul_ready:{spellID:1254252, evidence:'simc-source', note:'spell.lesser_ghoul_buff (baseline with Festering Strike), max 8; stack>=1 read as aura up, the 12.1.5 AoE stack<3 reads the digit'},
   festering_scythe:{spellID:458123, evidence:'simc-source', talent:'festering_scythe', note:'spell.festering_scythe_buff: next Festering Strike is Festering Scythe (15 s)'},
   festering_scythe_tt:{spellID:1241077, kind:'debuff', evidence:'simc-source', talent:'festering_scythe',
     note:'SimC tracks spell.festering_scythe_debuff as a player buff; in game it is a debuff on the target hit (Wowhead: "Hastens your Plagues on the target", 25 s). Read on the current target (adaptation)'},
@@ -76,7 +76,7 @@ function classify(ref) {
   const [kind, name, field] = ref.split('.');
   if (kind === 'buff' && buffs[name]) {
     if (field === 'max_stack') return {mode:'static-model', value:essenceMaxStack, source:'sc_spell_data.inc 433925 max_stack', ...buffs[name]};
-    return {mode:(field === 'stack' && name !== 'lesser_ghoul_ready') || field === 'remains' ? 'native-display+ocr' : 'native-display', ...buffs[name]};
+    return {mode:field === 'stack' || field === 'remains' ? 'native-display+ocr' : 'native-display', ...buffs[name]};
   }
   if (kind === 'debuff' && debuffs[name]) return {mode:field === 'remains' ? 'native-display+ocr' : 'native-display', target:'current', ...debuffs[name]};
   if (kind === 'dot' && debuffs[name]) return {mode:'adapted', source:'Current target debuff only: active_dots=0 <=> no plague on the current target', ...debuffs[name]};
@@ -92,6 +92,7 @@ function classify(ref) {
   if (kind === 'trinket') return {mode:'disabled-model', source:'No-items model: trinket buffs/procs absent, numbers 0 (as Windwalker)'};
   if (kind === 'pet') return {mode:'adapted', source:name === 'army_ghoul' ? 'buff.army_of_the_dead.up (42650, 30 s = army ghoul duration 30 s)'
     : 'talent.summon_gargoyle & buff.army_of_the_dead.remains>5 (gargoyle 25 s from the same cast, sc_spell_data.inc 49206)'};
+  if (ref === 'raid_event.pull.has_boss') return {mode:'adapted', source:'No scheduled pulls: has_boss is false (as SimC without pull events)'};
   if (kind === 'raid_event') return {mode:'adapted', source:'No scheduled raid events: *.exists is false; other fields are never reached'};
   const table = {
     active_enemies:{mode:'native-display', source:'TargetCount estimate or manual override; unknown blocks aoe/single_target choice'},

@@ -15,7 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'reader'))
 DOCS = ROOT / 'docs'
-COMMIT = '4c7c73621e596419b5bd6faa5d68940a9c640379'
+COMMIT = 'b36fc0a2e299f925bc0f72375eea013d7ff5b1cf'
 ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 
 from spec_profiles import PROFILES, create_apl  # noqa: E402
@@ -95,9 +95,9 @@ def build_export(fixture):
         square.update(options[0] if options else {})
         squares.append(square)
     cfg = {'schema': 'AHelperW.HUD', 'version': 1, 'static': True,
-           'client': {'version': '12.1.0', 'build': '69933', 'interface': 120100},
+           'client': {'version': '12.1.5', 'build': '70448', 'interface': 120105},
            'specID': spec, 'talents': encode_talents(table, spec, fixture.get('hero'), fixture.get('talents', ())),
-           'apl': {'profileID': profile.id, 'sourceCommit': COMMIT, 'assumedBuild': '69933', 'talentsVerified': False},
+           'apl': {'profileID': profile.id, 'sourceCommit': COMMIT, 'assumedBuild': '70448', 'talentsVerified': False},
            'screen': {'width': 1920, 'height': 1080, 'origin': 'top-left', 'units': 'physical-pixels'},
            'squares': squares, 'aliases': fixture.get('aliases', {}), 'equipment': [],
            'resources': {key: rect(0) for key in fixture.get('resources', ())},

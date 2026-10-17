@@ -18,6 +18,29 @@ BUFFS={'sudden_death':52437,'executioners_precision':386633,'collateral_damage':
        'master_of_warfare_proc':1269391,'battle_stance':386164,'power_infusion':10060}
 
 
+# SimC snapshot of every APL package (docs/*/source.json); the addon writes the
+# same commit into its export (Export.lua), so an old export is refused.
+SIMC_COMMIT='b36fc0a2e299f925bc0f72375eea013d7ff5b1cf'
+
+
+def client_build_note(client,table_build):
+    """Accept a client of the trait table's patch; refuse another patch.
+
+    Hotfix builds of one patch keep the talent trees (12.1.5: 70340, 70391, 70448
+    within a week), and the decoder still rejects a string that does not fit the
+    table. A new patch can move nodes, so it needs a re-pinned package. Returns
+    a note when the build differs, None on an exact match.
+    """
+    version,build=table_build.rsplit('.',1)
+    seen=f"{client.get('version')}.{client.get('build')}"
+    if str(client.get('version'))!=version:
+        raise ValueError(f'Пакеты APL подготовлены для клиента {table_build}, экспорт HUD — с клиента {seen}. '
+                         'Нужно обновление AHelperW под этот патч')
+    if str(client.get('build'))!=build:
+        return f'Клиент {seen}, таблица талантов {table_build}: тот же патч, строка талантов проверена декодером'
+    return None
+
+
 @dataclass(frozen=True)
 class Unknown:
     reasons: frozenset
@@ -153,7 +176,7 @@ class APLRuntime:
         if self.cfg.get('specID')!=self.spec_id: raise ValueError('Неверная специализация пакета APL')
         self.profile=PROFILES.get(self.spec_id)
         table=json.loads((root/self.trait_file).read_text(encoding='utf-8'))
-        if str(self.cfg['client']['build'])!=table['build'].split('.')[-1]: raise ValueError('Экспорт HUD и дерево талантов относятся к разным сборкам')
+        self.build_note=client_build_note(self.cfg.get('client',{}),table['build'])
         from talent_decode import decode
         # Legacy models pin allowed_heroes; otherwise every tree of the profile.
         allowed=getattr(self,'allowed_heroes',None) or {t.subtree for t in self.profile.hero_trees}

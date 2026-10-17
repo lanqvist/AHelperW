@@ -30,6 +30,15 @@ RIDER = unholy(32, CORE + ['forbidden_knowledge', 'summon_gargoyle', 'cycle_of_d
 # Festering Scythe window already applied to the target: rule 1 of single_target stays off.
 PLAGUED = {191587: (20, 1), 1240996: (20, 1), 1241077: (20, 1)}
 FIXTURE = SANLAYN
+GHOUL_AOE_SPELLS = {'epidemic': 'ready', 'death_coil': 'ready', 'festering_strike': 'ready', 'scourge_strike': 'ready',
+                    'putrefy': ('cd', 10.), 'dark_transformation': ('cd', 20.), 'outbreak': ('cd', 20.)}
+
+
+def two_charge_putrefy(fixture):
+    """The same build with Putrefy exported as a two-charge button."""
+    squares = [square + ({'charges': True, 'maxCharges': 2},) if square == ('spell', 1247378) else square
+               for square in fixture['squares']]
+    return dict(fixture, squares=squares)
 
 
 def cast(action, spell):
@@ -128,11 +137,29 @@ SCENARIOS = [
                      'dark_transformation': ('cd', 40.), 'army_of_the_dead': ('cd', 100.), 'outbreak': ('cd', 20.)},
              buffs={'gift_of_the_sanlayn': (12., 1)}, debuffs=PLAGUED, runes=3,
              numbers={'resource/runic_power': 40, 'context/targets': 5}),
-    Scenario("San'layn: Gift не горит — Putrefy не выбирается", 
-             check=lambda m, r: (r.get('action') != 'putrefy', f"{r.get('status')}: {r.get('action') or r.get('reason')}"),
+    # 12.1.5 AoE: putrefy,if=buff.dark_transformation.up|charges=max_charges.
+    Scenario("12.1.5 AoE: Gift не горит, Putrefy на максимуме зарядов — Putrefy", ('ready', 'putrefy'),
              spells={'putrefy': 'ready', 'epidemic': 'ready', 'death_coil': 'ready', 'festering_strike': 'ready',
                      'dark_transformation': ('cd', 20.), 'army_of_the_dead': ('cd', 100.), 'outbreak': ('cd', 20.)},
              debuffs=PLAGUED, runes=3, numbers={'resource/runic_power': 40, 'context/targets': 5}),
+    Scenario("San'layn: Gift не горит, у Putrefy 1 из 2 зарядов — Putrefy не выбирается",
+             check=lambda m, r: (r.get('status') == 'ready' and r.get('action') != 'putrefy',
+                                 f"{r.get('status')}: {r.get('action') or r.get('reason')}"),
+             fixture=two_charge_putrefy(SANLAYN),
+             spells={'putrefy': ('ready', 8., 1), 'epidemic': 'ready', 'death_coil': 'ready', 'festering_strike': 'ready',
+                     'dark_transformation': ('cd', 20.), 'army_of_the_dead': ('cd', 100.), 'outbreak': ('cd', 20.)},
+             debuffs=PLAGUED, runes=3, numbers={'resource/runic_power': 40, 'context/targets': 5}),
+    # 12.1.5 AoE: festering_strike,if=buff.lesser_ghoul_ready.stack<3 reads the digit.
+    # Essence 2/5 with 15 s left and 3 runes keep Epidemic off.
+    Scenario("12.1.5 AoE: Lesser Ghoul 2 стака — Festering Strike", ('ready', 'festering_strike'),
+             spells=GHOUL_AOE_SPELLS, buffs={'essence_of_the_blood_queen': (15., 2), 'lesser_ghoul_ready': (20., 2)},
+             debuffs=PLAGUED, runes=3, numbers={'resource/runic_power': 60, 'context/targets': 3}),
+    Scenario("12.1.5 AoE: Lesser Ghoul 4 стака — Scourge Strike", ('ready', 'scourge_strike'),
+             spells=GHOUL_AOE_SPELLS, buffs={'essence_of_the_blood_queen': (15., 2), 'lesser_ghoul_ready': (20., 4)},
+             debuffs=PLAGUED, runes=3, numbers={'resource/runic_power': 60, 'context/targets': 3}),
+    Scenario("12.1.5 AoE: стаки Lesser Ghoul не прочитаны — блокировка", ('blocked', 'proc:1254252'),
+             spells=GHOUL_AOE_SPELLS, buffs={'essence_of_the_blood_queen': (15., 2), 'lesser_ghoul_ready': 'up'},
+             debuffs=PLAGUED, runes=3, numbers={'resource/runic_power': 60, 'context/targets': 3}),
     # In game the client rejected Epidemic twice with no Virulent Plague on the target.
     Scenario('5 целей, на цели нет Virulent Plague — не Epidemic',
              check=lambda m, r: (r.get('action') != 'epidemic' and r.get('status') in ('ready', 'waiting'),
@@ -143,16 +170,19 @@ SCENARIOS = [
              spells={'epidemic': 'ready', 'death_coil': 'ready', 'festering_strike': 'ready', 'outbreak': ('cd', 20.)},
              debuffs={1241077: (20, 1), 191587: 'unknown'}, runes=1, numbers={'resource/runic_power': 69, 'context/targets': 5}),
     # Blocked / waiting with a reason
+    # Essence up for 15 s below max-1 stacks: only rune<2 can turn Epidemic on.
     Scenario('AoE: руны не прочитаны — блокировка', ('blocked', 'руны'),
              spells={'epidemic': 'ready', 'death_coil': 'ready'}, debuffs=PLAGUED,
+             buffs={'essence_of_the_blood_queen': (15., 2)},
              runes=['ready', 'unknown', 'cd', 'cd', 'cd', 'cd'], numbers={'resource/runic_power': 60, 'context/targets': 3}),
     Scenario('число целей неизвестно, ST и AoE расходятся — блокировка', ('blocked', 'context/targets'),
              spells={'epidemic': 'ready', 'death_coil': 'ready'}, buffs={'sudden_doom': 'up'}, debuffs=PLAGUED, runes=3,
              numbers={'resource/runic_power': 60, 'context/targets': None}),
-    Scenario('горгулья: остаток армии не прочитан — блокировка (питомец)', ('blocked', 'proc:42650'), fixture=RIDER,
-             spells={'epidemic': 'ready', 'death_coil': 'ready', 'death_and_decay': ('cd', 10.)},
-             buffs={'forbidden_knowledge': (20., 1), 'army_of_the_dead': 'up'}, debuffs=PLAGUED, runes=3,
-             numbers={'resource/runic_power': 60, 'context/targets': 4}),
+    # SimC's fallback buff has max_stack 1: without Vampiric Strike, Rider's
+    # "Essence stack >= max_stack-1" is 0>=0, so AoE Epidemic needs no spender reason.
+    Scenario('Rider, 3 цели: Epidemic без причины траты (fallback Essence: 0>=1-1)', ('ready', 'epidemic'), fixture=RIDER,
+             spells={'epidemic': 'ready', 'death_coil': 'ready', 'festering_strike': 'ready', 'death_and_decay': ('cd', 10.)},
+             debuffs=PLAGUED, runes=4, numbers={'resource/runic_power': 40, 'context/targets': 3}),
     Scenario('нет квадрата баффа Festering Scythe 1241077 — блокировка', ('blocked', 'proc:1241077'),
              fixture=unholy(32, CORE, procs=tuple(p for p in PROCS if p != 1241077)),
              spells={'festering_strike': 'ready', 'death_coil': 'ready'}, debuffs={191587: (20, 1), 1240996: (20, 1)},

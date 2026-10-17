@@ -1,5 +1,5 @@
 {
-  "clientBuild": "12.1.0.69933",
+  "clientBuild": "12.1.5.70448",
   "specID": 251,
   "complete": false,
   "note": "Display coverage only. Native rendering, OCR accuracy and APL evaluation are separate concerns. Nothing is game-observed yet.",
