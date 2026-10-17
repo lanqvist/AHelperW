@@ -1,4 +1,4 @@
-AHelperW 0.5.0 — выпуск для Windows x64 (предварительный)
+AHelperW 0.5.1 — выпуск для Windows x64 (предварительный)
 
 Состав: аддон WoW, ридер, Python, OCR-модели и зависимости.
 Отдельно устанавливать Python или AutoHotkey не нужно. После установки
@@ -43,6 +43,6 @@ Frost DK (Deathbringer проверен в игре; Rider — нет) и Unholy
 данные, резервные копии и аддон. Аддон при необходимости удаляется вручную
 из _retail_\Interface\AddOns\AHelperW. Настройки WoW/WTF не меняются.
 
-Исходники этой сборки: Source\AHelperW-Source-0.5.0.zip.
+Исходники этой сборки: Source\AHelperW-Source-0.5.1.zip.
 Лицензии зависимостей: _internal\licenses; SimulationCraft-COPYING.txt.
 Исходник APL, его происхождение и лицензия находятся в архиве исходников.

@@ -1,6 +1,6 @@
 # Windows release build
 
-Current package: **0.5.0** (addon **0.2.16**; reader models Arms/Slayer, Fury/Slayer,
+Current package: **0.5.1** (addon **0.2.17**; reader models Arms/Slayer, Fury/Slayer,
 Windwalker/Shado-Pan, Frost and Unholy DK, Retribution). First package was 0.3.0. The version is
 set in `packaging/setup.iss` (`AppVersion`) and `packaging/build.ps1` (`$version`).
 Windows x64, Python 3.12, Inno Setup 6.7.3. Run from the project root:
