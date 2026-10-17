@@ -49,7 +49,7 @@ PROFILES = {
                     model='retribution_apl:RetributionAPL'),
     71: SpecProfile('warrior.arms.slayer', 71, 'Arms / Slayer', 'arms-apl',
                     (SLAYER,), ('rage',), 'game-observed',
-                    binary_auras=frozenset({107574, 446035, 386164, 10060, 208086, 388539}),
+                    binary_auras=frozenset({107574, 446035, 386164, 10060, 208086, 388539, 1269391}),
                     model='apl:ArmsAPL'),
     # Not yet observed in game: input stays off by default after loading.
     # Enrage 184362 gates rampage,if=buff.enrage.remains<gcd.

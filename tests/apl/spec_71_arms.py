@@ -31,6 +31,15 @@ SCENARIOS = [
     Scenario('число целей неизвестно и меняет выбор: блокировка', ('blocked', 'context/targets'),
              numbers={'context/targets': None}, spells={'mortal_strike': 'ready', 'sweeping_strikes': 'ready'},
              buffs=STANCE, debuffs=REND),
+    # 1269391 is hidden in game; the addon colours it from the Slam → Heroic Strike override.
+    Scenario('прок Master of Warfare: Heroic Strike раньше Mortal Strike', ('ready', 'heroic_strike'),
+             spells={'mortal_strike': 'ready', 'slam': 'ready'},
+             buffs=dict(STANCE, master_of_warfare_proc='up'), debuffs=REND),
+    Scenario('прока нет: Mortal Strike, Heroic Strike пропущен', ('ready', 'mortal_strike'),
+             spells={'mortal_strike': 'ready', 'slam': 'ready'}, buffs=STANCE, debuffs=REND),
+    Scenario('замена Slam не прочитана: прок неизвестен, не отсутствует', ('blocked', '1269391'),
+             spells={'mortal_strike': 'ready', 'slam': 'ready'},
+             buffs=dict(STANCE, master_of_warfare_proc='unknown'), debuffs=REND),
     Scenario('Colossus не поддержан: отказ модели', ('refused', 'героической ветки'),
              fixture=dict(FIXTURE, hero=62, talents=['mortal_strike'])),
 ]

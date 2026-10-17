@@ -145,6 +145,7 @@ function ns.MakeHUDExport()
       result.squares[#result.squares + 1] = { index = i, kind = sq.kind, spellID = sq.spellID, name = info and info.name, rect = rect, castSpellIDs = castIDs,
         charges = sq.chargesUnknownMax and "unknown-max" or sq.multiCharge or false,
         maxCharges = sq.maxCharges, stackAuraID = sq.stackAuraID,
+        stateSource = sq.overrideProc and { kind = "override", spellID = sq.overrideProc.base, overrideSpellID = sq.overrideProc.override } or nil,
         baseCooldownMs = sq.kind == "spell" and ns.ReadValue(GetSpellBaseCooldown, sq.spellID) or nil,
         colorSample = rect and { x = rect.x + math.max(2, math.floor(rect.width * 0.1)), y = rect.y + math.floor(rect.height * 0.8) },
         timerRegion = rect and { x = rect.x + 2, y = rect.y + math.floor(rect.height * 0.13), width = rect.width - 4, height = math.floor(rect.height * 0.44) },

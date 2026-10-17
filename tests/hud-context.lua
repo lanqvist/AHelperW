@@ -129,6 +129,19 @@ noPower = false; cd = nil; ns.UpdateSquares(); assert(ns.squares[1].prevState ==
 cd = { isActive = true, isOnGCD = true, startTime = 100, duration = 1.5 }
 ns.UpdateSquares(); assert(ns.squares[1].prevState == "ready", "GCD is tracked separately")
 override = 1269383; ns.UpdateSquares(); assert(ns.squares[1].effectiveID == 1269383)
+if specID == 71 then
+  -- Master of Warfare 1269391 is hidden; its square follows the Slam override.
+  ns.BuildSquares({}, {1269391}, {})
+  assert(ns.squares[1].overrideProc and not ns.squares[1].procEngine, "hidden proc must use the override")
+  ns.UpdateSquares(); assert(ns.squares[1].prevState == "proc", "Heroic Strike override means the proc is up")
+  override = nil; ns.UpdateSquares(); assert(ns.squares[1].prevState == "procoff", "plain Slam means no proc")
+  local savedOverride = C_Spell.GetOverrideSpell
+  C_Spell.GetOverrideSpell = function() return forbidden end
+  ns.UpdateSquares(); assert(ns.squares[1].prevState == "unknown", "secret override must not read as no proc")
+  C_Spell.GetOverrideSpell = function() error("unavailable") end
+  ns.UpdateSquares(); assert(ns.squares[1].prevState == "unknown", "failed override must not read as no proc")
+  C_Spell.GetOverrideSpell = savedOverride; override = 1269383
+end
 charges = { maxCharges = 2, currentCharges = 1, cooldownStartTime = 99, cooldownDuration = 12, chargeModRate = 1 }
 ns.BuildSquares({7384}, {}, {}); ns.RefreshCooldownWidgets()
 assert(ns.squares[1].cool.cooldownArgs[2] == 12, "charge recharge must drive the timer")

@@ -56,7 +56,11 @@ ns.specProfiles = {
     executeThresholds = {20, 35},
     contextCells = { chargeRange = { source = "range", spellID = 100 } },
     preset = ns.armsAplPreset,
-    aliases = { heroic_strike = { spellID = 1269383, displaySpellID = 1464, procID = 1269391, sharesBindingWith = "slam" } },
+    -- Master of Warfare 1269391 is a hidden aura (attribute 1 0x10000000) whose only
+    -- effect overrides Slam with Heroic Strike: it never lit through AuraContainer,
+    -- so its square follows the public override instead.
+    aliases = { heroic_strike = { spellID = 1269383, displaySpellID = 1464, procID = 1269391, sharesBindingWith = "slam",
+      procFromOverride = true } },
   },
   -- In development; reader model: reader/fury_apl.py. IDs and evidence:
   -- docs/fury-apl/coverage.json. Sudden Death 52437 and Hack and Slash 383873

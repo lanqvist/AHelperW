@@ -348,6 +348,7 @@ function ns.BuildSquares(spells, procs, debuffs, stackLinks)
     sq.chargePlate:Hide(); sq.charges:Hide()
     sq.stateLabel:SetText("")
     sq.procEngine = nil
+    sq.overrideProc = nil
   end
   ns.HideProcContainers()
 
@@ -392,6 +393,13 @@ function ns.BuildSquares(spells, procs, debuffs, stackLinks)
     sq.chargesUnknownMax = nil
     local profile = ns.GetAPLProfile()
     sq.chargeSpellID = profile and profile.chargeSources and profile.chargeSources[spellID]
+    if kind == "proc" and profile and profile.aliases then
+      for _, alias in pairs(profile.aliases) do
+        if alias.procFromOverride and alias.procID == spellID then
+          sq.overrideProc = { base = alias.displaySpellID, override = alias.spellID }
+        end
+      end
+    end
     if kind == "spell" then
       local chInfo = C_Spell.GetSpellCharges(spellID)
       if chInfo then
@@ -428,7 +436,7 @@ function ns.BuildSquares(spells, procs, debuffs, stackLinks)
     sq:Show()
     sq.previewNumber:SetText(shown)
     sq.previewBadge:SetShown(ns.db.preview)
-    if kind ~= "spell" and ProbeAuraContainer() then
+    if kind ~= "spell" and not sq.overrideProc and ProbeAuraContainer() then
       if kind == "proc" then
         sq.procEngine = AttachAuraSlot(sq, spellID, "player", ns.externalAuras[spellID] and "HELPFUL" or "HELPFUL|PLAYER", pal.proc, ns.db.auraTimers) or nil
       else
@@ -462,7 +470,30 @@ local function GetProcAura(auraID)
   return nil
 end
 
+-- A hidden aura whose only effect is a button override: the override is public,
+-- the aura is not. An unreadable override stays unknown, never "no proc".
+local function UpdateOverrideProcSquare(sq, pal)
+  local current = ns.ReadValue(C_Spell.GetOverrideSpell, sq.overrideProc.base)
+  local state = "unknown"
+  if type(current) == "number" then
+    state = current == sq.overrideProc.override and "proc" or "procoff"
+  end
+  local c = pal[state]
+  sq.bg:SetColorTexture(c[1], c[2], c[3], 1)
+  sq.charges:Hide()
+  sq.stateLabel:SetText(state == "unknown" and "?" or "")
+  if not ns.db.stable and state == "proc" and sq.prevState == "procoff" then
+    sq.flashAnim:Stop()
+    sq.flashAnim:Play()
+  end
+  sq.prevState = state
+end
+
 local function UpdateProcSquare(sq, pal)
+  if sq.overrideProc then
+    UpdateOverrideProcSquare(sq, pal)
+    return
+  end
   if sq.procEngine then
     -- The engine owns visibility and all aura data in combat. Do not query it back.
     sq.bg:SetColorTexture(unpack(pal.procoff))
