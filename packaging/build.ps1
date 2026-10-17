@@ -1,6 +1,6 @@
 param([string]$ISCC = "$PSScriptRoot\..\build\tools\inno\ISCC.exe")
 $ErrorActionPreference = 'Stop'
-$version = '0.4.1'  # keep equal to AppVersion in setup.iss
+$version = '0.5.0'  # keep equal to AppVersion in setup.iss
 $projectRoot = Split-Path $PSScriptRoot -Parent
 Push-Location $projectRoot
 try {

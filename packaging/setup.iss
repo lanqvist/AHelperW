@@ -1,4 +1,4 @@
-#define AppVersion "0.4.1"
+#define AppVersion "0.5.0"
 #define RootDir AddBackslash(SourcePath) + ".."
 
 [Setup]
